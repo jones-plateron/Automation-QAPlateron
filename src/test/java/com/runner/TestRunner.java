@@ -9,7 +9,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions( tags="@Login" , stepNotifications = true, dryRun = false, features= "src\\test\\resources\\Feature\\", glue = "com.stepdefinition", 
+@CucumberOptions( tags="@EmployeeManagement" , stepNotifications = true, dryRun = false, features= "src\\test\\resources\\Feature\\", glue = "com.stepdefinition", 
 monochrome = true,publish = true, snippets = io.cucumber.junit.CucumberOptions.SnippetType.CAMELCASE ,plugin = {"pretty", "json:target//output.json"})
 public class TestRunner {
 
