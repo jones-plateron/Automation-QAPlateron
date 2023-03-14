@@ -19,11 +19,11 @@ public class HooksClass  {
 	@After
 	public void afterClassMethod(Scenario scen) throws IOException {
 		// close & Screenshot
-//		if(!scen.isFailed()){
-//		 // scen.attach(scenerioScreenshot(), "images/png","Scenario Output Screenshot");
-		// }
+		if(!scen.isFailed()){
+		 // scen.attach(scenerioScreenshot(), "images/png","Scenario Output Screenshot");
+		 }
 
-		// System.out.println(scen.isFailed());
+		 System.out.println(scen.isFailed());
 		//driver.quit();
 
 	}
