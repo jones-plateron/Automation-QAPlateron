@@ -52,7 +52,7 @@ public class RMS_Employee_Management_POM extends BaseClass{
 	public WebElement getActiveRoleElement() {
 		return rmsDriver.findElement(By.xpath("//li[@class='list-item cursor-pointer active']"));
 	}
-	public List<WebElement> getRolesElement() {
+	public List<WebElement> getJobsSectionRolesElement() {
 		return rmsDriver.findElements(By.xpath("//li[@class='list-item cursor-pointer ']"));
 	}
 	public WebElement getEmployeesSectionElement() {
@@ -110,10 +110,14 @@ public class RMS_Employee_Management_POM extends BaseClass{
 		return rmsDriver.findElement(By.xpath("//label[normalize-space()='Email Address']"));
 	}
 	public WebElement getEmailAddressTextBxElement() {
-		return rmsDriver.findElement(By.xpath("//input[contains(@name,'email')]"));
+		return rmsDriver.findElement(By.xpath("//div/input[@name='email']"));
 	}
 	public WebElement getEmailAddressTextBxErrorMsgElement() {
 		return rmsDriver.findElement(By.xpath("//span[normalize-space()='Please enter valid email']"));
+	}
+	//getBasicInformationsElement
+	public WebElement getProfessionalDetailsElement() {
+		return rmsDriver.findElement(By.xpath("//h3[normalize-space()='Professional Details']"));
 	}
 	public WebElement getEmployeeIDHdrElement() {
 		return rmsDriver.findElement(By.xpath("//label[normalize-space()='Employee ID']"));
@@ -128,10 +132,10 @@ public class RMS_Employee_Management_POM extends BaseClass{
 		return rmsDriver.findElement(By.xpath("//label[normalize-space()='Role']"));
 	}
 	public WebElement getDropDownRoleElement() {
-		return rmsDriver.findElement(By.xpath("//button[@id='react-aria-7575350127-18']"));
+		return rmsDriver.findElement(By.xpath("//span[@class='cursor-pointer w-150p text-ellipsis text-left']"));
 	}
-	public WebElement getElementsRoleDropdown() {
-		return rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[4]/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li"));
+	public List<WebElement> getAddEmpRoleDropdownElement() {
+		return rmsDriver.findElements(By.xpath("/html[1]/body[1]/div[4]/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li"));
 	}
 	public WebElement getAddEmpCancelBtnElement() {
 		return rmsDriver.findElement(By.xpath("//button[contains(@class,'btn btn-outline-default btn-small d-flex align-items-center mr-1')]"));
@@ -205,7 +209,7 @@ public class RMS_Employee_Management_POM extends BaseClass{
 	public WebElement getEmpPINEmpDetailsElement() {
 		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-neutral-dark btn-small d-flex align-items-center cursor-na']"));
 	}
-	public WebElement getRoleEmpDetailsElement() {
+	public WebElement getEditRoleEmpDetailsElement() {
 		return rmsDriver.findElement(By.xpath("//div[contains(@class,'col-4 col-md-4 col-sm-4 pb-2 pl-0')]//span[contains(@class,'font-bold')][normalize-space()='Manager']"));
 	}
 	public WebElement getPhoneEmpDetailsElement() {

@@ -1,6 +1,6 @@
 Feature: Roles and permission
 
-  @Rolesandpermission
+  @Rolesandpermission1
   Scenario Outline: As a RMS User, I need to Check roles and permission for Manager,Waiter and Busser
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
