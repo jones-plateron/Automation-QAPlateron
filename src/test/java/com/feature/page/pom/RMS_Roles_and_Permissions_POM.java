@@ -1,5 +1,7 @@
 package com.feature.page.pom;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -47,6 +49,32 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'POS Access')]"));
 		return element;
 	}		
+	
+//	public WebElement getAvailableJobsBakers() {
+//		WebElement element = rmsDriver.findElement(By.xpath("////*[contains(text(),'Bakers')]"));
+//		return element;
+//	}
+//	
+//	public WebElement getAvailableJobsCleaner() {
+//		WebElement element = rmsDriver.findElement(By.xpath("////*[contains(text(),'Cleaner')]"));
+//		return element;
+//	}
+//	
+//	public WebElement getAvailableJobsRobot1() {
+//		WebElement element = rmsDriver.findElement(By.xpath("////*[contains(text(),'Robot 1')]"));
+//		return element;
+//	}
+//	public WebElement getAvailableJobsBakers() {
+//		WebElement element = rmsDriver.findElement(By.xpath("////*[contains(text(),'Bakers')]"));
+//		return element;
+//	}
+//	
+	
+	////*[contains(text(),'Manager')]
+	
+	public List<WebElement> getRolesElement() {
+        return rmsDriver.findElements(By.xpath("//li[@class='list-item cursor-pointer ']"));
+    }
 	
 	public WebElement getRegeneratePinPermissions() {
 		WebElement element = rmsDriver.findElement(By.xpath("//h4[contains(text(),'Regenerate PIN')]"));
