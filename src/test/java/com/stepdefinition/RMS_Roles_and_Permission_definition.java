@@ -270,12 +270,14 @@ public void userShouldVerifyTheNewJobsIsAddedInTheAvailableJobList() {
     for (int i = 0; i < AllRoleElement.size(); i++) {
         String text = AllRoleElement.get(i).getText();
         System.out.println(text);
+        //Assert.assertTrue(text.contains(string));
+        
     }
     
 }
 @Then("User should able to give permission for the New Role and Verify User should able to click Save Button")
 public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleToClickSaveButton() {
-    
+    //pma.getRMS_Roles_and_Permissions_POM().getAvailableJobsManager()
 }
 @Then("User should able to see the edit icon and click edit icon to edit the Role Name {string}")
 public void userShouldAbleToSeeTheEditIconAndClickEditIconToEditTheRoleName(String string) {
