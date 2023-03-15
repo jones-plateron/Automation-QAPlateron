@@ -75,9 +75,9 @@ PageManager pma = new PageManager();
 	public List<WebElement> getRolesElement() {
         return rmsDriver.findElements(By.xpath("//li[@class='list-item cursor-pointer ']"));
     }
-	
+	//Changed locators Now
 	public WebElement getRegeneratePinPermissions() {
-		WebElement element = rmsDriver.findElement(By.xpath("//h4[contains(text(),'Regenerate PIN')]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[normalize-space()='Regenerate PIN']"));
 		return element;
 	}	
 	public WebElement getRegeneratePinInstructions() {
@@ -96,7 +96,7 @@ PageManager pma = new PageManager();
 	}
 
 	public WebElement getClockInOutPermissions() {
-		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'Order Management')]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[normalize-space()='Clock-In/Clock-Out']"));
 		return element;
 	}
 	
