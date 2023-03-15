@@ -1,6 +1,7 @@
 package com.stepdefinition;
 
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.base.BaseClass;
 import com.pagemanager.PageManager;
@@ -9,10 +10,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 
-public class RMS_Roles_and_Permission extends BaseClass{
+public class RMS_Roles_and_Permission_definition extends BaseClass{
 PageManager pma = new PageManager();
 	
-	public RMS_Roles_and_Permission() {
+	public RMS_Roles_and_Permission_definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
@@ -20,48 +21,81 @@ PageManager pma = new PageManager();
 	
 	@Then("User should verify by default {string},{string} and {string} Roles are available under the Jobs")
 	public void userShouldVerifyByDefaultAndRolesAreAvailableUnderTheJobs(String string, String string2, String string3) {
-	     
-	    
+	     String avJob1 = pma.getRMS_Roles_and_Permissions_POM().getAvailableJobsManager().getAttribute("Value");
+	     Assert.assertTrue(avJob1.contains(string));
+	     String avJob2 = pma.getRMS_Roles_and_Permissions_POM().getAvailableJobsWaiter().getAttribute("Value");
+	     Assert.assertTrue(avJob2.contains(string2));
+	     String avJob3 = pma.getRMS_Roles_and_Permissions_POM().getAvailableJobsBusser().getAttribute("Value");
+	     Assert.assertTrue(avJob3.contains(string3));
+	     System.out.println("Default Available Job Validation Done");
 	}
 	@Then("User should able to click jobs option and verify the {string} option is selected by default")
-	public void userShouldAbleToClickJobsOptionAndVerifyTheOptionIsSelectedByDefault(String string) {
-	   
+	public void userShouldAbleToClickJobsOptionAndVerifyTheOptionIsSelectedByDefault(String ActManagername) {
+	   pma.getRMS_Roles_and_Permissions_POM().getJobsTab().click();
+	   String ActName = pma.getRMS_Roles_and_Permissions_POM().getManagerNameHeader().getAttribute("Value");
+	   Assert.assertTrue(ActName.contains(ActManagername));
 	}
 	@Then("User should verify {string} Section is present and {string},{string} and {string} options is present under POS Access Section")
 	public void userShouldVerifySectionIsPresentAndAndOptionsIsPresentUnderPOSAccessSection(String string, String string2, String string3, String string4) {
-	   
+	   pma.getRMS_Roles_and_Permissions_POM().getAvailableJobsManager().click();
+	   String actPOSAcess = pma.getRMS_Roles_and_Permissions_POM().getPOSAcessSection().getAttribute("Value");
+	   Assert.assertTrue(actPOSAcess.contains(string));
+	   String actRePin = pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinPermissions().getAttribute("Value");
+	   Assert.assertTrue(actRePin.contains(string2));
+	   String actShiftReview = pma.getRMS_Roles_and_Permissions_POM().getShiftReviewPermissions().getAttribute("Value");
+	   Assert.assertTrue(actShiftReview.contains(string3));
+	   String actClockInOut = pma.getRMS_Roles_and_Permissions_POM().getClockInOutPermissions().getAttribute("Value");
+	   Assert.assertTrue(actClockInOut.contains(string4));
+	   System.out.println("All Options available");
 	}
 	@Then("User should verify {string} instruction under the Regenerate PIN option")
 	public void userShouldVerifyInstructionUnderTheRegeneratePINOption(String string) {
-	  
+	  String actReInstruction = pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinInstructions().getAttribute("Value");
+	  Assert.assertTrue(actReInstruction.contains(string));
 	}
 	@Then("User should verify {string} instruction is present under Shift Review option")
 	public void userShouldVerifyInstructionIsPresentUnderShiftReviewOption(String string) {
-	    
+		String actShiftReviewInstruction = pma.getRMS_Roles_and_Permissions_POM().getShiftReviewInstruction().getAttribute("Value");
+	    Assert.assertTrue(actShiftReviewInstruction.contains(string));
 	}
 	@Then("User should verify {string} instruction is present under Clock-In\\/Clock-Out options")
 	public void userShouldVerifyInstructionIsPresentUnderClockInClockOutOptions(String string) {
-	    
+		String actClockInOutInstruction = pma.getRMS_Roles_and_Permissions_POM().getClockInOutInstruction().getAttribute("Value");
+	    Assert.assertTrue(actClockInOutInstruction.contains(string));
 	}
 	@Then("User should verify {string} section is present and {string},{string},{string} and {string} options is present under Order Management Section")
 	public void userShouldVerifySectionIsPresentAndAndOptionsIsPresentUnderOrderManagementSection(String string, String string2, String string3, String string4, String string5) {
+	    String actOMSection = pma.getRMS_Roles_and_Permissions_POM().getOrderManagementSection().getAttribute("Value");
+	    Assert.assertTrue(actOMSection.contains(string)); 
+	    String actViewallOrders = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrdersPermissions().getAttribute("Value");
+	    Assert.assertTrue(actViewallOrders.contains(string2));
+	    String actViewmyOrders = pma.getRMS_Roles_and_Permissions_POM().getViewMyOrdersPermissions().getAttribute("Value");
+	    Assert.assertTrue(actViewmyOrders.contains(string3));
+	    String actRefund = pma.getRMS_Roles_and_Permissions_POM().getRefundPermissions().getAttribute("Value");
+	    Assert.assertTrue(actRefund.contains(string4));
+	    String actDiscount = pma.getRMS_Roles_and_Permissions_POM().getDiscountPermissions().getAttribute("Value");
+	    Assert.assertTrue(actDiscount.contains(string5));
 	    
 	}
 	@Then("User should verify {string} instruction is present under View All Orders option")
 	public void userShouldVerifyInstructionIsPresentUnderViewAllOrdersOption(String string) {
-	    
+		String actViewallorderInstruction = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrdersInstruction().getAttribute("Value");
+	    Assert.assertTrue(actViewallorderInstruction.contains(string));
 	}
 	@Then("User should verify {string} instruction is present under View My Orders option")
 	public void userShouldVerifyInstructionIsPresentUnderViewMyOrdersOption(String string) {
-	   
+		String actViewmyorderInstruction = pma.getRMS_Roles_and_Permissions_POM().getViewMyOrdersInstruction().getAttribute("Value");
+	    Assert.assertTrue(actViewmyorderInstruction.contains(string));
 	}
 	@Then("User should verify {string} instruction is present under Refund option")
 	public void userShouldVerifyInstructionIsPresentUnderRefundOption(String string) {
-	    
+		String actRefundInstruction = pma.getRMS_Roles_and_Permissions_POM().getRefundInstruction().getAttribute("Value");
+	    Assert.assertTrue(actRefundInstruction.contains(string));
 	}
 	@Then("User should verify {string} instruction is present under Discount option")
 	public void userShouldVerifyInstructionIsPresentUnderDiscountOption(String string) {
-	   
+		String actDiscountInstruction = pma.getRMS_Roles_and_Permissions_POM().getDiscountInstruction().getAttribute("Value");
+	    Assert.assertTrue(actDiscountInstruction.contains(string));
 	}
 	@Then("User should verify {string} Section is present and verify {string} option present under Other Permissions Section")
 	public void userShouldVerifySectionIsPresentAndVerifyOptionPresentUnderOtherPermissionsSection(String string, String string2) {
@@ -88,10 +122,6 @@ PageManager pma = new PageManager();
 	   
 	}
 
-@Then("User should able to click jobs option and verify the manager option is selected by default")
-public void userShouldAbleToClickJobsOptionAndVerifyTheManagerOptionIsSelectedByDefault() {
-    
-}
 @Then("User should able to click Add Jobs Button and verify the Add Jobs popup opens")
 public void userShouldAbleToClickAddJobsButtonAndVerifyTheAddJobsPopupOpens() {
     
@@ -123,7 +153,7 @@ public void userShouldVerifyTheNewJobsIsAddedInTheAvailableJobList() {
 }
 @Then("User should able to give permission for the New Role and Verify User should able to click Save Button")
 public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleToClickSaveButton() {
-    // Write code here that turns the phrase above into concrete actions
+    
 }
 @Then("User should able to see the edit icon and click edit icon to edit the Role Name {string}")
 public void userShouldAbleToSeeTheEditIconAndClickEditIconToEditTheRoleName(String string) {
