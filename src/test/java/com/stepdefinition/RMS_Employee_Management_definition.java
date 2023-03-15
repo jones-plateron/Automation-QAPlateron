@@ -2,9 +2,14 @@ package com.stepdefinition;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.base.BaseClass;
 import com.pagemanager.PageManager;
@@ -26,24 +31,46 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		
 	@Given("Login to the restaurant with {string} and {string}")
 	public void loginToTheRestaurantWithAnd(String mobileNum, String otp) throws IOException, Exception {
-		WebDriverManager.chromedriver().setup();
-		rmsDriver =new ChromeDriver();
+		WebDriverManager.edgedriver().setup();
 		
+		rmsDriver =new EdgeDriver();
 		rmsDriver.manage().window().maximize();
 		rmsDriver.get("https://www.qa.restaurants.plateron.com/auth/login");
 		rmsDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		//pma.getrMS_Page_POM().getMobileNumberElement().sendKeys("mobileNum");
 		Thread.sleep(1000);
+		pma.getRMS_Employee_Management_POM().getLoginMobileNumElement().sendKeys(mobileNum);
+		pma.getRMS_Employee_Management_POM().getLoginContinuebuttonElement().click();
+		pma.getRMS_Employee_Management_POM().getLoginOtpElement().sendKeys(otp);
+		pma.getRMS_Employee_Management_POM().getLoginVerifyOtpElement().click();
+		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getOverviewWelcomTextElement().getText().contains("Welcome"), "Verifying Successful Login");
 		
-//		pma.getrMS_Page_POM().getContinueBtnElement().click();
-//		pma.getrMS_Page_POM().getOtpFirstElement().sendKeys("otp");
-//		pma.getrMS_Page_POM().getVerifyOtpElement().click();
 	}
 	@When("User should redirects to employees section")
 	public void userShouldRedirectsToEmployeesSection() {
+		pma.getRMS_Employee_Management_POM().getHomeEmployeesSectionElement().click();
 	}
-	@Then("User should verify the jobs dropdown contains the list of available jobs")
-	public void userShouldVerifyTheJobsDropdownContainsTheListOfAvailableJobs() {
+	@Then("User should verify the jobs filter dropdown contains the list of available jobs")
+	public void userShouldVerifyTheJobsFilterDropdownContainsTheListOfAvailableJobs() {
+		List<String> Roles = new ArrayList<String>();
+		List<String> JobsFilter = new ArrayList<String>();
+		pma.getRMS_Employee_Management_POM().getJobsSectionElement().click();
+		
+		List<WebElement> AllRoleElement = pma.getRMS_Employee_Management_POM().getRolesElement();
+		for (int i = 0; i < AllRoleElement.size(); i++) {
+			Roles.add(AllRoleElement.get(i).getText());
+		}
+		Roles.add(pma.getRMS_Employee_Management_POM().getActiveRoleElement().getText());
+		//Verifying jobs Filter
+		pma.getRMS_Employee_Management_POM().getEmployeesSectionElement().click();
+		pma.getRMS_Employee_Management_POM().getAllJobsFilterDropdownElement().click();
+		
+		List<WebElement> jobRolesFilterElements = pma.getRMS_Employee_Management_POM().getJobRolesFilterElements();
+		for (int i = 0; i < jobRolesFilterElements.size(); i++) {
+			JobsFilter.add(jobRolesFilterElements.get(i).getText());
+		}
+		//Assert.assertTrue(Roles.size());
+		
+		
 	}
 	@Then("User should click on Add Employee button and verify the Slide pop-up")
 	public void userShouldClickOnAddEmployeeButtonAndVerifyTheSlidePopUp() {
