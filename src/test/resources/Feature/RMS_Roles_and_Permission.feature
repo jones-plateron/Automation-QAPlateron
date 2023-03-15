@@ -102,3 +102,4 @@ Feature: Roles and permission
     Examples: 
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
+ 
