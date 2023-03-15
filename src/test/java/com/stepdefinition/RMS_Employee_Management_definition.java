@@ -1,5 +1,9 @@
 package com.stepdefinition;
 
+import java.io.IOException;
+import java.time.Duration;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import com.base.BaseClass;
@@ -8,6 +12,7 @@ import com.pagemanager.PageManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class RMS_Employee_Management_definition extends BaseClass {
 	
@@ -20,7 +25,19 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	}
 		
 	@Given("Login to the restaurant with {string} and {string}")
-	public void loginToTheRestaurantWithAnd(String string, String string2) {
+	public void loginToTheRestaurantWithAnd(String mobileNum, String otp) throws IOException, Exception {
+		WebDriverManager.chromedriver().setup();
+		rmsDriver =new ChromeDriver();
+		
+		rmsDriver.manage().window().maximize();
+		rmsDriver.get("https://www.qa.restaurants.plateron.com/auth/login");
+		rmsDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		//pma.getrMS_Page_POM().getMobileNumberElement().sendKeys("mobileNum");
+		Thread.sleep(1000);
+		
+//		pma.getrMS_Page_POM().getContinueBtnElement().click();
+//		pma.getrMS_Page_POM().getOtpFirstElement().sendKeys("otp");
+//		pma.getrMS_Page_POM().getVerifyOtpElement().click();
 	}
 	@When("User should redirects to employees section")
 	public void userShouldRedirectsToEmployeesSection() {
