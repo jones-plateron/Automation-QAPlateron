@@ -1,5 +1,7 @@
 package com.feature.page.pom;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -38,8 +40,8 @@ public class RMS_Employee_Management_POM extends BaseClass{
 	public WebElement getAllJobsFilterDropdownElement() {
 		return rmsDriver.findElement(By.xpath("//span[@class='cursor-pointer font-bold w-150p text-left text-ellipsis ']"));
 	}//no-Need
-	public WebElement getJobRolesFilterElements() {
-		return rmsDriver.findElement(By.xpath("//*[@id=\"root\"]/div/main/section[2]/section[1]/div/div/div[2]/div"));
+	public List<WebElement> getJobRolesFilterElements() {////*[@id=\"root\"]/div/main/section[2]/section[1]/div/div/div[2]/div
+		return rmsDriver.findElements(By.xpath("//li[@class='dropdown-item text-ellipsis']"));
 	}
 	public WebElement getIndividualJobRoleElement() {
 		return rmsDriver.findElement(By.xpath("//li[@class='dropdown-item text-ellipsis']"));
@@ -50,8 +52,8 @@ public class RMS_Employee_Management_POM extends BaseClass{
 	public WebElement getActiveRoleElement() {
 		return rmsDriver.findElement(By.xpath("//li[@class='list-item cursor-pointer active']"));
 	}
-	public WebElement getRolesElement() {
-		return rmsDriver.findElement(By.xpath("//li[@class='list-item cursor-pointer ']"));
+	public List<WebElement> getRolesElement() {
+		return rmsDriver.findElements(By.xpath("//li[@class='list-item cursor-pointer ']"));
 	}
 	public WebElement getEmployeesSectionElement() {
 		return rmsDriver.findElement(By.xpath("//a[normalize-space()='Employees']"));
