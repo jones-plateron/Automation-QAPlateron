@@ -272,6 +272,7 @@ public void userShouldVerifyTheNewJobsIsAddedInTheAvailableJobList() {
         System.out.println(text);
         //Assert.assertTrue(text.contains(string));
         
+        
     }
     
 }
