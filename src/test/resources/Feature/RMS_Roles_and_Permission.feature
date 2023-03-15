@@ -1,11 +1,11 @@
-
 Feature: Roles and permission
-@Rolesandpermission
+
+  @Rolesandpermission
   Scenario Outline: As a RMS User, I need to Check roles and permission for Manager,Waiter and Busser
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
-    Then User should verify by default "Manager","Waiter" and "Busser" Roles are available under the Jobs
     Then User should able to click jobs option and verify the "Manager" option is selected by default
+    Then User should verify by default "Manager","Waiter" and "Busser" Roles are available under the Jobs
     Then User should verify "POS Access" Section is present and "Regenerate PIN","Shift Review" and "Clock-In/Clock-Out" options is present under POS Access Section
     Then User should verify "This permission allows the employee to regenerate PIN from POS. An SMS containing the new PIN would to sent to the employee's mobile number" instruction under the Regenerate PIN option
     Then User should verify "This permission allows the employee to review their shift form POS" instruction is present under Shift Review option
@@ -26,12 +26,12 @@ Feature: Roles and permission
     Examples: 
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
-@Rolesandpermission
+
+  @Rolesandpermission
   Scenario Outline: As a RMS User, I need to validate the jobs popup
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
-    Then User should able to click jobs option and verify the manager option is selected by default
-    And User should able to click Add Jobs Button and verify the Add Jobs popup opens
+    Then User should able to click jobs option and verify the "Manager" option is selected by default    And User should able to click Add Jobs Button and verify the Add Jobs popup opens
     Then User should able to enter the "<Job Name with Special character>" and verify "Name should not include special character!!" indication appears
     When User should able to clear the entered name and verify "Please enter valid job name" indication appears
     Then User should able to see and Click cancel Button and verify the Popup get closed
@@ -40,12 +40,12 @@ Feature: Roles and permission
     Examples: 
       | mobileNumber | otp    | Job Name with Special character |
       |   7777777723 | 666666 | Ac@;'.';'?/'                    |
-@Rolesandpermission
+
+  @Rolesandpermission
   Scenario Outline: As a RMS User, I need to Create new jobs and set permission for the New Role
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
-    Then User should able to click jobs option and verify the manager option is selected by default
-    Then User should add the New job "<Job Name>" and Click save Button
+    Then User should able to click jobs option and verify the "Manager" option is selected by default    Then User should add the New job "<Job Name>" and Click save Button
       | Job Name |
       | Baker    |
       | Cleaner  |
@@ -62,22 +62,22 @@ Feature: Roles and permission
     Examples: 
       | Edit Name |
       | Bakers    |
-@Rolesandpermission
+
+  @Rolesandpermission
   Scenario Outline: As a RMS User, I need to edit the permission
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
-    Then User should able to click jobs option and verify the manager option is selected by default
-    And User should able to select the Job and edit the permission
-    
+    Then User should able to click jobs option and verify the "Manager" option is selected by default    And User should able to select the Job and edit the permission
+
     Examples: 
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
-@Rolesandpermission
+
+  @Rolesandpermission
   Scenario Outline: As a RMS User, I need to delete the Role
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
-    Then User should able to click jobs option and verify the manager option is selected by default
-    And User should able to delete the Role by clicking delete Button
+    Then User should able to click jobs option and verify the "Manager" option is selected by default    And User should able to delete the Role by clicking delete Button
     Then User should verify the delete popup opens and Verify "Would you like to delete New Job ?"
     And User should verify the popup get closed when User clicks X icon or Cancel Button
     Then User should verify the job gets deleted when User clicks delete Button
@@ -85,12 +85,12 @@ Feature: Roles and permission
     Examples: 
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
-@Rolesandpermission
+
+  @Rolesandpermission
   Scenario Outline: As a RMS User, I need to delete by Re-assigning
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
-    Then User should able to click jobs option and verify the manager option is selected by default
-    And User should able to delete the Role by clicking delete Button
+    Then User should able to click jobs option and verify the "Manager" option is selected by default    And User should able to delete the Role by clicking delete Button
     Then User should verify the delete popup opens and Verify "Would you like to delete New Job ?"
     And User should verify the popup get closed when User clicks X icon or Cancel Button
     Then User should verify the job gets deleted when User clicks delete Button
