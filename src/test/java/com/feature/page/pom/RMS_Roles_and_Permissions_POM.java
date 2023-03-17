@@ -234,6 +234,12 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	
+	public WebElement geteditedit() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//*[@class=\"d-flex justify-content-between\"])[6]"));
+		return element;
+	}
+	
+	
 	
 	//CheckBox Locators	
 	public WebElement getRegeneratePinCheckBox() {
@@ -261,7 +267,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getDiscountCheckBox() {
-		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[2]/div[2]/div[4]/div[1]/div[1]/div[1]/label[1]/span[1]"));
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type=\"checkbox\"])[7]"));
 		return element;
 	}
 	public WebElement getSettingsCheckBox() {
