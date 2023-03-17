@@ -75,9 +75,9 @@ PageManager pma = new PageManager();
 	public List<WebElement> getRolesElement() {
         return rmsDriver.findElements(By.xpath("//li[@class='list-item cursor-pointer ']"));
     }
-	
+	//Changed locators Now
 	public WebElement getRegeneratePinPermissions() {
-		WebElement element = rmsDriver.findElement(By.xpath("//h4[contains(text(),'Regenerate PIN')]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[normalize-space()='Regenerate PIN']"));
 		return element;
 	}	
 	public WebElement getRegeneratePinInstructions() {
@@ -96,7 +96,7 @@ PageManager pma = new PageManager();
 	}
 
 	public WebElement getClockInOutPermissions() {
-		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'Order Management')]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[normalize-space()='Clock-In/Clock-Out']"));
 		return element;
 	}
 	
@@ -174,7 +174,13 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//label[@class='page-subheader__help-title d-block mb-1']"));
 		return element;
 	}
-	public WebElement getAddJobPopupTextBox() {
+	
+	public WebElement getAddJobPopupNameAlreadyExistsIndication() {
+		WebElement element = rmsDriver.findElement(By.xpath("//span[contains(text(),'Name already exists!!')]"));
+		return element;
+	}
+	
+			public WebElement getAddJobPopupTextBox() {
 		WebElement element = rmsDriver.findElement(By.xpath("//input[@name='id']"));
 		return element;
 	}
@@ -204,6 +210,31 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	
+	public WebElement get1stJobName() {
+		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[1]/div[1]/div[2]/ul[1]/li[4]/div[1]"));
+		return element;
+	}
+	
+	public WebElement get2ndJobName() {
+		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[1]/div[1]/div[2]/ul[1]/li[5]/div[1]"));
+		return element;
+	}
+	
+	public WebElement get3rdJobName() {
+		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[1]/div[1]/div[2]/ul[1]/li[6]/div[1]"));
+		return element;
+	}
+	
+	public WebElement get4thJobName() {
+		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[1]/div[1]/div[2]/ul[1]/li[7]/div[1]"));
+		return element;
+	}
+	public WebElement get5thJobName() {
+		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[1]/div[1]/div[2]/ul[1]/li[8]/div[1]"));
+		return element;
+	}
+	
+	
 	//CheckBox Locators	
 	public WebElement getRegeneratePinCheckBox() {
 		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]"));
@@ -226,7 +257,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getRefundCheckBox() {
-		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/label[1]/span[1]"));
+		WebElement element = rmsDriver.findElement(By.xpath("(.//*[@class=' label-text  text-bottom '])[6]"));
 		return element;
 	}
 	public WebElement getDiscountCheckBox() {
@@ -291,7 +322,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getDeleteJobReassignProceedButton() {
-		WebElement element = rmsDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-small d-flex align-items-center cursor-na']"));
+		WebElement element = rmsDriver.findElement(By.xpath("//button[contains(@class,'btn btn-primary btn-small d-flex align-items-center')]"));
 		return element;
 	}
 	public WebElement getDeleteJobReassignCancelButton() {
