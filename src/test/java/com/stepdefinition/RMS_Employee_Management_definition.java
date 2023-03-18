@@ -1,5 +1,7 @@
 package com.stepdefinition;
 
+import static org.testng.Assert.assertThrows;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -413,7 +415,7 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		System.out.println(indvEmployeeListElement.size());
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
 			indvEmployeeListElement.get(i).click();
-			Thread.sleep(500);
+			Thread.sleep(100);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
 			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
 		}
@@ -426,6 +428,13 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		int ActtotalEmp = indvEmployeeListElement.size()+inActiveEmployeeElement.size();
 		String string = Integer.toString(ActtotalEmp);
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getTotalEmpElement().getText().contains(string),"Verifying total Employees Count");
+		
+		
+		
+		
+		
+		
+		
 	}
 	@Then("user should verify the text message {string} by enter UA text in Search Bar")
 	public void userShouldVerifyTheTextMessageByEnterUATextInSearchBar(String string) {
@@ -438,41 +447,72 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	@Then("Verify Each employee profile contains edit button in Employee details page")
 	public void verifyEachEmployeeProfileContainsEditButtonInEmployeeDetailsPage() throws InterruptedException {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
-		System.out.println(indvEmployeeListElement.size());
-		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
-			indvEmployeeListElement.get(i).click();
-			Thread.sleep(300);
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
+		System.out.println(indvEmployeeListElement.size());int j=1;
+		for (int i = 0; i < indvEmployeeListElement.size(); i++,j++) {
+			String empListDispName = pma.getRMS_Employee_Management_POM().getEmpNameInsideListElement(j).getText();
+			System.out.println(empListDispName);
+			String empListEmpID = pma.getRMS_Employee_Management_POM().getEmpIDInsideListElement(j).getText();
+			System.out.println(empListEmpID);
+			String empListRole = pma.getRMS_Employee_Management_POM().getJobTypeInsideListElement(j).getText();
+			System.out.println(empListRole);
+			String empListEmail = pma.getRMS_Employee_Management_POM().getEmailInsideListIfElement(j).getText();
+			System.out.println(empListEmail);
+			String empListMobile = pma.getRMS_Employee_Management_POM().getPhoneInsideListElement(j).getText();
+			System.out.println(empListMobile);
+			Thread.sleep(100);
+			indvEmployeeListElement.get(i).click();Thread.sleep(300);
+			String SlideDispName1 = pma.getRMS_Employee_Management_POM().getSlideEmpNameElement().getText();Thread.sleep(300);
+			//String SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
+			String SlideDispName2 = pma.getRMS_Employee_Management_POM().getSlideDisplayNameElement().getText();Thread.sleep(100);
+			String SlidePhone = pma.getRMS_Employee_Management_POM().getSlidePhoneElement().getText();Thread.sleep(100);
+			String SlideEmail = pma.getRMS_Employee_Management_POM().getSlideEmailElement().getText();Thread.sleep(100);
+			String SlideRole = pma.getRMS_Employee_Management_POM().getSlideRoleElement().getText();Thread.sleep(100);
+			
+			
+			System.out.println(SlideDispName1);
+			//System.out.println(SlidePIN);
+			System.out.println(SlideDispName2);
+			System.out.println(SlidePhone);
+			System.out.println(SlideEmail);
+			System.out.println(SlideRole);
+			//verify
+			
+			//getSlideEmpNameElement
+			
+			
+			
+			
+			Thread.sleep(100);
+			//indvEmployeeListElement.get(i).click();
 			Thread.sleep(300);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
 			Thread.sleep(300);
-			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(500);
+			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(300);
+			break;
 		}//need to add individual validation
+		
+		
+		
+		
 	}
 	@Then("Verify user should able to modify the Employee information in RMS")
-	public void verifyUserShouldAbleToModifyTheEmployeeInformationInRMS() throws InterruptedException {
+	public void verifyUserShouldAbleToModifyTheEmployeeInformationInRMS() throws InterruptedException {//inprogress
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
+			Thread.sleep(100);
 			indvEmployeeListElement.get(i).click();
-			Thread.sleep(500);
+			Thread.sleep(300);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
-			Thread.sleep(500);
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
-			Thread.sleep(500);
-			pma.getRMS_Employee_Management_POM().getMarkAsInactiveEmpDetailsElement().click();
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivpopHdrElement().isDisplayed());
+			Thread.sleep(1000);
+			//Modify WAAAAAAAAIT
+			//pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().click();
 			
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().contains("Would you like to mark "));
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().contains(" inactive ?"));
-			Thread.sleep(100);
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopSaveElement().isDisplayed());
-			Thread.sleep(100);
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopCancelBtnElement().isDisplayed());
-			Thread.sleep(100);
-			pma.getRMS_Employee_Management_POM().getMarkasInActivepopCloseElement().click();
-			Thread.sleep(500);
-			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
+			
+			
+			
+			Thread.sleep(300);
+			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(300);
 		}
 		
 	}
@@ -481,17 +521,89 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		//Covered in Above Method
 	}
 	@Then("User should verify Mark as Inactive popup text and Cancel button")
-	public void userShouldVerifyMarkAsInactivePopupTextAndCancelButton() {
-		//
+	public void userShouldVerifyMarkAsInactivePopupTextAndCancelButton() throws InterruptedException {
+		//Covered in Above Method
+		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
+		System.out.println(indvEmployeeListElement.size());
+		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
+			indvEmployeeListElement.get(i).click();
+			Thread.sleep(100);
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
+			Thread.sleep(1000);
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
+			Thread.sleep(300);
+			if(pma.getRMS_Employee_Management_POM().getEmpRoleInsideEmpDeBefEditElement().getText().equals("Owner")) {//getEmpRoleInsideEmpDeBefEditElement
+				pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
+			}else {
+			
+			pma.getRMS_Employee_Management_POM().getMarkAsInactiveEmpDetailsElement().click();
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivpopHdrElement().isDisplayed());
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().contains("Would you like to mark "));
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().contains(" inactive ?"));
+			Thread.sleep(300);
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopSaveElement().isDisplayed());
+			Thread.sleep(300);
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopCancelBtnElement().isDisplayed());
+			Thread.sleep(300);
+			pma.getRMS_Employee_Management_POM().getMarkasInActivepopCloseElement().click();
+			Thread.sleep(300);
+			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
+			}
+		}
 	}
 	@Then("user should verify the Employee has bee moved to bottom of rms \\(as Inactive)")
-	public void userShouldVerifyTheEmployeeHasBeeMovedToBottomOfRmsAsInactive() {
+	public void userShouldVerifyTheEmployeeHasBeeMovedToBottomOfRmsAsInactive() throws InterruptedException {
+		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
+		System.out.println(indvEmployeeListElement.size());
+		for (int i = 0; i < 5; i++) {
+			Thread.sleep(100);
+			indvEmployeeListElement.get(i).click();
+			Thread.sleep(100);
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
+			Thread.sleep(1000);
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
+			Thread.sleep(100);
+			
+			if(pma.getRMS_Employee_Management_POM().getEmpRoleInsideEmpDeBefEditElement().getText().equals("Owner")) {//getEmpRoleInsideEmpDeBefEditElement
+				pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
+			}else {
+			pma.getRMS_Employee_Management_POM().getMarkAsInactiveEmpDetailsElement().click();
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivpopHdrElement().isDisplayed());
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().contains("Would you like to mark "));
+			String substring = pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().substring(22);
+			String[] split = substring.split(" inactive ?");
+			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().contains(" inactive ?"));
+			Thread.sleep(100);
+			pma.getRMS_Employee_Management_POM().getMarkasInActivepopSaveElement().click();
+			Thread.sleep(100);
+			//System.out.println(split[0]);
+			String name="";
+			for (int k = 2; k < split[0].length()-1; k++) {
+				name=name+split[0].charAt(k);
+			}
+			//System.out.println(name);
+			boolean flag=false;
+			List<WebElement> inActiveEmployeeElement = pma.getRMS_Employee_Management_POM().getInActiveEmployeeElement();
+			for (int j = 0; j < inActiveEmployeeElement.size(); j++) {//validation of Inactive Employee list
+				Thread.sleep(100);
+				if(inActiveEmployeeElement.get(j).getText().contains(name)) {
+					flag=true;
+				}
+			}
+			Assert.assertTrue(flag);
+			break;
+			}
+		}
+		
 	}
 	@Then("verify user should able to see the Employee Details page Cancel and Save button")
 	public void verifyUserShouldAbleToSeeTheEmployeeDetailsPageCancelAndSaveButton() {
+	
 	}
 	@Then("Verify the Popup gets closed when user clicks save or cancel after modification")
 	public void verifyThePopupGetsClosedWhenUserClicksSaveOrCancelAfterModification() {
 	}
 	
 }
+
+

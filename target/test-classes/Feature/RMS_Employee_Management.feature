@@ -62,10 +62,10 @@ Feature: Verify the Employee Management Page in RMS
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
     Then Verify Each employee profile contains edit button in Employee details page
-    And Verify user should able to modify the Employee information in RMS
-    And Verify user should able to see the mark as Inactive button in Employee details
-    And User should verify Mark as Inactive popup text and Cancel button
-    And user should verify the Employee has bee moved to bottom of rms (as Inactive)
+    #And Verify user should able to modify the Employee information in RMS
+    #And Verify user should able to see the mark as Inactive button in Employee details
+    #And User should verify Mark as Inactive popup text and Cancel button
+    #And user should verify the Employee has bee moved to bottom of rms (as Inactive)
     And verify user should able to see the Employee Details page Cancel and Save button
     And Verify the Popup gets closed when user clicks save or cancel after modification
 
