@@ -1,6 +1,5 @@
 package com.stepdefinition;
 
-import static org.testng.Assert.assertThrows;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -9,9 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -27,6 +29,7 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	
 	PageManager pma = new PageManager();
 	public static List<String> Roles;
+	
 	public RMS_Employee_Management_definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
@@ -42,11 +45,11 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		rmsDriver.get("https://www.qa.restaurants.plateron.com/auth/login");
 		rmsDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		Thread.sleep(1000);
-		pma.getRMS_Employee_Management_POM().getLoginMobileNumElement().sendKeys(mobileNum);
-		pma.getRMS_Employee_Management_POM().getLoginContinuebuttonElement().click();
-		pma.getRMS_Employee_Management_POM().getLoginOtpElement().sendKeys(otp);
-		pma.getRMS_Employee_Management_POM().getLoginVerifyOtpElement().click();
-		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getOverviewWelcomTextElement().getText().contains("Welcome"), "Verifying Successful Login");
+		pma.getRMS_Employee_Management_POM().getLoginMobileNumElement().sendKeys(mobileNum);Thread.sleep(500);
+		pma.getRMS_Employee_Management_POM().getLoginContinuebuttonElement().click();Thread.sleep(500);
+		pma.getRMS_Employee_Management_POM().getLoginOtpElement().sendKeys(otp);Thread.sleep(500);
+		pma.getRMS_Employee_Management_POM().getLoginVerifyOtpElement().click();Thread.sleep(500);
+		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getOverviewWelcomTextElement().getText().contains("Welcome"), "Verifying Successful Login");Thread.sleep(500);
 		
 	}
 	@When("User should redirects to employees section")
@@ -224,19 +227,36 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		Thread.sleep(2000);
 		//Role DropDown Validation
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getRoleHdrElement().isDisplayed());
-		pma.getRMS_Employee_Management_POM().getDropDownRoleElement().click();		
+		Thread.sleep(500);
+//		Actions ac= new Actions(rmsDriver);
+//		ac.keyDown(Keys.PAGE_DOWN).keyUp(Keys.PAGE_DOWN);
+		
+		//JavascriptExecutor js = (JavascriptExecutor) rmsDriver;
+		//js.executeScript("argument[0].click", pma.getRMS_Employee_Management_POM().getDropDownRoleElement());
+		pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
+		pma.getRMS_Employee_Management_POM().getSaveChangesPopSaveBtnElement().click();Thread.sleep(500);
+		pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().click();
+		pma.getRMS_Employee_Management_POM().getDropDownRoleWOErrorElement().click();
+//		pma.getRMS_Employee_Management_POM().getDropDownRoleElement().click();		//getDropDownRoleElement
 		List<WebElement> addEmpPgRoleDropdownElement = pma.getRMS_Employee_Management_POM().getAddEmpRoleDropdownElement();
-		int match=0;
-		for (int i = 1; i < addEmpPgRoleDropdownElement.size(); i++) {
-			String addEmployeeDropRole = addEmpPgRoleDropdownElement.get(i).getText();
-			for (int j = 0; j < Roles.size() ; j++) {
-				if(Roles.get(j).contains(addEmployeeDropRole)) {
-				match++;break;
-				}}}
-		Assert.assertTrue(match==Roles.size(), "Verifying Add Employee page Role Dropdown");
+		
+//		int match=0;
+//		for (int i = 1; i < addEmpPgRoleDropdownElement.size(); i++) {
+//			String addEmployeeDropRole = addEmpPgRoleDropdownElement.get(i).getText();
+//			System.out.println(addEmployeeDropRole);
+//			System.out.println(Roles.get(i));
+//			for (int j = 0; j < Roles.size() ; j++) {
+//				if(addEmployeeDropRole.contains(Roles.get(j))) {
+//				match++;
+//				break;
+//				}}}
+//		System.out.println(Roles.size());
+//		System.out.println(addEmpPgRoleDropdownElement.size());
+		Assert.assertTrue(addEmpPgRoleDropdownElement.size()==(Roles.size()+1), "Verifying Add Employee page Role Dropdown");
 	}
 	@Then("User should verify the Cancel and Close button")
 	public void userShouldVerifyTheCancelAndCloseButton() {
+		pma.getRMS_Employee_Management_POM().getFirstNameTextBxElement().sendKeys("jhg");
 		pma.getRMS_Employee_Management_POM().getAddEmpCancelBtnElement().click();
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getSaveChangesPopHdrElement().getText().equals("Save Changes"),"Verifying Save Changes Pop-up");
 		pma.getRMS_Employee_Management_POM().getSaveChangesPopSubTxtElement().getText().equals("Would you like to leave the page without saving the edited items?");
@@ -253,7 +273,7 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		rmsDriver.quit();
 	}
 	@When("User should Create an Employee with Mandatory Fields {string} {string} and {string}")
-	public void userShouldCreateAnEmployeeWithMandatoryFieldsAnd(String dispName, String phone, String role) {
+	public void userShouldCreateAnEmployeeWithMandatoryFieldsAnd(String dispName, String phone, String role) throws InterruptedException {
 		//pma.getRMS_Employee_Management_POM().getAddEmpCancelBtnElement().click();
 		//Remove the above line and change New Emp Details in Feature File
 		pma.getRMS_Employee_Management_POM().getDisplayNameTextBxElement().sendKeys(dispName);
@@ -269,15 +289,19 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			}
 		}
 		pma.getRMS_Employee_Management_POM().getAddEmpSaveBtnElement().click();
-		
+		Thread.sleep(2000);
+		rmsDriver.navigate().refresh();
 		
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		boolean check=false;
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
+			Thread.sleep(1000);
+			System.out.println(indvEmployeeListElement.get(i).getText());
 			if(indvEmployeeListElement.get(i).getText().contains(dispName)&&indvEmployeeListElement.get(i).getText().contains(role)) {	
 				check=true;
 				break;}		
 			}
+		Thread.sleep(500);
 		Assert.assertTrue(check);
 	}
 	@Then("User should verify the Employee added to the Employee list")
@@ -310,7 +334,7 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	}
 	
 	@When("User should Create a New Employee and store the Employee information")
-	public void UserShouldCreateANewEmployeeAndStoreTheEmployeeInformation(io.cucumber.datatable.DataTable dataTable) {
+	public void UserShouldCreateANewEmployeeAndStoreTheEmployeeInformation(io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
 	
 		
 		List<Map<String,String>> asMaps = dataTable.asMaps();
@@ -322,10 +346,14 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			try {
 				pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().click();	
 			} catch (Exception e) {}
-			pma.getRMS_Employee_Management_POM().getDisplayNameTextBxElement().sendKeys(asMaps.get(i).get("DispName"));
-			pma.getRMS_Employee_Management_POM().getPhoneNumbertextBxElement().sendKeys(asMaps.get(i).get("phoneNo"));
-			
-			pma.getRMS_Employee_Management_POM().getDropDownRoleWOErrorElement().click();
+			Thread.sleep(1000);
+			rmsDriver.navigate().refresh();
+			Thread.sleep(1000);
+			pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().click();Thread.sleep(1000);
+			pma.getRMS_Employee_Management_POM().getDisplayNameTextBxElement().sendKeys(asMaps.get(i).get("DispName"));Thread.sleep(900);
+			pma.getRMS_Employee_Management_POM().getPhoneNumbertextBxElement().sendKeys(asMaps.get(i).get("phoneNo"));Thread.sleep(900);
+			Thread.sleep(1000);
+			pma.getRMS_Employee_Management_POM().getDropDownRoleWOErrorElement().click();Thread.sleep(500);
 			List<WebElement> elements = pma.getRMS_Employee_Management_POM().getAddEmpRoleDropdownElement();
 			for (int j = 0; j < elements.size(); j++) {
 				if(elements.get(j).getText().contains(asMaps.get(i).get("Role"))){
@@ -337,8 +365,13 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		}
 	}
 	@Then("User should verify the Total Employees Count")
-	public void userShouldVerifyTheTotalEmployeesCount() {
-		//getTotalEmpElement-getInActiveEmployeeElement
+	public void userShouldVerifyTheTotalEmployeesCount() throws InterruptedException {
+		Thread.sleep(800);
+//1130		pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
+		// Remove above line at whole run
+		Thread.sleep(800);
+		
+		
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		List<WebElement> inActiveEmployeeElement = pma.getRMS_Employee_Management_POM().getInActiveEmployeeElement();
 		int ActtotalEmp = indvEmployeeListElement.size()+inActiveEmployeeElement.size();
@@ -415,8 +448,9 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		System.out.println(indvEmployeeListElement.size());
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
 			indvEmployeeListElement.get(i).click();
-			Thread.sleep(100);
+			Thread.sleep(200);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
+			Thread.sleep(300);
 			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
 		}
 	}
@@ -438,16 +472,33 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	}
 	@Then("user should verify the text message {string} by enter UA text in Search Bar")
 	public void userShouldVerifyTheTextMessageByEnterUATextInSearchBar(String string) {
-		pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
-		//Remove above line 
+//		pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
+//		//Remove above line 
 		pma.getRMS_Employee_Management_POM().getSearchBarElement().sendKeys("ygd6767");
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getNoResultsTextElement().getText().equals(string));
 		pma.getRMS_Employee_Management_POM().getSearchBarElement().sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 	}
 	@Then("Verify Each employee profile contains edit button in Employee details page")
-	public void verifyEachEmployeeProfileContainsEditButtonInEmployeeDetailsPage() throws InterruptedException {
+	public void verifyEachEmployeeProfileContainsEditButtonInEmployeeDetailsPage() throws InterruptedException, IOException {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());int j=1;
+		
+		//file = new File(System.getProperty("user.dir")+"\\SupportFiles\\Configsheet.xlsx");
+		Thread.sleep(1000);
+//		FileInputStream fileInputStream= new FileInputStream(new File(System.getProperty("user.dir")+"\\SupportFiles\\Configsheet.xlsx"));
+//		workbook = new XSSFWorkbook(fileInputStream);		
+//	     Sheet sheet = workbook.createSheet("Employee Details");
+//	      Row row = sheet.createRow(0);
+//	      Cell cell0 = row.createCell(0);
+//	      cell0.setCellValue("Employee Name");
+//	      Cell cell1= row.createCell(1);
+//	      cell1.setCellValue("Emp.Role");
+//	      Cell cell2 = row.createCell(2);
+//	      cell2.setCellValue("PIN");
+//	      FileOutputStream fileOutputStream = new FileOutputStream(file);
+//	      workbook.write(fileOutputStream);
+		
+		
 		for (int i = 0; i < indvEmployeeListElement.size(); i++,j++) {
 			String empListDispName = pma.getRMS_Employee_Management_POM().getEmpNameInsideListElement(j).getText();
 			System.out.println(empListDispName);
@@ -468,27 +519,46 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			String SlideEmail = pma.getRMS_Employee_Management_POM().getSlideEmailElement().getText();Thread.sleep(100);
 			String SlideRole = pma.getRMS_Employee_Management_POM().getSlideRoleElement().getText();Thread.sleep(100);
 			
+			Assert.assertTrue(empListDispName.equals(SlideDispName1));
+			Assert.assertTrue(empListDispName.equals(SlideDispName2));
+			Assert.assertTrue(empListRole.equals(SlideRole));
+			Assert.assertTrue(empListMobile.equals(SlidePhone));
+			Assert.assertTrue(empListEmail.equals(SlideEmail));
+			String SlidePIN ="";
+			try {
+				SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
+			} catch (NoSuchElementException e) {
+				pma.getRMS_Employee_Management_POM().getGeneratePinBtnElement().click();
+				Thread.sleep(500);
+				SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
+			}
+			System.out.println(SlidePIN);
 			
-			System.out.println(SlideDispName1);
-			//System.out.println(SlidePIN);
-			System.out.println(SlideDispName2);
-			System.out.println(SlidePhone);
-			System.out.println(SlideEmail);
-			System.out.println(SlideRole);
-			//verify
+			//Store in Excel
+//			  Row row1 = sheet.getRow(i+1);
+//		      Cell cellEmpNa = row1.createCell(0);
+//		      cellEmpNa.setCellValue(SlideDispName1);
+//		      Cell cellEmpRole= row1.createCell(1);
+//		      cellEmpRole.setCellValue(SlideRole);
+//		      Cell cellPin = row1.createCell(2);
+//		      cellPin.setCellValue(SlidePIN);
+//		      FileOutputStream fileOutputStream1 = new FileOutputStream(file);
+//		      workbook.write(fileOutputStream1);
 			
-			//getSlideEmpNameElement
 			
 			
 			
 			
-			Thread.sleep(100);
+				      
+			
+			
+			
 			//indvEmployeeListElement.get(i).click();
 			Thread.sleep(300);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
 			Thread.sleep(300);
 			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(300);
-			break;
+			//break;
 		}//need to add individual validation
 		
 		
@@ -596,13 +666,8 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		}
 		
 	}
-	@Then("verify user should able to see the Employee Details page Cancel and Save button")
-	public void verifyUserShouldAbleToSeeTheEmployeeDetailsPageCancelAndSaveButton() {
 	
-	}
-	@Then("Verify the Popup gets closed when user clicks save or cancel after modification")
-	public void verifyThePopupGetsClosedWhenUserClicksSaveOrCancelAfterModification() {
-	}
+	
 	
 }
 

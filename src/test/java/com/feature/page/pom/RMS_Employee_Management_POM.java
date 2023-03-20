@@ -131,8 +131,14 @@ public class RMS_Employee_Management_POM extends BaseClass{
 	public WebElement getRoleHdrElement() {
 		return rmsDriver.findElement(By.xpath("//label[normalize-space()='Role']"));
 	}
-	public WebElement getDropDownRoleElement() {
+	public WebElement getDropDownRoleElement() {//span[@class='cursor-pointer w-150p text-ellipsis text-left']
 		return rmsDriver.findElement(By.xpath("//div[@class='   dropdown']//button[@class='dropdown-toggle align-item-center d-flex dropdown-toggle custom-select minimal w-100 br-8 dropdown-error-border  align-item-center d-flex dropdown-toggle custom-select minimal w-100 br-8 dropdown-error-border -primary']"));
+	}
+	public WebElement getDropDownRoleElement1() {
+		return rmsDriver.findElement(By.xpath("//span[@class='cursor-pointer w-150p text-ellipsis text-left']"));
+	}
+	public WebElement getDropDownRoleElement2() {
+		return rmsDriver.findElement(By.xpath("//div[@class='   dropdown']//button[@class='dropdown-toggle align-item-center d-flex dropdown-toggle custom-select minimal w-100 br-8   align-item-center d-flex dropdown-toggle custom-select minimal w-100 br-8  -primary']"));
 	}
 	public WebElement getDropDownRoleWOErrorElement() {
 		return rmsDriver.findElement(By.xpath("//div[@class='   dropdown']//button[@class='dropdown-toggle align-item-center d-flex dropdown-toggle custom-select minimal w-100 br-8   align-item-center d-flex dropdown-toggle custom-select minimal w-100 br-8  -primary']"));
