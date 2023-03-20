@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -247,7 +248,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 		boolean ClockInOutCheckBox  = pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().isSelected();
 		Assert.assertFalse(ClockInOutCheckBox);
 		
-		boolean ViewAllOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox().isSelected();
+		boolean ViewAllOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox1().isSelected();
 		Assert.assertFalse(ViewAllOrderCheckBox);
 		
 		boolean ViewMyOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().isSelected();
@@ -256,7 +257,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 		boolean RefundCheckBox = pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().isSelected();
 		Assert.assertFalse(RefundCheckBox);
 		
-		boolean DiscountCheckBox = pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox().isSelected();
+		boolean DiscountCheckBox = pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().isSelected();
 		Assert.assertFalse(DiscountCheckBox);
 		
 		boolean SettingsCheckBox = pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().isSelected();
@@ -276,7 +277,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 		boolean ClockInOutCheckBox  = pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().isSelected();
 		Assert.assertFalse(ClockInOutCheckBox);
 		
-		boolean ViewAllOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox().isSelected();
+		boolean ViewAllOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox1().isSelected();
 		Assert.assertFalse(ViewAllOrderCheckBox);
 		
 		boolean ViewMyOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().isSelected();
@@ -285,7 +286,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 		boolean RefundCheckBox = pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().isSelected();
 		Assert.assertFalse(RefundCheckBox);
 		
-		boolean DiscountCheckBox = pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox().isSelected();
+		boolean DiscountCheckBox = pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().isSelected();
 		Assert.assertFalse(DiscountCheckBox);
 		
 		boolean SettingsCheckBox = pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().isSelected();
@@ -314,7 +315,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 		boolean ClockInOutCheckBox  = pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().isSelected();
 		Assert.assertTrue(ClockInOutCheckBox);
 		
-		boolean ViewAllOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox().isSelected();
+		boolean ViewAllOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox1().isSelected();
 		Assert.assertFalse(ViewAllOrderCheckBox);
 		
 		boolean ViewMyOrderCheckBox = pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().isSelected();
@@ -323,7 +324,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 		boolean RefundCheckBox = pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().isSelected();
 		Assert.assertFalse(RefundCheckBox);
 		
-		boolean DiscountCheckBox = pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox().isSelected();
+		boolean DiscountCheckBox = pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().isSelected();
 		Assert.assertFalse(DiscountCheckBox);
 		
 		boolean SettingsCheckBox = pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().isSelected();
@@ -369,7 +370,7 @@ public void userShouldAbleToClearTheEnteredNameAndVerifyIndicationAppears(String
 @Then("User should able to see and Click cancel Button and verify the Popup get closed")
 public void userShouldAbleToSeeAndClickCancelButtonAndVerifyThePopupGetClosed() throws InterruptedException {
 	
-	//Add Job Popup Closing by Cancel Button
+	//Add Job Pop-up Closing by Cancel Button
 	Thread.sleep(1000);
 	
 	pma.getRMS_Roles_and_Permissions_POM().getAddJobPopupCancelButton().isDisplayed();
@@ -380,7 +381,7 @@ public void userShouldAbleToSeeAndClickCancelButtonAndVerifyThePopupGetClosed() 
 @Then("User should able to see and Click X icon and verify the Popup get Closed")
 public void userShouldAbleToSeeAndClickXIconAndVerifyThePopupGetClosed() throws InterruptedException {
 	
-	//Add Job Popup Closing by Xicon
+	//Add Job Pop-up Closing by X-icon
 	Thread.sleep(1000);
     pma.getRMS_Roles_and_Permissions_POM().getAddJobsButton().click();
     pma.getRMS_Roles_and_Permissions_POM().getAddJobPopupTextBox().sendKeys("Manager");
@@ -450,6 +451,9 @@ public void userShouldVerifyTheNewJobsIsAddedInTheAvailableJobList() {
     for (int i = 0; i < AllRoleElement.size(); i++) {
         String text = AllRoleElement.get(i).getText();
         System.out.println(text); 
+       // if (text.contains("")) {
+			
+		//}
         for (int j = 0; j < jobNameswhileCreating.size(); j++) {
         	if(text.contains(jobNameswhileCreating.get(j))) {
         		k++;
@@ -462,9 +466,9 @@ public void userShouldVerifyTheNewJobsIsAddedInTheAvailableJobList() {
          
     }
 }
-
+ 
 @Then("User should able to give permission for the New Role and Verify User should able to click Save Button")
-public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleToClickSaveButton() {
+public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleToClickSaveButton() throws InterruptedException {
 	
 	Actions action = new Actions(rmsDriver);
 	//For the 1st Job - All Options
@@ -472,15 +476,29 @@ public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleTo
 	pma.getRMS_Roles_and_Permissions_POM().get1stJobName().click();
 	pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
 	pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
+	//Thread.sleep(3000);
 	pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox().click();
+	//Thread.sleep(2000);
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	Thread.sleep(2000);
+	pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox1().click();
+//	Thread.sleep(6000);
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	//Thread.sleep(2000);
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	//Thread.sleep(2000);
 	pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click();
-	
+	Thread.sleep(6000);
 	action.sendKeys(Keys.PAGE_DOWN).build().perform();
-	
-	//pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox().click();    //Hided due to Discount checkbox x path mismatch
-	//pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().click();
+	pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click();
+//	Thread.sleep(6000);
+	action.sendKeys(Keys.PAGE_DOWN).build().perform();
+	pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().click();
+//	Thread.sleep(6000);
+	pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().click();
+//	Thread.sleep(6000);
 	pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
 	}
 	catch(NoSuchElementException e)
@@ -491,12 +509,23 @@ public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleTo
 	
 	//For the 2nd Job - Only My order
 	try {
-	pma.getRMS_Roles_and_Permissions_POM().get2ndJobName().click();
-	pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
+		pma.getRMS_Roles_and_Permissions_POM().get2ndJobName().click();
+		pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
+		pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
+	//	Thread.sleep(3000);
+		pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
+	//	Thread.sleep(2000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	//	Thread.sleep(6000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	//	Thread.sleep(2000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		Thread.sleep(2000);
+		pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
+	//	Thread.sleep(6000);
+		pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
 	}
 	catch (NoSuchElementException e) {
 		System.out.println("Element not found: " + e.getMessage());
@@ -504,16 +533,29 @@ public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleTo
 	
 	//For the 3rd Job - Only My order with Discount
    try {
-	pma.getRMS_Roles_and_Permissions_POM().get3rdJobName().click();
-	pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
-	
-	action.sendKeys(Keys.PAGE_DOWN).build().perform();
-	
-	//pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox().click();
-	pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
+	   pma.getRMS_Roles_and_Permissions_POM().get3rdJobName().click();
+		pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
+		pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
+		Thread.sleep(3000);
+		pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
+	//	Thread.sleep(2000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	//	Thread.sleep(6000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		Thread.sleep(2000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		Thread.sleep(2000);
+		pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
+	//	Thread.sleep(6000);
+		action.sendKeys(Keys.PAGE_DOWN).build().perform();
+		Thread.sleep(2000);
+		pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click();
+	//	Thread.sleep(6000);
+		action.sendKeys(Keys.PAGE_DOWN).build().perform();
+		pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().click();
+		pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
    }
    catch (NoSuchElementException e)
    {
@@ -526,11 +568,16 @@ public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleTo
 	pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
 	pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
 	pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	Thread.sleep(2000);
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	Thread.sleep(2000);
 	pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
 	
 	action.sendKeys(Keys.PAGE_DOWN).build().perform();
-	
-	//pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click();
+	Thread.sleep(2000);
+	pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click();
 	pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
    }
    catch (NoSuchElementException e) {
@@ -543,12 +590,23 @@ public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleTo
 		pma.getRMS_Roles_and_Permissions_POM().get5thJobName().click();
 		pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
 		pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
+		Thread.sleep(3000);
 		pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
+		Thread.sleep(2000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	//	Thread.sleep(6000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		Thread.sleep(2000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		Thread.sleep(2000);
 		pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
-		
-		action.sendKeys(Keys.PAGE_DOWN).build().perform();
-		
-		//pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().click();
+//		Thread.sleep(6000);
+		action.sendKeys(Keys.ARROW_DOWN).build().perform();
+		Thread.sleep(2000);
+		pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().click();
+//		Thread.sleep(6000);
 		pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
 	} catch (NoSuchElementException e) {
 	    // code to handle the exception
@@ -558,18 +616,20 @@ public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleTo
 
 @Then("User should able to see the edit icon and click edit icon to edit the Role Name {string}")
 public void userShouldAbleToSeeTheEditIconAndClickEditIconToEditTheRoleName(String EditName) throws InterruptedException {
+	Actions action = new Actions(rmsDriver);
     pma.getRMS_Roles_and_Permissions_POM().get3rdJobName().click();
     pma.getRMS_Roles_and_Permissions_POM().getAvailableJobEditIcon().isDisplayed();
     pma.getRMS_Roles_and_Permissions_POM().getAvailableJobEditIcon().click();
-    Thread.sleep(10000);
     System.out.println("Icon Clicked");
+    Thread.sleep(4000);
     
-    pma.getRMS_Roles_and_Permissions_POM().geteditedit().click();
-    System.out.println("Clicked zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-                           //It is Clicking but not clearing 
-    pma.getRMS_Roles_and_Permissions_POM().geteditedit().clear();
-    System.out.println("Cleareddddddddddddddddddddddddddddddddddddddd");
-    pma.getRMS_Roles_and_Permissions_POM().geteditedit().sendKeys(EditName);
+    action.keyDown(Keys.CONTROL).sendKeys("a");
+    action.sendKeys(Keys.BACK_SPACE).build().perform();
+    action.keyUp(Keys.CONTROL);
+    Thread.sleep(4000);
+    action.sendKeys(EditName).build().perform();
+    Thread.sleep(4000);
+    pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
 }
 @Then("User should verify the role name is Changed")
 public void userShouldVerifyTheRoleNameIsChanged() {
@@ -579,14 +639,32 @@ public void userShouldVerifyTheRoleNameIsChanged() {
 }
 
 @Then("User should able to select the Job and edit the permission")
-public void userShouldAbleToSelectTheJobAndEditThePermission() {
-	//Editing the 5th Job Role and Giving all permission 
-	pma.getRMS_Roles_and_Permissions_POM().get5thJobName().click();
-	pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox().click();
+public void userShouldAbleToSelectTheJobAndEditThePermission() throws InterruptedException {
+	//Editing the 5th Job Role and Giving all permission Thread.sleep(1000);
+	Actions action = new Actions(rmsDriver);
+	pma.getRMS_Roles_and_Permissions_POM().get5thJobName().click();Thread.sleep(1000);
+	Thread.sleep(2000);
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	Thread.sleep(2000);
+	pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox1().click();
+	Thread.sleep(6000);
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	Thread.sleep(2000);
+	action.sendKeys(Keys.ARROW_DOWN).build().perform();
+	Thread.sleep(2000);
 	//pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
+	Thread.sleep(6000);
+	action.sendKeys(Keys.PAGE_DOWN).build().perform();
 	pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click();
-	//pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox().click();
-	//pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().click();
+	Thread.sleep(6000);
+	action.sendKeys(Keys.PAGE_DOWN).build().perform();
+	pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().click();
+	Thread.sleep(6000);
+//	sThread.sleep(6000);
 	pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
 	 
 }
@@ -629,7 +707,9 @@ public void verifyTheReAssignPopupOpensAndVerifyInstruction(String string) throw
     
 @Then("User should able to Re-assign the employee to other role")
 public void userShouldAbleToReAssignTheEmployeeToOtherRole() {
-	pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassigntoWaiter().click();   
+	// pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassignNextArrow().click();
+	 //pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassignPreviousArrow().click();
+	 pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassigntoWaiter().click();   
 }
 
 @Then("Verify User should able to Close by clicking either X icon or Cancel Button")
@@ -655,4 +735,4 @@ public void verifyUserShouldAbleToDeleteTheRoleByClickingProceedButton() throws 
     
 }
 
-}
+}//day 17-03-2023 18:19

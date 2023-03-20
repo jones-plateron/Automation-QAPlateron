@@ -1,6 +1,6 @@
 Feature: Roles and permission
 
-  @Rolesandpermission1231
+  @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to Check roles and permission for Manager,Waiter and Busser
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -27,7 +27,7 @@ Feature: Roles and permission
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
 
-  @Rolesandpermission1232
+  @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to validate the jobs popup
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -42,7 +42,7 @@ Feature: Roles and permission
       | mobileNumber | otp    | Job Name with Special character |
       |   7777777723 | 666666 | Ac@;'.';'?/'                    |
 
-  @Rolesandpermission1233
+  @Rolesandpermission23
   Scenario Outline: As a RMS User, I need to Create new jobs and set permission for the New Role
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -65,7 +65,7 @@ Feature: Roles and permission
       | mobileNumber | otp    | Edit Name  |
       |   7777777723 | 666666 | Edited Job |
 
-  @Rolesandpermission1234
+  @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to edit the permission
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -76,7 +76,7 @@ Feature: Roles and permission
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
 
-  @Rolesandpermission123
+  @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to delete the Role
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -90,7 +90,7 @@ Feature: Roles and permission
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
 
-  @Rolesandpermission123
+  @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to delete by Re-assigning
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
