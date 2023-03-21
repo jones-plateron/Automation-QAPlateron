@@ -59,7 +59,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	public void userShouldVerifySectionIsPresentAndAndOptionsIsPresentUnderPOSAccessSection(String string, String string2, String string3, String string4) throws InterruptedException {
 	   pma.getRMS_Roles_and_Permissions_POM().getAvailableJobsManager().click();
 	   
-	   Thread.sleep(1000);
+	   Thread.sleep(200);
 	   String actPOSAcess = pma.getRMS_Roles_and_Permissions_POM().getPOSAcessSection().getText();
 	   System.out.println(actPOSAcess);
 	   Assert.assertTrue(actPOSAcess.contains(string));
@@ -82,7 +82,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} instruction under the Regenerate PIN option")
 	public void userShouldVerifyInstructionUnderTheRegeneratePINOption(String string) throws InterruptedException
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 	  String actReInstruction = pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinInstructions().getText();
 	  System.out.println(actReInstruction);
 	  Assert.assertTrue(actReInstruction.contains(string));
@@ -91,7 +91,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} instruction is present under Shift Review option")
 	public void userShouldVerifyInstructionIsPresentUnderShiftReviewOption(String string) throws InterruptedException 
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 		String actShiftReviewInstruction = pma.getRMS_Roles_and_Permissions_POM().getShiftReviewInstruction().getText();
 		System.out.println(actShiftReviewInstruction);
 	    Assert.assertTrue(actShiftReviewInstruction.contains(string));
@@ -100,7 +100,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} instruction is present under Clock-In\\/Clock-Out options")
 	public void userShouldVerifyInstructionIsPresentUnderClockInClockOutOptions(String string) throws InterruptedException
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 		String actClockInOutInstruction = pma.getRMS_Roles_and_Permissions_POM().getClockInOutInstruction().getText();
 		System.out.println(actClockInOutInstruction);
 	    Assert.assertTrue(actClockInOutInstruction.contains(string));
@@ -109,7 +109,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} section is present and {string},{string},{string} and {string} options is present under Order Management Section")
 	public void userShouldVerifySectionIsPresentAndAndOptionsIsPresentUnderOrderManagementSection(String string, String string2, String string3, String string4, String string5) throws InterruptedException 
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 	    String actOMSection = pma.getRMS_Roles_and_Permissions_POM().getOrderManagementSection().getText();
 	    System.out.println(actOMSection);
 	    Assert.assertTrue(actOMSection.contains(string)); 
@@ -135,7 +135,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} instruction is present under View All Orders option")
 	public void userShouldVerifyInstructionIsPresentUnderViewAllOrdersOption(String string) throws InterruptedException 
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 		String actViewallorderInstruction = pma.getRMS_Roles_and_Permissions_POM().getViewAllOrdersInstruction().getText();
 		System.out.println(actViewallorderInstruction);
 	    Assert.assertTrue(actViewallorderInstruction.contains(string));
@@ -143,7 +143,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} instruction is present under View My Orders option")
 	public void userShouldVerifyInstructionIsPresentUnderViewMyOrdersOption(String string) throws InterruptedException 
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 		String actViewmyorderInstruction = pma.getRMS_Roles_and_Permissions_POM().getViewMyOrdersInstruction().getText();
 		System.out.println(actViewmyorderInstruction);
 	    Assert.assertTrue(actViewmyorderInstruction.contains(string));
@@ -151,7 +151,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} instruction is present under Refund option")
 	public void userShouldVerifyInstructionIsPresentUnderRefundOption(String string) throws InterruptedException 
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 		String actRefundInstruction = pma.getRMS_Roles_and_Permissions_POM().getRefundInstruction().getText();
 		System.out.println(actRefundInstruction);
 	    Assert.assertTrue(actRefundInstruction.contains(string));
@@ -159,7 +159,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} instruction is present under Discount option")
 	public void userShouldVerifyInstructionIsPresentUnderDiscountOption(String string) throws InterruptedException 
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 		String actDiscountInstruction = pma.getRMS_Roles_and_Permissions_POM().getDiscountInstruction().getText();
 		System.out.println(actDiscountInstruction);
 	    Assert.assertTrue(actDiscountInstruction.contains(string));
@@ -167,7 +167,7 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	@Then("User should verify {string} Section is present and verify {string} option present under Other Permissions Section")
 	public void userShouldVerifySectionIsPresentAndVerifyOptionPresentUnderOtherPermissionsSection(String string, String string2) throws InterruptedException 
 	{
-		Thread.sleep(1000);
+		Thread.sleep(200);
 	    String actOtherPermissionSection = pma.getRMS_Roles_and_Permissions_POM().getOtherPermissionsSection().getText();
 	    System.out.println(actOtherPermissionSection);
 	    Assert.assertTrue(actOtherPermissionSection.contains(string));
@@ -395,17 +395,13 @@ public void userShouldAbleToSeeAndClickXIconAndVerifyThePopupGetClosed() throws 
 
 @Then("User should add the New job {string} and Click save Button")
 public void userShouldAddTheNewJobAndClickSaveButton(String string, io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
-	
-	Thread.sleep(1000);
 	//Creating Roles
 	List<String> jobNames = dataTable.asList();{
 	for (int i = 1; i < jobNames.size(); i++) {
 		pma.getRMS_Roles_and_Permissions_POM().getAddJobsButton().click();
 		System.out.println(jobNames.get(i));
-		Thread.sleep(1000);
-		
+		Thread.sleep(200);
 		pma.getRMS_Roles_and_Permissions_POM().getAddJobPopupTextBox().sendKeys(jobNames.get(i));
-		
 		jobNameswhileCreating.add(jobNames.get(i));
 		try {
 			if (pma.getRMS_Roles_and_Permissions_POM().getAddJobPopupNameAlreadyExistsIndication().isDisplayed()) {
@@ -588,12 +584,10 @@ public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleTo
 		pma.getRMS_Roles_and_Permissions_POM().get5thJobName().click();
 		pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
 		pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
-		Thread.sleep(3000);
 		pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
 		Thread.sleep(2000);
 		action.sendKeys(Keys.ARROW_DOWN).build().perform();
 		action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	//	Thread.sleep(6000);
 		action.sendKeys(Keys.ARROW_DOWN).build().perform();
 		action.sendKeys(Keys.ARROW_DOWN).build().perform();
 		Thread.sleep(2000);
@@ -619,14 +613,14 @@ public void userShouldAbleToSeeTheEditIconAndClickEditIconToEditTheRoleName(Stri
     pma.getRMS_Roles_and_Permissions_POM().getAvailableJobEditIcon().isDisplayed();
     pma.getRMS_Roles_and_Permissions_POM().getAvailableJobEditIcon().click();
     System.out.println("Icon Clicked");
-    Thread.sleep(4000);
+    Thread.sleep(2000);
     
     action.keyDown(Keys.CONTROL).sendKeys("a");
     action.sendKeys(Keys.BACK_SPACE).build().perform();
     action.keyUp(Keys.CONTROL);
-    Thread.sleep(4000);
+    Thread.sleep(2000);
     action.sendKeys(EditName).build().perform();
-    Thread.sleep(4000);
+    Thread.sleep(2000);
     pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
 }
 @Then("User should verify the role name is Changed")
@@ -641,27 +635,26 @@ public void userShouldAbleToSelectTheJobAndEditThePermission() throws Interrupte
 	//Editing the 5th Job Role and Giving all permission Thread.sleep(1000);
 	Actions action = new Actions(rmsDriver);
 	pma.getRMS_Roles_and_Permissions_POM().get5thJobName().click();Thread.sleep(1000);
-	Thread.sleep(2000);
+	pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
+	pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
 	action.sendKeys(Keys.ARROW_DOWN).build().perform();
 	action.sendKeys(Keys.ARROW_DOWN).build().perform();
 	action.sendKeys(Keys.ARROW_DOWN).build().perform();
 	action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	Thread.sleep(2000);
+	Thread.sleep(200);
 	pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox1().click();
-	Thread.sleep(6000);
+	Thread.sleep(1000);
 	action.sendKeys(Keys.ARROW_DOWN).build().perform();
 	action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	Thread.sleep(2000);
+	Thread.sleep(200);
 	action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	Thread.sleep(2000);
-	//pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
-	Thread.sleep(6000);
+	Thread.sleep(1000);
 	action.sendKeys(Keys.PAGE_DOWN).build().perform();
 	pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click();
-	Thread.sleep(6000);
+	Thread.sleep(1000);
 	action.sendKeys(Keys.PAGE_DOWN).build().perform();
 	pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().click();
-	Thread.sleep(6000);
+	Thread.sleep(1000);
 //	sThread.sleep(6000);
 	pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
 	 
@@ -733,4 +726,4 @@ public void verifyUserShouldAbleToDeleteTheRoleByClickingProceedButton() throws 
     
 }
 
-}//day 17-03-2023 18:19
+}//day 20-03-2023 19:14
