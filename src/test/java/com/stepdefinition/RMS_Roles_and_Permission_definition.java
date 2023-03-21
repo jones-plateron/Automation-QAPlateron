@@ -32,7 +32,6 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	
 	@Then("User should verify by default {string},{string} and {string} Roles are available under the Jobs")
 	public void userShouldVerifyByDefaultAndRolesAreAvailableUnderTheJobs(String string, String string2, String string3) {
-	     
 		String avJob1 = pma.getRMS_Roles_and_Permissions_POM().getAvailableJobsManager().getText();
 	     System.out.println(avJob1);
 	     Assert.assertTrue(avJob1.contains(string));
@@ -44,7 +43,6 @@ List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
 	     String avJob3 = pma.getRMS_Roles_and_Permissions_POM().getAvailableJobsBusser().getText();
 	     System.out.println(avJob3);
 	     Assert.assertTrue(avJob3.contains(string3));
-	    
 	}
 	
 	@Then("User should able to click jobs option and verify the {string} option is selected by default")
