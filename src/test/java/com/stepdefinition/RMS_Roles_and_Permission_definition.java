@@ -22,7 +22,7 @@ import io.cucumber.java.en.When;
 public class RMS_Roles_and_Permission_definition extends BaseClass{
 PageManager pma = new PageManager();
 
-List<String> jobNameswhileCreating=new ArrayList<>(); //Assigning this Globally
+List<String> jobNameswhileCreating=new ArrayList<String>(); //Assigning this Globally
 
 	public RMS_Roles_and_Permission_definition() {
 		PageFactory.initElements(rmsDriver, this);
