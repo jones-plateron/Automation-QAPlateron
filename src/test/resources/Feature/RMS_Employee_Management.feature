@@ -64,7 +64,7 @@ Feature: Verify the Employee Management Page in RMS
     Then Verify user should able to modify the Employee information in RMS
     And Verify user should able to see the mark as Inactive button in Employee details
     And User should verify Mark as Inactive popup text and Cancel button
-    #And user should verify the Employee has bee moved to bottom of rms (as Inactive)
+    And user should verify the Employee has bee moved to bottom of rms (as Inactive)
     And Verify Each employee profile contains edit button in Employee details page
 
     Examples: 
