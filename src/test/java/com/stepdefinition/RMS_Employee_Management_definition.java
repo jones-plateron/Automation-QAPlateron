@@ -1,19 +1,25 @@
 package com.stepdefinition;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -29,6 +35,8 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	
 	PageManager pma = new PageManager();
 	public static List<String> Roles;
+	//public static File file;
+	
 	
 	public RMS_Employee_Management_definition() {
 		PageFactory.initElements(rmsDriver, this);
@@ -483,21 +491,27 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());int j=1;
 		
-		//file = new File(System.getProperty("user.dir")+"\\SupportFiles\\Configsheet.xlsx");
-		Thread.sleep(1000);
-//		FileInputStream fileInputStream= new FileInputStream(new File(System.getProperty("user.dir")+"\\SupportFiles\\Configsheet.xlsx"));
-//		workbook = new XSSFWorkbook(fileInputStream);		
+//		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+//		Thread.sleep(2000);
+//		FileInputStream fileInputStream= new FileInputStream(file);Thread.sleep(1000);
+//		Workbook workbook = new XSSFWorkbook(fileInputStream);		
 //	     Sheet sheet = workbook.createSheet("Employee Details");
 //	      Row row = sheet.createRow(0);
 //	      Cell cell0 = row.createCell(0);
 //	      cell0.setCellValue("Employee Name");
+//	      
+////	      workbook.write(fileOutputStream);
 //	      Cell cell1= row.createCell(1);
-//	      cell1.setCellValue("Emp.Role");
+//	      cell1.setCellValue("EmpRole");
+////	      workbook.write(fileOutputStream);
 //	      Cell cell2 = row.createCell(2);
 //	      cell2.setCellValue("PIN");
 //	      FileOutputStream fileOutputStream = new FileOutputStream(file);
 //	      workbook.write(fileOutputStream);
-		
+////	      fileOutputStream.close();
+////	      workbook.close();
+	      //
+	      
 		
 		for (int i = 0; i < indvEmployeeListElement.size(); i++,j++) {
 			String empListDispName = pma.getRMS_Employee_Management_POM().getEmpNameInsideListElement(j).getText();
@@ -535,17 +549,20 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			System.out.println(SlidePIN);
 			
 			//Store in Excel
-//			  Row row1 = sheet.getRow(i+1);
+//			Sheet sheet1 = workbook.getSheet("Employee Details");
+//			  Row row1 = sheet1.createRow(i+1);
 //		      Cell cellEmpNa = row1.createCell(0);
 //		      cellEmpNa.setCellValue(SlideDispName1);
+////		      workbook.write(fileOutputStream);
 //		      Cell cellEmpRole= row1.createCell(1);
 //		      cellEmpRole.setCellValue(SlideRole);
+////		      workbook.write(fileOutputStream);
 //		      Cell cellPin = row1.createCell(2);
 //		      cellPin.setCellValue(SlidePIN);
-//		      FileOutputStream fileOutputStream1 = new FileOutputStream(file);
-//		      workbook.write(fileOutputStream1);
-			
-			
+////		      FileOutputStream fileOutputStream = new FileOutputStream(file);
+//		      workbook.write(fileOutputStream);
+////		      fileOutputStream1.close();
+////		      workbook.close();
 			
 			
 			

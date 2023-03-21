@@ -28,8 +28,8 @@ Feature: Verify the Employee Management Page in RMS
     Then User should verify the Error Message "Please enter valid phone number"
 
     Examples: 
-      | mobileNumber | otp    | firstName | lastName | emailAddress       | employeeID | displayName | phoneNumber | Role    |
-      |   7777777777 | 666666 | Teste     | Automate | AutoTes@emall.com | YH62     | AutTest34     |  2455413330 | Manager |
+      | mobileNumber | otp    | firstName | lastName | emailAddress      | employeeID | displayName | phoneNumber | Role    |
+      |   7777777777 | 666666 | Teste     | Automate | AutoTes@emall.com | YH62       | AutTest34   |  2455413330 | Manager |
 
   @Employeelist
   Scenario Outline: Creating multiple Employees in RMS
@@ -69,4 +69,4 @@ Feature: Verify the Employee Management Page in RMS
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777777 | 666666 |
+      |   2222222222 | 666666 |
