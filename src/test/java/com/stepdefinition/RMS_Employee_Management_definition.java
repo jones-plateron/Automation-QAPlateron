@@ -1,12 +1,20 @@
 package com.stepdefinition;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -483,26 +491,23 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());int j=1;
 		
-//		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
-//		Thread.sleep(2000);
-//		FileInputStream fileInputStream= new FileInputStream(file);Thread.sleep(1000);
-//		Workbook workbook = new XSSFWorkbook(fileInputStream);		
-//	     Sheet sheet = workbook.createSheet("Employee Details");
-//	      Row row = sheet.createRow(0);
-//	      Cell cell0 = row.createCell(0);
-//	      cell0.setCellValue("Employee Name");
-//	      
-////	      workbook.write(fileOutputStream);
-//	      Cell cell1= row.createCell(1);
-//	      cell1.setCellValue("EmpRole");
-////	      workbook.write(fileOutputStream);
-//	      Cell cell2 = row.createCell(2);
-//	      cell2.setCellValue("PIN");
-//	      FileOutputStream fileOutputStream = new FileOutputStream(file);
-//	      workbook.write(fileOutputStream);
-////	      fileOutputStream.close();
-////	      workbook.close();
-	      //
+		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+		Thread.sleep(2000);
+		FileInputStream fileInputStream= new FileInputStream(file);Thread.sleep(1000);
+		Workbook workbook = new XSSFWorkbook(fileInputStream);		
+	     Sheet sheet = workbook.createSheet("Employee Details");
+	      Row row = sheet.createRow(0);
+	      Cell cell0 = row.createCell(0);
+	      cell0.setCellValue("Employee Name");
+	      Cell cell1= row.createCell(1);
+	      cell1.setCellValue("EmpRole");
+	      Cell cell2 = row.createCell(2);
+	      cell2.setCellValue("PIN");
+	      Cell cell3 = row.createCell(3);
+	      cell3.setCellValue("Email");
+	      Cell cell4 = row.createCell(4);
+	      cell4.setCellValue("PhoneNo");
+	      FileOutputStream fileOutputStream = new FileOutputStream(file);
 	      
 		
 		for (int i = 0; i < indvEmployeeListElement.size(); i++,j++) {
@@ -541,22 +546,18 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			System.out.println(SlidePIN);
 			
 			//Store in Excel
-//			Sheet sheet1 = workbook.getSheet("Employee Details");
-//			  Row row1 = sheet1.createRow(i+1);
-//		      Cell cellEmpNa = row1.createCell(0);
-//		      cellEmpNa.setCellValue(SlideDispName1);
-////		      workbook.write(fileOutputStream);
-//		      Cell cellEmpRole= row1.createCell(1);
-//		      cellEmpRole.setCellValue(SlideRole);
-////		      workbook.write(fileOutputStream);
-//		      Cell cellPin = row1.createCell(2);
-//		      cellPin.setCellValue(SlidePIN);
-////		      FileOutputStream fileOutputStream = new FileOutputStream(file);
-//		      workbook.write(fileOutputStream);
-////		      fileOutputStream1.close();
-////		      workbook.close();
-			
-			
+			Sheet sheet1 = workbook.getSheet("Employee Details");
+			  Row row1 = sheet1.createRow(i+1);
+		      Cell cellEmpNa = row1.createCell(0);
+		      cellEmpNa.setCellValue(SlideDispName1);
+		      Cell cellEmpRole= row1.createCell(1);
+		      cellEmpRole.setCellValue(SlideRole);
+		      Cell cellPin = row1.createCell(2);
+		      cellPin.setCellValue(SlidePIN);
+		      Cell cellEmail = row1.createCell(3);
+		      cellEmail.setCellValue(SlideEmail);
+		      Cell cellPhoneNo = row1.createCell(4);
+		      cellPhoneNo.setCellValue(SlidePhone);
 			
 				      
 			
@@ -570,7 +571,7 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			//break;
 		}//need to add individual validation
 		
-		
+		  workbook.write(fileOutputStream);
 		
 		
 	}
@@ -678,6 +679,6 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	
 	
 	
-}//21-03	15:06
+}//21-03-2023 15:38
 
 
