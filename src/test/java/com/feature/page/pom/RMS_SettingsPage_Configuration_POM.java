@@ -145,6 +145,10 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='toggle-slider round'][1]"));
 		return element;
 	}
+	public WebElement getDateandTimeSecHeader() {
+		return rmsDriver.findElement(By.xpath("//div[contains(text(),'Date and Time Format')]"));
+	}
+
 	public WebElement getGratuityBasedonOption() {
 		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(),'Gratuity Based on')]"));
 		return element;
@@ -240,6 +244,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	
+
 }
 
 
