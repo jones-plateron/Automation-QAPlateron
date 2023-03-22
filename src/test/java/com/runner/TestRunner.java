@@ -12,7 +12,7 @@ import io.cucumber.junit.CucumberOptions;
 
  
 
-@CucumberOptions( tags="@BillSettings1", stepNotifications = true, dryRun = false, features= "src\\test\\resources\\Feature\\", glue = "com.stepdefinition", 
+@CucumberOptions( tags="@ConfigurationTemp", stepNotifications = true, dryRun = false, features= "src\\test\\resources\\Feature\\", glue = "com.stepdefinition", 
 
 monochrome = true,publish = true, snippets = io.cucumber.junit.CucumberOptions.SnippetType.CAMELCASE ,plugin = {"pretty", "json:target//output.json"})
 public class TestRunner {

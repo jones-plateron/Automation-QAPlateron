@@ -492,8 +492,9 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		System.out.println(indvEmployeeListElement.size());int j=1;
 		
 		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
-		Thread.sleep(2000);
-		FileInputStream fileInputStream= new FileInputStream(file);Thread.sleep(1000);
+		Thread.sleep(1000);
+		FileInputStream fileInputStream= new FileInputStream(file);
+		Thread.sleep(1000);
 		Workbook workbook = new XSSFWorkbook(fileInputStream);		
 	     Sheet sheet = workbook.createSheet("Employee Details");
 	      Row row = sheet.createRow(0);
