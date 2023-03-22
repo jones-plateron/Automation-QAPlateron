@@ -131,10 +131,9 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='toggle-slider round'][1]"));
 		return element;
 	}
-//	public WebElement get() {
-//		WebElement element = rmsDriver.findElement(By.xpath(""));
-//		return element;
-//	}
+	public WebElement getDateandTimeSecHeader() {
+		return rmsDriver.findElement(By.xpath("//div[contains(text(),'Date and Time Format')]"));
+	}
 //	public WebElement get() {
 //		WebElement element = rmsDriver.findElement(By.xpath(""));
 //		return element;

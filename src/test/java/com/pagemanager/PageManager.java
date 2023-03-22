@@ -22,7 +22,7 @@ public class PageManager extends BaseClass{
 	public RMS_Employee_Management_POM getRMS_Employee_Management_POM() {
 		return (rMS_Employee_Management_POM==null)? rMS_Employee_Management_POM = new RMS_Employee_Management_POM (): rMS_Employee_Management_POM;
 	}
-
+	
 	public RMS_Roles_and_Permissions_POM getRMS_Roles_and_Permissions_POM() {
 		return rMS_Roles_and_Permissions_POM==null? rMS_Roles_and_Permissions_POM = new RMS_Roles_and_Permissions_POM():rMS_Roles_and_Permissions_POM;
 	}
@@ -30,6 +30,8 @@ public class PageManager extends BaseClass{
 	public RMS_SettingsPage_Configuration_POM getrMS_SettingsPage_Configuration_POM() {
 		return rMS_SettingsPage_Configuration_POM==null ? rMS_SettingsPage_Configuration_POM = new RMS_SettingsPage_Configuration_POM():rMS_SettingsPage_Configuration_POM;
 		}
+	
+	
 	
 
 }
