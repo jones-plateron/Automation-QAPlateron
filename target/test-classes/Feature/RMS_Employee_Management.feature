@@ -15,7 +15,7 @@ Feature: Verify the Employee Management Page in RMS
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777777 | 666666 |
+      |   2222222222 | 666666 |
 
   @EmployeeCreation
   Scenario Outline: Verify the New Employee Creation in RMS
@@ -28,8 +28,8 @@ Feature: Verify the Employee Management Page in RMS
     Then User should verify the Error Message "Please enter valid phone number"
 
     Examples: 
-      | mobileNumber | otp    | firstName | lastName | emailAddress       | employeeID | displayName | phoneNumber | Role    |
-      |   7777777777 | 666666 | Teste     | Automate | AutoTes@emall.com | YH62     | AutTest34     |  2455413330 | Manager |
+      | mobileNumber | otp    | firstName | lastName | emailAddress      | employeeID | displayName | phoneNumber | Role    |
+      |   2222222222 | 666666 | Teste     | Automate | AutoTes@emall.com | YH62       | AutTest34   |  2355123330 | Manager |
 
   @Employeelist
   Scenario Outline: Creating multiple Employees in RMS
@@ -38,11 +38,11 @@ Feature: Verify the Employee Management Page in RMS
     Then User should click on Add Employee button and verify the Slide pop-up
     When User should Create a New Employee and store the Employee information
       | DispName | phoneNo    | Role    |
-      | V1       | 5234457110 | Manager |
-      | V2       | 6234457110 | Manager |
-      | V3       | 7234457110 | Waiter  |
-      | V4       | 8234457110 | Waiter  |
-      | V5       | 9234457110 | Busser  |
+      | Auto11   | 5234457120 | Manager |
+      | Auto12   | 6234457120 | Manager |
+      | Auto13   | 7234457120 | Waiter  |
+      | Auto14   | 8234457120 | Waiter  |
+      | Auto15   | 9234457120 | Busser  |
     Then User should verify the Total Employees Count
     And User should verify the Employee list contains Owner profile
     And User should verify Each Employee list contains Job type Mobile Number
@@ -55,7 +55,7 @@ Feature: Verify the Employee Management Page in RMS
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777777 | 666666 |
+      |   2222222222 | 666666 |
 
   @EmployeeEdit
   Scenario Outline: Verify the Edit Employees functionality in RMS
@@ -69,4 +69,4 @@ Feature: Verify the Employee Management Page in RMS
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777777 | 666666 |
+      |   2222222222 | 666666 |
