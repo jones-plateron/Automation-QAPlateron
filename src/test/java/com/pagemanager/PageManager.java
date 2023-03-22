@@ -27,7 +27,7 @@ public class PageManager extends BaseClass{
 		return rMS_Roles_and_Permissions_POM==null? rMS_Roles_and_Permissions_POM = new RMS_Roles_and_Permissions_POM():rMS_Roles_and_Permissions_POM;
 	}
 
-	public RMS_SettingsPage_Configuration_POM getrMS_SettingsPage_Configuration_POM() {
+	public RMS_SettingsPage_Configuration_POM getRMS_SettingsPage_Configuration_POM() {
 		return rMS_SettingsPage_Configuration_POM==null ? rMS_SettingsPage_Configuration_POM = new RMS_SettingsPage_Configuration_POM():rMS_SettingsPage_Configuration_POM;
 		}
 	
