@@ -20,6 +20,10 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//i[@class='icon-settings mr-1']"));
 		return element;
 	}
+	public WebElement getSettingsHeader() {
+		WebElement element = rmsDriver.findElement(By.xpath("//a[contains(text(),'Settings')]"));
+		return element;
+	}
 	public WebElement getBillConfigurationOptionSections() {
 		WebElement element = rmsDriver.findElement(By.xpath("//li[contains(text(),'Bill Configuration')]"));
 		return element;
@@ -34,6 +38,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	
+	
 	public WebElement getSalesTaxOptions() {
 		WebElement element = rmsDriver.findElement(By.xpath("(//h4[@class='accordion-body__header'])[1]"));
 		return element;
@@ -44,6 +49,15 @@ PageManager pma = new PageManager();
 	}
 	public WebElement getSalesTaxTextBox() {
 		WebElement element = rmsDriver.findElement(By.xpath("//input[@name='taxPercentage']"));//input[@id="taxPer"])[1]
+		return element;
+	}
+	public WebElement getSalesTaxTextboxIndication() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='invalid-feedback'])[1]"));
+		return element;
+	}
+	
+	public WebElement getSalesTaxSymbol() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='input-group-text'])[1]"));//input[@id="taxPer"])[1]
 		return element;
 	}
 	public WebElement getApplySalesTaxontheSubtotalafterDeductionsOptions() {
@@ -131,31 +145,101 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='toggle-slider round'][1]"));
 		return element;
 	}
-//	public WebElement get() {
-//		WebElement element = rmsDriver.findElement(By.xpath(""));
-//		return element;
-//	}
-//	public WebElement get() {
-//		WebElement element = rmsDriver.findElement(By.xpath(""));
-//		return element;
-//	}
-//	public WebElement get() {
-//		WebElement element = rmsDriver.findElement(By.xpath(""));
-//		return element;
-//	}
-//	public WebElement get() {
-//		WebElement element = rmsDriver.findElement(By.xpath(""));
-//		return element;
-//	}
-//	public WebElement get() {
-//		WebElement element = rmsDriver.findElement(By.xpath(""));
-//		return element;
-//	}
-//	public WebElement get() {
-//		WebElement element = rmsDriver.findElement(By.xpath(""));
-//		return element;
-//	}
-//	
+	public WebElement getGratuityBasedonOption() {
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(),'Gratuity Based on')]"));
+		return element;
+	}
+	public WebElement getGuestCountRadioButtonOption() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//*[@class='gratuity-label'])[1]"));
+		return element;
+	}
+	public WebElement getOrderAmountRadioButtonOption() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//*[@class='gratuity-label'])[2]"));
+		return element;
+	}
+	public WebElement getGratuityPercentageOption() {
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(),'Gratuity percentage')]"));
+		return element;
+	}
+	public WebElement getGratuityPercentageTextBox() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@class='form-control form-md form-box-tax prepend-form-control input-number   '])[1]"));
+		return element;
+	}
+	public WebElement getGratuityPercentageInstruction() {
+		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'if gratuity need not be applied please enter 0')]]"));
+		return element;
+	}
+	public WebElement getGratuityPercentagesymbol() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='input-group-text'])[1]"));
+		return element;
+	}
+	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountOption() {
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and 'Gratuity will be added on bill when subtotal reaches this amount']]]"));
+		return element;
+	}
+	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountSymbol() {
+		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='input-group-text' and contains(text(),'$')]"));
+		return element;
+	}
+	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@class='form-control form-md form-small  prepend-form-control input-number   '])[1]"));
+		return element;
+	}
+	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountInstruction() {
+		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'then gratuity is activated')]"));
+		return element;
+	}
+	
+	public WebElement getTaxtobeAppliedonGratuityAmountOption() {
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and  contains(text(),'Tax to be applied on gratuity amount')]"));
+		return element;
+	}
+	public WebElement getTaxtobeAppliedonGratuityAmountSymbol() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='input-group-text'])[2]"));
+		return element;
+	}
+	public WebElement getTaxtobeAppliedonGratuityAmountTextBox() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@class='form-control form-md form-box-tax prepend-form-control input-number   '])[2]"));
+		return element;
+	}public WebElement getApplyGratuityforOptions() {
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(),'Apply Gratuity for')]"));
+		return element;
+	}
+	public WebElement getTakeAwayCheckBox() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class=' label-text  text-bottom '])[1]"));
+		return element;
+	}
+	
+	public WebElement getDineInCheckBox() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class=' label-text  text-bottom '])[2]"));
+		return element;
+	}
+	public WebElement getTakeAwayText() {
+		WebElement element = rmsDriver.findElement(By.xpath("//span[contains(text(),'TakeAway')]"));
+		return element;
+	}
+	public WebElement getDineInText() {
+		WebElement element = rmsDriver.findElement(By.xpath("//span[contains(text(),'Dine-In')]"));
+		return element;
+	}
+	
+	public WebElement getApplyGratuityontheSubtotalafterDeductionsOptions() {
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(),'Apply gratuity on the subtotal after deductions')]"));
+		return element;
+	}
+	public WebElement getApplyGratuityontheSubtotalafterDeductionsToggle() {
+		WebElement element = rmsDriver.findElement(By.xpath("//span[@class=\"toggle-slider    round \"]"));
+		return element;
+	}
+	public WebElement getApplyGratuityontheSubtotalafterDeductionsInstruction() {
+		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'turning off would apply gratuity on subtotal before deductions')]"));
+		return element;
+	}
+	public WebElement getGratuityConfigurationSaveButton() {
+		WebElement element = rmsDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-small d-flex align-items-center ']"));
+		return element;
+	}
+	
 }
-//21-03-2023 18.29
+
 
