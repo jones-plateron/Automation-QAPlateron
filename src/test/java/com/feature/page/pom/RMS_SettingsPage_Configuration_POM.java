@@ -92,8 +92,16 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("(//h4[@class='accordion-body__header'])[4]"));
 		return element;
 	}
+	public WebElement getServiceFeePercentageSymbol() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='input-group-text'])[2]"));
+		return element;
+	}
 	public WebElement getServiceFeePercentageTextBox() {
 		WebElement element = rmsDriver.findElement(By.xpath("//input[@name='serviceFeePercentage']"));
+		return element;
+	}
+	public WebElement getServiceFeePercentageTextBoxIndication() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='invalid-feedback'])[2]"));
 		return element;
 	}
 	public WebElement getServiceFeePercentageInstruction() {
@@ -193,6 +201,18 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'then gratuity is activated')]"));
 		return element;
 	}
+	public WebElement getGratuitywillbeAddedonBillwhenGuestCountReachesthisNo() {
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(),'Gratuity will be added on bill when Guest count reaches this No')]"));
+		return element;
+	}
+	public WebElement getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoInstruction() {
+		WebElement element = rmsDriver.findElement(By.xpath("//p[@class='muted' and contains(text(),'then gratuity is activated')]"));
+		return element;
+	}
+	public WebElement getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox() {
+		WebElement element = rmsDriver.findElement(By.xpath("//input[@name='orderFromValue']"));
+		return element;
+	}
 	
 	public WebElement getTaxtobeAppliedonGratuityAmountOption() {
 		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and  contains(text(),'Tax to be applied on gratuity amount')]"));
@@ -247,4 +267,4 @@ PageManager pma = new PageManager();
 
 }
 
-
+//22-03-2023 18:32
