@@ -25,7 +25,8 @@ public class Bill_Configuration_Definition extends BaseClass{
 	
 	
 	@When("User should Click Settings Sections")
-	public void userShouldClickSettingsSections() {
+	public void userShouldClickSettingsSections() throws InterruptedException {
+		Thread.sleep(2000);
 		pma.getRMS_SettingsPage_Configuration_POM().getSettingsSections().click();
 	}
 	@Then("User should verify the Page redirection to Settings Page {string}")
@@ -44,12 +45,22 @@ public class Bill_Configuration_Definition extends BaseClass{
 	}
 	@Then("User should Enable or Disable Apply sales tax on Subtotal after Deductions Option #Excel Input")
 	public void userShouldEnableOrDisableApplySalesTaxOnSubtotalAfterDeductionsOptionExcelInput() throws InterruptedException, IOException {
-//		System.out.println(pma.getrMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isDisplayed());
-//		System.out.println(pma.getrMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isSelected());
-//		System.out.println(pma.getrMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isEnabled());
-//		System.out.println(pma.getrMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getText());
-//		System.out.println(pma.getrMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("checked"));
+//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isEnabled());
+//		
+//		System.out.println("xxxxxxxxxxxxxxxxxxxxxxx"+rmsDriver.findElement(By.cssSelector("#root > div > main > div > div.page-inner__content.pb-1.pt-1 > div.card.border.mw-750 > div > ul:nth-child(1) > li:nth-child(2) > div > div.form-toggle.ml-1 > label > span")).getCssValue("cursor")); 
+//
+//		pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().click();
+//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isEnabled());
 		
+		//System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isDisplayed());
+		//System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isSelected());
+//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getText());
+//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("checked"));
+//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isDisplayed());
+//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isSelected());
+//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getText());
+//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("checked"));
+//		
 //		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
 //		FileInputStream fileInputStream= new FileInputStream(file);Thread.sleep(1000);//Bill Configuration
 //		Workbook workbook = new XSSFWorkbook(fileInputStream);		
@@ -58,17 +69,18 @@ public class Bill_Configuration_Definition extends BaseClass{
 //	      Cell cell = row.getCell(1);
 //	      String salTxafterDeduct = cell.getStringCellValue();
 	      
+		
 	      String salTxafterDeduct = getDataFromExcel("Bill Configuration", 2, 1);
 	      
 		if(salTxafterDeduct=="ON") {
-			if(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("")=="ON") {	
-			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("")=="OFF") {
+			if(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {	
+			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().click();
 			}
 		}else if (salTxafterDeduct=="OFF") {
-			if(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("")=="ON") {
+			if(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {
 				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().click();	
-			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("")=="OFF") {
+			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 			}
 		}else {
 			Assert.assertTrue(false, "Invalid State");
@@ -85,14 +97,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 //	      String salTxOnTipafterDeduct = cell.getStringCellValue();
 		String salTxOnTipafterDeduct = getDataFromExcel("Bill Configuration", 3, 1);
 		if(salTxOnTipafterDeduct=="ON") {
-			if(pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("")=="ON") {	
-			}else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("")=="OFF") {
+			if(pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("value").equals("true")) {	
+			}else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("value").equals("false")) {
 				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().click();
 			}
 		}else if (salTxOnTipafterDeduct=="OFF") {
-			if(pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("")=="ON") {
+			if(pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("value").equals("true")) {
 				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().click();	
-			}else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("")=="OFF") {
+			}else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("value").equals("false")) {
 			}
 		}else {
 			Assert.assertTrue(false, "Invalid State");
@@ -127,14 +139,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 	    String SerFeeTXCheckBx = getDataFromExcel("Bill Configuration", 5, 1);  
 		
 	      if(SerFeeTXCheckBx=="ON") {
-				if(pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("")=="ON") {	
-				}else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("")=="OFF") {
+				if(pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("value").equals("true")) {	
+				}else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("value").equals("false")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().click();
 				}
 			}else if (SerFeeTXCheckBx=="OFF") {
-				if(pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("")=="ON") {
+				if(pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("value").equals("true")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().click();	
-				}else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("")=="OFF") {
+				}else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("value").equals("false")) {
 				}
 			}else {
 				Assert.assertTrue(false, "Invalid State");
@@ -153,14 +165,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 		
 		
 	      if(serFeeonSubToAfterDedu=="ON") {
-				if(pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("")=="ON") {	
-				}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("")=="OFF") {
+				if(pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {	
+				}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().click();
 				}
 			}else if (serFeeonSubToAfterDedu=="OFF") {
-				if(pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("")=="ON") {
+				if(pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().click();	
-				}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("")=="OFF") {
+				}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 				}
 			}else {
 				Assert.assertTrue(false, "Invalid State");
@@ -187,14 +199,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 		String GradEnable = getDataFromExcel("Bill Configuration", 8, 1);
 	      
 	      if(GradEnable=="ON") {
-				if(pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("")=="ON") {	
-				}else if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("")=="OFF") {
+				if(pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value").equals("true")) {	
+				}else if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value").equals("false")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().click();
 				}
 			}else if (GradEnable=="OFF") {
-				if(pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("")=="ON") {
+				if(pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value").equals("true")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().click();	
-				}else if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("")=="OFF") {
+				}else if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value").equals("false")) {
 				}
 			}else {
 				Assert.assertTrue(false, "Invalid State");
@@ -304,14 +316,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 		String grdSubafterDeduct = getDataFromExcel("Bill Configuration", 16, 1);
 		
 		if(grdSubafterDeduct=="ON") {
-			if(pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("")=="ON") {	
-			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("")=="OFF") {
+			if(pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {	
+			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 				pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().click();
 			}
 		}else if (grdSubafterDeduct=="OFF") {
-			if(pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("")=="ON") {
+			if(pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {
 				pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().click();	
-			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("")=="OFF") {
+			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 			}
 		}else {
 			Assert.assertTrue(false, "Invalid State");
