@@ -65,7 +65,11 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getApplySalesTaxontheSubtotalafterDeductionsToggle() {
-		WebElement element = rmsDriver.findElement(By.xpath("(.//*[@class='toggle-switch'])[1]"));
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[1]"));
+		return element;
+	}
+	public WebElement getApplySalesTaxontheSubtotalafterDeductionsToggle1() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='toggle-slider round'])[1]"));
 		return element;
 	}
 	public WebElement getApplySalesTaxontheSubtotalafterDeductionsInstruction() {
@@ -77,7 +81,11 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getgetApplySalesTaxontheTipafterDeductionsToggle() {
-		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[2]/div[1]/ul[1]/li[3]/div[1]/div[2]/label[1]/span[1]"));
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[2]"));
+		return element;
+	}
+	public WebElement getgetApplySalesTaxontheTipafterDeductionsToggle1() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='toggle-slider round'])[2]"));
 		return element;
 	}
 	public WebElement getApplySalesTaxontheTipafterDeductionsInstruction() {
@@ -114,6 +122,10 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getServiceFeePercentageInclusiveofSalesTaxToggle() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[3]"));
+		return element;
+	}
+	public WebElement getServiceFeePercentageInclusiveofSalesTaxToggle1() {
 		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='toggle-slider round'])[3]"));
 		return element;
 	}
@@ -126,6 +138,10 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getApplyServiceFeeOntheSubtotalafterDeductionsToggle() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[4]"));
+		return element;
+	}
+	public WebElement getApplyServiceFeeOntheSubtotalafterDeductionsToggle1() {
 		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='toggle-slider round'])[4]"));
 		return element;
 	}
@@ -134,7 +150,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getBillSettingSaveButton() {
-		WebElement element = rmsDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-small d-flex align-items-center ']"));
+		WebElement element = rmsDriver.findElement(By.xpath("//button[contains(text(),'Save')]"));
 		return element;
 	}
 	public WebElement getGratuityConfigurationSections() {
@@ -150,7 +166,11 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getEnableGratuityToggle() {
-		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='toggle-slider round'][1]"));
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[1]"));
+		return element;
+	}
+	public WebElement getEnableGratuityToggle1() {
+		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='toggle-slider round']"));
 		return element;
 	}
 	public WebElement getDateandTimeSecHeader() {
@@ -229,13 +249,21 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(),'Apply Gratuity for')]"));
 		return element;
 	}
-	public WebElement getTakeAwayCheckBox() {
+	public WebElement getTakeAwayCheckBox() {//(//span[@class=' label-text  text-bottom '])[1]
 		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class=' label-text  text-bottom '])[1]"));
+		return element;
+	}
+	public WebElement getTakeAwayCheckBox1() {//(//span[@class=' label-text  text-bottom '])[1]
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'][@name='check'])[1]"));
 		return element;
 	}
 	
 	public WebElement getDineInCheckBox() {
 		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class=' label-text  text-bottom '])[2]"));
+		return element;
+	}
+	public WebElement getDineInCheckBox1() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'][@name='check'])[2]"));
 		return element;
 	}
 	public WebElement getTakeAwayText() {
@@ -252,7 +280,15 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getApplyGratuityontheSubtotalafterDeductionsToggle() {
-		WebElement element = rmsDriver.findElement(By.xpath("//span[@class=\"toggle-slider    round \"]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='toggle-slider    round ']"));
+		return element;
+	}
+	public WebElement getApplyGratuityontheSubtotalafterDeductionsToggle1() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[2]"));
+		return element;
+	}
+	public WebElement getApplyGratuityontheSubtotalafterDeductionsToggle2() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[4]"));
 		return element;
 	}
 	public WebElement getApplyGratuityontheSubtotalafterDeductionsInstruction() {
