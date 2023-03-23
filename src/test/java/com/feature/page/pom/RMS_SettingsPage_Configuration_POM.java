@@ -174,11 +174,17 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getGratuityPercentageTextBox() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//input[@class='form-control form-md form-box-tax prepend-form-control input-number   '])[1]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//input[@name='gratuityPercentage']"));
 		return element;
 	}
+	public WebElement getGratuityPercentageTextBoxIndication() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='invalid-feedback'])[3]"));
+		return element;
+	}
+	
+	
 	public WebElement getGratuityPercentageInstruction() {
-		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'if gratuity need not be applied please enter 0')]]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//p[contains(text(),'if gratuity need not be applied please')]"));
 		return element;
 	}
 	public WebElement getGratuityPercentagesymbol() {
@@ -186,15 +192,19 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountOption() {
-		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and 'Gratuity will be added on bill when subtotal reaches this amount']]]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(), 'Gratuity will be added on bill when subtotal reaches this amount')]"));
 		return element;
 	}
 	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountSymbol() {
-		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='input-group-text' and contains(text(),'$')]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//span[normalize-space()='$']"));
 		return element;
 	}
 	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//input[@class='form-control form-md form-small  prepend-form-control input-number   '])[1]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//input[contains(@name,'orderFromValue')]"));
+		return element;
+	}
+	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='invalid-feedback'])[4]"));
 		return element;
 	}
 	public WebElement getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountInstruction() {
@@ -223,9 +233,14 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getTaxtobeAppliedonGratuityAmountTextBox() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//input[@class='form-control form-md form-box-tax prepend-form-control input-number   '])[2]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//li[contains(@class,'list-item border-bottom pb-3 mt-3 py-1')]//div[contains(@class,'form-row form-row row d-flex flex-wrap align-items-center mb-1 justify-space-between')]//input[contains(@class,'')]"));
 		return element;
-	}public WebElement getApplyGratuityforOptions() {
+	}
+	public WebElement getTaxtobeAppliedonGratuityAmountTextBoxIndication() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='invalid-feedback'])[5]"));
+		return element;
+	}
+	public WebElement getApplyGratuityforOptions() {
 		WebElement element = rmsDriver.findElement(By.xpath("//h4[@class='accordion-body__header' and contains(text(),'Apply Gratuity for')]"));
 		return element;
 	}
@@ -252,7 +267,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getApplyGratuityontheSubtotalafterDeductionsToggle() {
-		WebElement element = rmsDriver.findElement(By.xpath("//span[@class=\"toggle-slider    round \"]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//span[@class='toggle-slider    round ']"));
 		return element;
 	}
 	public WebElement getApplyGratuityontheSubtotalafterDeductionsInstruction() {
@@ -267,4 +282,4 @@ PageManager pma = new PageManager();
 
 }
 
-//22-03-2023 18:32
+//23-03-2023 18:20
