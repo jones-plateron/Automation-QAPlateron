@@ -65,7 +65,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getApplySalesTaxontheSubtotalafterDeductionsToggle() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class=\"toggle-slider round\"])[1]"));
+		WebElement element = rmsDriver.findElement(By.xpath("(.//*[@class='toggle-switch'])[1]"));
 		return element;
 	}
 	public WebElement getApplySalesTaxontheSubtotalafterDeductionsInstruction() {

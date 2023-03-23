@@ -7,7 +7,7 @@ Feature: Configuring the Pre-defined Bill Settings
     When User should Click Settings Sections
     Then User should verify the Page redirection to Settings Page "Date and Time Format"
     And User should click Bill configuration and update the sales tax percentage #Excel Input
-    #And User should Enable or Disable Apply sales tax on Subtotal after Deductions Option #Excel Input 
+    And User should Enable or Disable Apply sales tax on Subtotal after Deductions Option #Excel Input 
 #		And User should Enable or Disable Apply sales tax on Tip after Deductions Option #Excel Input
 #		And User should enter the Service Fee Percentage #Excel Input
 #		And User should enable or Disable the Service fee tax option #Excel Input
