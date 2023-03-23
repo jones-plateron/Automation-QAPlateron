@@ -471,12 +471,6 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		String string = Integer.toString(ActtotalEmp);
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getTotalEmpElement().getText().contains(string),"Verifying total Employees Count");
 		
-		
-		
-		
-		
-		
-		
 	}
 	@Then("user should verify the text message {string} by enter UA text in Search Bar")
 	public void userShouldVerifyTheTextMessageByEnterUATextInSearchBar(String string) {

@@ -43,21 +43,17 @@ public class Bill_Configuration_Definition extends BaseClass{
 	      Thread.sleep(3000);
 	}
 	@Then("User should Enable or Disable Apply sales tax on Subtotal after Deductions Option #Excel Input")
-	public void userShouldEnableOrDisableApplySalesTaxOnSubtotalAfterDeductionsOptionExcelInput() throws InterruptedException, IOException {
-//		System.out.println(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().isEnabled());
-//		
-//		System.out.println("xxxxxxxxxxxxxxxxxxxxxxx"+rmsDriver.findElement(By.cssSelector("#root > div > main > div > div.page-inner__content.pb-1.pt-1 > div.card.border.mw-750 > div > ul:nth-child(1) > li:nth-child(2) > div > div.form-toggle.ml-1 > label > span")).getCssValue("cursor")); 
-	      
+	public void userShouldEnableOrDisableApplySalesTaxOnSubtotalAfterDeductionsOptionExcelInput() throws InterruptedException, IOException {	      
 	      String salTxafterDeduct = getDataFromExcel("Bill Configuration", 2, 1);
-	      
-		if(salTxafterDeduct=="ON") {
+	      //System.out.println(salTxafterDeduct);
+		if(salTxafterDeduct.equals("ON")) {
 			if(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {	
 			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().click();
+				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle1().click();
 			}
-		}else if (salTxafterDeduct=="OFF") {
+		}else if (salTxafterDeduct.equals("OFF")) {
 			if(pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().click();	
+				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle1().click();	
 			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 			}
 		}else {
@@ -67,14 +63,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 	@Then("User should Enable or Disable Apply sales tax on Tip after Deductions Option #Excel Input")
 	public void userShouldEnableOrDisableApplySalesTaxOnTipAfterDeductionsOptionExcelInput() throws InterruptedException, IOException {
 		String salTxOnTipafterDeduct = getDataFromExcel("Bill Configuration", 3, 1);
-		if(salTxOnTipafterDeduct=="ON") {
+		if(salTxOnTipafterDeduct.equals("ON")) {
 			if(pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("value").equals("true")) {	
 			}else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("value").equals("false")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().click();
+				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle1().click();
 			}
-		}else if (salTxOnTipafterDeduct=="OFF") {
+		}else if (salTxOnTipafterDeduct.equals("OFF")) {
 			if(pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("value").equals("true")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().click();	
+				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle1().click();	
 			}else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle().getAttribute("value").equals("false")) {
 			}
 		}else {
@@ -84,6 +80,8 @@ public class Bill_Configuration_Definition extends BaseClass{
 	@Then("User should enter the Service Fee Percentage #Excel Input")
 	public void userShouldEnterTheServiceFeePercentageExcelInput() throws IOException, InterruptedException {
 		String serviceFeePerc = getDataFromExcel("Bill Configuration", 4, 1);
+		Thread.sleep(1000);
+		pma.getRMS_SettingsPage_Configuration_POM().getSalesTaxTextBox().clear();
 		pma.getRMS_SettingsPage_Configuration_POM().getSalesTaxTextBox().sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));Thread.sleep(500);
 	      pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageTextBox().sendKeys(serviceFeePerc);
 	      
@@ -92,14 +90,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 	public void userShouldEnableOrDisableTheServiceFeeTaxOptionExcelInput() throws IOException, InterruptedException {
 	    String SerFeeTXCheckBx = getDataFromExcel("Bill Configuration", 5, 1);  
 		
-	      if(SerFeeTXCheckBx=="ON") {
+	      if(SerFeeTXCheckBx.equals("ON")) {
 				if(pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("value").equals("true")) {	
 				}else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("value").equals("false")) {
-					pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().click();
+					pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
 				}
-			}else if (SerFeeTXCheckBx=="OFF") {
+			}else if (SerFeeTXCheckBx.equals("OFF")) {
 				if(pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("value").equals("true")) {
-					pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().click();	
+					pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();	
 				}else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle().getAttribute("value").equals("false")) {
 				}
 			}else {
@@ -111,14 +109,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 	    String serFeeonSubToAfterDedu = getDataFromExcel("Bill Configuration", 7, 1);
 		
 		
-	      if(serFeeonSubToAfterDedu=="ON") {
+	      if(serFeeonSubToAfterDedu.equals("ON")) {
 				if(pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {	
 				}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
-					pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().click();
+					pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1().click();
 				}
-			}else if (serFeeonSubToAfterDedu=="OFF") {
+			}else if (serFeeonSubToAfterDedu.equals("OFF")) {
 				if(pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {
-					pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().click();	
+					pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1().click();	
 				}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 				}
 			}else {
@@ -138,14 +136,14 @@ public class Bill_Configuration_Definition extends BaseClass{
 		
 		String GradEnable = getDataFromExcel("Bill Configuration", 8, 1);
 	      
-	      if(GradEnable=="ON") {
+	      if(GradEnable.equals("ON")) {
 				if(pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value").equals("true")) {	
 				}else if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value").equals("false")) {
-					pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().click();
+					pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle1().click();
 				}
-			}else if (GradEnable=="OFF") {
+			}else if (GradEnable.equals("OFF")) {
 				if(pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value").equals("true")) {
-					pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().click();	
+					pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle1().click();	
 				}else if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value").equals("false")) {
 				}
 			}else {
@@ -228,15 +226,15 @@ public class Bill_Configuration_Definition extends BaseClass{
 	@Then("User should enable or Disable the Apply gratuity on subtotal after deductions #Excel Input")
 	public void userShouldEnableOrDisableTheApplyGratuityOnSubtotalAfterDeductionsExcelInput() throws InterruptedException, IOException {
 		String grdSubafterDeduct = getDataFromExcel("Bill Configuration", 16, 1);
-		
-		if(grdSubafterDeduct=="ON") {
+		System.out.println(grdSubafterDeduct);
+		if(grdSubafterDeduct.equals("ON")) {
 			if(pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {	
 			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().click();
+				pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle1().click();
 			}
-		}else if (grdSubafterDeduct=="OFF") {
+		}else if (grdSubafterDeduct.equals("OFF")) {
 			if(pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("value").equals("true")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().click();	
+				pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle1().click();	
 			}else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
 			}
 		}else {
@@ -250,4 +248,4 @@ public class Bill_Configuration_Definition extends BaseClass{
 
 }
 
-//23-03-23	13:18
+//23-03-23	17:46

@@ -4,6 +4,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.base.BaseClass;
 import com.feature.page.pom.RMS_Employee_Management_POM;
+import com.feature.page.pom.RMS_Menus_Configuration_POM;
 import com.feature.page.pom.RMS_Roles_and_Permissions_POM;
 import com.feature.page.pom.RMS_SettingsPage_Configuration_POM;
 
@@ -12,6 +13,8 @@ public class PageManager extends BaseClass{
 	private RMS_Employee_Management_POM rMS_Employee_Management_POM; 
 	private RMS_Roles_and_Permissions_POM rMS_Roles_and_Permissions_POM;
 	private RMS_SettingsPage_Configuration_POM rMS_SettingsPage_Configuration_POM;
+	private RMS_Menus_Configuration_POM rMS_Menus_Configuration_POM;
+	
 	
 	public PageManager() {
 		PageFactory.initElements(rmsDriver, this);
@@ -29,6 +32,9 @@ public class PageManager extends BaseClass{
 
 	public RMS_SettingsPage_Configuration_POM getRMS_SettingsPage_Configuration_POM() {
 		return rMS_SettingsPage_Configuration_POM==null ? rMS_SettingsPage_Configuration_POM = new RMS_SettingsPage_Configuration_POM():rMS_SettingsPage_Configuration_POM;
+		}
+	public RMS_Menus_Configuration_POM getRMS_Menus_Configuration_POM() {
+		return rMS_Menus_Configuration_POM==null ? rMS_Menus_Configuration_POM = new RMS_Menus_Configuration_POM():rMS_Menus_Configuration_POM;
 		}
 	
 	
