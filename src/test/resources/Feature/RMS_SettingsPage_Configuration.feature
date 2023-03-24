@@ -1,4 +1,4 @@
-@BillSettings
+@BillSettings1
 Feature: Settings Page Configuration
 
   @BillSettings1
@@ -50,4 +50,4 @@ Feature: Settings Page Configuration
     Examples: 
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
-      #22-03-2023 18:32
+      
