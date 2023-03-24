@@ -25,7 +25,7 @@ Scenario Outline: As a RMS User, I need to Validate Bill Settings Page
    
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   2222222222 | 666666 |
       
       @BillSettings2
     Scenario Outline: As a RMS User, I need to Validate Gratuity Settings Page
@@ -38,16 +38,16 @@ Scenario Outline: As a RMS User, I need to Validate Bill Settings Page
     Then User should Validate TakeAway and Dine-In
     And User should Verify "Apply Gratuity for" is Hided when the Guest Count is Selected
     Then User should Verify "Gratuity percentage" option is present and Validate the Textbox
-    #And User should Verify the Instruction "if gratuity need not be applied please enter 0" under Gratuity percentage option    
-    #Then User should Verify "Gratuity will be added on bill when subtotal reaches this amount" option is present and Validate the Textbox
-    #And User should Verify the Instruction "then gratuity is activated" under Gratuity will be added on bill when subtotal reaches this amount option
-    #Then User should Verify "Tax to be applied on gratuity amount" option is present and Validate the Textbox
-    #Then User should Verify "Apply gratuity on the subtotal after deductions" option is present and Validate the Toggle
-    #And User should Verify the Instruction "turning off would apply gratuity on subtotal before deductions" under Apply gratuity on the subtotal after deductions option
-    #Then User should able to Click Save Button
+    And User should Verify the Instruction "if gratuity need not be applied please enter 0" under Gratuity percentage option    
+    Then User should Verify "Gratuity will be added on bill when subtotal reaches this amount" option is present and Validate the Textbox
+    And User should Verify the Instruction "then gratuity is activated" under Gratuity will be added on bill when subtotal reaches this amount option
+    Then User should Verify "Tax to be applied on gratuity amount" option is present and Validate the Textbox
+    Then User should Verify "Apply gratuity on the subtotal after deductions" option is present and Validate the Toggle
+    And User should Verify the Instruction "turning off would apply gratuity on subtotal before deductions" under Apply gratuity on the subtotal after deductions option
+    Then User should able to Click Save Button
     
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   2222222222 | 666666 |
       
       #22-03-2023 18:32
