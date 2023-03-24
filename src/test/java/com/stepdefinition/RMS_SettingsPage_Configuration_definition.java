@@ -265,8 +265,9 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 	    
 	}
 	@Then("User should Validate TakeAway and Dine-In")
-	public void userShouldValidateTakeAwayAndDineIn() {
-		//Holding this for confirmation
+	public void userShouldValidateTakeAwayAndDineIn() throws InterruptedException {
+//		pma.getRMS_SettingsPage_Configuration_POM().getTakeAwayCheckBox().click();
+//		pma.getRMS_SettingsPage_Configuration_POM().getDineInCheckBox().click();
 	   
 	}
 	@Then("User should Verify {string} is Hided when the Guest Count is Selected")
@@ -288,28 +289,242 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 	    
 	    String text2 = pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentagesymbol().getText();
 	    Assert.assertTrue(text2.contains("%"));
+	    System.out.println(text2);
 	    
-	    //Textbox validation have to do 
+	    pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().click();
+		
+		//Please enter valid value Validation 
+		Actions action = new Actions(rmsDriver);
+		action.keyDown(Keys.CONTROL).sendKeys("a");
+	    action.sendKeys(Keys.BACK_SPACE).build().perform();
+	    action.keyUp(Keys.CONTROL);
+	    
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+		String actIndication = pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBoxIndication().getText();
+		Assert.assertTrue(actIndication.contains("Please enter valid value"));
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().click();
+		 pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().sendKeys("1");
+		 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBoxIndication().isDisplayed();
+		 Assert.assertFalse(!actStatus);
+		
+		//Trying to give Alphabets
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().click();
+		action.keyDown(Keys.CONTROL).sendKeys("a");
+	    action.sendKeys(Keys.BACK_SPACE).build().perform();
+	    action.keyUp(Keys.CONTROL);
+	    
+	    pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().sendKeys("Robo");
+	    String actText = pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().getText();
+		Assert.assertTrue(actText.isEmpty());
+		
+		//Trying to enter Special character
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().sendKeys("!@$%%^&^&&&");
+		String actText1 = pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().getText();
+		Assert.assertTrue(actText1.isEmpty());
+		
+		//Trying to enter decimal number
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().sendKeys(".2");
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+			
+		//Conforming that given number is saved and displayed correctly
+		String actGiven = pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().getAttribute("value");
+		System.out.println(actGiven);
+        Assert.assertTrue(actGiven.contains(".2"));   
+        pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+	    
 	}
 	@Then("User should Verify the Instruction {string} under Gratuity percentage option")
 	public void userShouldVerifyTheInstructionUnderGratuityPercentageOption(String string) {
-	    
+		String actText = pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageInstruction().getText();
+	    Assert.assertTrue(actText.contains(string));
+	    System.out.println(actText);
 	}
+	
+	
 	@Then("User should Verify the Instruction {string} under Gratuity will be added on bill when subtotal reaches this amount option")
 	public void userShouldVerifyTheInstructionUnderGratuityWillBeAddedOnBillWhenSubtotalReachesThisAmountOption(String string) {
+	    String actText = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountOption().getText();
+	    //Assert.assertTrue(actText.contains(string));
+	    System.out.println(actText);
+	    //Symbol validating
+	    String actText1 = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountSymbol().getText();
+	    Assert.assertTrue(actText1.contains("$")); 
 	    
 	}
+	
+	//Gratuity will be added Text boxes for amount
+	@Then("User should Verify {string} option is present and Validate the Textboxs")
+	public void userShouldVerifyOptionIsPresentAndValidateTheTextboxs(String string) throws InterruptedException {
+		pma.getRMS_SettingsPage_Configuration_POM().getOrderAmountRadioButtonOption().click();
+		
+		String actText = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountOption().getText();
+		Assert.assertTrue(actText.contains(string));
+		System.out.println(actText);
+		
+		    pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().click();
+			
+			//Please enter valid value Validation 
+			Actions action = new Actions(rmsDriver);
+			action.keyDown(Keys.CONTROL).sendKeys("a");
+		    action.sendKeys(Keys.BACK_SPACE).build().perform();
+		    action.keyUp(Keys.CONTROL);
+		    
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+			
+			Thread.sleep(2000);
+			String actIndication = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication().getText();
+			Assert.assertTrue(actIndication.contains("Please enter valid value"));
+			System.out.println(actIndication);
+			//pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().click();
+			 pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().sendKeys("1");
+			 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication().isDisplayed();
+			 Assert.assertFalse(!actStatus);
+			
+			//Trying to give Alphabets
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().click();
+			action.keyDown(Keys.CONTROL).sendKeys("a");
+		    action.sendKeys(Keys.BACK_SPACE).build().perform();
+		    action.keyUp(Keys.CONTROL);
+		    
+		    pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().sendKeys("Robo");
+		    String actText1 = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().getText();
+			Assert.assertTrue(actText1.isEmpty());
+			
+			//Trying to enter Special character
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().sendKeys("!@$%%^&^&&&");
+			String actText2 = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().getText();
+			Assert.assertTrue(actText2.isEmpty());
+			
+			//Trying to enter decimal number
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().sendKeys(".2");
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+				
+			//Conforming that given number is saved and displayed correctly
+			String actGiven = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().getAttribute("value");
+			System.out.println(actGiven);
+	        Assert.assertTrue(actGiven.contains("2"));
+	   
+	}
+	//Gratuity will be added Text boxes for GuestNo
+	@Then("User should Verify {string} option is present and validate the textbox by giving Guestcount")
+	public void userShouldVerifyOptionIsPresentAndValidateTheTextboxByGivingGuestcount(String string) {
+		pma.getRMS_SettingsPage_Configuration_POM().getGuestCountRadioButtonOption().click();
+		String actText = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNo().getText();
+		Assert.assertTrue(actText.contains(string));
+		
+		    pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().click();
+			
+			//Please enter valid value Validation 
+			Actions action = new Actions(rmsDriver);
+			action.keyDown(Keys.CONTROL).sendKeys("a");
+		    action.sendKeys(Keys.BACK_SPACE).build().perform();
+		    action.keyUp(Keys.CONTROL);
+		    
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+			String actIndication = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication().getText();
+			Assert.assertTrue(actIndication.contains("Please enter valid value"));
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().click();
+			 pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().sendKeys("1");
+			 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication().isDisplayed();
+			 Assert.assertFalse(!actStatus);
+			
+			//Trying to give Alphabets
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().click();
+			action.keyDown(Keys.CONTROL).sendKeys("a");
+		    action.sendKeys(Keys.BACK_SPACE).build().perform();
+		    action.keyUp(Keys.CONTROL);
+		    
+		    pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().sendKeys("Robo");
+		    String actText1 = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().getText();
+			Assert.assertTrue(actText1.isEmpty());
+			
+			//Trying to enter Special character
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().sendKeys("!@$%%^&^&&&");
+			String actText2 = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().getText();
+			Assert.assertTrue(actText2.isEmpty());
+			
+			//Trying to enter decimal number
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().sendKeys(".2");
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+				
+			//Conforming that given number is saved and displayed correctly
+			String actGiven = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().getAttribute("value");
+			System.out.println(actGiven);
+	        Assert.assertTrue(actGiven.contains("2"));
+	  
+	}
+	
+	//Tax to be applied Text boxes
+	@Then("User should Verify {string} option is presents and Validate the Textbox")
+	public void userShouldVerifyOptionIsPresentsAndValidateTheTextbox(String string) {
+		
+		String actText = pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountOption().getText();
+		Assert.assertTrue(actText.contains(string));
+		
+		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().click();
+		
+		//Please enter valid value Validation 
+		Actions action = new Actions(rmsDriver);
+		action.keyDown(Keys.CONTROL).sendKeys("a");
+	    action.sendKeys(Keys.BACK_SPACE).build().perform();
+	    action.keyUp(Keys.CONTROL);
+	    
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+		String actIndication = pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBoxIndication().getText();
+		Assert.assertTrue(actIndication.contains("Please enter valid value"));
+		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().click();
+		 pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys("1");
+		 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBoxIndication().isDisplayed();
+		 Assert.assertFalse(!actStatus);
+		
+		//Trying to give Alphabets
+		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().click();
+		action.keyDown(Keys.CONTROL).sendKeys("a");
+	    action.sendKeys(Keys.BACK_SPACE).build().perform();
+	    action.keyUp(Keys.CONTROL);
+	    
+	    pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys("Robo");
+	    String actText1= pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().getText();
+		Assert.assertTrue(actText1.isEmpty());
+		
+		//Trying to enter Special character
+		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys("!@$%%^&^&&&");
+		String actText2 = pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().getText();
+		Assert.assertTrue(actText2.isEmpty());
+		
+		//Trying to enter decimal number
+		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys(".2");
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+			
+		//Conforming that given number is saved and displayed correctly
+		String actGiven = pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().getAttribute("value");
+		System.out.println(actGiven);
+        Assert.assertTrue(actGiven.contains(".2"));    
+	}
+	
 	@Then("User should Verify {string} option is present and Validate the Toggle")
 	public void userShouldVerifyOptionIsPresentAndValidateTheToggle(String string) {
+		String actText = pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsOptions().getText();
+		Assert.assertTrue(actText.contains(string)); 
 	    
 	}
 	@Then("User should Verify the Instruction {string} under Apply gratuity on the subtotal after deductions option")
 	public void userShouldVerifyTheInstructionUnderApplyGratuityOnTheSubtotalAfterDeductionsOption(String string) {
+		String actText = pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsInstruction().getText();
+		Assert.assertTrue(actText.contains(string));
 	    
 	}
 	@Then("User should able to Click Save Button")
 	public void userShouldAbleToClickSaveButton1() {
-	    
+		pma.getRMS_SettingsPage_Configuration_POM().getOrderAmountRadioButtonOption().click();
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
+	    pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().sendKeys("10");
+	    pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
+	    pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().sendKeys("50");
+	    pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
+	    pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys("10");
+	    pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
 	}
 }
-//22-03-2023 18:32
+//23-03-2023 18:20
