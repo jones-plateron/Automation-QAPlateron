@@ -25,10 +25,10 @@ Feature: Settings Page Configuration
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
-
-  @BillSettings2
-  Scenario Outline: As a RMS User, I need to Validate Gratuity Settings Page
+      |   2222222222 | 666666 |
+      
+      @BillSettings2
+    Scenario Outline: As a RMS User, I need to Validate Gratuity Settings Page
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click Settings Sections
     Then User should Click Gratuity Configuration and Verify the Gratuity Configuration Page Opens with "Gratuity Configuration"
