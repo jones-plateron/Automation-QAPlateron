@@ -22,12 +22,13 @@ Feature: Settings Page Configuration
     And User should Verify the Instruction "turning off would apply service fee on subtotal before deductions" under Apply service fee on the subtotal after deductions
     Then User should Validate the Toggle of Apply service fee on the subtotal after deductions
     And User Should able to Click Save Button
+
     Examples: 
       | mobileNumber | otp    |
       |   2222222222 | 666666 |
-
-  @BillSettings2
-  Scenario Outline: As a RMS User, I need to Validate Gratuity Settings Page
+      
+      @BillSettings2
+    Scenario Outline: As a RMS User, I need to Validate Gratuity Settings Page
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click Settings Sections
     Then User should Click Gratuity Configuration and Verify the Gratuity Configuration Page Opens with "Gratuity Configuration"
@@ -45,6 +46,8 @@ Feature: Settings Page Configuration
     And User should Verify the Instruction "turning off would apply gratuity on subtotal before deductions" under Apply gratuity on the subtotal after deductions option
     Then User should Verify "Gratuity will be added on bill when Guest count reaches this No" option is present and validate the textbox by giving Guestcount
     Then User should able to Click Save Button
+
     Examples: 
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
+      #22-03-2023 18:32
