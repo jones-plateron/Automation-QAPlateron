@@ -1,3 +1,4 @@
+@Jobs
 Feature: Roles and permission
 
   @Rolesandpermission2323
@@ -25,7 +26,7 @@ Feature: Roles and permission
     
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   9999999999 | 666666 |
 
   @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to validate the jobs popup
@@ -40,30 +41,30 @@ Feature: Roles and permission
 
     Examples: 
       | mobileNumber | otp    | Job Name with Special character |
-      |   7777777723 | 666666 | Ac@;'.';'?/'                    |
+      |   9999999999 | 666666 | Ac@;'.';'?/'                    |
 
   @Rolesandpermission23
   Scenario Outline: As a RMS User, I need to Create new jobs and set permission for the New Role
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
     Then User should able to click jobs option and verify the "Manager" option is selected by default
-    #Then User should add the New job "<Job Name>" and Click save Button
-      #| Job Name |
-      #| Baker    |
-      #| Cleaner  |
-      #| Robot 1  |
-      #| Robot 2  |
-      #| Robot 3  |
-      #| Robot 4  |
-      #| Robot 5  |
-    #Then User should verify the New Jobs is added in the available job list
-    #And User should able to give permission for the New Role and Verify User should able to click Save Button
+    Then User should add the New job "<Job Name>" and Click save Button
+      | Job Name |
+      | Baker    |
+      | Cleaner  |
+      | Robot 1  |
+      | Robot 2  |
+      | Robot 3  |
+      | Robot 4  |
+      | Robot 5  |
+    Then User should verify the New Jobs is added in the available job list
+    And User should able to give permission for the New Role and Verify User should able to click Save Button
 
     Then User should able to see the edit icon and click edit icon to edit the Role Name "<Edit Name>"
     And User should verify the role name is Changed
     Examples: 
       | mobileNumber | otp    | Edit Name  |
-      |   7777777723 | 666666 | Edited Job |
+      |   9999999999 | 666666 | Edited Job |
 
   @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to edit the permission
@@ -74,7 +75,7 @@ Feature: Roles and permission
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   9999999999 | 666666 |
 
   @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to delete the Role
@@ -88,7 +89,7 @@ Feature: Roles and permission
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   9999999999 | 666666 |
 
   @Rolesandpermission2323
   Scenario Outline: As a RMS User, I need to delete by Re-assigning
@@ -102,7 +103,7 @@ Feature: Roles and permission
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   9999999999 | 666666 |
   #Scenario Outline: As a RMS User, I need to delete by Re-assigning
     #Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     #When User should redirects to employees section

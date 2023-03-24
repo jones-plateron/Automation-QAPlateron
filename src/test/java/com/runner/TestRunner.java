@@ -5,13 +5,15 @@ import org.junit.runner.RunWith;
 
 import com.reports.JvmReport;
 
+//import com.reports.JvmReport;
+
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 
  
-@CucumberOptions( tags="@BillSettings", stepNotifications = false, dryRun = false, features= "src\\test\\resources\\Feature\\", glue = "com.stepdefinition", 
+@CucumberOptions( tags="@MenuSection", stepNotifications = false, dryRun = false, features= "src\\test\\resources\\Feature\\", glue = "com.stepdefinition", 
 monochrome = true,publish = true, snippets = io.cucumber.junit.CucumberOptions.SnippetType.CAMELCASE ,plugin = {"pretty", "json:target//output.json"})
 public class TestRunner {
 
