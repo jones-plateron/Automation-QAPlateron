@@ -234,6 +234,12 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	
+	public WebElement geteditedit() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//*[@class=\"d-flex justify-content-between\"])[6]"));
+		return element;
+	}
+	
+	
 	
 	//CheckBox Locators	
 	public WebElement getRegeneratePinCheckBox() {
@@ -248,9 +254,21 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/label[1]/span[1]"));
 		return element;
 	}
-	public WebElement getViewAllOrderCheckBox() {
-		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]"));
+	public WebElement getViewAllOrderCheckBox1() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//*[@class='  custom-check-label text-center'])[4]"));
 		return element;
+	}
+	public WebElement getViewAllOrderCheckBox2() {
+	 WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]"));
+	 return element;
+		}		
+	public WebElement getViewAllOrderCheckBox3() {
+	WebElement element = rmsDriver.findElement(By.xpath("(//span[@class=' label-text  text-bottom '])[4]"));
+				return element;
+			}		
+  public WebElement getViewAllOrderCheckBox4() {
+		WebElement element = rmsDriver.findElement(By.xpath("//div[contains(@class,'mb-8')]//div[2]//div[2]//div[1]//div[1]//div[1]//div[1]//label[1]//span[1]"));
+	    return element;
 	}
 	public WebElement getViewMyOrderChechBox() {
 		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/label[1]/span[1]"));
@@ -260,10 +278,28 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("(.//*[@class=' label-text  text-bottom '])[6]"));
 		return element;
 	}
-	public WebElement getDiscountCheckBox() {
+	public WebElement getDiscountCheckBox1() {
+		WebElement element = rmsDriver.findElement(By.xpath("//div[4]//div[1]//div[1]//div[1]//label[1]//span[1]"));
+		return element;
+	}
+	
+	public WebElement getDiscountCheckBox2() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type=\"checkbox\"])[7]"));
+		return element;
+	}
+	
+	public WebElement getDiscountCheckBox3() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class=' label-text  text-bottom '])[7]"));
+		return element;
+	}
+	
+	public WebElement getDiscountCheckBox4() {
 		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[2]/div[2]/div[4]/div[1]/div[1]/div[1]/label[1]/span[1]"));
 		return element;
 	}
+	
+	
+	
 	public WebElement getSettingsCheckBox() {
 		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/section[2]/div[2]/div[2]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]"));
 		return element;

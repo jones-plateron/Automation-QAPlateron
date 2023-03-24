@@ -15,7 +15,7 @@ Feature: Verify the Employee Management Page in RMS
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777777 | 666666 |
+      |   2222222222 | 666666 |
 
   @EmployeeCreation
   Scenario Outline: Verify the New Employee Creation in RMS
@@ -28,47 +28,45 @@ Feature: Verify the Employee Management Page in RMS
     Then User should verify the Error Message "Please enter valid phone number"
 
     Examples: 
-      | mobileNumber | otp    | firstName | lastName   | emailAddress       | employeeID | displayName | phoneNumber | Role    |
-      |   7777777777 | 666666 | Test      | Automation | AutoTest@email.com | J123       | AutoTest    |  9566902940 | Manager |
+      | mobileNumber | otp    | firstName | lastName | emailAddress      | employeeID | displayName | phoneNumber | Role    |
+      |   2222222222 | 666666 | Teste     | Automate | AutoTes@emall.com | YH62       | AutTest34   |  2355123330 | Manager |
 
   @Employeelist
   Scenario Outline: Creating multiple Employees in RMS
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
     Then User should click on Add Employee button and verify the Slide pop-up
-    #When User should Create a New Employee and store the Employee information
-      #| DispName | phoneNo    | Role    |
-      #| TJo2     | 5566902940 | Manager |
-      #| T12      | 5566902941 | Manager |
-      #| jTnes22  | 5566902942 | Waiter  |
-      #| joTnes32 | 5566902943 | Waiter  |
-      #| jonTes42 | 5566902944 | Busser  |
+    When User should Create a New Employee and store the Employee information
+      | DispName | phoneNo    | Role    |
+      | Auto11   | 5234457120 | Manager |
+      | Auto12   | 6234457120 | Manager |
+      | Auto13   | 7234457120 | Waiter  |
+      | Auto14   | 8234457120 | Waiter  |
+      | Auto15   | 9234457120 | Busser  |
     Then User should verify the Total Employees Count
-    #And User should verify the Employee list contains Owner profile
-    #And User should verify Each Employee list contains Job type Mobile Number
-    #And User should verify Each Employee list contains PIN and OTP section
-    #And User should verify other than owner Each Employee list contains Mark as Inactive option
-    #And User should verify Mark as Inactive popup text and Cancel button when Clicked
-    #And User should verify Employee Details popup when user Clicks on Each Employee list
+    And User should verify the Employee list contains Owner profile
+    And User should verify Each Employee list contains Job type Mobile Number
+    And User should verify Each Employee list contains PIN and OTP section
+    And User should verify other than owner Each Employee list contains Mark as Inactive option
+    And User should verify Mark as Inactive popup text and Cancel button when Clicked
+    And User should verify Employee Details popup when user Clicks on Each Employee list
     And user should verify the search results in Employee page using Employee name Id or Phone
     And user should verify the text message "Can't find employee in the list." by enter UA text in Search Bar
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777777 | 666666 |
+      |   2222222222 | 666666 |
 
   @EmployeeEdit
   Scenario Outline: Verify the Edit Employees functionality in RMS
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
-    Then Verify Each employee profile contains edit button in Employee details page
-    And Verify user should able to modify the Employee information in RMS
+    Then Verify user should able to modify the Employee information in RMS
     And Verify user should able to see the mark as Inactive button in Employee details
     And User should verify Mark as Inactive popup text and Cancel button
     And user should verify the Employee has bee moved to bottom of rms (as Inactive)
-    And verify user should able to see the Employee Details page Cancel and Save button
-    And Verify the Popup gets closed when user clicks save or cancel after modification
+    And Verify Each employee profile contains edit button in Employee details page
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777777 | 666666 |
+      |   2222222222 | 666666 |

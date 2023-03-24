@@ -2,6 +2,8 @@ package com.stepdefinition;
 
 import java.io.IOException;
 
+import com.base.BaseClass;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -9,7 +11,7 @@ import io.cucumber.java.Scenario;
  * Used For Driver Initializing, Quitting Driver and Screenshot
  */
 
-public class HooksClass  {
+public class HooksClass  extends BaseClass{
 
 	@Before
 	public void beforeClassMethod() throws IOException {
@@ -23,8 +25,8 @@ public class HooksClass  {
 		 // scen.attach(scenerioScreenshot(), "images/png","Scenario Output Screenshot");
 		 }
 
-		 System.out.println(scen.isFailed());
-		//driver.quit();
+		 //System.out.println(scen.isFailed());
+		rmsDriver.quit();
 
 	}
 
