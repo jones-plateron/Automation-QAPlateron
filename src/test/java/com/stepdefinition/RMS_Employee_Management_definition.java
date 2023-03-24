@@ -517,13 +517,13 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			String empListMobile = pma.getRMS_Employee_Management_POM().getPhoneInsideListElement(j).getText();
 			System.out.println(empListMobile);
 			Thread.sleep(100);
-			indvEmployeeListElement.get(i).click();Thread.sleep(300);
-			String SlideDispName1 = pma.getRMS_Employee_Management_POM().getSlideEmpNameElement().getText();Thread.sleep(300);
+			indvEmployeeListElement.get(i).click();Thread.sleep(3000);
+			String SlideDispName1 = pma.getRMS_Employee_Management_POM().getSlideEmpNameElement().getText();Thread.sleep(3000);
 			//String SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
-			String SlideDispName2 = pma.getRMS_Employee_Management_POM().getSlideDisplayNameElement().getText();Thread.sleep(100);
-			String SlidePhone = pma.getRMS_Employee_Management_POM().getSlidePhoneElement().getText();Thread.sleep(100);
-			String SlideEmail = pma.getRMS_Employee_Management_POM().getSlideEmailElement().getText();Thread.sleep(100);
-			String SlideRole = pma.getRMS_Employee_Management_POM().getSlideRoleElement().getText();Thread.sleep(100);
+			String SlideDispName2 = pma.getRMS_Employee_Management_POM().getSlideDisplayNameElement().getText();Thread.sleep(1000);
+			String SlidePhone = pma.getRMS_Employee_Management_POM().getSlidePhoneElement().getText();Thread.sleep(1000);
+			String SlideEmail = pma.getRMS_Employee_Management_POM().getSlideEmailElement().getText();Thread.sleep(1000);
+			String SlideRole = pma.getRMS_Employee_Management_POM().getSlideRoleElement().getText();Thread.sleep(1000);
 			
 			Assert.assertTrue(empListDispName.equals(SlideDispName1));
 			Assert.assertTrue(empListDispName.equals(SlideDispName2));
