@@ -62,7 +62,8 @@ List<String> jobNameswhileCreating=new ArrayList<String>(); //Assigning this Glo
 	   Thread.sleep(200);
 	   String actPOSAcess = pma.getRMS_Roles_and_Permissions_POM().getPOSAcessSection().getText();
 	   System.out.println(actPOSAcess);
-	   Assert.assertTrue(actPOSAcess.contains(string));
+//	   Assert.assertTrue(actPOSAcess.contains(string));
+	   Assert.assertTrue(false);
 	   
 	   String actRePin = pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinPermissions().getText();
 	   System.out.println(actRePin);
