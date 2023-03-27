@@ -21,8 +21,8 @@ public class HooksClass  extends BaseClass{
 	@After
 	public void afterClassMethod(Scenario scen) throws IOException {
 		// close & Screenshot
-		if(!scen.isFailed()){
-		 // scen.attach(scenerioScreenshot(), "images/png","Scenario Output Screenshot");
+		if(scen.isFailed()){
+		  scen.attach(scenerioScreenshot(), "images/png","Scenario Output Screenshot");
 		 }
 
 		 //System.out.println(scen.isFailed());
