@@ -1,2 +1,4 @@
 /target/
 target/test-classes/com/runner/TestRunner.class
+TestRunner.class
+pom.properties
