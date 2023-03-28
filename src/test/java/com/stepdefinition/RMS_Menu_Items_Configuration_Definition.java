@@ -204,37 +204,39 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 //		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameErrorMsg().isDisplayed());
 	}
 
-	@When("User should add Modifier Items under Modifier {string} {string} {string} then  Edit and Delete Modifier")
-	public void userShouldAddModifierItemsUnderModifierThenEditAndDeleteModifier(String mod1, String mod2, String mod3,
-			io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+	@When("User should add Modifier Items under Modifier {string} {string} {string}")
+	public void userShouldAddModifierItemsUnderModifier(String mod1, String mod2, String mod3,
+			io.cucumber.datatable.DataTable dataTable) {
 		List<Map<String,String>> modifierItemsAsMaps = dataTable.asMaps();
 		
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
-		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys("Edit and Delete");
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod1);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
 		for (int i = 0; i < modifierItemsAsMaps.size(); i++) {
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(300);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(200);
-			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegetarian")) {
-				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().click();	
-			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Non-Vegetarian")) {
-				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();	
-			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegan")) {
-				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
-			}Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(300);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));
+			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("")) {
+				
+			} else if (condition) {
+				
+			} else if (condition) {
+				
+			}{
+
+			}
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().sendKeys(modifierItemsAsMaps.get(i).get("Modifier Type"));
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().sendKeys(modifierItemsAsMaps.get(i).get("Modifier Type"));
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().sendKeys(modifierItemsAsMaps.get(i).get("Modifier Type"));
+			
+			
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));
+			
+			
+			
+			
+			
 		}
-		//Edit and Delete Operation -//button[@class='mr-2 tooltip']
-		
-		for (int i = 0; i < modifierItemsAsMaps.size(); i++) {
-			
-			
-			
-		}
-		
 	}
 
 	@When("User should click Modifier Name and verify Modifier Items Count")
@@ -351,4 +353,4 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	public void userShouldVerifyNotificationBarWithText(String string, String string2) {
 	}
 
-}// 27-03-2023 17:59
+}
