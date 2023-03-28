@@ -27,6 +27,9 @@ PageManager pma = new PageManager();
 	public WebElement getModifiersButtonUnderMenuItemsSec() {
 		return rmsDriver.findElement(By.xpath("//li[contains(text(),'Modifiers')]"));
 	}
+	public WebElement getModifiersButtonUnderMenuItemsSec1() {
+		return rmsDriver.findElement(By.xpath("//div[contains(text(),'Modifiers')]"));
+	}
 	public WebElement getAddModifierbutton() {
 		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-outline-primary btn-small btn-width large d-flex align-items-center']"));
 	}
@@ -144,12 +147,24 @@ PageManager pma = new PageManager();
 	public List<WebElement> getModifierItemsList() {
 		return rmsDriver.findElements(By.xpath("//div[@class=' menu-card__menu-card-item  cursor-grab ']"));
 	}
-	public WebElement getEditModifierItemsIconInsideList() {
-		return rmsDriver.findElement(By.xpath("//button[@class='mr-2 tooltip']"));
+	public List<WebElement> getEditModifierItemsIconInsideList() {
+		return rmsDriver.findElements(By.xpath("//button[@class='mr-2 tooltip']"));
 	}
 	public WebElement getUpdateModifierItemSlidePopupHdr() {
 		return rmsDriver.findElement(By.xpath("//h4[contains(@class,'modal-title text-ellipsis')]"));
 	}
+//	public WebElement getModifierItemNameInsideList(WebElement find) {  // Applies for Category Menu Item
+//		return find.findElement(By.xpath("//h4[@class='card-title line-wrap']"));
+//	}
+//	public WebElement getModifierItemDescriptionInsideList(WebElement find) { // Applies for Category Menu Item Description
+//		return find.findElement(By.xpath("//p[@class='card-text w-break mb-1']"));
+//	}
+//	public WebElement getModifierItemPriceInsideList(WebElement find) { // Applies for Category Menu Item Price
+//		return find.findElement(By.xpath("//div[@class='d-flex mw-60']"));
+//	}
+	
+	
+	
 	public WebElement getModifierItemNameInsideList() {  // Applies for Category Menu Item
 		return rmsDriver.findElement(By.xpath("//h4[@class='card-title line-wrap']"));
 	}
@@ -159,15 +174,31 @@ PageManager pma = new PageManager();
 	public WebElement getModifierItemPriceInsideList() { // Applies for Category Menu Item Price
 		return rmsDriver.findElement(By.xpath("//div[@class='d-flex mw-60']"));
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public WebElement getActiveModifierElement() { // Applies for Category Menu 
 		return rmsDriver.findElement(By.xpath("//li[@class='list-item item-width no-border d-flex align-items-center active ']"));
 	}
 	public List<WebElement> getAllModifierElement() { // Applies for Category Menu 
 		return rmsDriver.findElements(By.xpath("//li[@aria-describedby='rbd-hidden-text-11-hidden-text-61']"));
 	}
-	public WebElement getDeleteModifierItemsIconInsideList() {
+	public List<WebElement> getDeleteModifierItemsIconInsideList() {
+		return rmsDriver.findElements(By.xpath("//button[@data-target='#delete-menu-modal']"));
+	}
+	public WebElement getDeleteModifierItemsIconInsideList1() {
 		return rmsDriver.findElement(By.xpath("//button[@data-target='#delete-menu-modal']"));
 	}
+	
+	
+	
 	public WebElement getDeleteModifierItemPopHdr() {
 		return rmsDriver.findElement(By.xpath("//h4[@class='modal-title text-ellipsis ']"));
 	}
@@ -288,4 +319,4 @@ PageManager pma = new PageManager();
 	
 }
 
-//27-03-2023 11:40
+//28-03-2023 18:28

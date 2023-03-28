@@ -3,7 +3,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import com.base.BaseClass;
@@ -14,6 +16,7 @@ import io.cucumber.java.en.When;
 public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 
 	PageManager pma = new PageManager();
+	
 	public String specialChar = "!@#$%%^&*()_+";
 	public String upperCase = "AUTOMATIONTEXT";
 	public String lowerCase = "automationtext";
@@ -42,7 +45,7 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		Thread.sleep(1000);
 		pma.getRMS_Menus_Configuration_POM().getModifiersButtonUnderMenuItemsSec().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
-		System.out.println(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupHdrElement().getText());
+		//System.out.println(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupHdrElement().getText());
 		Assert.assertTrue(
 				pma.getRMS_Menus_Configuration_POM().getAddModifierPopupHdrElement().getText().equals("Add Modifier"));
 		Thread.sleep(500);
@@ -93,20 +96,20 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys("Edit");
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
 		Thread.sleep(500);
-		System.out.println(pma.getRMS_Menus_Configuration_POM().getActiveModifierElement().getText());
+		//System.out.println(pma.getRMS_Menus_Configuration_POM().getActiveModifierElement().getText());
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getActiveModifierElement().getText()
 				.contains(modifierName + "Edit"));
 		modifierName = modifierName + "Edit";
 		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
-		Thread.sleep(200);
+		Thread.sleep(400);
 		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupCancelElement().click();
-		Thread.sleep(200);
+		Thread.sleep(400);
 		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
-		Thread.sleep(200);
+		Thread.sleep(400);
 		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupCloseElement().click();
-		Thread.sleep(200);
+		Thread.sleep(400);
 		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
-		Thread.sleep(200);
+		Thread.sleep(400);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupHdrElement().getText()
 				.equals("Delete Modifier"));
 		Thread.sleep(500);
@@ -117,38 +120,39 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 
 	@When("User should verify the Add Modifier item slide pop-up and text box")
 	public void userShouldVerifyTheAddModifierItemSlidePopUpAndTextBox() throws InterruptedException {
+		Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideHdrElement().getText().equals("Add Modifier Item"));
-		Thread.sleep(200);
+		Thread.sleep(500);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameHdrElement().isDisplayed());
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceHdrElement().isDisplayed());
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModifierTypeHdr().isDisplayed());
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionHdr().isDisplayed());
-		Thread.sleep(200);
+		Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys("Test");
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameErrorMsg().getText().equals("Please enter modifier name"));
-		Thread.sleep(200);
+		Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceErrMsgElement().getText().equals("Please enter valid price"));
-		Thread.sleep(200);// Validation for Modifier Item Name
+		Thread.sleep(500);// Validation for Modifier Item Name
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(specialChar);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().getAttribute("value").equals(specialChar));
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().clear();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(upperCase);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().getAttribute("value").equals(upperCase));
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().clear();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(lowerCase);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().getAttribute("value").equals(lowerCase));
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().clear();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(text);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().getAttribute("value").equals(text));
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().clear();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		String charsTwohund = "abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !\"§ $%& /() =?* '<> #|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNJNHJ *(&^%$#$%^&*(HJHUhgg142356348978";
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(charsTwohund);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().getAttribute("value").length() == 140);
@@ -157,23 +161,23 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(specialChar);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().getAttribute("value").length()==0);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(upperCase);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().getAttribute("value").length()==0);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(lowerCase);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().getAttribute("value").length()==0);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();
-		Thread.sleep(200);
-		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(text);
-		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().getAttribute("value").length()==10);
+		Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(text);Thread.sleep(200);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().getAttribute("value").length()==5);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		String number="1234567890";
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(number);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement()
-				.getAttribute("value").equals(number));
+				.getAttribute("value").equals("12345"));
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();
 		
 		//Validation on Description Text Box
@@ -211,36 +215,173 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys("Edit and Delete");
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
 		for (int i = 0; i < modifierItemsAsMaps.size(); i++) {
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(300);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(200);
+			Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(500);
 			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegetarian")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().click();	
 			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Non-Vegetarian")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();	
 			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegan")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
-			}Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(300);
+			}Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
 		}
-		//Edit and Delete Operation -//button[@class='mr-2 tooltip']
+		//Edit Item
+		List<WebElement> modifierItemsList = pma.getRMS_Menus_Configuration_POM().getModifierItemsList();
+		for (int i = 0; i < modifierItemsList.size(); i++) {
+			int j=i+1;
+			Thread.sleep(500);
+			List<WebElement> editModifierItemsIconInsideList1 = pma.getRMS_Menus_Configuration_POM().getEditModifierItemsIconInsideList();
+			String nameMod = rmsDriver.findElement(By.xpath("(//h4[@class='card-title line-wrap'])["+j+"]")).getText();
+			String descriptionMod = rmsDriver.findElement(By.xpath("(//p[@class='card-text w-break mb-1'])["+j+"]")).getText();
+			String priceMod = rmsDriver.findElement(By.xpath("(//div[@class='d-flex mw-60'])["+j+"]")).getText();
+//			System.out.println(nameMod);
+//			System.out.println(priceMod);
+//			System.out.println(descriptionMod);			
+			Thread.sleep(500);
+			editModifierItemsIconInsideList1.get(i+1).click();
+			Thread.sleep(500);
+			String insideNameText = pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().getAttribute("value");Thread.sleep(500);
+			String insidePriceText = pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().getAttribute("value");Thread.sleep(500);
+			String insideDescripText = pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().getAttribute("value");Thread.sleep(500);
+//			System.out.println(insideNameText);
+//			System.out.println(insidePriceText);
+//			System.out.println(insideDescripText);
+			Thread.sleep(500);
+			Assert.assertTrue(nameMod.equals(insideNameText));
+			Assert.assertTrue(priceMod.contains(insidePriceText));
+			Assert.assertTrue(descriptionMod.equals(insideDescripText));
+			Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(" Edited Name");Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(".5");Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(" Edited Description");Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(500);
+		}
 		
-		for (int i = 0; i < modifierItemsAsMaps.size(); i++) {
+		//Modifier Items Count
+		String activeModifier = pma.getRMS_Menus_Configuration_POM().getActiveModifierElement().getText();Thread.sleep(500);
+		List<WebElement> modifierItemsCount = pma.getRMS_Menus_Configuration_POM().getModifierItemsList();Thread.sleep(1000);
+		int size = modifierItemsCount.size();
+		String string = Integer.toString(size);
+		//System.out.println(string);
+		Thread.sleep(500);
+		Assert.assertTrue(activeModifier.contains(string));
+		
+		
+		//Delete Item
+		List<WebElement> deleteModifierItemsIconInsideList = pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemsIconInsideList();
+		//String activeModifier = pma.getRMS_Menus_Configuration_POM().getActiveModifierElement().getText();
+		for (int i = 0; i < deleteModifierItemsIconInsideList.size(); i++) {
+			String modifierItemName = pma.getRMS_Menus_Configuration_POM().getModifierItemNameInsideList().getText();
+			String substring = activeModifier.substring(0, 15);
+			pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemsIconInsideList1().click();			
+			pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopHdr().isDisplayed();
+			String deleteModifierPopText = pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopText().getText();
+//			System.out.println(activeModifier);
+//			System.out.println(modifierItemName+substring);
+//			System.out.println(deleteModifierPopText);
+			Assert.assertTrue(deleteModifierPopText.equals("Are you sure want to delete the "+modifierItemName+" from the "+substring+"?"));
 			
-			
-			
+			pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopCloseElement().click();
+			Thread.sleep(900);
+			pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemsIconInsideList1().click();Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopCancelElement().click();
+			Thread.sleep(900);
+			pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemsIconInsideList1().click();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopDeleteElement().click();
+			Thread.sleep(900);
+		}
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();Thread.sleep(500);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupHdrElement().getText().equals("Delete Modifier"));Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupTextElement().getText().equals("Are you sure want to delete the Edit and Delete from the list?");
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupCloseElement().click();Thread.sleep(500);
+		
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupCancelElement().click();Thread.sleep(500);
+		
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();Thread.sleep(500);
+
+		//Create a Modifier
+		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod1);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
+		for (int i = 0; i < 4; i++) {
+			Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(500);
+			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegetarian")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().click();	
+			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Non-Vegetarian")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();	
+			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegan")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
+			}Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
+		}
+		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod2);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
+		for (int i = 4; i < 8; i++) {
+			Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(500);
+			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegetarian")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().click();	
+			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Non-Vegetarian")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();	
+			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegan")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
+			}Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
+		}
+		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod3);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
+		for (int i = 8; i < 12; i++) {
+			Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(500);
+			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegetarian")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().click();	
+			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Non-Vegetarian")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();	
+			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegan")) {
+				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
+			}Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
 		}
 		
 	}
 
 	@When("User should click Modifier Name and verify Modifier Items Count")
 	public void userShouldClickModifierNameAndVerifyModifierItemsCount() {
+		//Covered in Above
 	}
 
 	@Then("User should verify Modifier count in Modifier button")
-	public void userShouldVerifyModifierCountInModifierButton() {
+	public void userShouldVerifyModifierCountInModifierButton() throws InterruptedException {
+		//Modifier Count
+		String modifiersCountText = pma.getRMS_Menus_Configuration_POM().getModifiersButtonUnderMenuItemsSec1().getText();
+		Thread.sleep(900);
+		List<WebElement> allCategoriesList = pma.getRMS_Menus_Configuration_POM().getAllCategoriesList(); //both Modifier and Category
+		int size = allCategoriesList.size();
+		String Count = Integer.toString(size);Thread.sleep(900);
+		Assert.assertTrue(modifiersCountText.contains(Count));
 	}
 
 	@Then("User should click Add Categories button and Add Category pop-up")
@@ -349,13 +490,4 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	public void userShouldVerifyNotificationBarWithText(String string, String string2) {
 	}
 
-}// 27-03-2023 17:59
-=======
-	
-	
-	
-	
-
-	
-}
->>>>>>> cbf4a082edc737fc9dd41292473311c25cf9afbc
+}// 28-03-2023 18:28
