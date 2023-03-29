@@ -35,10 +35,11 @@ Feature: Menus Items section validations
   Scenario Outline: As a RMS User, Validate Category section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User shoild click Menus section and verify the page redirection
-    Then User should click Add Categories button and Add Category pop-up
+    Then User should verify Add Categories button and Add Category pop-up
     And User should should Add new Category and verify Edit and Delete options of category
     And User should verify the Add Menu Slide Pop-up and text box
-    And User should add Menu Items under Categories "Category1" and "Category2"
+    #Bug double time Clicking Add Modifier button inside Menu (logic-for the Second time)
+    And User should add Menu Items under Categories "AutoCategory1" and "AutoCategory2"
       | MenuName    | Modifier Type  | Price | Description                     |
       | Menu Item1  | Vegetarian     |  1.99 | Description Test Menu one       |
       | Menu Item2  | Non-Vegetarian |  2.99 | Description Test Menu two       |

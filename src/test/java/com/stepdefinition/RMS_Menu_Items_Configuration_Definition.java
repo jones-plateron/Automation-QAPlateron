@@ -1,4 +1,5 @@
 package com.stepdefinition;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -7,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import com.base.BaseClass;
 import com.pagemanager.PageManager;
@@ -22,7 +24,9 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	public String lowerCase = "automationtext";
 	public String numbers = "1234567890";
 	public String text = "!@#$%^&*()abcdefghijABCDEFGHIJ1234567890AutomationTestRegression";
-
+	public List<String> modifiersList=new ArrayList<String>();
+	
+	
 	// !@#$%^&*()abcdefghijABCDEFGHIJ1234567890Automation
 	
 	
@@ -193,7 +197,7 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	        int j=140-i;
 	        String RemainingCount = Integer.toString(j);
 	        //System.out.println(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionHdr().getText());
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionHdr().getText().contains(RemainingCount);
+	        Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionHdr().getText().contains(RemainingCount));
 		}
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideCloseBtn().click();
 		Thread.sleep(100);
@@ -379,21 +383,274 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		String modifiersCountText = pma.getRMS_Menus_Configuration_POM().getModifiersButtonUnderMenuItemsSec1().getText();
 		Thread.sleep(900);
 		List<WebElement> allCategoriesList = pma.getRMS_Menus_Configuration_POM().getAllCategoriesList(); //both Modifier and Category
+		for (int i = 0; i < allCategoriesList.size(); i++) {
+			modifiersList.add(allCategoriesList.get(i).getText());
+		}
 		int size = allCategoriesList.size();
 		String Count = Integer.toString(size);Thread.sleep(900);
 		Assert.assertTrue(modifiersCountText.contains(Count));
 	}
 
-	@Then("User should click Add Categories button and Add Category pop-up")
-	public void userShouldClickAddCategoriesButtonAndAddCategoryPopUp() {
+	@Then("User should verify Add Categories button and Add Category pop-up")
+	public void userShouldVerifyAddCategoriesButtonAndAddCategoryPopUp() throws InterruptedException {
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(500);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupHdrElement().getText().equals("Add Category"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextElement().getText().equals("Category Name"));
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupCloseBtnElement().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupCancelBtnElement().click();
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupErrorMsgElement().getText().equals("Please enter valid category name"));
+		
+		
+		Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(specialChar);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().getAttribute("value").equals(specialChar));
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		String nameOfCategory1 = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupHdrElement().getText().equals("Delete Category"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupTextElement().getText().equals("Are you sure want to delete the "+nameOfCategory1+" from the list?"));
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(upperCase);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().getAttribute("value").equals(upperCase));
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		String nameOfCategory2 = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupHdrElement().getText().equals("Delete Category"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupTextElement().getText().equals("Are you sure want to delete the "+nameOfCategory2+" from the list?"));
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(lowerCase);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().getAttribute("value").equals(lowerCase));
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		String nameOfCategory3 = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupHdrElement().getText().equals("Delete Category"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupTextElement().getText().equals("Are you sure want to delete the "+nameOfCategory3+" from the list?"));
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(numbers);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().getAttribute("value").equals(numbers));
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		String nameOfCategory4 = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupHdrElement().getText().equals("Delete Category"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupTextElement().getText().equals("Are you sure want to delete the "+nameOfCategory4+" from the list?"));
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(text);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().getAttribute("value").length()==50);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().clear();Thread.sleep(100);
+		
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys("Category1");
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
 	}
 
 	@Then("User should should Add new Category and verify Edit and Delete options of category")
-	public void userShouldShouldAddNewCategoryAndVerifyEditAndDeleteOptionsOfCategory() {
+	public void userShouldShouldAddNewCategoryAndVerifyEditAndDeleteOptionsOfCategory() throws InterruptedException {
+		pma.getRMS_Menus_Configuration_POM().getEditModifierNameIconElement().click();
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(text);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().getAttribute("value").length()==50);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		String nameOfCategory = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText().length()==50);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupHdrElement().getText().equals("Delete Category"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupTextElement().getText().equals("Are you sure want to delete the "+nameOfCategory+" from the list?"));
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupCloseElement().click();
+		
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupCancelElement().click();
+		
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupHdrElement().getText().equals("Delete Category"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupTextElement().getText().equals("Are you sure want to delete the "+nameOfCategory+" from the list?"));
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();
 	}
 
 	@Then("User should verify the Add Menu Slide Pop-up and text box")
-	public void userShouldVerifyTheAddMenuSlidePopUpAndTextBox() {
+	public void userShouldVerifyTheAddMenuSlidePopUpAndTextBox() throws InterruptedException {
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys("Menu Validations");
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(300);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameErrorMsg().getText().equals("Please enter menu name"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameHdr().getText().equals("Menu Name"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeHdr().getText().equals("Menu Type"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceHdr().getText().equals("Price"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionHdr().getText().contains("Description"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionHdr().getText().contains("(Remaining characters -140/140)"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideApplyModifiersHdr().getText().equals("Apply modifiers"));
+		//text box validations
+		//Name
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(specialChar);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().getAttribute("value").equals(specialChar));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(numbers);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().getAttribute("value").equals(numbers));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(upperCase);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().getAttribute("value").equals(upperCase));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(lowerCase);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().getAttribute("value").equals(lowerCase));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(text+text+text+text);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().getAttribute("value").length()==140);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().clear();
+		//Price
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(specialChar);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().getAttribute("value").length()==0);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(numbers);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().getAttribute("value").length()==5);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(upperCase);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().getAttribute("value").length()==0);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(lowerCase);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().getAttribute("value").length()==0);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(text);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().getAttribute("value").length()==5);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().clear();
+		//Description
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(specialChar);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().getAttribute("value").equals(specialChar));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(numbers);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().getAttribute("value").equals(numbers));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(upperCase);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().getAttribute("value").equals(upperCase));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(lowerCase);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().getAttribute("value").equals(lowerCase));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().clear();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(text+text+text+text);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().getAttribute("value").length()==140);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().clear();
+		
+		for (int i = 1; i < 141; i++) {
+			Random random = new Random();
+	        int randomInt = random.nextInt(26) + 65; // generates a random integer between 65 and 90 (ASCII codes for A-Z)
+	        char randomChar = (char) randomInt;
+	        String dumText=""+randomChar;
+	        pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(dumText);
+	        int j=140-i;
+	        String RemainingCount = Integer.toString(j);
+	        //System.out.println(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionHdr().getText());
+			Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionHdr().getText().contains(RemainingCount));
+		}
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
+		
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown().click();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().click();
+		//Error Message Verification
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameErrorMsg().getText().equals("Please enter menu name"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDownErrorMsg().getText().equals("Please select menu type"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceErrorMsg().getText().equals("Please enter valid price"));
+		
+		//Add modifiers Section
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifierListHdr().getText().equals("Modifier List"));
+
+//======//ForNow
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideCloseBtn().click();
+		pma.getRMS_Menus_Configuration_POM().getModifiersButtonUnderMenuItemsSec().click();
+		List<WebElement> allCategoriesList = pma.getRMS_Menus_Configuration_POM().getAllCategoriesList(); //both Modifier and Category
+		for (int i = 0; i < allCategoriesList.size(); i++) {
+			modifiersList.add(allCategoriesList.get(i).getText());
+		}
+		System.out.println(modifiersList);
+		pma.getRMS_Menus_Configuration_POM().getCategoriesButtonUnderMenuItemsSec().click();
+		pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();
+//======//Need to remove While Complete Run
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();
+//Bug*********************
+		//modifier Match validations
+		List<WebElement> addMenuSlideModifiersList = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
+		int k=0;
+		for (int i = 0; i < addMenuSlideModifiersList.size(); i++) {
+			String textMatch = addMenuSlideModifiersList.get(i).getText();
+			for (int j = 0; j <modifiersList.size() ; j++) {
+				if (modifiersList.get(j).contains(textMatch)) {
+					k++;break;
+				}
+			}
+		}
+		
+		if (k==modifiersList.size()) {
+			Assert.assertTrue(true,"Modifiers Count Match Validation");
+		}else {
+			Assert.assertTrue(false,"Modifiers Count Match Validation");
+		}
+		//Cancel and Save button validation in Modifiers List
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListCancelBtn().click();Thread.sleep(300);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();Thread.sleep(300);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtn().click();Thread.sleep(300);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListConfirtext().getText().contains("You have not selected any modifier for"));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListLetMeSelectBtn().click();Thread.sleep(300);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtn().click();Thread.sleep(300);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListYesItsOkBtn().click();Thread.sleep(300);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideCloseBtn().click();Thread.sleep(100);
+		
+		//Create a Menu and Validate Edit and Delete Options of Menu Items
+		pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys("Test Menu");Thread.sleep(100);
+		Select slt = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
+		slt.selectByVisibleText("Non-Vegetarian");Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys("1.99");Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(100);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().isDisplayed());
+		
+		pma.getRMS_Menus_Configuration_POM().getEditFirstMenuItemIconInsideList().click();Thread.sleep(100);
+		
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys("_Edit");Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().clear();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys("10.99");Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys("This is a Text1 to Validate the Menu Description - Category");Thread.sleep(500);
+		Select slt1 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
+		slt1.selectByVisibleText("Vegetarian");Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(100);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().isDisplayed());Thread.sleep(300);
+//Validation of Data Match of Menu
+		String activeCategory = pma.getRMS_Menus_Configuration_POM().getActiveModifierElement().getText();
+		CharSequence subActiveCategory = activeCategory.subSequence(0, 16);
+		String menuName = pma.getRMS_Menus_Configuration_POM().getModifierItemNameInsideList().getText();Thread.sleep(100);
+		String menuDescription = pma.getRMS_Menus_Configuration_POM().getModifierItemDescriptionInsideList().getText();Thread.sleep(100);
+		String menuPrice = pma.getRMS_Menus_Configuration_POM().getModifierItemPriceInsideList().getText();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getEditFirstMenuItemIconInsideList().click();Thread.sleep(100);
+		String menuNameInside = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().getAttribute("value");Thread.sleep(100);
+		String menuPriceInside = pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().getAttribute("value");Thread.sleep(100);
+		String menuDescriptionInside = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().getAttribute("value");Thread.sleep(100);
+		
+		Assert.assertTrue(menuName.equals(menuNameInside));
+		Assert.assertTrue(menuPrice.contains(menuPriceInside));
+		Assert.assertTrue(menuDescription.contains(menuDescriptionInside));
+		Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideCloseBtn().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemsIconInsideList1().click();Thread.sleep(100);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopHdr().getText().equals("Delete Menu"));
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopCloseElement().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemsIconInsideList1().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopCancelElement().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemsIconInsideList1().click();Thread.sleep(100);
+		
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopText().getText().equals("Are you sure want to delete the "+menuName+" from the "+subActiveCategory+"?");Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopDeleteElement().click();Thread.sleep(100);
+		//for Category delete
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();Thread.sleep(100);
 	}
 
 	@Then("User should add Menu Items under Categories {string} and {string}")
@@ -490,4 +747,4 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	public void userShouldVerifyNotificationBarWithText(String string, String string2) {
 	}
 
-}// 28-03-2023 18:28
+}// 28-03-2023 18:28///+ some Change
