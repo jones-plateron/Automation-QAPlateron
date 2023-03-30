@@ -560,23 +560,40 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceErrorMsg().getText().equals("Please enter valid price"));
 		
 		//Add modifiers Section
-		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();
-		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifierListHdr().getText().equals("Modifier List"));
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();Thread.sleep(500);
+//after bug fix Modificationv - with Error AddModifier button wont work
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys("XXXXXX");Thread.sleep(300);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys("000");
+		Select slt = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(300);
+		slt.selectByVisibleText("Vegan");Thread.sleep(100);//Fix
+		
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();Thread.sleep(500);
+//		System.out.println(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifierListHdr().getText().equals("Modifier List"));
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifierListHdr().getText().equals("Modifier List"));Thread.sleep(500);
 
 //======//ForNow
-		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideCloseBtn().click();
-		pma.getRMS_Menus_Configuration_POM().getModifiersButtonUnderMenuItemsSec().click();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideCloseBtn().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getModifiersButtonUnderMenuItemsSec().click();Thread.sleep(100);
 		List<WebElement> allCategoriesList = pma.getRMS_Menus_Configuration_POM().getAllCategoriesList(); //both Modifier and Category
 		for (int i = 0; i < allCategoriesList.size(); i++) {
 			modifiersList.add(allCategoriesList.get(i).getText());
 		}
-		System.out.println(modifiersList);
-		pma.getRMS_Menus_Configuration_POM().getCategoriesButtonUnderMenuItemsSec().click();
+//		System.out.println(modifiersList);
+		pma.getRMS_Menus_Configuration_POM().getCategoriesButtonUnderMenuItemsSec().click();Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(500);
-		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();Thread.sleep(100);
 //======//Need to remove While Complete Run
-		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();Thread.sleep(100);
 //Bug*********************
+		//after bug fix Modificationv - with Error AddModifier button wont work
+				pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys("XXXXXX");Thread.sleep(300);
+				pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys("000");
+				Select sltR = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(300);
+				sltR.selectByVisibleText("Vegan");Thread.sleep(100);//Fix
+		
+				pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();Thread.sleep(100);
+		
+//Bug Fix************************
 		//modifier Match validations
 		List<WebElement> addMenuSlideModifiersList = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
 		int k=0;
@@ -588,13 +605,14 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				}
 			}
 		}
-		
+		Thread.sleep(100);
 		if (k==modifiersList.size()) {
 			Assert.assertTrue(true,"Modifiers Count Match Validation");
 		}else {
 			Assert.assertTrue(false,"Modifiers Count Match Validation");
 		}
 		//Cancel and Save button validation in Modifiers List
+//		System.out.println("************************************************************************************************************************************");
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListCancelBtn().click();Thread.sleep(300);
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();Thread.sleep(300);
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtn().click();Thread.sleep(300);
@@ -607,8 +625,8 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		//Create a Menu and Validate Edit and Delete Options of Menu Items
 		pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys("Test Menu");Thread.sleep(100);
-		Select slt = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
-		slt.selectByVisibleText("Non-Vegetarian");Thread.sleep(100);
+		Select selt = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
+		selt.selectByVisibleText("Non-Vegetarian");Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys("1.99");Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(100);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().isDisplayed());
@@ -654,45 +672,153 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	}
 
 	@Then("User should add Menu Items under Categories {string} and {string}")
-	public void userShouldAddMenuItemsUnderCategoriesAnd(String string, String string2,
-			io.cucumber.datatable.DataTable dataTable) {
-		// Write code here that turns the phrase above into concrete actions
-		// For automatic transformation, change DataTable to one of
-		// E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-		// Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-		// Double, Byte, Short, Long, BigInteger or BigDecimal.
-		// For other transformations you can register a DataTableType.
+	public void userShouldAddMenuItemsUnderCategoriesAnd(String cateName1, String cateName2,io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+		List<Map<String,String>> asMaps = dataTable.asMaps();
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(cateName1);Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		for (int i = 0; i < asMaps.size()/2; i++) {Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(100);
+			Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
+			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(100);
+	
+		}
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(cateName2);Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		for (int i = asMaps.size()/2; i < asMaps.size(); i++) {
+			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(100);
+			Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
+			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(100);
+	
+		}
+		
+		
+		//Need to Create for All - created
 	}
 
 	@Then("User should verify the add modifier slide list inside Menu")
 	public void userShouldVerifyTheAddModifierSlideListInsideMenu() {
+		//Covered in Previous Method - "User should verify the Add Menu Slide Pop-up and text box"
 	}
 
 	@Then("User should add Menu Items with modifiers under Category {string}")
-	public void userShouldAddMenuItemsWithModifiersUnderCategory(String string,
-			io.cucumber.datatable.DataTable dataTable) {
-		// Write code here that turns the phrase above into concrete actions
-		// For automatic transformation, change DataTable to one of
-		// E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-		// Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-		// Double, Byte, Short, Long, BigInteger or BigDecimal.
-		// For other transformations you can register a DataTableType.
+	public void userShouldAddMenuItemsWithModifiersUnderCategory(String CateModifier,io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(CateModifier);Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		
+//InProgress?????		
+		List<List<String>> asLists = dataTable.asLists();
+		for (int i = 0,j=0; i < asLists.size(); i++) {
+			List<String> list = asLists.get(i);
+			Thread.sleep(500);
+				pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(100);
+				pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(list.get(j));Thread.sleep(100);
+				Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
+				slt2.selectByVisibleText(list.get(j+1));Thread.sleep(100);
+				pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(list.get(j+2));Thread.sleep(100);
+				
+				pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();			Thread.sleep(100);
+				
+				//Modifiers Selection
+				
+				if (i==0) {
+					List<WebElement> addMenuSlideModifiersList = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
+					for (int k = 0; k < addMenuSlideModifiersList.size()/2; k++) {
+						rmsDriver.findElement(By.xpath("(//span[@class='label-text text-bottom'])["+(k+1)+"]")).click();Thread.sleep(100);
+					}
+					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtnAfter().click();Thread.sleep(400);
+					List<WebElement> ModifiersListReqOrOpt = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddedModifiersListReqOrOpt();
+					for (int k = 0; k < ModifiersListReqOrOpt.size(); k++) {
+						Select slt = new Select(ModifiersListReqOrOpt.get(k));Thread.sleep(300);
+						slt.selectByVisibleText("Required");Thread.sleep(300);
+						Select slt1 = new Select(rmsDriver.findElement(By.xpath("(//tbody/tr[@class=' cursor-pointer']/td[2]/select[1])["+(k+1)+"]")));Thread.sleep(300);
+						List<WebElement> options = slt1.getOptions();Thread.sleep(300);
+						String optionText = options.get(options.size()-1).getText();Thread.sleep(300);
+//						System.out.println(optionText);Thread.sleep(200);
+//						System.out.println(rmsDriver.findElement(By.xpath("(//span[@class='td-overflow label-text text-left text-bottom'])["+(k+1)+"]")).getText());Thread.sleep(200);
+						Assert.assertTrue(rmsDriver.findElement(By.xpath("(//span[@class='td-overflow label-text text-left text-bottom'])["+(k+1)+"]")).getText().contains(optionText));Thread.sleep(200);
+					}
+					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListSaveBtnAfter().click();Thread.sleep(100);
+				} else if (i==1) {
+					List<WebElement> addMenuSlideModifiersList1 = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
+					System.out.println(addMenuSlideModifiersList1);
+					for (int k = addMenuSlideModifiersList1.size(); k > addMenuSlideModifiersList1.size()/2; k--) {Thread.sleep(200);
+//						System.out.println(k);
+						rmsDriver.findElement(By.xpath("(//span[@class='label-text text-bottom'])["+k+"]")).click();Thread.sleep(100);
+					}
+					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtnAfter().click();Thread.sleep(100);
+					List<WebElement> ModifiersListReqOrOpt = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddedModifiersListReqOrOpt();
+					for (int k = 0; k < ModifiersListReqOrOpt.size()/2; k++) {
+						Select slt = new Select(ModifiersListReqOrOpt.get(k));Thread.sleep(300);
+						slt.selectByVisibleText("Required");Thread.sleep(300);
+						Select slt1 = new Select(rmsDriver.findElement(By.xpath("(//tbody/tr[@class=' cursor-pointer']/td[2]/select[1])["+(k+1)+"]")));Thread.sleep(300);
+						List<WebElement> options = slt1.getOptions();Thread.sleep(300);
+						String optionText = options.get(options.size()-1).getText();Thread.sleep(300);
+						Assert.assertTrue(rmsDriver.findElement(By.xpath("(//span[@class='td-overflow label-text text-left text-bottom'])["+(k+1)+"]")).getText().contains(optionText));
+					}
+					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListSaveBtnAfter().click();Thread.sleep(200);
+				} else if (i==2) {
+					List<WebElement> addMenuSlideModifiersList2 = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
+					for (int k = 0; k < addMenuSlideModifiersList2.size(); k++) {
+						rmsDriver.findElement(By.xpath("(//span[@class='label-text text-bottom'])["+(k+1)+"]")).click();Thread.sleep(200);
+					}
+					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtnAfter().click();Thread.sleep(200);
+					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(100);
+					Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideAreYouSureText().getText().contains("Are you sure all the modifiers are optional for this menu"));
+					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideLetMeModifyBtn().click();Thread.sleep(300);
+					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(200);
+					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideYesProceedBtn().click();
+				}
+		}
 	}
 
 	@Then("User should verify the Menu items Edit option")
 	public void userShouldVerifyTheMenuItemsEditOption() {
+		//Covered in - User should verify the Add Menu Slide Pop-up and text box
 	}
 
 	@Then("User should verify the Menu items Delete option")
 	public void userShouldVerifyTheMenuItemsDeleteOption() {
+		//Covered in - User should verify the Add Menu Slide Pop-up and text box
 	}
 
 	@Then("User should verify the Menu items Count on Category Name")
-	public void userShouldVerifyTheMenuItemsCountOnCategoryName() {
+	public void userShouldVerifyTheMenuItemsCountOnCategoryName() throws InterruptedException {
+		Thread.sleep(100);
+		List<WebElement> categoryListsElement = pma.getRMS_Menus_Configuration_POM().getCategoryListsElement();Thread.sleep(100);
+		for (int i = 0; i < categoryListsElement.size(); i++) {Thread.sleep(100);
+			String categoryName = categoryListsElement.get(i).getText();Thread.sleep(100);
+			categoryListsElement.get(i).click();Thread.sleep(100);
+			List<WebElement> menusListInsideCate = pma.getRMS_Menus_Configuration_POM().getMenusListInsideCate();Thread.sleep(100);
+			int size = menusListInsideCate.size();Thread.sleep(100);
+			String menusCountString = Integer.toString(size);Thread.sleep(100);
+			System.out.println(menusCountString);Thread.sleep(100);
+			System.out.println(categoryName);Thread.sleep(100);
+			Assert.assertTrue(categoryName.contains(menusCountString));Thread.sleep(100);
+		}
+		
 	}
 
 	@Then("User should verify the Category Count on Categories button")
-	public void userShouldVerifyTheCategoryCountOnCategoriesButton() {
+	public void userShouldVerifyTheCategoryCountOnCategoriesButton() throws InterruptedException {
+		Thread.sleep(100);
+		List<WebElement> categoryListsElement = pma.getRMS_Menus_Configuration_POM().getCategoryListsElement();Thread.sleep(100);
+		String categoriesCount = pma.getRMS_Menus_Configuration_POM().getCategoriesButtonUnderMenuItemsSec1().getText();
+		int size = categoryListsElement.size();
+		String string = Integer.toString(size);
+		System.out.println(categoriesCount);
+		System.out.println(string);
+		Assert.assertTrue(categoriesCount.contains(string));
 	}
 
 	@Then("User should Publish the menu after updation")
@@ -747,4 +873,4 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	public void userShouldVerifyNotificationBarWithText(String string, String string2) {
 	}
 
-}// 28-03-2023 18:28///+ some Change
+}// 30-03-2023 09:59///+ some Change

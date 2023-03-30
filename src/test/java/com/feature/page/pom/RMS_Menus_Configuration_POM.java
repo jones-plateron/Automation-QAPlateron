@@ -164,6 +164,19 @@ PageManager pma = new PageManager();
 	public WebElement getUpdateModifierItemSlidePopupHdr() {
 		return rmsDriver.findElement(By.xpath("//h4[contains(@class,'modal-title text-ellipsis')]"));
 	}
+	public WebElement getAddModifierItemSlideYesProceedBtn() {
+		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Yes, Proceed']"));
+	}
+	public WebElement getAddModifierItemSlideLetMeModifyBtn() {
+		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Let me modifiy']"));
+	}
+	public WebElement getAddModifierItemSlideAreYouSureText() {
+		return rmsDriver.findElement(By.xpath("//div[@role='alert']"));
+	}
+	
+	
+	
+	
 //	public WebElement getModifierItemNameInsideList(WebElement find) {  // Applies for Category Menu Item
 //		return find.findElement(By.xpath("//h4[@class='card-title line-wrap']"));
 //	}
@@ -228,6 +241,9 @@ PageManager pma = new PageManager();
 	public WebElement getCategoriesButtonUnderMenuItemsSec() {
 		return rmsDriver.findElement(By.xpath("//div[contains(text(),'Categories (')]"));
 	}
+	public WebElement getCategoriesButtonUnderMenuItemsSec1() {
+		return rmsDriver.findElement(By.xpath("//li[@class='switch-tag medium cursor-pointer switch-tag-active']"));
+	}
 	public WebElement getAddCategoryButton() {
 		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-outline-primary btn-small large d-flex align-items-center']"));
 	}
@@ -286,7 +302,7 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//h4[normalize-space()='Modifier List']"));
 	}
 	public List<WebElement> getAddMenuSlideModifiersList() {
-		return rmsDriver.findElements(By.xpath("//div[@class='accordion']"));
+		return rmsDriver.findElements(By.xpath("//div[@class='task-group__task-listitem mt-3']"));
 	}
 	public WebElement getAddMenuSlideModifiersListApplyBtn() {
 		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Save']"));
@@ -303,7 +319,29 @@ PageManager pma = new PageManager();
 	public WebElement getAddMenuSlideModifiersListConfirtext() {//
 		return rmsDriver.findElement(By.xpath("//div[@role='alert']"));
 	}
+	//button[@class='btn btn-outline-default btn-md ml-2']
+	public WebElement getAddMenuSlideModifiersListApplyBtnAfter() {//After Adding items to menu
+		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-outline-default btn-md ml-2']"));
+	}
 	
+	public WebElement getAddMenuSlideModifiersListSaveBtnAfter() {//After Adding items to menu
+		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-medium mt-2 mb-2']"));
+	}
+	
+	//select[@class='minimal full-width']
+	public List<WebElement> getAddMenuSlideAddedModifiersListReqOrOpt() {
+		return rmsDriver.findElements(By.xpath("//select[@class='minimal full-width']"));
+	}
+	
+	public List<WebElement> getCategoryListsElement() {
+		return rmsDriver.findElements(By.xpath("//ul[@class='list-group-flush list-group__box-model mb-2']//li"));
+	}
+	
+	
+	
+	
+	
+		
 	
 	
 	

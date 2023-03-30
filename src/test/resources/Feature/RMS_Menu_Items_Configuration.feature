@@ -65,8 +65,8 @@ Feature: Menus Items section validations
     And User should verify the add modifier slide list inside Menu
     And User should add Menu Items with modifiers under Category "ModifierCate"
       | MenuModifier1 | Non-Vegetarian | 1.99 |
-      | MenuModifier1 | Vegetarian     | 3.99 |
-      | MenuModifier1 | Vegan          | 7.99 |
+      | MenuModifier2 | Vegetarian     | 3.99 |
+      | MenuModifier3 | Vegan          | 7.99 |
     #modify above line before run
     And User should verify the Menu items Edit option
     And User should verify the Menu items Delete option
