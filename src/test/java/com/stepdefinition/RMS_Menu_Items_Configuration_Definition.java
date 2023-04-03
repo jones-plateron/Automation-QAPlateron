@@ -1,5 +1,6 @@
 package com.stepdefinition;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -7,6 +8,7 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -677,14 +679,14 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(cateName1);Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
-		for (int i = 0; i < asMaps.size()/2; i++) {Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(100);
-			Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
-			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(100);
+		for (int i = 0; i < asMaps.size()/2; i++) {Thread.sleep(300);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(200);
+			Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(200);
+			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(400);
 	
 		}
 		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
@@ -734,7 +736,7 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				if (i==0) {
 					List<WebElement> addMenuSlideModifiersList = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
 					for (int k = 0; k < addMenuSlideModifiersList.size()/2; k++) {
-						rmsDriver.findElement(By.xpath("(//span[@class='label-text text-bottom'])["+(k+1)+"]")).click();Thread.sleep(100);
+						rmsDriver.findElement(By.xpath("(//span[@class='label-text text-bottom'])["+(k+1)+"]")).click();Thread.sleep(300);
 					}
 					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtnAfter().click();Thread.sleep(400);
 					List<WebElement> ModifiersListReqOrOpt = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddedModifiersListReqOrOpt();
@@ -802,11 +804,8 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			List<WebElement> menusListInsideCate = pma.getRMS_Menus_Configuration_POM().getMenusListInsideCate();Thread.sleep(100);
 			int size = menusListInsideCate.size();Thread.sleep(100);
 			String menusCountString = Integer.toString(size);Thread.sleep(100);
-			System.out.println(menusCountString);Thread.sleep(100);
-			System.out.println(categoryName);Thread.sleep(100);
 			Assert.assertTrue(categoryName.contains(menusCountString));Thread.sleep(100);
 		}
-		
 	}
 
 	@Then("User should verify the Category Count on Categories button")
@@ -816,61 +815,231 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		String categoriesCount = pma.getRMS_Menus_Configuration_POM().getCategoriesButtonUnderMenuItemsSec1().getText();
 		int size = categoryListsElement.size();
 		String string = Integer.toString(size);
-		System.out.println(categoriesCount);
-		System.out.println(string);
 		Assert.assertTrue(categoriesCount.contains(string));
 	}
 
 	@Then("User should Publish the menu after updation")
-	public void userShouldPublishTheMenuAfterUpdation() {
+	public void userShouldPublishTheMenuAfterUpdation() throws InterruptedException {Thread.sleep(400);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();
 	}
-
-	@When("User should click Menus section and verify the page redirection")
-	public void userShouldClickMenusSectionAndVerifyThePageRedirection() {
-	}
-
 	@Then("User should add {string} and verify that publish menu status as {string} and count")
-	public void userShouldAddAndVerifyThatPublishMenuStatusAsAndCount(String string, String string2) {
+	public void userShouldAddAndVerifyThatPublishMenuStatusAsAndCount(String cateName, String status) throws InterruptedException {
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(cateName);Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(500);
+		
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(500);
+		WebElement publishMenuPopTable = pma.getRMS_Menus_Configuration_POM().getPublishMenuPopTable();Thread.sleep(900);
+		List<WebElement> findTableRows = publishMenuPopTable.findElements(By.tagName("tr"));Thread.sleep(900);
+		for (int i = 0; i < findTableRows.size(); i++) {Thread.sleep(100);
+			//System.out.println(findTableRows.get(i).getText());
+			if (findTableRows.get(i).getText().contains(cateName)) {
+			List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));Thread.sleep(200);
+//				System.out.println(findTableDatas.get(1).getText());
+			Assert.assertTrue(findTableDatas.get(1).getText().equals("Added"));Thread.sleep(200);
+			}
+		}
+//		int size = findTableRows.size()-1;
+//		String changeCount = Integer.toString(size);
+//		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getTotalChangesTextInPublish().getText().contains(changeCount));
+		
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getUnmappedCookingStnTextInPublish().getText().contains("Unmapped Items to Cooking Stations"));
+		Thread.sleep(200);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupHdr().getText().equals("Publish Menu"));Thread.sleep(200);
+		WebElement firstRow = publishMenuPopTable.findElement(By.tagName("thead"));Thread.sleep(200);
+		List<WebElement> datasInFirstRow =  firstRow.findElements(By.tagName("th"));
+		Assert.assertTrue(datasInFirstRow.get(0).getText().contains("Menu Name"));Thread.sleep(200);
+//		for (int i = 0; i < datasInFirstRow.size(); i++) {
+//			System.out.println(datasInFirstRow.get(i).getText());	
+//		}
+		Assert.assertTrue(datasInFirstRow.get(1).getText().equals("Status"));Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupCancelBtn().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupCloseElement().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(200);
 	}
 
 	@Then("User should verify the Publish Menu pop-up and Click publish")
 	public void userShouldVerifyThePublishMenuPopUpAndClickPublish() {
+//		Covered in method - User should add {string} and verify that publish menu status as {string} and count
 	}
 
 	@Then("User should add {string} inside Category and verify that publish menu status as {string} and {string}")
-	public void userShouldAddInsideCategoryAndVerifyThatPublishMenuStatusAsAnd(String string, String string2,
-			String string3) {
+	public void userShouldAddInsideCategoryAndVerifyThatPublishMenuStatusAsAnd(String menuName, String catStatus,
+			String menuStatus) throws InterruptedException {
+		String cateName = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();
+		pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(menuName);Thread.sleep(200);
+		Select slt = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());
+		slt.selectByVisibleText("Vegan");
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys("12.5");Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys("Publish Menu Description Text");Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(200);
+		
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		//Status Validation
+		boolean point1=false,point2=false;
+		WebElement publishMenuPopTable = pma.getRMS_Menus_Configuration_POM().getPublishMenuPopTable();Thread.sleep(900);
+		List<WebElement> findTableRows = publishMenuPopTable.findElements(By.tagName("tr"));Thread.sleep(900);
+		for (int i = 0; i < findTableRows.size(); i++) {Thread.sleep(100);
+			//System.out.println(findTableRows.get(i).getText());
+			if (findTableRows.get(i).getText().contains(menuName)) {
+			List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
+//				System.out.println(findTableDatas.get(1).getText());
+			Assert.assertTrue(findTableDatas.get(1).getText().equals(menuStatus));Thread.sleep(200);
+			point1=true;
+			}
+			if (findTableRows.get(i).getText().contains(cateName)) {
+				List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
+//					System.out.println(findTableDatas.get(1).getText());
+				Assert.assertTrue(findTableDatas.get(1).getText().equals(catStatus));Thread.sleep(200);
+				point2=true;
+				}
+		}
+		Assert.assertTrue(point1);
+		Assert.assertTrue(point2);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(200);
 	}
 
 	@Then("User should Edit the {string} and verify that publish menu status as {string} and {string}")
-	public void userShouldEditTheAndVerifyThatPublishMenuStatusAsAnd(String string, String string2, String string3) {
+	public void userShouldEditTheAndVerifyThatPublishMenuStatusAsAnd(String editMenu, String cateStatus, String menuStatus) throws InterruptedException {
+		String cateName = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();Thread.sleep(200);
+		
+		pma.getRMS_Menus_Configuration_POM().getEditFirstMenuItemIconInsideList().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(" edit");Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(200);
+		
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		//Status Validation
+		boolean point1=false,point2=false;
+				WebElement publishMenuPopTable = pma.getRMS_Menus_Configuration_POM().getPublishMenuPopTable();Thread.sleep(900);
+				List<WebElement> findTableRows = publishMenuPopTable.findElements(By.tagName("tr"));Thread.sleep(900);
+				for (int i = 0; i < findTableRows.size(); i++) {Thread.sleep(100);
+					//System.out.println(findTableRows.get(i).getText());
+					if (findTableRows.get(i).getText().contains(editMenu+" edit")) {
+					List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
+//						System.out.println(findTableDatas.get(1).getText());
+					Assert.assertTrue(findTableDatas.get(1).getText().equals(menuStatus));Thread.sleep(200);
+					point1=true;
+					}
+					if (findTableRows.get(i).getText().contains(cateName)) {
+						List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
+//							System.out.println(findTableDatas.get(1).getText());
+						Assert.assertTrue(findTableDatas.get(1).getText().equals(cateStatus));Thread.sleep(200);
+						point2=true;
+					}
+				}
+				Assert.assertTrue(point1);
+				Assert.assertTrue(point2);
+				pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(200);
 	}
 
 	@Then("User should delete the {string} and verify that publish menu status as {string} and {string}")
-	public void userShouldDeleteTheAndVerifyThatPublishMenuStatusAsAnd(String string, String string2, String string3) {
+	public void userShouldDeleteTheAndVerifyThatPublishMenuStatusAsAnd(String deleteMenu, String cateStatus, String menuStatus) throws InterruptedException {
+		String cateName = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();Thread.sleep(200);
+		
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopDeleteElement().click();Thread.sleep(200);
+		
+
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		boolean point1=false,point2=false;
+		//Status Validation
+				WebElement publishMenuPopTable = pma.getRMS_Menus_Configuration_POM().getPublishMenuPopTable();Thread.sleep(900);
+				List<WebElement> findTableRows = publishMenuPopTable.findElements(By.tagName("tr"));Thread.sleep(900);
+				for (int i = 0; i < findTableRows.size(); i++) {Thread.sleep(100);
+					//System.out.println(findTableRows.get(i).getText());
+					if (findTableRows.get(i).getText().contains(deleteMenu+" edit")) {
+					List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
+//						System.out.println(findTableDatas.get(1).getText());
+					Assert.assertTrue(findTableDatas.get(1).getText().equals(menuStatus));Thread.sleep(200);
+					point1=true;
+					}
+					if (findTableRows.get(i).getText().contains(cateName)) {
+						List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
+//							System.out.println(findTableDatas.get(1).getText());
+						Assert.assertTrue(findTableDatas.get(1).getText().equals(cateStatus));Thread.sleep(200);
+						point2=true;
+						}
+				}
+				Assert.assertTrue(point1);
+				Assert.assertTrue(point2);
+				pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(200);
 	}
 
 	@Then("User should add some Menus and verify the status in Publish Menu")
-	public void userShouldAddSomeMenusAndVerifyTheStatusInPublishMenu(io.cucumber.datatable.DataTable dataTable) {
-		// Write code here that turns the phrase above into concrete actions
-		// For automatic transformation, change DataTable to one of
-		// E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-		// Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-		// Double, Byte, Short, Long, BigInteger or BigDecimal.
-		//
-		// For other transformations you can register a DataTableType.
+	public void userShouldAddSomeMenusAndVerifyTheStatusInPublishMenu(io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+		String cateName = pma.getRMS_Menus_Configuration_POM().getCategoryNameHdrNEDElement().getText();Thread.sleep(200);
+		List<Map<String, String>> asMaps = dataTable.asMaps();
+		for (int i = 0; i < asMaps.size(); i++) {Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(200);
+			Select slt = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());
+			slt.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(200);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();
+		}
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		boolean point2=false;int point1=0;
+		//Status Validation
+		WebElement publishMenuPopTable = pma.getRMS_Menus_Configuration_POM().getPublishMenuPopTable();Thread.sleep(900);
+		List<WebElement> findTableRows = publishMenuPopTable.findElements(By.tagName("tr"));Thread.sleep(900);
+		for (int i = 0; i < findTableRows.size(); i++) {Thread.sleep(100);
+			//System.out.println(findTableRows.get(i).getText());
+		for (int j = 0; j < asMaps.size(); j++) {
+			
+			if (findTableRows.get(i).getText().contains(asMaps.get(j).get("MenuName"))) {
+			List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
+//				System.out.println(findTableDatas.get(1).getText());
+			Assert.assertTrue(findTableDatas.get(1).getText().equals("Added"));Thread.sleep(200);
+			point1++;
+			}
+		}
+			if (findTableRows.get(i).getText().contains(cateName)) {
+				List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
+//					System.out.println(findTableDatas.get(1).getText());
+				Assert.assertTrue(findTableDatas.get(1).getText().equals("Existing"));Thread.sleep(200);
+				point2=true;
+				}
+		}
+		Thread.sleep(200);
+		Assert.assertTrue(point1==asMaps.size());
+		Assert.assertTrue(point2);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(200);
+		
+		
 	}
 
 	@Then("User should perform rearrange and verify the status in publish Menu")
-	public void userShouldPerformRearrangeAndVerifyTheStatusInPublishMenu() {
-	}
-
-	@Then("User should perform rearrange Only and verify the {string} in publish Menu")
-	public void userShouldPerformRearrangeOnlyAndVerifyTheInPublishMenu(String string) {
+	public void userShouldPerformRearrangeAndVerifyTheStatusInPublishMenu() throws InterruptedException {
+		Thread.sleep(200);
+		List<WebElement> menusListInsideCate = pma.getRMS_Menus_Configuration_POM().getMenusListInsideCate();Thread.sleep(200);
+		Actions act = new Actions(rmsDriver);Thread.sleep(500);
+		act.dragAndDrop(menusListInsideCate.get(0), menusListInsideCate.get(menusListInsideCate.size()-1)).build().perform();Thread.sleep(900);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getPublishPopupRearrText().getText().equals("Some of the menus/categories have been rearranged."));Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(500);
+		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getUnmapCSTxtatTopPublishMenu().isDisplayed());Thread.sleep(100);
 	}
 
 	@Then("User should verify {string} notification bar with {string} text")
-	public void userShouldVerifyNotificationBarWithText(String string, String string2) {
+	public void userShouldVerifyNotificationBarWithText(String textMNF, String subTextMNF) throws InterruptedException {
+	pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(200);
+	pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys("Menu Not Found");Thread.sleep(100);
+	Select selt = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
+	selt.selectByVisibleText("Non-Vegetarian");Thread.sleep(100);
+	pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys("199");Thread.sleep(100);
+	pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(500);
+	rmsDriver.navigate().refresh();
+	Thread.sleep(6000);
+	Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getMenuNotPublishedtext().getText().equals(textMNF));Thread.sleep(300);
+	Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getMenuNotPublishedSubtext().getText().equals(subTextMNF));Thread.sleep(200);
+	pma.getRMS_Menus_Configuration_POM().getMenuNotPublishedClose().click();Thread.sleep(300);
+	rmsDriver.navigate().refresh();Thread.sleep(500);
+	Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getMenuNotPublishedtext().isDisplayed());
 	}
 
-}// 30-03-2023 09:59///+ some Change
+}// 03-04-2023 9:54///

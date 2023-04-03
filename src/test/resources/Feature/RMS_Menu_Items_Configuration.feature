@@ -78,10 +78,10 @@ Feature: Menus Items section validations
       | mobileNumber | otp    |
       |   2222222222 | 666666 |
 
-  @PublishMenuValidations 
+  @PublishMenuValidations
   Scenario Outline: As a RMS User, Validate Publish Menu popup section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
-    When User should click Menus section and verify the page redirection
+    When User shoild click Menus section and verify the page redirection
     Then User should add "Newcategory" and verify that publish menu status as "Added" and count
     #modify above line before run
     And User should verify the Publish Menu pop-up and Click publish
@@ -90,12 +90,12 @@ Feature: Menus Items section validations
     And User should Edit the "NewMenu" and verify that publish menu status as "Existing" and "Modified"
     And User should delete the "NewMenu" and verify that publish menu status as "Existing" and "Removed"
     And User should add some Menus and verify the status in Publish Menu
+    	| MenuName | Modifier Type  | Price | Description		                |
       | PubMenu1 | Non-Vegetarian |    14 | Description Test Publish Menu |
       | PubMenu2 | Vegan          |  0.99 | Description Test Publish Menu |
       | PubMenu3 | Non-Vegetarian |    12 | Description Test Publish Menu |
       | PubMenu4 | Vegetarian     | 13.99 | Description Test Publish Menu |
     And User should perform rearrange and verify the status in publish Menu
-    And User should perform rearrange Only and verify the "Some of the menus/categories have been rearranged." in publish Menu
     And User should verify "Menu Not Published" notification bar with "Publish Menu to save the changes made to the menu items" text
 
     Examples: 

@@ -321,7 +321,7 @@ PageManager pma = new PageManager();
 	}
 	//button[@class='btn btn-outline-default btn-md ml-2']
 	public WebElement getAddMenuSlideModifiersListApplyBtnAfter() {//After Adding items to menu
-		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-outline-default btn-md ml-2']"));
+		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-outline-default btn-md w-md ml-2']"));
 	}
 	
 	public WebElement getAddMenuSlideModifiersListSaveBtnAfter() {//After Adding items to menu
@@ -378,6 +378,36 @@ PageManager pma = new PageManager();
 	public WebElement getPublishMenuPopupCloseElement() {
 		return rmsDriver.findElement(By.xpath("//i[@class='icon-close icon-5x']"));
 	}
+	
+	public WebElement getPublishMenuPopTable() {
+		return rmsDriver.findElement(By.xpath("//table[@class='table mt-3']"));
+	}
+	public WebElement getTotalChangesTextInPublish() {
+		return rmsDriver.findElement(By.xpath("//p[@class='modal-sub-title']"));
+	}
+	public WebElement getUnmappedCookingStnTextInPublish() {
+		return rmsDriver.findElement(By.xpath("//span[@class='modal-link']"));
+	}
+	public WebElement getPublishPopupRearrText() {
+		return rmsDriver.findElement(By.xpath("//p[@class='pl-1 font-bold text-medium']"));
+	}
+	public WebElement getUnmapCSTxtatTopPublishMenu() {
+		return rmsDriver.findElement(By.xpath("//span[@class='modal-link']"));
+	}
+	public WebElement getMenuNotPublishedtext() {
+		return rmsDriver.findElement(By.xpath("//h4[@class='publish-menu-warning-header']"));
+	}
+	public WebElement getMenuNotPublishedSubtext() {
+		return rmsDriver.findElement(By.xpath("//p[@class='publish-menu-warning-description']"));
+	}
+	public WebElement getMenuNotPublishedClose() {
+		return rmsDriver.findElement(By.xpath("//div[@class='cursor-pointer']//img"));
+	}
+	
+	
+	
+	
+	
 	public WebElement get() {
 		return rmsDriver.findElement(By.xpath(""));
 	}
