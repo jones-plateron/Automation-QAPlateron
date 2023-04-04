@@ -6,7 +6,7 @@ Feature: Menus Items section validations
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User shoild click Menus section and verify the page redirection
     And User should click Modifiers button and verify the Add Modifiers Popup "TestMod"
-    And User should verify the Modifier Name Edit and Delete options options of category "TestMod"
+    And User should verify the Modifier Name Edit and Delete options of category "TestMod"
     And User should verify the Add Modifier item slide pop-up and text box
     #bug Need to un hide step line
     And User should add Modifier Items under Modifier "Test1" "Test2" "Test3" then Edit and Delete Modifier

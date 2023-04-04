@@ -1,10 +1,20 @@
 package com.stepdefinition;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -94,8 +104,8 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 
 	}
 
-	@When("User should verify the Modifier Name Edit and Delete options options of category {string}")
-	public void userShouldVerifyTheModifierNameEditAndDeleteOptionsOptionsOfCategory(String modifierName)
+	@When("User should verify the Modifier Name Edit and Delete options of category {string}")
+	public void userShouldVerifyTheModifierNameEditAndDeleteOptionsOfCategory(String modifierName)
 			throws InterruptedException {
 		pma.getRMS_Menus_Configuration_POM().getEditModifierNameIconElement().click();
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierPopupHdrElement().isDisplayed());
@@ -214,13 +224,13 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 
 	@When("User should add Modifier Items under Modifier {string} {string} {string} then Edit and Delete Modifier")
 	public void userShouldAddModifierItemsUnderModifierThenEditAndDeleteModifier(String mod1, String mod2, String mod3,
-			io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+			io.cucumber.datatable.DataTable dataTable) throws InterruptedException, IOException {
 		List<Map<String,String>> modifierItemsAsMaps = dataTable.asMaps();
 		
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys("Edit and Delete");
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
-		for (int i = 0; i < modifierItemsAsMaps.size(); i++) {
+		for (int i = 0; i < 2; i++) {
 			Thread.sleep(1000);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
@@ -238,7 +248,7 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		}
 		//Edit Item
 		List<WebElement> modifierItemsList = pma.getRMS_Menus_Configuration_POM().getModifierItemsList();
-		for (int i = 0; i < modifierItemsList.size(); i++) {
+		for (int i = 0; i < 2; i++) {
 			int j=i+1;
 			Thread.sleep(500);
 			List<WebElement> editModifierItemsIconInsideList1 = pma.getRMS_Menus_Configuration_POM().getEditModifierItemsIconInsideList();
@@ -313,34 +323,57 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();Thread.sleep(500);
 
-		//Create a Modifier
+		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+		Thread.sleep(1000);
+		FileInputStream fileInputStream= new FileInputStream(file);
+		Thread.sleep(1000);
+		Workbook workbook = new XSSFWorkbook(fileInputStream);		
+	     Sheet sheet = workbook.getSheet("Modifier List");
+	     Row row = sheet.createRow(0);
+	      Cell cell0 = row.createCell(0);
+	      cell0.setCellValue("Modifier Name");
+	      Cell cell1= row.createCell(1);
+	      cell1.setCellValue("Item Name");
+	      Cell cell2 = row.createCell(2);
+	      cell2.setCellValue("Price");
+	      FileOutputStream fileOutputStream = new FileOutputStream(file);
+		//Create a Modifier-------------------------------------------------------------
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod1);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
 		for (int i = 0; i < 4; i++) {
-			Thread.sleep(1000);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(300);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(500);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(300);
 			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegetarian")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().click();	
 			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Non-Vegetarian")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();	
 			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegan")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
-			}Thread.sleep(1000);
+			}Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
+			
+			
+			
+		      Row row1 = sheet.createRow(i+1);
+		      Cell catName = row1.createCell(0);
+		      catName.setCellValue(mod1);
+		      Cell itemName= row1.createCell(1);
+		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
+		      Cell price = row1.createCell(2);
+		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
 		}
+		//-----------------------------------------------------------------------------------
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod2);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
 		for (int i = 4; i < 8; i++) {
-			Thread.sleep(1000);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(300);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(500);
 			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegetarian")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().click();	
@@ -348,18 +381,38 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();	
 			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegan")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
-			}Thread.sleep(1000);
+			}Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
+			
+			Row row1 = sheet.createRow(i+1);
+		      Cell catName = row1.createCell(0);
+		      catName.setCellValue(mod2);
+		      Cell itemName= row1.createCell(1);
+		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
+		      Cell price = row1.createCell(2);
+		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
 		}
+		//-----------------------------------------------------------------------------------
+		//Random Category Name
+//				String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvwxyz";
+//				StringBuilder sb = new StringBuilder(10);
+//				Random random = new Random();
+//				for (int i = 0; i < 10; i++) {
+//					int index = random.nextInt(alphaNumericString.length());
+//					char randomChar = alphaNumericString.charAt(index);
+//					sb.append(randomChar);
+//				}
+//			     String randomCateName = sb.toString();
+		
+		
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod3);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
 		for (int i = 8; i < 12; i++) {
-			Thread.sleep(1000);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().clear();Thread.sleep(300);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Amount"));Thread.sleep(500);
 			if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegetarian")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegetarian().click();	
@@ -367,10 +420,20 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeNonVeg().click();	
 			} else if (modifierItemsAsMaps.get(i).get("Modifier Type").equals("Vegan")) {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
-			}Thread.sleep(1000);
+			}Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
+		
+		
+			Row row1 = sheet.createRow(i+1);
+		      Cell catName = row1.createCell(0);
+		      catName.setCellValue(mod3);
+		      Cell itemName= row1.createCell(1);
+		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
+		      Cell price = row1.createCell(2);
+		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
 		}
+		workbook.write(fileOutputStream);
 		
 	}
 
@@ -674,37 +737,114 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	}
 
 	@Then("User should add Menu Items under Categories {string} and {string}")
-	public void userShouldAddMenuItemsUnderCategoriesAnd(String cateName1, String cateName2,io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+	public void userShouldAddMenuItemsUnderCategoriesAnd(String cateName1, String cateName2,io.cucumber.datatable.DataTable dataTable) throws InterruptedException, IOException {
 		List<Map<String,String>> asMaps = dataTable.asMaps();
+		
+		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+		Thread.sleep(1000);
+		FileInputStream fileInputStream= new FileInputStream(file);
+		Thread.sleep(1000);
+		Workbook workbook = new XSSFWorkbook(fileInputStream);		
+	     Sheet sheet = workbook.getSheet("Menu List");
+	      Row row = sheet.createRow(0);
+	      Cell cell0 = row.createCell(0);
+	      cell0.setCellValue("Category Name");
+	      Cell cell1= row.createCell(1);
+	      cell1.setCellValue("Menu Name");
+	      Cell cell2 = row.createCell(2);
+	      cell2.setCellValue("Price");
+	      Cell cell3 = row.createCell(3);
+	      cell3.setCellValue("Menu Type");
+	      FileOutputStream fileOutputStream = new FileOutputStream(file);
+	     // workbook.write(fileOutputStream);
+		
+		//Random Category Name
+		String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvwxyz";
+		StringBuilder sb = new StringBuilder(10);
+		Random random = new Random();
+		for (int i = 0; i < 10; i++) {
+			int index = random.nextInt(alphaNumericString.length());
+			char randomChar = alphaNumericString.charAt(index);
+			sb.append(randomChar);
+		}
+	     String randomCateName = sb.toString();  
+	     pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+	     pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName);Thread.sleep(100);
+	     pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);		
+		
+		for (int i = 0; i < asMaps.size()/2; i++) {	Thread.sleep(400);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(100);
+			Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());
+			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(100);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(500);
+		
+			
+			Sheet sht= workbook.getSheet("Menu List");
+			Row createRow = sht.createRow(i+1);
+			Cell createCel = createRow.createCell(0);
+			createCel.setCellValue(randomCateName);
+			Cell createCell = createRow.createCell(1);
+			createCell.setCellValue(asMaps.get(i).get("MenuName"));
+			Cell createCell1 = createRow.createCell(2);
+			createCell1.setCellValue(asMaps.get(i).get("Price"));
+			Cell createCell2 = createRow.createCell(3);
+			createCell2.setCellValue(asMaps.get(i).get("Modifier Type"));
+			
+			
+		}
+		
+		
+		
+		
+		//Random Category Name
+				String alphaNumericString1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvwxyz";
+				StringBuilder sb1 = new StringBuilder(10);
+				Random random1 = new Random();
+				for (int i = 0; i < 10; i++) {
+					int index = random1.nextInt(alphaNumericString1.length());
+					char randomChar1 = alphaNumericString1.charAt(index);
+					sb1.append(randomChar1);
+				}
+			     String randomCateName1 = sb1.toString();
 		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
-		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(cateName1);Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName1);Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
-		for (int i = 0; i < asMaps.size()/2; i++) {Thread.sleep(300);
+		for (int i = asMaps.size()/2; i < asMaps.size(); i++) {Thread.sleep(400);
 			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(200);
 			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(200);
 			Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(200);
-			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(200);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(400);
-	
-		}
-		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
-		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(cateName2);Thread.sleep(100);
-		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
-		for (int i = asMaps.size()/2; i < asMaps.size(); i++) {
-			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(100);
-			Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());Thread.sleep(100);
-			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(100);
+			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));
 			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(100);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(100);
-	
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(500);
+			
+			
+			
+			Sheet sht= workbook.getSheet("Menu List");
+			Row createRow = sht.createRow(i+1);
+			Cell createCel = createRow.createCell(0);
+			createCel.setCellValue(randomCateName1);
+			Cell createCell = createRow.createCell(1);
+			createCell.setCellValue(asMaps.get(i).get("MenuName"));
+			Cell createCell1 = createRow.createCell(2);
+			createCell1.setCellValue(asMaps.get(i).get("Price"));
+			Cell createCell2 = createRow.createCell(3);
+			createCell2.setCellValue(asMaps.get(i).get("Modifier Type"));
+			
+			
+			
 		}
-		
-		
+		workbook.write(fileOutputStream);
 		//Need to Create for All - created
+		
+		
+		
+		
+		
+		
 	}
 
 	@Then("User should verify the add modifier slide list inside Menu")
@@ -713,10 +853,29 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	}
 
 	@Then("User should add Menu Items with modifiers under Category {string}")
-	public void userShouldAddMenuItemsWithModifiersUnderCategory(String CateModifier,io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+	public void userShouldAddMenuItemsWithModifiersUnderCategory(String CateModifier,io.cucumber.datatable.DataTable dataTable) throws InterruptedException, IOException {
+		
+		//Random Category Name
+		String alphaNumericString1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvwxyz";
+		StringBuilder sb1 = new StringBuilder(10);
+		Random random1 = new Random();
+		for (int i = 0; i < 10; i++) {
+			int index = random1.nextInt(alphaNumericString1.length());
+			char randomChar1 = alphaNumericString1.charAt(index);
+			sb1.append(randomChar1);
+		}
+	     String randomCateName1 = sb1.toString();
+		
+
 		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
-		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(CateModifier);Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName1);Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
+		
+		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+		Thread.sleep(1000);
+		FileInputStream fileInputStream= new FileInputStream(file);
+		Thread.sleep(1000);
+		Workbook workbook = new XSSFWorkbook(fileInputStream);
 		
 //InProgress?????		
 		List<List<String>> asLists = dataTable.asLists();
@@ -731,8 +890,26 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				
 				pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();			Thread.sleep(100);
 				
-				//Modifiers Selection
 				
+				
+				Sheet sht= workbook.getSheet("Menu List");
+				Row createRow = sht.createRow(i+21);
+				Cell createCel = createRow.createCell(0);
+				createCel.setCellValue(randomCateName1);
+				Cell createCell = createRow.createCell(1);
+				createCell.setCellValue(list.get(j));
+				Cell createCell1 = createRow.createCell(2);
+				createCell1.setCellValue(list.get(j+2));
+				Cell createCell2 = createRow.createCell(3);
+				createCell2.setCellValue(list.get(j+1));
+				
+			     
+				
+				
+				
+				
+				
+				//Modifiers Selection
 				if (i==0) {
 					List<WebElement> addMenuSlideModifiersList = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
 					for (int k = 0; k < addMenuSlideModifiersList.size()/2; k++) {
@@ -753,7 +930,7 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListSaveBtnAfter().click();Thread.sleep(100);
 				} else if (i==1) {
 					List<WebElement> addMenuSlideModifiersList1 = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
-					System.out.println(addMenuSlideModifiersList1);
+					//System.out.println(addMenuSlideModifiersList1);
 					for (int k = addMenuSlideModifiersList1.size(); k > addMenuSlideModifiersList1.size()/2; k--) {Thread.sleep(200);
 //						System.out.println(k);
 						rmsDriver.findElement(By.xpath("(//span[@class='label-text text-bottom'])["+k+"]")).click();Thread.sleep(100);
@@ -782,6 +959,8 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideYesProceedBtn().click();
 				}
 		}
+		 FileOutputStream fileOutputStream = new FileOutputStream(file);
+		workbook.write(fileOutputStream);
 	}
 
 	@Then("User should verify the Menu items Edit option")
@@ -1042,4 +1221,4 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getMenuNotPublishedtext().isDisplayed());
 	}
 
-}// 03-04-2023 9:54///
+}// 04-04-2023 10:22///
