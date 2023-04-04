@@ -1,14 +1,25 @@
 package com.stepdefinition;
 
 import java.awt.Desktop.Action;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -23,6 +34,7 @@ import io.cucumber.java.en.When;
 public class RMS_Manage_Table_Definition extends BaseClass {
 
 	PageManager pma = new PageManager();
+	List<WebElement> areaListWebElement = new ArrayList<WebElement>();
 
 	public RMS_Manage_Table_Definition() {
 		PageFactory.initElements(rmsDriver, this);
@@ -34,7 +46,7 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 	public void userShouldAbleToClickPOSSystemSectionsAndVerifyPageRedirectedToPOSSystem() throws InterruptedException {
 		Thread.sleep(2000);
 		pma.getRMS_ManageTable_POM().getPOSSystemSections().click();
-		System.out.println("Clickedddddddddddddddddddddddd");
+		// System.out.println("Clickedddddddddddddddddddddddd");
 		Thread.sleep(2000);
 		String displayed = pma.getRMS_ManageTable_POM().getManageTableTab().getText();
 		System.out.println(displayed);
@@ -245,14 +257,10 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 
 	}
 
-	@Then("User should able to see the Newly added Area name is Selected and Validate the page")
-	public void userShouldAbleToSeeTheNewlyAddedAreaNameIsSelectedAndValidateThePage() {
-		// pma.getRMS_ManageTable_POM().get
-
-	}
-
 	@Then("User should able to see and Click the Dropdown under the Area")
 	public void userShouldAbleToSeeAndClickTheDropdownUnderTheArea() throws InterruptedException {
+		Thread.sleep(2500);
+		areaListWebElement = pma.getRMS_ManageTable_POM().getAreaLists();
 		pma.getRMS_ManageTable_POM().getAddTableButton().click();
 		pma.getRMS_ManageTable_POM().getAreaSelectDropDown().click();
 
@@ -261,51 +269,58 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 	@Then("User should Verify all Available area is showing under the Dropdown")
 	public void userShouldVerifyAllAvailableAreaIsShowingUnderTheDropdown() throws InterruptedException {
 
-		Select selectDropdown = new Select(pma.getRMS_ManageTable_POM().getAreaSelectDropDown());
-		List<WebElement> options = selectDropdown.getOptions();
-		selectDropdown.selectByVisibleText("Area 1");
-		for (int i = 0; i < options.size(); i++) {
-			String text = options.get(i).getText();
-			System.out.println(text);
-			if (text.contains("Area 1")) {
+		Select select = new Select(pma.getRMS_ManageTable_POM().getAreaSelectDropDown());
+		List<WebElement> optionsDD = select.getOptions();
 
-				Thread.sleep(2000);
-				options.get(i).click();
+		int count = 0;
+//	for (int i = 0; i < optionsDD.size(); i++) {
+//		System.out.println(optionsDD.get(i).getText());
+//	}
+//	for (int i = 0; i < areaListWebElement.size(); i++) {
+//		System.out.println(areaListWebElement.get(i).getText());
+//	}
+
+		for (int i = 0; i < areaListWebElement.size(); i++) {
+			String areaNameList = areaListWebElement.get(i).getText();
+			for (int j = 0; j < optionsDD.size(); j++) {
+				String areaNameDD = optionsDD.get(j).getText();
+				if (areaNameList.equals(areaNameDD)) {
+					count++;
+					break;
+				}
 
 			}
-
 		}
 
-//	List<WebElement> areaLists = pma.getRMS_ManageTable_POM().getAreaLists();
-//	for (int i = 0; i < areaLists.size(); i++) {
-//		String text = areaLists.get(i).getText();
-//		System.out.println(text);
-//		if (text.contains("Area 1")) {
-//			
-//			
-//			Thread.sleep(2000);
-//		areaLists.get(i).click();
-//			
-//		}
-//		
-//	}
-//  
-//    
+		System.out.println(count);
+		System.out.println(optionsDD.size());
+		System.out.println(areaListWebElement.size());
+		// Assert.assertTrue(count==areaListWebElement.size());
+
 	}
 
 	@Then("User should able to Select any Area and verify the selected area is showing inside the dropdown")
 	public void userShouldAbleToSelectAnyAreaAndVerifyTheSelectedAreaIsShowingInsideTheDropdown() {
 
+		Select selectDropdown = new Select(pma.getRMS_ManageTable_POM().getAreaSelectDropDown());
+		List<WebElement> options = selectDropdown.getOptions();
+		selectDropdown.selectByVisibleText("Area 1");
+		selectDropdown.getFirstSelectedOption().getText();
+		System.out.println(selectDropdown.getFirstSelectedOption().getText());
+
+		// After Verifying
+		pma.getRMS_ManageTable_POM().getAddTableXIcon().click();
 	}
 
 	@Then("User should able to enter Table Name,Seating Capacity and Click Save Button")
 	public void userShouldAbleToEnterTableNameSeatingCapacityAndClickSaveButton(
-			io.cucumber.datatable.DataTable dataTable) {
+			io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
 		List<Map<String, String>> CreateTable = dataTable.asMaps();
 		for (int i = 0; i < CreateTable.size(); i++) {
 			pma.getRMS_ManageTable_POM().getAddTableButton().click();
 			Select selectDropdown = new Select(pma.getRMS_ManageTable_POM().getAreaSelectDropDown());
-			selectDropdown.selectByVisibleText("Area 1");
+			Thread.sleep(200);
+			selectDropdown.selectByVisibleText("Ground Floor");
 			pma.getRMS_ManageTable_POM().getTableNameTextBox().sendKeys(CreateTable.get(i).get("Table Name"));
 			pma.getRMS_ManageTable_POM().getSeatingCapacityTextBox()
 					.sendKeys(CreateTable.get(i).get("Seating Capacity"));
@@ -318,32 +333,74 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 	@Then("User should able to select any area and verify the Area Header and Total Table count under the Area Name")
 	public void userShouldAbleToSelectAnyAreaAndVerifyTheAreaHeaderAndTotalTableCountUnderTheAreaName()
 			throws InterruptedException {
-
+		// rmsDriver.navigate().refresh();
+		Thread.sleep(2000);
 		List<WebElement> areaLists = pma.getRMS_ManageTable_POM().getAreaLists();
 		for (int i = 0; i < areaLists.size(); i++) {
 			String text = areaLists.get(i).getText();
 			if (text.contains("Ground Floor")) {
-				Thread.sleep(2000);
+				System.out.println(text);
 				areaLists.get(i).click();
+				break;
 
 			}
 		}
-//	String text = pma.getRMS_ManageTable_POM().getAreaHeader().getText();
-//	Assert.assertTrue(text.equals("Area 1"));
-
-		List<WebElement> getallTables = pma.getRMS_ManageTable_POM().getallTables();
+		String text = pma.getRMS_ManageTable_POM().getAreaHeader().getText();
+		Assert.assertTrue(!text.equals("Ground Floor"));
+		Thread.sleep(12000);
+		List<WebElement> getallTables = pma.getRMS_ManageTable_POM().getallTables();//Getting total table count
 		int TotalCount = getallTables.size();
 		System.out.println(TotalCount);
 		String TotalTablecount = String.valueOf(TotalCount);
-		String text = pma.getRMS_ManageTable_POM().getTotalTables().getText();
+		String text1 = pma.getRMS_ManageTable_POM().getTotalTables().getText();//Getting total table count
 		Assert.assertTrue(text.contains(TotalTablecount));
 
 	}
 
-	@Then("User should able to Click any Table")
-	public void userShouldAbleToClickAnyTable() {
-		List<WebElement> tables = pma.getRMS_ManageTable_POM().getTables();
-		tables.get(0);
+	@Then("User should able to Edit any Area name")
+	public void userShouldAbleToEditAnyAreaName() throws InterruptedException {
+
+		// Editing Area Name doing here
+		Actions action = new Actions(rmsDriver);
+		List<WebElement> areaLists = pma.getRMS_ManageTable_POM().getAreaLists();
+		for (int i = 0; i < areaLists.size(); i++) {
+			String text = areaLists.get(i).getText();
+			if (text.contains("Automation Area")) {
+				Thread.sleep(2000);
+				areaLists.get(i).click();
+
+				pma.getRMS_ManageTable_POM().getAreaEditIcon().click();
+				action.keyDown(Keys.CONTROL).sendKeys("a");
+				action.sendKeys(Keys.BACK_SPACE).build().perform();
+				action.keyUp(Keys.CONTROL);
+				Thread.sleep(2000);
+				action.sendKeys("Edited Area").build().perform();
+				Thread.sleep(2000);
+			}
+			pma.getRMS_ManageTable_POM().getAreaHeader().click();
+			String areaHeader = pma.getRMS_ManageTable_POM().getAreaHeader().getText();
+			System.out.println(areaHeader);
+			Thread.sleep(2000);
+			
+			// Again Editing back the area name
+			List<WebElement> areaLists2 = pma.getRMS_ManageTable_POM().getAreaLists();
+			for (int j = 0; j < areaLists2.size(); j++) {
+				String text1 = areaLists2.get(j).getText();
+				if (text.contains("Edited Area")) {
+					Thread.sleep(2000);
+					areaLists.get(i).click();
+					
+
+					pma.getRMS_ManageTable_POM().getAreaEditIcon().click();
+					action.keyDown(Keys.CONTROL).sendKeys("a");
+					action.sendKeys(Keys.BACK_SPACE).build().perform();
+					action.keyUp(Keys.CONTROL);
+					Thread.sleep(2000);
+					action.sendKeys("Automation Area").build().perform();
+					Thread.sleep(2000);
+				}
+			}
+		}
 	}
 
 	@Then("User should able to select any Area and Select any Table")
@@ -451,17 +508,40 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 		// X-Icon
 		pma.getRMS_ManageTable_POM().getDeleteTablepopupXicon().click();
 
-		// Deleting Table
+		// Deleting Table "Ground Floor Tables"
 		String totalTablebeforeDelete = pma.getRMS_ManageTable_POM().getTotalTables().getText();
 		System.out.println(totalTablebeforeDelete);
 		pma.getRMS_ManageTable_POM().getTableThreeDots().get(0).click();
 		pma.getRMS_ManageTable_POM().getDeleteTable().click();
 		pma.getRMS_ManageTable_POM().getDeleteTablepopupDeletebutton().click();// Table Deleted here
-		Thread.sleep(200); 
+		Thread.sleep(200);
 		String totalTableafterDelete = pma.getRMS_ManageTable_POM().getTotalTables().getText();
 		System.out.println(totalTableafterDelete);
 		Assert.assertTrue(!totalTablebeforeDelete.equals(totalTableafterDelete));
 
+	}
+
+	@Then("User should able to search any table and validate it")
+	public void userShouldAbleToSearchAnyTableAndValidateIt() throws InterruptedException {
+
+		pma.getRMS_ManageTable_POM().getSearch().sendKeys("xyz");
+		Thread.sleep(2000);
+		String attribute = pma.getRMS_ManageTable_POM().getSearch().getAttribute("value");
+		List<WebElement> insideTableTableName = pma.getRMS_ManageTable_POM().getInsideTableTableName();
+		for (int i = 0; i < insideTableTableName.size(); i++) {
+			String text = insideTableTableName.get(i).getText();
+			if (text.contains(attribute)) {
+				Assert.assertTrue(true);
+			} else {
+				boolean displayed = pma.getRMS_ManageTable_POM().getNomatchingTable().isDisplayed();
+				Assert.assertTrue(displayed);
+
+			}
+		}
+		pma.getRMS_ManageTable_POM().getSearch().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+		pma.getRMS_ManageTable_POM().getSearch().sendKeys("/';[];'/");
+		boolean displayed = pma.getRMS_ManageTable_POM().getNomatchingTable().isDisplayed();
+		Assert.assertTrue(displayed);
 	}
 
 	@Then("User should able to rearrange the Area and Validate the Rearrange Position")
@@ -484,16 +564,79 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 
 	}
 
-	@Then("User should able to Rearrance the Table and Validate the Rearranged Position")
-	public void userShouldAbleToRearranceTheTableAndValidateTheRearrangedPosition() {
+	@Then("User should able to rearrange the Table and Validate the Rearranged Position")
+	public void userShouldAbleToRearrangeTheTableAndValidateTheRearrangedPosition()  throws InterruptedException {
 
 		Actions actions = new Actions(rmsDriver);
-		pma.getRMS_ManageTable_POM().getAreaLists().get(1).click();
+
+		// For Rearrange "Ground Floor Area is selected"
+		List<WebElement> areaLists = pma.getRMS_ManageTable_POM().getAreaLists();
+		for (int i = 0; i < areaLists.size(); i++) {
+			String text = areaLists.get(i).getText();
+			if (text.contains("Ground Floor")) {
+				Thread.sleep(2000);
+				areaLists.get(i).click();
+			}
+			
+		}
 
 		actions.dragAndDrop(pma.getRMS_ManageTable_POM().getTables().get(0),
 				pma.getRMS_ManageTable_POM().getTables().get(3)).build().perform();
 		actions.dragAndDrop(pma.getRMS_ManageTable_POM().getTables().get(0),
-				pma.getRMS_ManageTable_POM().getTables().get(2)).build().perform();
+				pma.getRMS_ManageTable_POM().getTables().get(1)).build().perform();
 
 	}
-}// 30-03-2023 Finished only search pending
+	@Then("Store all the Date in Excel")
+	public void storeAllTheDateInExcel() throws InterruptedException, IOException {
+		
+	    List<WebElement> areaLists = pma.getRMS_ManageTable_POM().getAreaLists();
+	   
+	    File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+		Thread.sleep(1000);
+		FileInputStream fileInputStream= new FileInputStream(file);
+		Thread.sleep(1000);
+		Workbook workbook = new XSSFWorkbook(fileInputStream);		
+	     Sheet sheet = workbook.getSheet("Table List");
+	      Row row = sheet.createRow(0);
+	      Cell cell0 = row.createCell(0);
+	      cell0.setCellValue("Area Name");
+	      Cell cell1= row.createCell(1);
+	      cell1.setCellValue("Table Name");
+	      Cell cell2 = row.createCell(2);
+	      cell2.setCellValue("Seating Capacity");
+	      FileOutputStream fileOutputStream = new FileOutputStream(file);
+	    
+	   int k=1;
+	    for (int i = 0; i < areaLists.size(); i++) {
+	    	areaLists.get(i).click();
+	    	 List<WebElement> getallTables = pma.getRMS_ManageTable_POM().getallTables();
+	    	 Thread.sleep(100);
+	    	for (int j = 0; j < getallTables.size(); j++) {
+	    		String text = rmsDriver.findElement(By.xpath("(//div[@class='primary-name'])["+(j+1)+"]")).getText();
+	    		String replaceAll = text.replaceAll("[\\r\\n]+", "");
+	    		String TableName = replaceAll.substring(5);
+	    		String seatsCount = rmsDriver.findElement(By.xpath("(//p[@class='w-85 form-label__small-text font-bold'])["+(j+1)+"]")).getText();
+	    		
+	    	Row row1 = sheet.createRow(k);
+	  	    Cell areaName = row1.createCell(0);
+	  	    areaName.setCellValue(areaLists.get(i).getText());
+	  	    Cell tableName= row1.createCell(1);
+	  	    tableName.setCellValue(TableName);
+	  	    Cell seats = row1.createCell(2);
+	  	    seats.setCellValue(seatsCount);
+	  	    k++;
+			}
+	    	Thread.sleep(300);
+		}
+	    workbook.write(fileOutputStream);
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	}
+}

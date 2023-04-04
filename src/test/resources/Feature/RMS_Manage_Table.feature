@@ -11,7 +11,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   2222222222 | 666666 |
 
   #Validating the TakeOut Page
   @TakeOut
@@ -30,43 +30,45 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   2222222222 | 666666 |
 
   #Validating the AddTable
   @AddTables
   Scenario Outline: 
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click POS System Sections and Verify page redirected to POS System
-    #Then User should able to Click Add Table Button on top right corner of the page
-    #Then User should able to Verify the Add Table Popup opens
-    #And User should able to see the Area Option and +Add Area Button
-    #And User should able to see the Cancel button and Save button
-    #Then User should able to See and Click X Icon on top of the Popup
-    #Then User should click +Add Area Button and Verify Select Area Words "Select Area" appearing
-    #Then User should able to See Area TextBox and Validate the TextBox
-    #Then User should able to see the Table Name and Seating Capacity option
-    #And User should able to Validate the Table Name Textbox
-    #Then User should able to Validate the Seating Capacity Textbox
-    #Then User should able enter AreaName in the Area TextBox and enter the Table Name and Seating Capacity inside the Text Box
-      #| Area Name | Table Name | Seating Capacity |
-      #| Area 1    | T1         |               11 |
-      #| Area 2    | T2         |               12 |
-      #| Area 3    | T3         |               13 | 
-    #Then User should able to see the Newly added Area name is Selected and Validate the page
-    #Then User should able to see and Click the Dropdown under the Area
-    #And User should Verify all Available area is showing under the Dropdown
-    #Then User should able to Select any Area and verify the selected area is showing inside the dropdown
-    #Then User should able to enter Table Name,Seating Capacity and Click Save Button
-      #| Table Name | Seating Capacity |
-      #| N1         |               11 |
-      #| N2         |               22 |
-      #| N3         |               33 |
+    Then User should able to Click Add Table Button on top right corner of the page
+    Then User should able to Verify the Add Table Popup opens
+    And User should able to see the Area Option and +Add Area Button
+    And User should able to see the Cancel button and Save button
+    Then User should able to See and Click X Icon on top of the Popup
+    Then User should click +Add Area Button and Verify Select Area Words "Select Area" appearing
+    Then User should able to See Area TextBox and Validate the TextBox
+    Then User should able to see the Table Name and Seating Capacity option
+    And User should able to Validate the Table Name Textbox
+    Then User should able to Validate the Seating Capacity Textbox
+    Then User should able enter AreaName in the Area TextBox and enter the Table Name and Seating Capacity inside the Text Box
+      | Area Name       | Table Name | Seating Capacity |
+      | Area 1          | T1         |               11 |
+      | Area 2          | T2         |               12 |
+      | Area 3          | T3         |               13 |
+      | Automation Area | T7         |               47 |
+      | Ground Floor    | G1         |               44 |
+    Then User should able to see and Click the Dropdown under the Area
+    And User should Verify all Available area is showing under the Dropdown
+    Then User should able to Select any Area and verify the selected area is showing inside the dropdown
+    Then User should able to enter Table Name,Seating Capacity and Click Save Button
+      | Table Name | Seating Capacity |
+      | S1         |               11 |
+      | S2         |               22 |
+      | S3         |               33 |
+      | xyz        |               77 |
     And User should able to select any area and verify the Area Header and Total Table count under the Area Name
-    And User should able to Click any Table
+    And User should able to Edit any Area name
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   2222222222 | 666666 |
 
   #Validating the Table
   @ValidatingTable
@@ -82,10 +84,11 @@ Feature: Manage Table
     Then User should able to see and Click the Cancel button
     Then User should able to See print Button "Print all Tables"
     Then User should able to Delete any Table
+    Then User should able to search any table and validate it
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   2222222222 | 666666 |
 
   #Validating the Rearrange
   @Rearrange
@@ -93,10 +96,9 @@ Feature: Manage Table
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click POS System Sections and Verify page redirected to POS System
     Then User should able to rearrange the Area and Validate the Rearrange Position
-    And User should able to Rearrance the Table and Validate the Rearranged Position
+    And User should able to rearrange the Table and Validate the Rearranged Position
+    Then Store all the Date in Excel
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
-      
-      
+      |   2222222222 | 666666 |

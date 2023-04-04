@@ -170,7 +170,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getAreaHeader() {
-		WebElement element = rmsDriver.findElement(By.xpath("//div[@class='d-flex justify-content-between']"));
+		WebElement element = rmsDriver.findElement(By.xpath("//div[@class='page-subheader__sub-title mb-2  ']"));
 		return element;
 	}
 	public WebElement getTotalTables() {
@@ -183,7 +183,7 @@ PageManager pma = new PageManager();
 	}
 	//div[@class='table-container menu-cards card box box-sm  ']
 	public List<WebElement> getAreaLists() {
-		List<WebElement> element = rmsDriver.findElements(By.xpath(".//*[@class='dropdown-item text-ellipsis  dragable-item  list-style-none  draggable-class-list   ']"));
+		List<WebElement> element = rmsDriver.findElements(By.xpath("//div[@class='w-70 text-ellipsis cursor-pointer']"));
 		return element;
 	}
 	
@@ -194,12 +194,12 @@ PageManager pma = new PageManager();
 	
 	
 	public WebElement getAreaLists1() {
-		WebElement element = rmsDriver.findElement(By.xpath(".//*[@data-rbd-drag-handle-draggable-id='item-b0adca3f-a278-4a27-a70a-6a3cd7536551']"));
+		WebElement element = rmsDriver.findElement(By.xpath("(//div[@class='w-70 text-ellipsis cursor-pointer'])[5]"));
 		return element;
 	}
 	
 	public WebElement getAreaLists2() {
-		WebElement element = rmsDriver.findElement(By.xpath("//*[@data-rbd-drag-handle-draggable-id='item-b5274298-74f0-4388-bb17-3c52571bb2f9']"));
+		WebElement element = rmsDriver.findElement(By.xpath("(//div[@class='w-70 text-ellipsis cursor-pointer'])[2]"));
 		return element;
 	}
 	
@@ -290,5 +290,9 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//i[@class='icon-edit black icon-3x cursor-pointer']"));
 		return element;
 	}
+	public WebElement getNomatchingTable() {
+		WebElement element = rmsDriver.findElement(By.xpath("//P[@class='mb-4']"));
+		return element;
+	}
 	
-}//28-03-2023 Finished upto dropdown
+}

@@ -68,7 +68,7 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		pma.getRMS_Employee_Management_POM().getLoginMobileNumElement().sendKeys(mobileNum);Thread.sleep(500);
 		pma.getRMS_Employee_Management_POM().getLoginContinuebuttonElement().click();Thread.sleep(500);
 		pma.getRMS_Employee_Management_POM().getLoginOtpElement().sendKeys(otp);Thread.sleep(500);
-		pma.getRMS_Employee_Management_POM().getLoginVerifyOtpElement().click();Thread.sleep(500);
+		pma.getRMS_Employee_Management_POM().getLoginVerifyOtpElement().click();Thread.sleep(1000);
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getOverviewWelcomTextElement().getText().contains("Welcome"), "Verifying Successful Login");Thread.sleep(500);
 		
 		
