@@ -19,6 +19,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -46,9 +48,12 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		
 	@Given("Login to the restaurant with {string} and {string}")
 	public void loginToTheRestaurantWithAnd(String mobileNum, String otp) throws IOException, Exception {
-		WebDriverManager.edgedriver().setup();
-		
-		rmsDriver =new EdgeDriver();
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions co = new ChromeOptions();
+        co.addArguments("--remote-allow-origins=*");
+        rmsDriver =new ChromeDriver(co);
+		//rmsDriver =new EdgeDriver();
+		//rmsDriver =new ChromeDriver();
 		rmsDriver.manage().window().maximize();
 		rmsDriver.get("https://www.qa.restaurants.plateron.com/auth/login");
 		rmsDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -278,7 +283,7 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getSaveChangesPopHdrElement().getText().equals("Save Changes"),"Verifying Save Changes Pop-up");
 		pma.getRMS_Employee_Management_POM().getSaveChangesPopSaveBtnElement().click();
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().isDisplayed());
-		rmsDriver.quit();
+		//rmsDriver.quit();
 	}
 	@When("User should Create an Employee with Mandatory Fields {string} {string} and {string}")
 	public void userShouldCreateAnEmployeeWithMandatoryFieldsAnd(String dispName, String phone, String role) throws InterruptedException {
@@ -374,10 +379,10 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	}
 	@Then("User should verify the Total Employees Count")
 	public void userShouldVerifyTheTotalEmployeesCount() throws InterruptedException {
-		Thread.sleep(800);
+		Thread.sleep(1000);
 //1130		pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
 		// Remove above line at whole run
-		Thread.sleep(800);
+		Thread.sleep(1000);
 		
 		
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
@@ -456,9 +461,9 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		System.out.println(indvEmployeeListElement.size());
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
 			indvEmployeeListElement.get(i).click();
-			Thread.sleep(200);
+			Thread.sleep(1000);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
-			Thread.sleep(300);
+			Thread.sleep(1000);
 			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
 		}
 	}
@@ -473,12 +478,13 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		
 	}
 	@Then("user should verify the text message {string} by enter UA text in Search Bar")
-	public void userShouldVerifyTheTextMessageByEnterUATextInSearchBar(String string) {
+	public void userShouldVerifyTheTextMessageByEnterUATextInSearchBar(String string) throws InterruptedException {
 //		pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
 //		//Remove above line 
 		pma.getRMS_Employee_Management_POM().getSearchBarElement().sendKeys("ygd6767");
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getNoResultsTextElement().getText().equals(string));
 		pma.getRMS_Employee_Management_POM().getSearchBarElement().sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+		Thread.sleep(2000);
 	}
 	@Then("Verify Each employee profile contains edit button in Employee details page")
 	public void verifyEachEmployeeProfileContainsEditButtonInEmployeeDetailsPage() throws InterruptedException, IOException {
@@ -559,10 +565,10 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			
 			
 			//indvEmployeeListElement.get(i).click();
-			Thread.sleep(300);
+		      Thread.sleep(1000);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
-			Thread.sleep(300);
-			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(300);
+			Thread.sleep(1000);
+			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(1000);
 			//break;
 		}//need to add individual validation
 		
@@ -575,9 +581,9 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
-			Thread.sleep(100);
+			Thread.sleep(500);
 			indvEmployeeListElement.get(i).click();
-			Thread.sleep(300);
+			Thread.sleep(500);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
 			Thread.sleep(1000);
 			//Modify WAAAAAAAAIT
@@ -586,8 +592,8 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			
 			
 			
-			Thread.sleep(300);
-			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(300);
+			Thread.sleep(500);
+			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(500);
 		}
 		
 	}

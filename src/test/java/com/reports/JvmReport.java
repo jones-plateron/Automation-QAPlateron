@@ -18,9 +18,9 @@ public class JvmReport {
 		
 		Configuration config = new Configuration(f, "Regression Testing Report ");
 		config.addClassifications("Operating Platform", "Windows");
-		config.addClassifications("Application Type", "Mobile");
+		config.addClassifications("Application Type", "Web And Mobile");
 		config.addClassifications("Version", "11");
-		config.addClassifications("Driver", "Appium");
+		config.addClassifications("Drivers", "Selenium, Appium");
 		config.addClassifications("Build Version", " ");
 		List<String> li = new ArrayList<String>();
 		li.add(jsonFile);
