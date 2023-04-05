@@ -24,4 +24,4 @@ Feature: Configuring the Pre-defined Bill Settings
 		
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
+      |   7777777723 | 666666 |

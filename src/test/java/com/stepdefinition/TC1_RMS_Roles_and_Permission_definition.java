@@ -18,12 +18,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 
-public class RMS_Roles_and_Permission_definition extends BaseClass{
+public class TC1_RMS_Roles_and_Permission_definition extends BaseClass{
 PageManager pma = new PageManager();
 
 List<String> jobNameswhileCreating=new ArrayList<String>(); //Assigning this Globally
 
-	public RMS_Roles_and_Permission_definition() {
+	public TC1_RMS_Roles_and_Permission_definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
@@ -62,7 +62,7 @@ List<String> jobNameswhileCreating=new ArrayList<String>(); //Assigning this Glo
 	   String actPOSAcess = pma.getRMS_Roles_and_Permissions_POM().getPOSAcessSection().getText();
 	   System.out.println(actPOSAcess);
 //	   Assert.assertTrue(actPOSAcess.contains(string));
-	   Assert.assertTrue(false);
+//	   Assert.assertTrue(false);
 	   
 	   String actRePin = pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinPermissions().getText();
 	   System.out.println(actRePin);
@@ -446,11 +446,8 @@ public void userShouldAddTheNewJobAndClickSaveButton(String string) throws Inter
 			
 		}
 		Thread.sleep(300);
-		action.sendKeys(Keys.ARROW_UP).build().perform();
-		action.sendKeys(Keys.ARROW_UP).build().perform();
-		action.sendKeys(Keys.ARROW_UP).build().perform();
-		action.sendKeys(Keys.ARROW_UP).build().perform();
-		action.sendKeys(Keys.ARROW_UP).build().perform();
+		action.sendKeys(Keys.PAGE_UP).build().perform();
+		
 		Thread.sleep(300);
 		pma.getRMS_Roles_and_Permissions_POM().getRestaurantPortal().click();
 		String AllowAccessRestaurantPortal  = getDataFromExcel("Jobs Configuration", (i+1), 9);

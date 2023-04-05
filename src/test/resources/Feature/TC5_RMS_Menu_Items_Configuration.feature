@@ -29,7 +29,7 @@ Feature: Menus Items section validations
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
 
   @CategoryValidations
   Scenario Outline: As a RMS User, Validate Category section
@@ -76,7 +76,7 @@ Feature: Menus Items section validations
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
 
   @PublishMenuValidations
   Scenario Outline: As a RMS User, Validate Publish Menu popup section
@@ -100,4 +100,4 @@ Feature: Menus Items section validations
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |

@@ -16,10 +16,10 @@ import com.pagemanager.PageManager;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class RMS_SettingsPage_Configuration_definition extends BaseClass {
+public class TC3_RMS_SettingsPage_Configuration_definition extends BaseClass {
 	PageManager pma = new PageManager();
 	
-	public RMS_SettingsPage_Configuration_definition() {
+	public TC3_RMS_SettingsPage_Configuration_definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
@@ -128,8 +128,12 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 	}
 	@Then("User should Verify the Instruction {string} under Apply sales tax on the tip after deductions option")
 	public void userShouldVerifyTheInstructionUnderApplySalesTaxOnTheTipAfterDeductionsOption(String string) {
-		String actText = pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheTipafterDeductionsInstruction().getText();
-	    Assert.assertTrue(actText.contains(string));
+	
+//		String actText = pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheTipafterDeductionsInstruction().getText();
+//	    Assert.assertTrue(actText.contains(string));
+		
+		
+		//This is removed in RMS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	}
 	@Then("User should Validate the Toggle of Apply sales tax on the tip after deductions")
 	public void userShouldValidateTheToggleOfApplySalesTaxOnTheTipAfterDeductions() {
@@ -443,9 +447,11 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 			
 			//Please enter valid value Validation 
 			Actions action = new Actions(rmsDriver);
-			action.keyDown(Keys.CONTROL).sendKeys("a");
-		    action.sendKeys(Keys.BACK_SPACE).build().perform();
-		    action.keyUp(Keys.CONTROL);
+//			action.keyDown(Keys.CONTROL).sendKeys("a");
+//		    action.sendKeys(Keys.BACK_SPACE).build().perform();
+//		    action.keyUp(Keys.CONTROL);
+		    pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
+		    
 		    
 			pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
 			String actIndication = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication().getText();
@@ -457,10 +463,12 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 			
 			//Trying to give Alphabets
 			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().click();
-			action.keyDown(Keys.CONTROL).sendKeys("a");
-		    action.sendKeys(Keys.BACK_SPACE).build().perform();
-		    action.keyUp(Keys.CONTROL);
-		    
+//			action.keyDown(Keys.CONTROL).sendKeys("a");
+//		    action.sendKeys(Keys.BACK_SPACE).build().perform();
+//		    action.keyUp(Keys.CONTROL);
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
+			
+			
 		    pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().sendKeys("Robo");
 		    String actText1 = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().getText();
 			Assert.assertTrue(actText1.isEmpty());
@@ -491,10 +499,13 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().click();
 		
 		//Please enter valid value Validation 
-		Actions action = new Actions(rmsDriver);
-		action.keyDown(Keys.CONTROL).sendKeys("a");
-	    action.sendKeys(Keys.BACK_SPACE).build().perform();
-	    action.keyUp(Keys.CONTROL);
+//		Actions action = new Actions(rmsDriver);
+//		action.keyDown(Keys.CONTROL).sendKeys("a");
+//	    action.sendKeys(Keys.BACK_SPACE).build().perform();
+//	    action.keyUp(Keys.CONTROL);
+		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
+		
+		
 	    
 		pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
 		String actIndication = pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBoxIndication().getText();
@@ -506,9 +517,11 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 		
 		//Trying to give Alphabets
 		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().click();
-		action.keyDown(Keys.CONTROL).sendKeys("a");
-	    action.sendKeys(Keys.BACK_SPACE).build().perform();
-	    action.keyUp(Keys.CONTROL);
+//		action.keyDown(Keys.CONTROL).sendKeys("a");
+//	    action.sendKeys(Keys.BACK_SPACE).build().perform();
+//	    action.keyUp(Keys.CONTROL);
+		
+		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
 	    
 	    pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys("Robo");
 	    String actText1= pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().getText();

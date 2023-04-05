@@ -11,7 +11,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
 
   #Validating the TakeOut Page
   @TakeOut
@@ -30,7 +30,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
 
   #Validating the AddTable
   @AddTables
@@ -68,7 +68,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
 
   #Validating the Table
   @ValidatingTable
@@ -88,7 +88,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
 
   #Validating the Rearrange
   @Rearrange
@@ -101,4 +101,4 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |

@@ -27,7 +27,7 @@ import com.pagemanager.PageManager;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
+public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 
 	PageManager pma = new PageManager();
 	
@@ -42,7 +42,7 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	// !@#$%^&*()abcdefghijABCDEFGHIJ1234567890Automation
 	
 	
-	public RMS_Menu_Items_Configuration_Definition() {
+	public TC5_RMS_Menu_Items_Configuration_Definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
@@ -1004,8 +1004,24 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	}
 	@Then("User should add {string} and verify that publish menu status as {string} and count")
 	public void userShouldAddAndVerifyThatPublishMenuStatusAsAndCount(String cateName, String status) throws InterruptedException {
+		//Random Category Name
+				String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvwxyz";
+				StringBuilder sb = new StringBuilder(10);
+				Random random = new Random();
+				for (int i = 0; i < 10; i++) {
+					int index = random.nextInt(alphaNumericString.length());
+					char randomChar = alphaNumericString.charAt(index);
+					sb.append(randomChar);
+				}
+			     String randomCateName = sb.toString();
+		
+		
+		
+		
+		
+		
 		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(500);
-		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(cateName);Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName);Thread.sleep(500);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(500);
 		
 		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(500);
@@ -1013,7 +1029,7 @@ public class RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		List<WebElement> findTableRows = publishMenuPopTable.findElements(By.tagName("tr"));Thread.sleep(900);
 		for (int i = 0; i < findTableRows.size(); i++) {Thread.sleep(100);
 			//System.out.println(findTableRows.get(i).getText());
-			if (findTableRows.get(i).getText().contains(cateName)) {
+			if (findTableRows.get(i).getText().contains(randomCateName)) {
 			List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));Thread.sleep(200);
 //				System.out.println(findTableDatas.get(1).getText());
 			Assert.assertTrue(findTableDatas.get(1).getText().equals("Added"));Thread.sleep(200);
