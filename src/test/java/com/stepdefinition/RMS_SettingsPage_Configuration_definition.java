@@ -118,6 +118,13 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 	public void userShouldValidateTheToggleOfApplySalesTaxOnTheSubtotalAfterDeductionsOption() {
 		
 	    //Holding this
+		if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
+				.getAttribute("value").equals("true")) {
+		} else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
+				.getAttribute("value").equals("false")) {
+			pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle1()
+					.click();
+			}
 	}
 	@Then("User should Verify the Instruction {string} under Apply sales tax on the tip after deductions option")
 	public void userShouldVerifyTheInstructionUnderApplySalesTaxOnTheTipAfterDeductionsOption(String string) {
@@ -127,6 +134,12 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 	@Then("User should Validate the Toggle of Apply sales tax on the tip after deductions")
 	public void userShouldValidateTheToggleOfApplySalesTaxOnTheTipAfterDeductions() {
 		//Holding this 
+		if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
+				.getAttribute("value").equals("true")) {
+		} else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
+				.getAttribute("value").equals("false")) {
+			pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle1().click();
+		}
 	}
 	@Then("User should Verify Service Fee section contain {string},{string} and {string} options")
 	public void userShouldVerifyServiceFeeSectionContainAndOptions(String string, String string2, String string3) {
@@ -199,6 +212,12 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 	@Then("User should Validate the Toggle of Service Fee Percentage inclusive of sales tax")
 	public void userShouldValidateTheToggleOfServiceFeePercentageInclusiveOfSalesTax() {
 	    //Holding this
+		if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+				.getAttribute("value").equals("true")) {
+		} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+				.getAttribute("value").equals("false")) {
+			pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
+		}
 	}
 	@Then("User should Verify the Instruction {string} under Apply service fee on the subtotal after deductions")
 	public void userShouldVerifyTheInstructionUnderApplyServiceFeeOnTheSubtotalAfterDeductions(String string) {
@@ -208,6 +227,13 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 	@Then("User should Validate the Toggle of Apply service fee on the subtotal after deductions")
 	public void userShouldValidateTheToggleOfApplyServiceFeeOnTheSubtotalAfterDeductions() {
 	   // Holding this
+		if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
+				.getAttribute("value").equals("true")) {
+		} else if (pma.getRMS_SettingsPage_Configuration_POM()
+				.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
+			pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
+					.click();
+		}
 	}
 	@Then("User Should able to Click Save Button")
 	public void userShouldAbleToClickSaveButton() {
@@ -525,6 +551,7 @@ public class RMS_SettingsPage_Configuration_definition extends BaseClass {
 	    pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
 	    pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys("10");
 	    pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+	    
 	}
 }
 //23-03-2023 18:20
