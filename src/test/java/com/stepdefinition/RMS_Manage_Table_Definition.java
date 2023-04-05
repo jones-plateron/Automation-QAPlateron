@@ -629,14 +629,6 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 	    	Thread.sleep(300);
 		}
 	    workbook.write(fileOutputStream);
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
+	   
 	}
 }
