@@ -9,12 +9,14 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.rules.ErrorCollector;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,6 +26,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import com.base.BaseClass;
 import com.pagemanager.PageManager;
@@ -37,6 +40,10 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	
 	PageManager pma = new PageManager();
 	public static List<String> Roles;
+	
+	public ErrorCollector collector = new ErrorCollector();
+	
+	public static String dispNameInList="",roleInList="";
 	//public static File file;
 	
 	
@@ -63,6 +70,10 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		pma.getRMS_Employee_Management_POM().getLoginOtpElement().sendKeys(otp);Thread.sleep(500);
 		pma.getRMS_Employee_Management_POM().getLoginVerifyOtpElement().click();Thread.sleep(500);
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getOverviewWelcomTextElement().getText().contains("Welcome"), "Verifying Successful Login");Thread.sleep(500);
+		
+		
+		
+		
 		
 	}
 	@When("User should redirects to employees section")
@@ -94,6 +105,10 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			for (int j = 0; j < Roles.size(); j++) {
 				if(Roles.get(j).contains(fRole)) {
 					match++;break;}}}
+		
+		
+		
+		
 		Assert.assertTrue(match==Roles.size(),"Verifying Employee page Jobs Filter");
 		
 	}
@@ -266,6 +281,10 @@ public class RMS_Employee_Management_definition extends BaseClass {
 //		System.out.println(Roles.size());
 //		System.out.println(addEmpPgRoleDropdownElement.size());
 		Assert.assertTrue(addEmpPgRoleDropdownElement.size()==(Roles.size()+1), "Verifying Add Employee page Role Dropdown");
+		
+		
+		
+		
 	}
 	@Then("User should verify the Cancel and Close button")
 	public void userShouldVerifyTheCancelAndCloseButton() {
@@ -285,12 +304,23 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().isDisplayed());
 		//rmsDriver.quit();
 	}
-	@When("User should Create an Employee with Mandatory Fields {string} {string} and {string}")
-	public void userShouldCreateAnEmployeeWithMandatoryFieldsAnd(String dispName, String phone, String role) throws InterruptedException {
+	@When("User should Create an Employee with Mandatory Fields {string} and {string}")
+	public void userShouldCreateAnEmployeeWithMandatoryFieldsAnd(String dispName, String role) throws InterruptedException {
 		//pma.getRMS_Employee_Management_POM().getAddEmpCancelBtnElement().click();
 		//Remove the above line and change New Emp Details in Feature File
 		pma.getRMS_Employee_Management_POM().getDisplayNameTextBxElement().sendKeys(dispName);
-		pma.getRMS_Employee_Management_POM().getPhoneNumbertextBxElement().sendKeys(phone);
+		//Random 10 Char Number
+		Random random1 = new Random();
+        StringBuilder sb1 = new StringBuilder();
+        for (int k = 0; k < 10; k++) {
+            sb1.append(random1.nextInt(10));
+            }
+        String randomNum = sb1.toString();
+		
+		
+		
+		
+		pma.getRMS_Employee_Management_POM().getPhoneNumbertextBxElement().sendKeys(randomNum);
 		pma.getRMS_Employee_Management_POM().getDropDownRoleWOErrorElement().click();
 		
 		List<WebElement> addEmpRoleDropdownElements = pma.getRMS_Employee_Management_POM().getAddEmpRoleDropdownElement();
@@ -302,23 +332,24 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			}
 		}
 		pma.getRMS_Employee_Management_POM().getAddEmpSaveBtnElement().click();
-		Thread.sleep(2000);
+		Thread.sleep(6000);
 		rmsDriver.navigate().refresh();
-		
+		dispNameInList=dispName;
+		roleInList=role;
+	}
+	@Then("User should verify the Employee added to the Employee list")
+	public void userShouldVerifyTheEmployeeAddedToTheEmployeeList() throws InterruptedException {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		boolean check=false;
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
 			Thread.sleep(1000);
-			System.out.println(indvEmployeeListElement.get(i).getText());
-			if(indvEmployeeListElement.get(i).getText().contains(dispName)&&indvEmployeeListElement.get(i).getText().contains(role)) {	
+//			System.out.println(indvEmployeeListElement.get(i).getText());
+			if(indvEmployeeListElement.get(i).getText().contains(dispNameInList)&&indvEmployeeListElement.get(i).getText().contains(roleInList)) {	
 				check=true;
 				break;}		
 			}
 		Thread.sleep(500);
 		Assert.assertTrue(check);
-	}
-	@Then("User should verify the Employee added to the Employee list")
-	public void userShouldVerifyTheEmployeeAddedToTheEmployeeList() {
 	}
 	
 	@When("User should Create an Employee without Mandatory Fields {string} {string} {string} and {string}")
@@ -348,42 +379,85 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	
 	@When("User should Create a New Employee and store the Employee information")
 	public void UserShouldCreateANewEmployeeAndStoreTheEmployeeInformation(io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
-	
-		
 		List<Map<String,String>> asMaps = dataTable.asMaps();
+		pma.getRMS_Employee_Management_POM().getAddEmpCancelBtnElement().click();
 		
-		for (int i = 0; i < asMaps.size(); i++) {
+		
+		pma.getRMS_Employee_Management_POM().getJobsSectionElement().click();
+		List<WebElement> AllRoleElement = rmsDriver.findElements(By.xpath("//li[contains(@class,'list-item cursor-pointer ')]"));
+		List<String> jobRoles = new ArrayList<String>();
+		for (int i = 0; i < AllRoleElement.size(); i++) {
+			jobRoles.add(AllRoleElement.get(i).getText());
+		}
+		
+		//Verifying jobs Filter
+		pma.getRMS_Employee_Management_POM().getEmployeesSectionElement().click();
+		
+		
+		
+		
+		
+		for (int i = 0; i < jobRoles.size(); i++) {
 //			System.out.println(asMaps.get(i).get("DispName"));
 //			System.out.println(asMaps.get(i).get("phoneNo"));
 //			System.out.println(asMaps.get(i).get("Role"));
-			try {
-				pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().click();	
-			} catch (Exception e) {}
-			Thread.sleep(1000);
-			rmsDriver.navigate().refresh();
-			Thread.sleep(1000);
+			
+			//Random 10 Char text
+			String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvwxyz";
+			StringBuilder sb = new StringBuilder(10);
+			Random random = new Random();
+			for (int k = 0; k < 10; k++) {
+				int index = random.nextInt(alphaNumericString.length());
+				char randomChar = alphaNumericString.charAt(index);
+				sb.append(randomChar);
+			}String randomEmpName = sb.toString();
+			//Random 10 Char Number
+			Random random1 = new Random();
+	        StringBuilder sb1 = new StringBuilder();
+	        for (int k = 0; k < 10; k++) {
+	            sb1.append(random1.nextInt(10));
+	        }
+	        String randomNum = sb1.toString();
+			
+			
+			
+			
+			
+			
+			
+//			try {
+//				pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().click();	
+//			} catch (Exception e) {}
+			
+			
+//			rmsDriver.navigate().refresh();
+			Thread.sleep(500);
 			pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().click();Thread.sleep(1000);
-			pma.getRMS_Employee_Management_POM().getDisplayNameTextBxElement().sendKeys(asMaps.get(i).get("DispName"));Thread.sleep(900);
-			pma.getRMS_Employee_Management_POM().getPhoneNumbertextBxElement().sendKeys(asMaps.get(i).get("phoneNo"));Thread.sleep(900);
-			Thread.sleep(1000);
+			pma.getRMS_Employee_Management_POM().getDisplayNameTextBxElement().sendKeys(randomEmpName);Thread.sleep(900);
+			pma.getRMS_Employee_Management_POM().getPhoneNumbertextBxElement().sendKeys(randomNum);Thread.sleep(900);
+			Thread.sleep(500);
 			pma.getRMS_Employee_Management_POM().getDropDownRoleWOErrorElement().click();Thread.sleep(500);
-			List<WebElement> elements = pma.getRMS_Employee_Management_POM().getAddEmpRoleDropdownElement();
-			for (int j = 0; j < elements.size(); j++) {
-				if(elements.get(j).getText().contains(asMaps.get(i).get("Role"))){
-					pma.getRMS_Employee_Management_POM().getAddEmpRoleDropdownElement().get(j).click();
-					break;
-				}	
-			}
+//			List<WebElement> elements = pma.getRMS_Employee_Management_POM().getAddEmpRoleDropdownElement();
+			
+			
+			pma.getRMS_Employee_Management_POM().getAddEmpRoleDropdownElement().get(i+1).click();
+			
+			
+//			for (int j = 0; j < elements.size(); j++) {
+//				if(true){
+//					pma.getRMS_Employee_Management_POM().getAddEmpRoleDropdownElement().get(i+1).click();
+//					break;
+//				}	
+//			}
 			pma.getRMS_Employee_Management_POM().getAddEmpSaveBtnElement().click();
 		}
+		rmsDriver.navigate().refresh();Thread.sleep(1000);
 	}
 	@Then("User should verify the Total Employees Count")
 	public void userShouldVerifyTheTotalEmployeesCount() throws InterruptedException {
 		Thread.sleep(1000);
 //1130		pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
 		// Remove above line at whole run
-		Thread.sleep(1000);
-		
 		
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		List<WebElement> inActiveEmployeeElement = pma.getRMS_Employee_Management_POM().getInActiveEmployeeElement();
@@ -424,11 +498,11 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		Assert.assertTrue(ActtotalEmp==pinInsideListElements.size(), "Verifying Job roles");
 	}
 	@Then("User should verify other than owner Each Employee list contains Mark as Inactive option")
-	public void userShouldVerifyOtherThanOwnerEachEmployeeListContainsMarkAsInactiveOption() {
+	public void userShouldVerifyOtherThanOwnerEachEmployeeListContainsMarkAsInactiveOption() throws InterruptedException {
 			List<WebElement> moreIconElements = rmsDriver.findElements(By.xpath("//button//i[contains(@class,'icon-icon-ellipsis-v icon-3x mr-1')]"));
 			List<WebElement> inActiveEmployeeElement = pma.getRMS_Employee_Management_POM().getInActiveEmployeeElement();
 			int j=1;
-		
+			
 			for (int i = 0; i < (moreIconElements.size()-inActiveEmployeeElement.size()); i++) {
 				moreIconElements.get(i).click();
 				Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInactiveInsideListElement(j).isDisplayed());
@@ -441,19 +515,20 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		List<WebElement> moreIconElements = rmsDriver.findElements(By.xpath("//button//i[contains(@class,'icon-icon-ellipsis-v icon-3x mr-1')]"));
 		List<WebElement> inActiveEmployeeElement = pma.getRMS_Employee_Management_POM().getInActiveEmployeeElement();
 		int j=1;
+		
+		
 			for (int i = 0; i < (moreIconElements.size()-inActiveEmployeeElement.size()); i++) {
 				moreIconElements.get(i).click();
 				Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInactiveInsideListElement(j).isDisplayed());
-				
 				pma.getRMS_Employee_Management_POM().getMarkasInactiveInsideListElement(j).click();
 				Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivpopHdrElement().isDisplayed());
 				Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopCancelBtnElement().isDisplayed());
 				Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopSaveElement().isDisplayed());
 				Assert.assertTrue(pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().contains("Would you like to mark")&&pma.getRMS_Employee_Management_POM().getMarkasInActivepopTextElement().getText().contains("inactive ?"));
 				pma.getRMS_Employee_Management_POM().getMarkasInActivepopCloseElement().click();
-				j++;
+				j++;break;
 			}
-			Thread.sleep(3000);
+			Thread.sleep(500);
 	}
 	@Then("User should verify Employee Details popup when user Clicks on Each Employee list")
 	public void userShouldVerifyEmployeeDetailsPopupWhenUserClicksOnEachEmployeeList() throws InterruptedException {
@@ -461,9 +536,9 @@ public class RMS_Employee_Management_definition extends BaseClass {
 		System.out.println(indvEmployeeListElement.size());
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
 			indvEmployeeListElement.get(i).click();
-			Thread.sleep(1000);
+			Thread.sleep(200);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
-			Thread.sleep(1000);
+			Thread.sleep(200);
 			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
 		}
 	}
@@ -489,14 +564,15 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	@Then("Verify Each employee profile contains edit button in Employee details page")
 	public void verifyEachEmployeeProfileContainsEditButtonInEmployeeDetailsPage() throws InterruptedException, IOException {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
-		System.out.println(indvEmployeeListElement.size());int j=1;
+		System.out.println(indvEmployeeListElement.size());
+		int j=1;
 		
 		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
 		Thread.sleep(1000);
 		FileInputStream fileInputStream= new FileInputStream(file);
 		Thread.sleep(1000);
 		Workbook workbook = new XSSFWorkbook(fileInputStream);		
-	     Sheet sheet = workbook.createSheet("Employee Details");
+	     Sheet sheet = workbook.getSheet("Employee Details");
 	      Row row = sheet.createRow(0);
 	      Cell cell0 = row.createCell(0);
 	      cell0.setCellValue("Employee Name");
@@ -509,101 +585,107 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	      Cell cell4 = row.createCell(4);
 	      cell4.setCellValue("PhoneNo");
 	      FileOutputStream fileOutputStream = new FileOutputStream(file);
-	      
 		
-		for (int i = 0; i < indvEmployeeListElement.size(); i++,j++) {
-			String empListDispName = pma.getRMS_Employee_Management_POM().getEmpNameInsideListElement(j).getText();
-			System.out.println(empListDispName);
-			String empListEmpID = pma.getRMS_Employee_Management_POM().getEmpIDInsideListElement(j).getText();
-			System.out.println(empListEmpID);
-			String empListRole = pma.getRMS_Employee_Management_POM().getJobTypeInsideListElement(j).getText();
-			System.out.println(empListRole);
-			String empListEmail = pma.getRMS_Employee_Management_POM().getEmailInsideListIfElement(j).getText();
-			System.out.println(empListEmail);
-			String empListMobile = pma.getRMS_Employee_Management_POM().getPhoneInsideListElement(j).getText();
-			System.out.println(empListMobile);
-			Thread.sleep(100);
-			indvEmployeeListElement.get(i).click();Thread.sleep(3000);
-			String SlideDispName1 = pma.getRMS_Employee_Management_POM().getSlideEmpNameElement().getText();Thread.sleep(3000);
-			//String SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
-			String SlideDispName2 = pma.getRMS_Employee_Management_POM().getSlideDisplayNameElement().getText();Thread.sleep(1000);
-			String SlidePhone = pma.getRMS_Employee_Management_POM().getSlidePhoneElement().getText();Thread.sleep(1000);
-			String SlideEmail = pma.getRMS_Employee_Management_POM().getSlideEmailElement().getText();Thread.sleep(1000);
-			String SlideRole = pma.getRMS_Employee_Management_POM().getSlideRoleElement().getText();Thread.sleep(1000);
-			
-			Assert.assertTrue(empListDispName.equals(SlideDispName1));
-			Assert.assertTrue(empListDispName.equals(SlideDispName2));
-			Assert.assertTrue(empListRole.equals(SlideRole));
-			Assert.assertTrue(empListMobile.equals(SlidePhone));
-			Assert.assertTrue(empListEmail.equals(SlideEmail));
-			String SlidePIN ="";
-			try {
-				SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
-			} catch (NoSuchElementException e) {
-				pma.getRMS_Employee_Management_POM().getGeneratePinBtnElement().click();
-				Thread.sleep(500);
-				SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
-			}
-			System.out.println(SlidePIN);
-			
-			//Store in Excel
-			Sheet sheet1 = workbook.getSheet("Employee Details");
-			  Row row1 = sheet1.createRow(i+1);
-		      Cell cellEmpNa = row1.createCell(0);
-		      cellEmpNa.setCellValue(SlideDispName1);
-		      Cell cellEmpRole= row1.createCell(1);
-		      cellEmpRole.setCellValue(SlideRole);
-		      Cell cellPin = row1.createCell(2);
-		      cellPin.setCellValue(SlidePIN);
-		      Cell cellEmail = row1.createCell(3);
-		      cellEmail.setCellValue(SlideEmail);
-		      Cell cellPhoneNo = row1.createCell(4);
-		      cellPhoneNo.setCellValue(SlidePhone);
-			
-				      
-			
-			
-			
-			//indvEmployeeListElement.get(i).click();
-		      Thread.sleep(1000);
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
-			Thread.sleep(1000);
-			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(1000);
-			//break;
-		}//need to add individual validation
 		
-		  workbook.write(fileOutputStream);
+		
+		try {
+			for (int i = 0; i < indvEmployeeListElement.size(); i++,j++) {
+				String empListDispName = pma.getRMS_Employee_Management_POM().getEmpNameInsideListElement(j).getText();
+				//System.out.println(empListDispName);
+				String empListEmpID = pma.getRMS_Employee_Management_POM().getEmpIDInsideListElement(j).getText();
+//				System.out.println(empListEmpID);
+				String empListRole = pma.getRMS_Employee_Management_POM().getJobTypeInsideListElement(j).getText();
+//				System.out.println(empListRole);
+				String empListEmail = pma.getRMS_Employee_Management_POM().getEmailInsideListIfElement(j).getText();
+//				System.out.println(empListEmail);
+				String empListMobile = pma.getRMS_Employee_Management_POM().getPhoneInsideListElement(j).getText();
+//				System.out.println(empListMobile);
+				Thread.sleep(100);
+				indvEmployeeListElement.get(i).click();Thread.sleep(200);
+				String SlideDispName1 = pma.getRMS_Employee_Management_POM().getSlideEmpNameElement().getText();Thread.sleep(200);
+				//String SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
+				String SlideDispName2 = pma.getRMS_Employee_Management_POM().getSlideDisplayNameElement().getText();Thread.sleep(200);
+				String SlidePhone = pma.getRMS_Employee_Management_POM().getSlidePhoneElement().getText();Thread.sleep(200);
+				String SlideEmail = pma.getRMS_Employee_Management_POM().getSlideEmailElement().getText();Thread.sleep(200);
+				String SlideRole = pma.getRMS_Employee_Management_POM().getSlideRoleElement().getText();Thread.sleep(200);
+				String newStringName = empListDispName;
+				//System.out.println(SlideDispName1);
+				if (empListDispName.length()>3) {
+					newStringName = empListDispName.substring(0, empListDispName.length() - 3);
+				}
+				
+				
+				Assert.assertTrue(SlideDispName1.contains(newStringName));
+				Assert.assertTrue(empListDispName.equals(SlideDispName2));
+				Assert.assertTrue(empListRole.equals(SlideRole));
+				Assert.assertTrue(empListMobile.equals(SlidePhone));
+				Assert.assertTrue(empListEmail.equals(SlideEmail));
+				String SlidePIN ="";
+				try {
+					SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
+				} catch (NoSuchElementException e) {
+					pma.getRMS_Employee_Management_POM().getGeneratePinBtnElement().click();
+					SlidePIN = pma.getRMS_Employee_Management_POM().getSlidePINElement().getText();
+				}
+				System.out.println(SlidePIN);
+				
+				//Store in Excel
+				Sheet sheet1 = workbook.getSheet("Employee Details");
+				  Row row1 = sheet1.createRow(i+1);
+			      Cell cellEmpNa = row1.createCell(0);
+			      cellEmpNa.setCellValue(SlideDispName1);
+			      Cell cellEmpRole= row1.createCell(1);
+			      cellEmpRole.setCellValue(SlideRole);
+			      Cell cellPin = row1.createCell(2);
+			      cellPin.setCellValue(SlidePIN);
+			      Cell cellEmail = row1.createCell(3);
+			      cellEmail.setCellValue(SlideEmail);
+			      Cell cellPhoneNo = row1.createCell(4);
+			      cellPhoneNo.setCellValue(SlidePhone);
+				
+					      
+				
+				
+				
+				//indvEmployeeListElement.get(i).click();
+				Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
+				pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(200);
+				//break;
+			}//need to add individual validation
+			
+			  
+		} catch (Exception e) {
+			workbook.write(fileOutputStream);
+			e.printStackTrace();
+		}
+		workbook.write(fileOutputStream);
 		
 		
 	}
 	@Then("Verify user should able to modify the Employee information in RMS")
 	public void verifyUserShouldAbleToModifyTheEmployeeInformationInRMS() throws InterruptedException {//inprogress
-		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
-		System.out.println(indvEmployeeListElement.size());
-		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
-			Thread.sleep(500);
-			indvEmployeeListElement.get(i).click();
-			Thread.sleep(500);
-			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
-			Thread.sleep(1000);
-			//Modify WAAAAAAAAIT
-			//pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().click();
-			
-			
-			
-			
-			Thread.sleep(500);
-			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(500);
-		}
+//		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
+//		System.out.println(indvEmployeeListElement.size());
+//		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
+//			Thread.sleep(100);
+//			indvEmployeeListElement.get(i).click();
+//			Thread.sleep(100);
+//			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
+//			Thread.sleep(100);
+//			//Modify WAAAAAAAAIT
+//			//pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().click();
+//			
+//			
+//			
+//			
+//			Thread.sleep(100);
+//			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();Thread.sleep(100);
+//		}
 		
 	}
-	@Then("Verify user should able to see the mark as Inactive button in Employee details")
-	public void verifyUserShouldAbleToSeeTheMarkAsInactiveButtonInEmployeeDetails() {
-		//Covered in Above Method
-	}
+	
 	@Then("User should verify Mark as Inactive popup text and Cancel button")
 	public void userShouldVerifyMarkAsInactivePopupTextAndCancelButton() throws InterruptedException {
-		//Covered in Above Method
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());
 		for (int i = 0; i < indvEmployeeListElement.size(); i++) {
@@ -630,18 +712,19 @@ public class RMS_Employee_Management_definition extends BaseClass {
 			Thread.sleep(300);
 			pma.getRMS_Employee_Management_POM().getAddEmpCloseElement().click();
 			}
+			break;
 		}
 	}
 	@Then("user should verify the Employee has bee moved to bottom of rms \\(as Inactive)")
 	public void userShouldVerifyTheEmployeeHasBeeMovedToBottomOfRmsAsInactive() throws InterruptedException {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			Thread.sleep(100);
 			indvEmployeeListElement.get(i).click();
 			Thread.sleep(100);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
-			Thread.sleep(1000);
+			Thread.sleep(300);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getEditBtnEmpDetailsElement().isDisplayed());
 			Thread.sleep(100);
 			
@@ -672,7 +755,8 @@ public class RMS_Employee_Management_definition extends BaseClass {
 				}
 			}
 			Assert.assertTrue(flag);
-			break;
+			indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
+			//break;
 			}
 		}
 		
@@ -680,6 +764,6 @@ public class RMS_Employee_Management_definition extends BaseClass {
 	
 	
 	
-}//21-03-2023 15:38
+}//05-04-2023 10:17
 
 

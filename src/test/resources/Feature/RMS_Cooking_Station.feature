@@ -1,4 +1,4 @@
-@EmployeeManagement
+@EmployeeManagem
 Feature: Verify the Cooking station Page in RMS
 
   @Cookingstation
