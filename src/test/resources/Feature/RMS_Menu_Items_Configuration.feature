@@ -6,9 +6,10 @@ Feature: Menus Items section validations
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User shoild click Menus section and verify the page redirection
     And User should click Modifiers button and verify the Add Modifiers Popup "TestMod"
-    And User should verify the Modifier Name Edit and Delete options options of category "TestMod"
+    And User should verify the Modifier Name Edit and Delete options of category "TestMod"
     And User should verify the Add Modifier item slide pop-up and text box
-    And User should add Modifier Items under Modifier "Test1" "Test2" "Test3"
+    #bug Need to un hide step line
+    And User should add Modifier Items under Modifier "Test1" "Test2" "Test3" then Edit and Delete Modifier
       | Modifier | Amount | Modifier Type  | Description             |
       | Item1    |      1 | Vegetarian     | Description Test one    |
       | Item2    |      2 | Non-Vegetarian | Description Test two    |
@@ -34,10 +35,11 @@ Feature: Menus Items section validations
   Scenario Outline: As a RMS User, Validate Category section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User shoild click Menus section and verify the page redirection
-    Then User should click Add Categories button and Add Category pop-up
+    Then User should verify Add Categories button and Add Category pop-up
     And User should should Add new Category and verify Edit and Delete options of category
     And User should verify the Add Menu Slide Pop-up and text box
-    And User should add Menu Items under Categories "Category1" and "Category2"
+    #Bug double time Clicking Add Modifier button inside Menu (logic-for the Second time)
+    And User should add Menu Items under Categories "AutoCategory1" and "AutoCategory2"
       | MenuName    | Modifier Type  | Price | Description                     |
       | Menu Item1  | Vegetarian     |  1.99 | Description Test Menu one       |
       | Menu Item2  | Non-Vegetarian |  2.99 | Description Test Menu two       |
@@ -63,8 +65,8 @@ Feature: Menus Items section validations
     And User should verify the add modifier slide list inside Menu
     And User should add Menu Items with modifiers under Category "ModifierCate"
       | MenuModifier1 | Non-Vegetarian | 1.99 |
-      | MenuModifier1 | Vegetarian     | 3.99 |
-      | MenuModifier1 | Vegan          | 7.99 |
+      | MenuModifier2 | Vegetarian     | 3.99 |
+      | MenuModifier3 | Vegan          | 7.99 |
     #modify above line before run
     And User should verify the Menu items Edit option
     And User should verify the Menu items Delete option
@@ -76,10 +78,10 @@ Feature: Menus Items section validations
       | mobileNumber | otp    |
       |   2222222222 | 666666 |
 
-  @PublishMenuValidations 
+  @PublishMenuValidations
   Scenario Outline: As a RMS User, Validate Publish Menu popup section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
-    When User should click Menus section and verify the page redirection
+    When User shoild click Menus section and verify the page redirection
     Then User should add "Newcategory" and verify that publish menu status as "Added" and count
     #modify above line before run
     And User should verify the Publish Menu pop-up and Click publish
@@ -88,12 +90,12 @@ Feature: Menus Items section validations
     And User should Edit the "NewMenu" and verify that publish menu status as "Existing" and "Modified"
     And User should delete the "NewMenu" and verify that publish menu status as "Existing" and "Removed"
     And User should add some Menus and verify the status in Publish Menu
+    	| MenuName | Modifier Type  | Price | Description		                |
       | PubMenu1 | Non-Vegetarian |    14 | Description Test Publish Menu |
       | PubMenu2 | Vegan          |  0.99 | Description Test Publish Menu |
       | PubMenu3 | Non-Vegetarian |    12 | Description Test Publish Menu |
       | PubMenu4 | Vegetarian     | 13.99 | Description Test Publish Menu |
     And User should perform rearrange and verify the status in publish Menu
-    And User should perform rearrange Only and verify the "Some of the menus/categories have been rearranged." in publish Menu
     And User should verify "Menu Not Published" notification bar with "Publish Menu to save the changes made to the menu items" text
 
     Examples: 

@@ -1,7 +1,7 @@
 @EmployeeManagement
 Feature: Verify the Employee Management Page in RMS
 
-  @AddEmployeepage
+  @AddEmployeepage 
   Scenario Outline: Verify the Add Employee page in RMS
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -15,23 +15,23 @@ Feature: Verify the Employee Management Page in RMS
 
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
+      |   9443518246 | 666666 |
 
-  @EmployeeCreation
+  @EmployeeCreation 
   Scenario Outline: Verify the New Employee Creation in RMS
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
     Then User should click on Add Employee button and verify the Slide pop-up
-    When User should Create an Employee with Mandatory Fields "<displayName>" "<phoneNumber>" and "<Role>"
+    When User should Create an Employee with Mandatory Fields "<displayName>" and "<Role>"
     Then User should verify the Employee added to the Employee list
     When User should Create an Employee without Mandatory Fields "<firstName>" "<lastName>" "<emailAddress>" and "<employeeID>"
     Then User should verify the Error Message "Please enter valid phone number"
 
     Examples: 
-      | mobileNumber | otp    | firstName | lastName | emailAddress      | employeeID | displayName | phoneNumber | Role    |
-      |   9999999999 | 666666 | Teste     | Automate | AutoTes@emall.com | YH62       | AutTest34   |  2355129330 | Manager |
+      | mobileNumber | otp    | firstName | lastName | emailAddress      | employeeID | displayName  | Role    |
+      |   9443518246 | 666666 | Tester     | Automate | AutoTes@emall.com | YH62       | AutTest34    | Manager |
 
-  @Employeelist
+  @Employeelist 
   Scenario Outline: Creating multiple Employees in RMS
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -55,18 +55,17 @@ Feature: Verify the Employee Management Page in RMS
 
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
+      |   9443518246 | 666666 |
 
   @EmployeeEdit
   Scenario Outline: Verify the Edit Employees functionality in RMS
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
     Then Verify user should able to modify the Employee information in RMS
-    And Verify user should able to see the mark as Inactive button in Employee details
     And User should verify Mark as Inactive popup text and Cancel button
     And user should verify the Employee has bee moved to bottom of rms (as Inactive)
     And Verify Each employee profile contains edit button in Employee details page
 
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
+      |   9443518246 | 666666 |

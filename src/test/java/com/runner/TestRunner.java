@@ -13,14 +13,15 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 
  
-@CucumberOptions( tags="@MenuSection", stepNotifications = false, dryRun = false, features= "src\\test\\resources\\Feature\\", glue = "com.stepdefinition", 
+@CucumberOptions( tags="@Rolesandpermission", stepNotifications = true, dryRun = false, features= "src\\test\\resources\\Feature\\", glue = "com.stepdefinition", 
 monochrome = true,publish = true, snippets = io.cucumber.junit.CucumberOptions.SnippetType.CAMELCASE ,plugin = {"pretty", "json:target//output.json"})
+
+//parallel = "methods", threads = 10
 public class TestRunner {
 
 	@AfterClass
 	public static void afterClass() {
 		JvmReport.generateJVMReport(System.getProperty("user.dir")+"\\target\\output.json");
 	}
-	
-	
+		
 }

@@ -1,7 +1,7 @@
-@Jobs
+@Rolesandpermission
 Feature: Roles and permission
 
-  @Rolesandpermission2323
+  @UIValidation
   Scenario Outline: As a RMS User, I need to Check roles and permission for Manager,Waiter and Busser
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -18,17 +18,14 @@ Feature: Roles and permission
     And User should verify "This permission allows the employee to apply discounts for the order" instruction is present under Discount option
     Then User should verify "Other Permissions" Section is present and verify "Settings" option present under Other Permissions Section
     And User should verify "This permission enables the employee to view control the POS teminal settings" instruction is present under Settings option
+    Then User should able to Click Restaurant Portal and Verify the Page
     And User should verify the all option is selected as default for manager
-    #And User should able to click waiter option and verify which are the option is selected and which are the option is not selected
-    #Then User should able to hit Save
-    #And User should able to click Busser option and verify which are the option is selected and which are the option is not selected
-    #Then User should able to hit Save
-    
+		
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
+      |   7777777723 | 666666 |
 
-  @Rolesandpermission2323
+  @AddJobPopup
   Scenario Outline: As a RMS User, I need to validate the jobs popup
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -41,43 +38,36 @@ Feature: Roles and permission
 
     Examples: 
       | mobileNumber | otp    | Job Name with Special character |
-      |   9999999999 | 666666 | Ac@;'.';'?/'                    |
+      |   7777777723 | 666666 | Ac@;'.';'?/'                    |
 
-  @Rolesandpermission23
+  @AddingJobs
   Scenario Outline: As a RMS User, I need to Create new jobs and set permission for the New Role
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
     Then User should able to click jobs option and verify the "Manager" option is selected by default
-    Then User should add the New job "<Job Name>" and Click save Button
-      | Job Name |
-      | Baker    |
-      | Cleaner  |
-      | Robot 1  |
-      | Robot 2  |
-      | Robot 3  |
-      | Robot 4  |
-      | Robot 5  |
+    Then User should add the New job "Job Name" and Click save Button
     Then User should verify the New Jobs is added in the available job list
     And User should able to give permission for the New Role and Verify User should able to click Save Button
-
     Then User should able to see the edit icon and click edit icon to edit the Role Name "<Edit Name>"
     And User should verify the role name is Changed
+
     Examples: 
       | mobileNumber | otp    | Edit Name  |
-      |   9999999999 | 666666 | Edited Job |
+      |   7777777723 | 666666 | Edited Job |
 
-  @Rolesandpermission2323
+  @EditPermission
   Scenario Outline: As a RMS User, I need to edit the permission
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
     Then User should able to click jobs option and verify the "Manager" option is selected by default
+    
     And User should able to select the Job and edit the permission
 
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
+      |   7777777723 | 666666 |
 
-  @Rolesandpermission2323
+  @DeleteJob
   Scenario Outline: As a RMS User, I need to delete the Role
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -89,9 +79,9 @@ Feature: Roles and permission
 
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
+      |   7777777723 | 666666 |
 
-  @Rolesandpermission2323
+  @ReassignJob
   Scenario Outline: As a RMS User, I need to delete by Re-assigning
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
@@ -103,13 +93,15 @@ Feature: Roles and permission
 
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
-  #Scenario Outline: As a RMS User, I need to delete by Re-assigning
-    #Given Login to the restaurant with "<mobileNumber>" and "<otp>"
-    #When User should redirects to employees section
-    #Then User should able to click jobs option and verify the "Manager" option is selected by default 
-    #Then 
-#
-    #Examples: 
-      #| mobileNumber | otp    |
-      #|   7777777723 | 666666 |
+      |   7777777723 | 666666 |
+      
+    @Delete  
+  Scenario Outline: As a RMS User, I need to delete by Re-assigning
+    Given Login to the restaurant with "<mobileNumber>" and "<otp>"
+    When User should redirects to employees section
+    Then User should able to click jobs option and verify the "Manager" option is selected by default 
+    Then User should able to Delete all the Jobs
+
+    Examples: 
+      | mobileNumber | otp    |
+      |   7777777723 | 666666 |

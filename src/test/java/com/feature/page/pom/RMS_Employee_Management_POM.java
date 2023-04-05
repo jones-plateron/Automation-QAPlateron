@@ -192,7 +192,7 @@ public class RMS_Employee_Management_POM extends BaseClass{
 		return rmsDriver.findElement(By.xpath("//span[@class='user-profile user-active-label']"));
 	}
 	public WebElement getEmpNameInsideListElement(int i) {
-		return rmsDriver.findElement(By.xpath("(//p[@class=\"font-bold text-ellipsis w-100 text-left text-ellipsis\"])["+i+"]"));
+		return rmsDriver.findElement(By.xpath("(//p[contains(@class,'font-bold text-ellipsis w-100 text-left')])["+i+"]"));
 	}
 	public WebElement getEmpIDInsideListElement(int i) {
 		return rmsDriver.findElement(By.xpath("(//p[@class='muted text-left'])["+i+"]"));
