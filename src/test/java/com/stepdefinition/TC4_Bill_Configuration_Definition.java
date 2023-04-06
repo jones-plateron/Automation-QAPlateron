@@ -12,11 +12,11 @@ import com.pagemanager.PageManager;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class Bill_Configuration_Definition extends BaseClass {
+public class TC4_Bill_Configuration_Definition extends BaseClass {
 
 	PageManager pma = new PageManager();
 
-	public Bill_Configuration_Definition() {
+	public TC4_Bill_Configuration_Definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);

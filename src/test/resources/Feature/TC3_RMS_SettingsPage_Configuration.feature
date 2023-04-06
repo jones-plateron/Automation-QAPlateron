@@ -1,13 +1,13 @@
-@BillSettings1
+@BillSettings 
 Feature: Settings Page Configuration
 
-  @BillSettings1
+  @BillSettings1 @Test1
   Scenario Outline: As a RMS User, I need to Validate Bill Settings Page
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click Settings Sections
     Then User should Click Bill Configuration and Verify the Bill Configuration Page Opens
     Then User should able to Verify the Page Header as "Billing - Tax, Fees & Charges" and Verify it Contains "Sales Tax" and "Service Fee" Sections
-    Then User should Verify Sales Tax section contains "Sales Tax" ,"Apply sales tax on the subtotal after deductions" and "Apply sales tax on the tip after deductions" options
+    Then User should Verify Sales Tax section contains "Sales Tax" ,"Apply sales tax on the subtotal after deductions" and "Apply sales tax on tip" options
     And User should Verify the Instruction "percentage of tax to be applied on the total amount of order" under Sales Tax option
     Then User should Validate the TextBox of Salex Tax option
     And User should Verify the Instruction "turning tip would apply sales tax on subtotal before deductions" under Apply sales tax on the subtotal after deductions option
@@ -25,9 +25,9 @@ Feature: Settings Page Configuration
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
       
-      @BillSettings2
+      @BillSettings2 @Test1
     Scenario Outline: As a RMS User, I need to Validate Gratuity Settings Page
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click Settings Sections

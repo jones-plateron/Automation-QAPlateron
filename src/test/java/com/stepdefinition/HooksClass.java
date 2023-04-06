@@ -26,7 +26,7 @@ public class HooksClass  extends BaseClass{
 		 }
 
 		 //System.out.println(scen.isFailed());
-		//rmsDriver.quit();
+		rmsDriver.quit();
 
 	}
 

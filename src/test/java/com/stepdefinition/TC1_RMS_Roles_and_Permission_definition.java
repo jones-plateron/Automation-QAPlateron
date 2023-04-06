@@ -18,12 +18,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 
-public class RMS_Roles_and_Permission_definition extends BaseClass{
+public class TC1_RMS_Roles_and_Permission_definition extends BaseClass{
 PageManager pma = new PageManager();
 
 List<String> jobNameswhileCreating=new ArrayList<String>(); //Assigning this Globally
 
-	public RMS_Roles_and_Permission_definition() {
+	public TC1_RMS_Roles_and_Permission_definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
@@ -62,7 +62,7 @@ List<String> jobNameswhileCreating=new ArrayList<String>(); //Assigning this Glo
 	   String actPOSAcess = pma.getRMS_Roles_and_Permissions_POM().getPOSAcessSection().getText();
 	   System.out.println(actPOSAcess);
 //	   Assert.assertTrue(actPOSAcess.contains(string));
-	   Assert.assertTrue(false);
+//	   Assert.assertTrue(false);
 	   
 	   String actRePin = pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinPermissions().getText();
 	   System.out.println(actRePin);
@@ -446,11 +446,8 @@ public void userShouldAddTheNewJobAndClickSaveButton(String string) throws Inter
 			
 		}
 		Thread.sleep(300);
-		action.sendKeys(Keys.ARROW_UP).build().perform();
-		action.sendKeys(Keys.ARROW_UP).build().perform();
-		action.sendKeys(Keys.ARROW_UP).build().perform();
-		action.sendKeys(Keys.ARROW_UP).build().perform();
-		action.sendKeys(Keys.ARROW_UP).build().perform();
+		action.sendKeys(Keys.PAGE_UP).build().perform();
+		
 		Thread.sleep(300);
 		pma.getRMS_Roles_and_Permissions_POM().getRestaurantPortal().click();
 		String AllowAccessRestaurantPortal  = getDataFromExcel("Jobs Configuration", (i+1), 9);
@@ -526,110 +523,7 @@ public void userShouldVerifyTheNewJobsIsAddedInTheAvailableJobList() {
 		}
     }
 }
- 
-@Then("User should able to give permission for the New Role and Verify User should able to click Save Button")
-public void userShouldAbleToGivePermissionForTheNewRoleAndVerifyUserShouldAbleToClickSaveButton() throws InterruptedException {
-	
-	/*
-	 * Actions action = new Actions(rmsDriver); //For the 1st Job - All Options try
-	 * { pma.getRMS_Roles_and_Permissions_POM().get1stJobName().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
-	 * //Thread.sleep(3000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
-	 * //Thread.sleep(2000); action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox1().click(); //
-	 * Thread.sleep(6000); action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); //Thread.sleep(2000);
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); //Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
-	 * Thread.sleep(6000); action.sendKeys(Keys.PAGE_DOWN).build().perform();
-	 * pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click(); //
-	 * Thread.sleep(6000); action.sendKeys(Keys.PAGE_DOWN).build().perform();
-	 * pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().click(); //
-	 * Thread.sleep(6000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().click(); //
-	 * Thread.sleep(6000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().
-	 * click(); } catch(NoSuchElementException e) { // code to handle the exception
-	 * System.out.println("Element not found: " + e.getMessage()); }
-	 * 
-	 * //For the 2nd Job - Only My order try {
-	 * pma.getRMS_Roles_and_Permissions_POM().get2ndJobName().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click(); //
-	 * Thread.sleep(3000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click(); //
-	 * Thread.sleep(2000); action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); // Thread.sleep(6000);
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); // Thread.sleep(2000);
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click(); //
-	 * Thread.sleep(6000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().
-	 * click(); } catch (NoSuchElementException e) {
-	 * System.out.println("Element not found: " + e.getMessage()); }
-	 * 
-	 * //For the 3rd Job - Only My order with Discount try {
-	 * pma.getRMS_Roles_and_Permissions_POM().get3rdJobName().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
-	 * Thread.sleep(3000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click(); //
-	 * Thread.sleep(2000); action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); // Thread.sleep(6000);
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); Thread.sleep(2000);
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click(); //
-	 * Thread.sleep(6000); action.sendKeys(Keys.PAGE_DOWN).build().perform();
-	 * Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click(); //
-	 * Thread.sleep(6000); action.sendKeys(Keys.PAGE_DOWN).build().perform();
-	 * pma.getRMS_Roles_and_Permissions_POM().getDiscountCheckBox1().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().
-	 * click(); } catch (NoSuchElementException e) {
-	 * System.out.println("Element not found: " + e.getMessage()); } //For the 4th
-	 * Job - Only My order with Refund
-	 * 
-	 * try { pma.getRMS_Roles_and_Permissions_POM().get4thJobName().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); Thread.sleep(2000);
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click();
-	 * 
-	 * action.sendKeys(Keys.PAGE_DOWN).build().perform(); Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getRefundCheckBox().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().
-	 * click(); } catch (NoSuchElementException e) {
-	 * System.out.println("Element not found: " + e.getMessage()); } //For the 5th
-	 * Job - Only My order with Settings
-	 * 
-	 * try { // code that might throw an exception
-	 * pma.getRMS_Roles_and_Permissions_POM().get5thJobName().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getRegeneratePinCheckBox().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getShiftReviewCheckBox().click();
-	 * pma.getRMS_Roles_and_Permissions_POM().getClockInOutCheckBox().click();
-	 * Thread.sleep(2000); action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); Thread.sleep(2000);
-	 * action.sendKeys(Keys.ARROW_DOWN).build().perform(); Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getViewMyOrderChechBox().click(); //
-	 * Thread.sleep(6000); action.sendKeys(Keys.ARROW_DOWN).build().perform();
-	 * Thread.sleep(2000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getSettingsCheckBox().click(); //
-	 * Thread.sleep(6000);
-	 * pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().
-	 * click(); } catch (NoSuchElementException e) { // code to handle the exception
-	 * System.out.println("Element not found: " + e.getMessage()); }
-	 */
-}
+ 	
 @Then("User should able to see the edit icon and click edit icon to edit the Role Name {string}")
 public void userShouldAbleToSeeTheEditIconAndClickEditIconToEditTheRoleName(String EditName) throws InterruptedException {
 	Actions action = new Actions(rmsDriver);

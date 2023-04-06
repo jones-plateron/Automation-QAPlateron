@@ -97,7 +97,7 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//i[@class='icon-close icon-5x']"));
 	}
 	public WebElement getDeleteModifierPopupTextElement() {
-		return rmsDriver.findElement(By.xpath("//p[@class='empty-state__help-text--large']"));
+		return rmsDriver.findElement(By.xpath("//p[@class='empty-state__help-text--large ']"));
 	}
 	public WebElement getAddModifierItemButtonElement() {
 		return rmsDriver.findElement(By.xpath("//div[@class='card card-empty']"));

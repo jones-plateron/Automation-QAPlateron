@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -31,12 +32,12 @@ import com.pagemanager.PageManager;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class RMS_Manage_Table_Definition extends BaseClass {
+public class TC6_RMS_Manage_Table_Definition extends BaseClass {
 
 	PageManager pma = new PageManager();
 	List<WebElement> areaListWebElement = new ArrayList<WebElement>();
 
-	public RMS_Manage_Table_Definition() {
+	public TC6_RMS_Manage_Table_Definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
@@ -334,26 +335,27 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 	public void userShouldAbleToSelectAnyAreaAndVerifyTheAreaHeaderAndTotalTableCountUnderTheAreaName()
 			throws InterruptedException {
 		// rmsDriver.navigate().refresh();
-		Thread.sleep(2000);
+		Thread.sleep(800);
 		List<WebElement> areaLists = pma.getRMS_ManageTable_POM().getAreaLists();
 		for (int i = 0; i < areaLists.size(); i++) {
 			String text = areaLists.get(i).getText();
 			if (text.contains("Ground Floor")) {
-				System.out.println(text);
 				areaLists.get(i).click();
 				break;
 
 			}
 		}
 		String text = pma.getRMS_ManageTable_POM().getAreaHeader().getText();
-		Assert.assertTrue(!text.equals("Ground Floor"));
+		Assert.assertTrue(text.contains("Ground Floor"));
 		Thread.sleep(12000);
+		
 		List<WebElement> getallTables = pma.getRMS_ManageTable_POM().getallTables();//Getting total table count
 		int TotalCount = getallTables.size();
 		System.out.println(TotalCount);
 		String TotalTablecount = String.valueOf(TotalCount);
-		String text1 = pma.getRMS_ManageTable_POM().getTotalTables().getText();//Getting total table count
-		Assert.assertTrue(text.contains(TotalTablecount));
+		
+		String text1 = pma.getRMS_ManageTable_POM().getTotalTables().getText();//Getting total table count in heading
+		Assert.assertTrue(text1.contains(TotalTablecount));
 
 	}
 
@@ -366,31 +368,39 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 		for (int i = 0; i < areaLists.size(); i++) {
 			String text = areaLists.get(i).getText();
 			if (text.contains("Automation Area")) {
-				Thread.sleep(2000);
-				areaLists.get(i).click();
-
+				try {
+		    		areaLists.get(i).click();
+				} catch (ElementNotInteractableException e) {
+					Actions act = new Actions(rmsDriver);
+					act.keyDown(Keys.ARROW_DOWN).keyUp(Keys.ARROW_DOWN);
+					areaLists.get(i).click();
+				}
 				pma.getRMS_ManageTable_POM().getAreaEditIcon().click();
 				action.keyDown(Keys.CONTROL).sendKeys("a");
 				action.sendKeys(Keys.BACK_SPACE).build().perform();
 				action.keyUp(Keys.CONTROL);
-				Thread.sleep(2000);
+				Thread.sleep(200);
 				action.sendKeys("Edited Area").build().perform();
-				Thread.sleep(2000);
+				Thread.sleep(200);
+				break;
 			}
-			pma.getRMS_ManageTable_POM().getAreaHeader().click();
+			}
+		
+			pma.getRMS_ManageTable_POM().getTotalTables().click();
+			Thread.sleep(1000);
 			String areaHeader = pma.getRMS_ManageTable_POM().getAreaHeader().getText();
 			System.out.println(areaHeader);
-			Thread.sleep(2000);
-			
+			Thread.sleep(200);
+		
+		
 			// Again Editing back the area name
 			List<WebElement> areaLists2 = pma.getRMS_ManageTable_POM().getAreaLists();
 			for (int j = 0; j < areaLists2.size(); j++) {
 				String text1 = areaLists2.get(j).getText();
-				if (text.contains("Edited Area")) {
+				if (text1.contains("Edited Area")) {
 					Thread.sleep(2000);
-					areaLists.get(i).click();
-					
-
+					areaLists2.get(j).click();
+			
 					pma.getRMS_ManageTable_POM().getAreaEditIcon().click();
 					action.keyDown(Keys.CONTROL).sendKeys("a");
 					action.sendKeys(Keys.BACK_SPACE).build().perform();
@@ -401,7 +411,7 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 				}
 			}
 		}
-	}
+	
 
 	@Then("User should able to select any Area and Select any Table")
 	public void userShouldAbleToSelectAnyAreaAndSelectAnyTable() throws InterruptedException {
@@ -434,6 +444,7 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 
 	@Then("User should able to see and Click Preview option")
 	public void userShouldAbleToSeeAndClickPreviewOption() {
+		
 		boolean displayed = pma.getRMS_ManageTable_POM().getPreviewButton().isDisplayed();
 		Assert.assertTrue(displayed);
 
@@ -516,7 +527,7 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 		pma.getRMS_ManageTable_POM().getDeleteTablepopupDeletebutton().click();// Table Deleted here
 		Thread.sleep(200);
 		String totalTableafterDelete = pma.getRMS_ManageTable_POM().getTotalTables().getText();
-		System.out.println(totalTableafterDelete);
+		System.out.println(totalTableafterDelete);Thread.sleep(200);
 		Assert.assertTrue(!totalTablebeforeDelete.equals(totalTableafterDelete));
 
 	}
@@ -608,7 +619,17 @@ public class RMS_Manage_Table_Definition extends BaseClass {
 	    
 	   int k=1;
 	    for (int i = 0; i < areaLists.size(); i++) {
-	    	areaLists.get(i).click();
+	    	Thread.sleep(200);
+	    	try {
+	    		areaLists.get(i).click();
+			} catch (ElementNotInteractableException e) {
+				Actions act = new Actions(rmsDriver);
+				act.keyDown(Keys.ARROW_DOWN).keyUp(Keys.ARROW_DOWN);
+				areaLists.get(i).click();
+			}
+	    	//
+	    	
+	    	
 	    	 List<WebElement> getallTables = pma.getRMS_ManageTable_POM().getallTables();
 	    	 Thread.sleep(100);
 	    	for (int j = 0; j < getallTables.size(); j++) {
