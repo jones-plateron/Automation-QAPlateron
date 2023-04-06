@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -367,9 +368,13 @@ public class TC6_RMS_Manage_Table_Definition extends BaseClass {
 		for (int i = 0; i < areaLists.size(); i++) {
 			String text = areaLists.get(i).getText();
 			if (text.contains("Automation Area")) {
-				Thread.sleep(200);
-				areaLists.get(i).click();
-				Thread.sleep(200);
+				try {
+		    		areaLists.get(i).click();
+				} catch (ElementNotInteractableException e) {
+					Actions act = new Actions(rmsDriver);
+					act.keyDown(Keys.ARROW_DOWN).keyUp(Keys.ARROW_DOWN);
+					areaLists.get(i).click();
+				}
 				pma.getRMS_ManageTable_POM().getAreaEditIcon().click();
 				action.keyDown(Keys.CONTROL).sendKeys("a");
 				action.sendKeys(Keys.BACK_SPACE).build().perform();
@@ -522,7 +527,7 @@ public class TC6_RMS_Manage_Table_Definition extends BaseClass {
 		pma.getRMS_ManageTable_POM().getDeleteTablepopupDeletebutton().click();// Table Deleted here
 		Thread.sleep(200);
 		String totalTableafterDelete = pma.getRMS_ManageTable_POM().getTotalTables().getText();
-		System.out.println(totalTableafterDelete);
+		System.out.println(totalTableafterDelete);Thread.sleep(200);
 		Assert.assertTrue(!totalTablebeforeDelete.equals(totalTableafterDelete));
 
 	}
@@ -615,7 +620,16 @@ public class TC6_RMS_Manage_Table_Definition extends BaseClass {
 	   int k=1;
 	    for (int i = 0; i < areaLists.size(); i++) {
 	    	Thread.sleep(200);
-	    	areaLists.get(i).click();
+	    	try {
+	    		areaLists.get(i).click();
+			} catch (ElementNotInteractableException e) {
+				Actions act = new Actions(rmsDriver);
+				act.keyDown(Keys.ARROW_DOWN).keyUp(Keys.ARROW_DOWN);
+				areaLists.get(i).click();
+			}
+	    	//
+	    	
+	    	
 	    	 List<WebElement> getallTables = pma.getRMS_ManageTable_POM().getallTables();
 	    	 Thread.sleep(100);
 	    	for (int j = 0; j < getallTables.size(); j++) {

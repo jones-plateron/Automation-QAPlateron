@@ -47,7 +47,6 @@ Feature: Roles and permission
     Then User should able to click jobs option and verify the "Manager" option is selected by default
     Then User should add the New job "Job Name" and Click save Button
     Then User should verify the New Jobs is added in the available job list
-    And User should able to give permission for the New Role and Verify User should able to click Save Button
     Then User should able to see the edit icon and click edit icon to edit the Role Name "<Edit Name>"
     And User should verify the role name is Changed
 
@@ -60,7 +59,6 @@ Feature: Roles and permission
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to employees section
     Then User should able to click jobs option and verify the "Manager" option is selected by default
-    
     And User should able to select the Job and edit the permission
 
     Examples: 

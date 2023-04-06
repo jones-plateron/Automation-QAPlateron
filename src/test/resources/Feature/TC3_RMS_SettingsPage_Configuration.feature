@@ -1,7 +1,7 @@
-@BillSettings1
+@BillSettings 
 Feature: Settings Page Configuration
 
-  @BillSettings1
+  @BillSettings1 @Test1
   Scenario Outline: As a RMS User, I need to Validate Bill Settings Page
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click Settings Sections
@@ -27,7 +27,7 @@ Feature: Settings Page Configuration
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
       
-      @BillSettings2
+      @BillSettings2 @Test1
     Scenario Outline: As a RMS User, I need to Validate Gratuity Settings Page
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click Settings Sections

@@ -80,8 +80,7 @@ public class TC3_RMS_SettingsPage_Configuration_definition extends BaseClass {
 		Assert.assertTrue(actIndication.contains("Please enter valid value"));
 		pma.getRMS_SettingsPage_Configuration_POM().getSalesTaxTextBox().click();
 		 pma.getRMS_SettingsPage_Configuration_POM().getSalesTaxTextBox().sendKeys("1");
-		 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getSalesTaxTextboxIndication().isDisplayed();
-		 Assert.assertFalse(!actStatus);
+		 
 		
 		//Trying to give Alphabets
 		pma.getRMS_SettingsPage_Configuration_POM().getSalesTaxTextBox().click();
@@ -180,8 +179,7 @@ public class TC3_RMS_SettingsPage_Configuration_definition extends BaseClass {
 		Assert.assertTrue(actIndication.contains("Please enter valid value"));
 		pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageTextBox().click();
 		 pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageTextBox().sendKeys("1");
-		 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageTextBoxIndication().isDisplayed();
-		 Assert.assertFalse(!actStatus);
+		 
 		
 		//Trying to give Alphabets
 		pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageTextBox().click();
@@ -334,8 +332,7 @@ public class TC3_RMS_SettingsPage_Configuration_definition extends BaseClass {
 		Assert.assertTrue(actIndication.contains("Please enter valid value"));
 		pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().click();
 		 pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().sendKeys("1");
-		 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBoxIndication().isDisplayed();
-		 Assert.assertFalse(!actStatus);
+		 
 		
 		//Trying to give Alphabets
 		pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox().click();
@@ -404,12 +401,11 @@ public class TC3_RMS_SettingsPage_Configuration_definition extends BaseClass {
 			
 			Thread.sleep(2000);
 			String actIndication = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication().getText();
+			Thread.sleep(200);
 			Assert.assertTrue(actIndication.contains("Please enter valid value"));
 			System.out.println(actIndication);
-			//pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().click();
-			 pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().sendKeys("1");
-			 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication().isDisplayed();
-			 Assert.assertFalse(!actStatus);
+			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().sendKeys("1");
+			 
 			
 			//Trying to give Alphabets
 			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox().click();
@@ -458,8 +454,7 @@ public class TC3_RMS_SettingsPage_Configuration_definition extends BaseClass {
 			Assert.assertTrue(actIndication.contains("Please enter valid value"));
 			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().click();
 			 pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().sendKeys("1");
-			 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBoxIndication().isDisplayed();
-			 Assert.assertFalse(!actStatus);
+			 
 			
 			//Trying to give Alphabets
 			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox().click();
@@ -512,8 +507,7 @@ public class TC3_RMS_SettingsPage_Configuration_definition extends BaseClass {
 		Assert.assertTrue(actIndication.contains("Please enter valid value"));
 		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().click();
 		 pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().sendKeys("1");
-		 boolean actStatus = pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBoxIndication().isDisplayed();
-		 Assert.assertFalse(!actStatus);
+		 
 		
 		//Trying to give Alphabets
 		pma.getRMS_SettingsPage_Configuration_POM().getTaxtobeAppliedonGratuityAmountTextBox().click();

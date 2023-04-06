@@ -1,4 +1,4 @@
-@MenuSection
+@MenuSection 
 Feature: Menus Items section validations
 
   @ModifierMenuValidations
@@ -101,3 +101,14 @@ Feature: Menus Items section validations
     Examples: 
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
+
+#@DeleteMenus
+  #Scenario Outline: As a RMS User, Validate Publish Menu popup section
+    #Given Login to the restaurant with "<mobileNumber>" and "<otp>"
+    #When User shoild click Menus section and verify the page redirection
+    #Then Deleting Menus and Categories
+#
+#
+    #Examples: 
+      #| mobileNumber | otp    |
+      #|   7777777723 | 666666 |      

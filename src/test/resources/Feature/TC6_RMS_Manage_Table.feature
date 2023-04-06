@@ -1,8 +1,8 @@
-@ManageTable
+@ManageTable 
 Feature: Manage Table
 
   @POSSetup
-  Scenario Outline: 
+  Scenario Outline: Validation of POS Setup Section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click POS System Sections and Verify page redirected to POS System
     And User should able to verify POS System has two Section Manage Table and POS Setup
@@ -15,7 +15,7 @@ Feature: Manage Table
 
   #Validating the TakeOut Page
   @TakeOut
-  Scenario Outline: 
+  Scenario Outline: Validation of Take-out Section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click POS System Sections and Verify page redirected to POS System
     Then User should able to verify Manage Table has two button DineIn and TakeOut
@@ -34,7 +34,7 @@ Feature: Manage Table
 
   #Validating the AddTable
   @AddTables
-  Scenario Outline: 
+  Scenario Outline: Validation of Add table Functionality
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click POS System Sections and Verify page redirected to POS System
     Then User should able to Click Add Table Button on top right corner of the page
@@ -72,7 +72,7 @@ Feature: Manage Table
 
   #Validating the Table
   @ValidatingTable
-  Scenario Outline: 
+  Scenario Outline: Validation of Table Modification Functionality
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click POS System Sections and Verify page redirected to POS System
     Then User should able to select any Area and Select any Table
@@ -92,7 +92,7 @@ Feature: Manage Table
 
   #Validating the Rearrange
   @Rearrange
-  Scenario Outline: 
+  Scenario Outline: Validation of Area and Table Rearrange 
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should able to Click POS System Sections and Verify page redirected to POS System
     Then User should able to rearrange the Area and Validate the Rearrange Position
