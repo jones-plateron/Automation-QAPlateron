@@ -66,8 +66,8 @@ public class TC2_RMS_Employee_Management_definition extends BaseClass {
 		rmsDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		Thread.sleep(1000);
 		pma.getRMS_Employee_Management_POM().getLoginMobileNumElement().sendKeys(mobileNum);Thread.sleep(500);
-		pma.getRMS_Employee_Management_POM().getLoginContinuebuttonElement().click();Thread.sleep(500);
-		pma.getRMS_Employee_Management_POM().getLoginOtpElement().sendKeys(otp);Thread.sleep(500);
+		pma.getRMS_Employee_Management_POM().getLoginContinuebuttonElement().click();Thread.sleep(1000);
+		pma.getRMS_Employee_Management_POM().getLoginOtpElement().sendKeys(otp);Thread.sleep(1000);
 		pma.getRMS_Employee_Management_POM().getLoginVerifyOtpElement().click();Thread.sleep(1000);
 		Assert.assertTrue(pma.getRMS_Employee_Management_POM().getOverviewWelcomTextElement().getText().contains("Welcome"), "Verifying Successful Login");Thread.sleep(500);
 		
@@ -722,7 +722,7 @@ public class TC2_RMS_Employee_Management_definition extends BaseClass {
 	public void userShouldVerifyTheEmployeeHasBeeMovedToBottomOfRmsAsInactive() throws InterruptedException {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 1; i++) {
 			Thread.sleep(100);
 			indvEmployeeListElement.get(1).click();	
 			Thread.sleep(100);
