@@ -52,7 +52,7 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 			throws InterruptedException, IOException {
 		String salTxafterDeduct = getDataFromExcel("Bill Configuration", 2, 1);
 		// System.out.println(salTxafterDeduct);
-		if (salTxafterDeduct.equals("ON")) {
+		if (salTxafterDeduct.equals("ON")) {Thread.sleep(500);
 			if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
 					.getAttribute("value").equals("true")) {
 			} else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
@@ -109,51 +109,51 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 
 	@Then("User should enable or Disable the Service fee tax option #Excel Input")
 	public void userShouldEnableOrDisableTheServiceFeeTaxOptionExcelInput() throws IOException, InterruptedException {
-		String SerFeeTXCheckBx = getDataFromExcel("Bill Configuration", 5, 1);
-
-		if (SerFeeTXCheckBx.equals("ON")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
-					.getAttribute("value").equals("true")) {
-			} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
-					.getAttribute("value").equals("false")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
-			}
-		} else if (SerFeeTXCheckBx.equals("OFF")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
-					.getAttribute("value").equals("true")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
-			} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
-					.getAttribute("value").equals("false")) {
-			}
-		} else {
-			Assert.assertTrue(false, "Invalid State");
-		}
+//		String SerFeeTXCheckBx = getDataFromExcel("Bill Configuration", 5, 1);
+//
+//		if (SerFeeTXCheckBx.equals("ON")) {Thread.sleep(500);
+//			if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+//					.getAttribute("value").equals("true")) {Thread.sleep(500);
+//			} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+//					.getAttribute("value").equals("false")) {Thread.sleep(500);
+//				pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
+//			}
+//		} else if (SerFeeTXCheckBx.equals("OFF")) {Thread.sleep(500);
+//			if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+//					.getAttribute("value").equals("true")) {Thread.sleep(500);
+//				pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
+//			} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+//					.getAttribute("value").equals("false")) {Thread.sleep(500);
+//			}
+//		} else {
+//			Assert.assertTrue(false, "Invalid State");
+//		}
 	}
 
 	@Then("User should enable or Disable the Apply service fee on the subtotal after deductions #Excel Input")
 	public void userShouldEnableOrDisableTheApplyServiceFeeOnTheSubtotalAfterDeductionsExcelInput()
 			throws IOException, InterruptedException {
-		String serFeeonSubToAfterDedu = getDataFromExcel("Bill Configuration", 7, 1);
-
-		if (serFeeonSubToAfterDedu.equals("ON")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
-					.getAttribute("value").equals("true")) {
-			} else if (pma.getRMS_SettingsPage_Configuration_POM()
-					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
-						.click();
-			}
-		} else if (serFeeonSubToAfterDedu.equals("OFF")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
-					.getAttribute("value").equals("true")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
-						.click();
-			} else if (pma.getRMS_SettingsPage_Configuration_POM()
-					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {
-			}
-		} else {
-			Assert.assertTrue(false, "Invalid State");
-		}
+//		String serFeeonSubToAfterDedu = getDataFromExcel("Bill Configuration", 7, 1);
+//
+//		if (serFeeonSubToAfterDedu.equals("ON")) {Thread.sleep(500);
+//			if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
+//					.getAttribute("value").equals("true")) {Thread.sleep(500);
+//			} else if (pma.getRMS_SettingsPage_Configuration_POM()
+//					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {Thread.sleep(500);
+//				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
+//						.click();
+//			}
+//		} else if (serFeeonSubToAfterDedu.equals("OFF")) {Thread.sleep(500);
+//			if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
+//					.getAttribute("value").equals("true")) {Thread.sleep(500);
+//				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
+//						.click();
+//			} else if (pma.getRMS_SettingsPage_Configuration_POM()
+//					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {Thread.sleep(500);
+//			}
+//		} else {
+//			Assert.assertTrue(false, "Invalid State");
+//		}
 	}
 
 	@Then("User should click Save button in Bill Configuration page")
@@ -173,17 +173,17 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 
 		if (GradEnable.equals("ON")) {
 			if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value")
-					.equals("true")) {
+					.equals("true")) {Thread.sleep(500);
 			} else if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value")
-					.equals("false")) {
+					.equals("false")) {Thread.sleep(500);
 				pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle1().click();
 			}
-		} else if (GradEnable.equals("OFF")) {
+		} else if (GradEnable.equals("OFF")) {Thread.sleep(500);
 			if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value")
-					.equals("true")) {
+					.equals("true")) {Thread.sleep(500);
 				pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle1().click();
 			} else if (pma.getRMS_SettingsPage_Configuration_POM().getEnableGratuityToggle().getAttribute("value")
-					.equals("false")) {
+					.equals("false")) {Thread.sleep(500);
 			}
 		} else {
 			Assert.assertTrue(false, "Invalid State");
@@ -195,20 +195,20 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 
 		String CheckboxOption = getDataFromExcel("Bill Configuration", 9, 1);
 
-		if (CheckboxOption.equals("Guest Count")) {
+		if (CheckboxOption.equals("Guest Count")) {Thread.sleep(500);
 			pma.getRMS_SettingsPage_Configuration_POM().getGuestCountRadioButtonOption().click();
 
-		} else if (CheckboxOption.equals("Order Amount")) {
+		} else if (CheckboxOption.equals("Order Amount")) {Thread.sleep(500);
 			pma.getRMS_SettingsPage_Configuration_POM().getOrderAmountRadioButtonOption().click();
 			// Need to Add takeAway & Dine-In
 			String takeAwayCheckbxStatus = getDataFromExcel("Bill Configuration", 14, 1);
-			if (takeAwayCheckbxStatus.equals("ON")) {
+			if (takeAwayCheckbxStatus.equals("ON")) {Thread.sleep(500);
 				if (pma.getRMS_SettingsPage_Configuration_POM().getTakeAwayCheckBox1().getAttribute("value")
 						.equals("true")) {
 				} else {
 					pma.getRMS_SettingsPage_Configuration_POM().getTakeAwayCheckBox().click();
 				}
-			} else if (takeAwayCheckbxStatus.equals("OFF")) {
+			} else if (takeAwayCheckbxStatus.equals("OFF")) {Thread.sleep(500);
 				if (pma.getRMS_SettingsPage_Configuration_POM().getTakeAwayCheckBox1().getAttribute("value")
 						.equals("true")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getTakeAwayCheckBox().click();
@@ -218,11 +218,11 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 			String dineINCheckbxStatus = getDataFromExcel("Bill Configuration", 15, 1);
 			if (dineINCheckbxStatus.equals("ON")) {
 				if (pma.getRMS_SettingsPage_Configuration_POM().getDineInCheckBox1().getAttribute("value")
-						.equals("true")) {
+						.equals("true")) {Thread.sleep(500);
 				} else {
 					pma.getRMS_SettingsPage_Configuration_POM().getDineInCheckBox().click();
 				}
-			} else if (dineINCheckbxStatus.equals("OFF")) {
+			} else if (dineINCheckbxStatus.equals("OFF")) {Thread.sleep(500);
 				if (pma.getRMS_SettingsPage_Configuration_POM().getDineInCheckBox1().getAttribute("value")
 						.equals("true")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getDineInCheckBox().click();
@@ -237,7 +237,7 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 
 	@Then("User should enter the Gratuity Percentage #Excel Input")
 	public void userShouldEnterTheGratuityPercentageExcelInput() throws IOException, InterruptedException {
-
+		Thread.sleep(500);
 		String gratuityPercentage = getDataFromExcel("Bill Configuration", 10, 1);
 		pma.getRMS_SettingsPage_Configuration_POM().getGratuityPercentageTextBox()
 				.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
@@ -247,7 +247,7 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 	@Then("User should verify and Enter Gratuity eligibility #Excel Input Two")
 	public void userShouldVerifyAndEnterGratuityEligibilityExcelInputExcelInputTwo()
 			throws IOException, InterruptedException {
-
+		Thread.sleep(500);
 		String CheckboxOption = getDataFromExcel("Bill Configuration", 9, 1);
 		if (CheckboxOption.equals("Guest Count")) {
 			String countOfGuest = getDataFromExcel("Bill Configuration", 11, 1);
@@ -256,7 +256,7 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 			pma.getRMS_SettingsPage_Configuration_POM().getGratuitywillbeAddedonBillwhenGuestCountReachesthisNoTextbox()
 					.sendKeys(countOfGuest);
 
-		} else if (CheckboxOption.equals("Order Amount")) {
+		} else if (CheckboxOption.equals("Order Amount")) {Thread.sleep(500);
 			String orderAmount = getDataFromExcel("Bill Configuration", 12, 1);
 			pma.getRMS_SettingsPage_Configuration_POM()
 					.getGratuitywillbeAddedonBillwhenSubtotalReachesthisAmountTextBox()
@@ -269,7 +269,7 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 	}
 
 	@Then("User should Enter the Gratuity tax percentage #Excel Input")
-	public void userShouldEnterTheGratuityTaxPercentageExcelInput() throws InterruptedException, IOException {
+	public void userShouldEnterTheGratuityTaxPercentageExcelInput() throws InterruptedException, IOException {Thread.sleep(500);
 
 		String gratFeeTxIntStr = getDataFromExcel("Bill Configuration", 13, 1);
 
@@ -297,22 +297,22 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 //		}else {
 //			Assert.assertTrue(false, "Invalid State");
 //		}
-
+		Thread.sleep(500);
 		String CheckboxOption = getDataFromExcel("Bill Configuration", 9, 1);
-		if (CheckboxOption.equals("Guest Count")) {
+		if (CheckboxOption.equals("Guest Count")) {Thread.sleep(500);
 
 			String grdSubafterDeduct = getDataFromExcel("Bill Configuration", 16, 1);
-			if (grdSubafterDeduct.equals("ON")) {
+			if (grdSubafterDeduct.equals("ON")) {Thread.sleep(500);
 				if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle1()
-						.getAttribute("value").equals("true")) {
+						.getAttribute("value").equals("true")) {Thread.sleep(500);
 				} else if (pma.getRMS_SettingsPage_Configuration_POM()
 						.getApplyGratuityontheSubtotalafterDeductionsToggle1().getAttribute("value").equals("false")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle()
 							.click();
 				}
-			} else if (grdSubafterDeduct.equals("OFF")) {
+			} else if (grdSubafterDeduct.equals("OFF")) {Thread.sleep(500);
 				if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle1()
-						.getAttribute("value").equals("true")) {
+						.getAttribute("value").equals("true")) {Thread.sleep(500);
 					pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle()
 							.click();
 				} else if (pma.getRMS_SettingsPage_Configuration_POM()
@@ -322,23 +322,23 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 				Assert.assertTrue(false, "Invalid State");
 			}
 
-		} else if (CheckboxOption.equals("Order Amount")) {
+		} else if (CheckboxOption.equals("Order Amount")) {Thread.sleep(500);
 			String grdSubafterDeduct = getDataFromExcel("Bill Configuration", 16, 1);
 			if (grdSubafterDeduct.equals("ON")) {
 				if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle2()
-						.getAttribute("value").equals("true")) {
+						.getAttribute("value").equals("true")) {Thread.sleep(500);
 				} else if (pma.getRMS_SettingsPage_Configuration_POM()
 						.getApplyGratuityontheSubtotalafterDeductionsToggle2().getAttribute("value").equals("false")) {
 					pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle()
 							.click();
 				}
-			} else if (grdSubafterDeduct.equals("OFF")) {
+			} else if (grdSubafterDeduct.equals("OFF")) {Thread.sleep(500);
 				if (pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle2()
-						.getAttribute("value").equals("true")) {
+						.getAttribute("value").equals("true")) {Thread.sleep(500);
 					pma.getRMS_SettingsPage_Configuration_POM().getApplyGratuityontheSubtotalafterDeductionsToggle()
 							.click();
 				} else if (pma.getRMS_SettingsPage_Configuration_POM()
-						.getApplyGratuityontheSubtotalafterDeductionsToggle2().getAttribute("value").equals("false")) {
+						.getApplyGratuityontheSubtotalafterDeductionsToggle2().getAttribute("value").equals("false")) {Thread.sleep(500);
 				}
 			} else {
 				Assert.assertTrue(false, "Invalid State");

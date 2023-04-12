@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -367,6 +368,7 @@ public void userShouldAddTheNewJobAndClickSaveButton(String string) throws Inter
 		String PermissionViewAllOrder = getDataFromExcel("Jobs Configuration", (i+1), 4);
 		if (PermissionViewAllOrder.equals("Yes")) {
 			if (pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox().getAttribute("value").equals("false")) {
+				Thread.sleep(200);
 				pma.getRMS_Roles_and_Permissions_POM().getViewAllOrderCheckBox1().click();
 			}
 			
@@ -542,9 +544,10 @@ public void userShouldAbleToSeeTheEditIconAndClickEditIconToEditTheRoleName(Stri
     pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionSaveButton().click();
 }
 @Then("User should verify the role name is Changed")
-public void userShouldVerifyTheRoleNameIsChanged() {
+public void userShouldVerifyTheRoleNameIsChanged() throws InterruptedException {
     String text = pma.getRMS_Roles_and_Permissions_POM().get3rdJobName().getText();
     System.out.println(text);
+    Thread.sleep(300);
     Assert.assertEquals(text, "Edited Job");
 }
 
@@ -611,8 +614,14 @@ public void verifyTheReAssignPopupOpensAndVerifyInstruction(String string) throw
     for (int i = 0; i < AllRoleElement.size(); i++) {
         String text = AllRoleElement.get(i).getText();
         if (text.contains("Baker")) {
-        	Thread.sleep(200);
-        	AllRoleElement.get(i).click();
+            Thread.sleep(500);
+            try {
+                AllRoleElement.get(i).click();
+            } catch (ElementNotInteractableException e) {
+                Actions act = new Actions(rmsDriver);
+                act.keyDown(Keys.ARROW_DOWN).keyUp(Keys.ARROW_DOWN);
+                AllRoleElement.get(i).click();
+            }
         	
     pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionDeleteButton().click();
 	pma.getRMS_Roles_and_Permissions_POM().getDeleteJobPopupSaveButton().click();
@@ -624,9 +633,10 @@ public void verifyTheReAssignPopupOpensAndVerifyInstruction(String string) throw
 
 }
 @Then("User should able to Re-assign the employee to other role")
-public void userShouldAbleToReAssignTheEmployeeToOtherRole() {
+public void userShouldAbleToReAssignTheEmployeeToOtherRole() throws InterruptedException {
 	// pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassignNextArrow().click();
 	 //pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassignPreviousArrow().click();
+	Thread.sleep(200);
 	 pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassigntoWaiter().click();   
 }
 
@@ -636,27 +646,31 @@ public void verifyUserShouldAbleToCloseByClickingEitherXIconOrCancelButton() {
     System.out.println("Re-assign Popup Closed");
 }
 @Then("Verify User should able to delete the Role by clicking Proceed Button")
-public void verifyUserShouldAbleToDeleteTheRoleByClickingProceedButton() throws InterruptedException {
-	
-	List<WebElement> AllRoleElement = pma.getRMS_Roles_and_Permissions_POM().getRolesElement();
-    for (int i = 0; i < AllRoleElement.size(); i++) {
-        String text = AllRoleElement.get(i).getText();
-        if (text.contains("Baker")) {
-        	Thread.sleep(200);
-        	AllRoleElement.get(i).click();
-      
-	pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionDeleteButton().click();
-	pma.getRMS_Roles_and_Permissions_POM().getDeleteJobPopupSaveButton().click();
-	Thread.sleep(1000);
-	pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassigntoWaiter().click();
-	pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassignProceedButton().click();
-	
-        System.out.println(text);
-        break;
+public void verifyUserShouldAbleToDeleteTheRoleByClickingProceedButton() throws InterruptedException {Thread.sleep(1000);
+List<WebElement> AllRoleElement = pma.getRMS_Roles_and_Permissions_POM().getRolesElement();
+for (int i = 0; i < AllRoleElement.size(); i++) {
+    String text = AllRoleElement.get(i).getText();
+    if (text.contains("Baker")) {
+        Thread.sleep(200);
+        try {
+            AllRoleElement.get(i).click();
+        } catch (ElementNotInteractableException e) {
+            Actions act = new Actions(rmsDriver);
+            act.keyDown(Keys.ARROW_DOWN).keyUp(Keys.ARROW_DOWN);
+            AllRoleElement.get(i).click();
         }
+ 
+pma.getRMS_Roles_and_Permissions_POM().getRolesandPermissionDeleteButton().click();
+pma.getRMS_Roles_and_Permissions_POM().getDeleteJobPopupSaveButton().click();
+Thread.sleep(200);
+pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassigntoWaiter().click();Thread.sleep(200);
+pma.getRMS_Roles_and_Permissions_POM().getDeleteJobReassignProceedButton().click();
+
     }
-    
-   }  
+}
+Thread.sleep(200);
+rmsDriver.navigate().refresh();
+}  
 @Then("User should able to Delete all the Jobs")
 public void userShouldAbleToDeleteAllTheJobs() throws InterruptedException, IOException {
 	
@@ -665,7 +679,7 @@ public void userShouldAbleToDeleteAllTheJobs() throws InterruptedException, IOEx
 	String AllowAccessRestaurantPortal  = getDataFromExcel("Jobs Configuration", 13, 1);
 	if (AllowAccessRestaurantPortal.equals("Yes")) {
     for (int i = 0; i < AllRoleElement.size(); i++) {
-    	Thread.sleep(100);
+    	Thread.sleep(400);
     	
     	if (AllRoleElement.get(i).getText().contains("Manager")) {
 			continue;
@@ -679,7 +693,6 @@ public void userShouldAbleToDeleteAllTheJobs() throws InterruptedException, IOEx
 	        pma.getRMS_Roles_and_Permissions_POM().getDeleteJobPopupSaveButton().click();Thread.sleep(100);
 	        AllRoleElement = pma.getRMS_Roles_and_Permissions_POM().getRolesElement();
 	        i--;
-			
 		}  
 }
 	}

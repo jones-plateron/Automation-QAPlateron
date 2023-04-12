@@ -1,4 +1,4 @@
-@BillSettings 
+@BillSettingsConfig
 Feature: Configuring the Pre-defined Bill Settings
 
   @ConfigurationTemp @Test
