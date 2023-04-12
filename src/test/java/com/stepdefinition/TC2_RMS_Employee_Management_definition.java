@@ -722,9 +722,9 @@ public class TC2_RMS_Employee_Management_definition extends BaseClass {
 	public void userShouldVerifyTheEmployeeHasBeeMovedToBottomOfRmsAsInactive() throws InterruptedException {
 		List<WebElement> indvEmployeeListElement = pma.getRMS_Employee_Management_POM().getIndvEmployeeListElement();
 		System.out.println(indvEmployeeListElement.size());
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 20; i++) {
 			Thread.sleep(100);
-			indvEmployeeListElement.get(1).click();
+			indvEmployeeListElement.get(1).click();	
 			Thread.sleep(100);
 			Assert.assertTrue(pma.getRMS_Employee_Management_POM().getAddEmployeePageHeaderElement().getText().contains("Employee Details"));
 			Thread.sleep(100);

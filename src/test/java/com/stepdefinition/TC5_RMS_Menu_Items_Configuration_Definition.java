@@ -48,8 +48,8 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		PageFactory.initElements(mobileDriver1, this);
 	}
 
-	@When("User shoild click Menus section and verify the page redirection")
-	public void userShoildClickMenusSectionAndVerifyThePageRedirection() {
+	@When("User should click Menus section and verify the page redirection")
+	public void userShouldClickMenusSectionAndVerifyThePageRedirection() {
 		pma.getRMS_Menus_Configuration_POM().getHomeMenusSectionelement().click();
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getTopMenuItemsSectionElement().isDisplayed());
 	}

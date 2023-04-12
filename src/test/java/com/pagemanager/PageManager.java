@@ -3,6 +3,7 @@ package com.pagemanager;
 import org.openqa.selenium.support.PageFactory;
 
 import com.base.BaseClass;
+import com.feature.page.pom.RMS_Cooking_Station_POM;
 import com.feature.page.pom.RMS_Employee_Management_POM;
 import com.feature.page.pom.RMS_ManageTable_POM;
 import com.feature.page.pom.RMS_Menus_Configuration_POM;
@@ -16,6 +17,7 @@ public class PageManager extends BaseClass{
 	private RMS_SettingsPage_Configuration_POM rMS_SettingsPage_Configuration_POM;
 	private RMS_Menus_Configuration_POM rMS_Menus_Configuration_POM;
 	private RMS_ManageTable_POM rMS_ManageTable_POM;
+	private RMS_Cooking_Station_POM rMS_Cooking_Station_POM;
 	
 	public PageManager() {
 		PageFactory.initElements(rmsDriver, this);
@@ -40,6 +42,10 @@ public class PageManager extends BaseClass{
 
 	public RMS_ManageTable_POM getRMS_ManageTable_POM() {
 		return rMS_ManageTable_POM==null ? rMS_ManageTable_POM = new RMS_ManageTable_POM():rMS_ManageTable_POM;
+	}
+
+	public RMS_Cooking_Station_POM getrMS_Cooking_Station_POM() {
+		return rMS_Cooking_Station_POM==null ? rMS_Cooking_Station_POM = new RMS_Cooking_Station_POM() : rMS_Cooking_Station_POM;
 	} 
 	
 	
