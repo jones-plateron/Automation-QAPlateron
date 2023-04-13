@@ -113,6 +113,7 @@ public class TC8_Discount_Configuration_definition extends BaseClass {
 	}
 	@Then("User should validate the Minimum Order Amount Textbox")
 	public void userShouldValidateTheMinimumOrderAmountTextbox() {
+		
 		//Default Value
 		String defaultValue = pma.getRMS_Discount_Configuration_POM().getMinimumOrderAmntTxtBx().getAttribute("value");
 		Assert.assertTrue(defaultValue.contains("0"));
