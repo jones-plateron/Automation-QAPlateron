@@ -1,10 +1,10 @@
-@MenuSection
+@MenuSection 
 Feature: Menus Items section validations
 
   @ModifierMenuValidations
   Scenario Outline: As a RMS User, Validate Modifiers section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
-    When User shoild click Menus section and verify the page redirection
+    When User should click Menus section and verify the page redirection
     And User should click Modifiers button and verify the Add Modifiers Popup "TestMod"
     And User should verify the Modifier Name Edit and Delete options of category "TestMod"
     And User should verify the Add Modifier item slide pop-up and text box
@@ -29,12 +29,12 @@ Feature: Menus Items section validations
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
 
   @CategoryValidations
   Scenario Outline: As a RMS User, Validate Category section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
-    When User shoild click Menus section and verify the page redirection
+    When User should click Menus section and verify the page redirection
     Then User should verify Add Categories button and Add Category pop-up
     And User should should Add new Category and verify Edit and Delete options of category
     And User should verify the Add Menu Slide Pop-up and text box
@@ -76,12 +76,12 @@ Feature: Menus Items section validations
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
 
   @PublishMenuValidations
   Scenario Outline: As a RMS User, Validate Publish Menu popup section
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
-    When User shoild click Menus section and verify the page redirection
+    When User should click Menus section and verify the page redirection
     Then User should add "Newcategory" and verify that publish menu status as "Added" and count
     #modify above line before run
     And User should verify the Publish Menu pop-up and Click publish
@@ -100,4 +100,15 @@ Feature: Menus Items section validations
 
     Examples: 
       | mobileNumber | otp    |
-      |   2222222222 | 666666 |
+      |   7777777723 | 666666 |
+
+#@DeleteMenus
+  #Scenario Outline: As a RMS User, Validate Publish Menu popup section
+    #Given Login to the restaurant with "<mobileNumber>" and "<otp>"
+    #When User should click Menus section and verify the page redirection
+    #Then Deleting Menus and Categories
+#
+#
+    #Examples: 
+      #| mobileNumber | otp    |
+      #|   7777777723 | 666666 |      

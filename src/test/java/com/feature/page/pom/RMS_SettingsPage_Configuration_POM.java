@@ -97,7 +97,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getServiceFeePercentageOptions() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//h4[@class='accordion-body__header'])[4]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[normalize-space()='Service Fee Percentage']"));
 		return element;
 	}
 	public WebElement getServiceFeePercentageSymbol() {
@@ -118,15 +118,15 @@ PageManager pma = new PageManager();
 	}
 	
 	public WebElement getServiceFeePercentageInclusiveofSalesTaxOptions() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//h4[@class='accordion-body__header'])[5]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[normalize-space()='Service Fee Percentage inclusive of sales tax']"));
 		return element;
 	}
 	public WebElement getServiceFeePercentageInclusiveofSalesTaxToggle() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[3]"));
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[1]"));
 		return element;
 	}
 	public WebElement getServiceFeePercentageInclusiveofSalesTaxToggle1() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='toggle-slider round'])[3]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//li[contains(@class,'list-item border-bottom pb-3 mt-3')]//span[contains(@class,'toggle-slider round')]"));
 		return element;
 	}
 	public WebElement getServiceFeePercentageInclusiveofSalesTaxInstruction() {
@@ -134,15 +134,15 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getApplyServiceFeeOntheSubtotalafterDeductionsOption() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//h4[@class='accordion-body__header'])[6]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//h4[normalize-space()='Apply service fee on the subtotal after deductions']"));
 		return element;
 	}
 	public WebElement getApplyServiceFeeOntheSubtotalafterDeductionsToggle() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[4]"));
+		WebElement element = rmsDriver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[2]/div[1]/ul[2]/li[3]/div[1]/div[2]/label[1]/span[1]"));
 		return element;
 	}
 	public WebElement getApplyServiceFeeOntheSubtotalafterDeductionsToggle1() {
-		WebElement element = rmsDriver.findElement(By.xpath("(//span[@class='toggle-slider round'])[4]"));
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@type='checkbox'])[2]"));
 		return element;
 	}
 	public WebElement getApplyServiceFeeOntheSubtotalafterDeductionsInstruction() {

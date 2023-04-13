@@ -1,7 +1,7 @@
-@BillSettings
+@BillSettingsConfig
 Feature: Configuring the Pre-defined Bill Settings
 
-  @ConfigurationTemp
+  @ConfigurationTemp @Test
   Scenario Outline: Configuration by Data Driven 
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should Click Settings Sections
@@ -24,4 +24,4 @@ Feature: Configuring the Pre-defined Bill Settings
 		
     Examples: 
       | mobileNumber | otp    |
-      |   9999999999 | 666666 |
+      |   7777777723 | 666666 |
