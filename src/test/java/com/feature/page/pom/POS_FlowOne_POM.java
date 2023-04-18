@@ -100,16 +100,16 @@ public class POS_FlowOne_POM extends BaseClass{
 		 WebElement element = posDriver1.findElement(By.xpath(""));
 		 return element;
 	}
-	public WebElement get12() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getActiveOrderHeader() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Active Orders']"));
 		 return element;
 	}
 	public WebElement get13() {
 		 WebElement element = posDriver1.findElement(By.xpath(""));
 		 return element;
 	}
-	public WebElement get14() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getRecievePaymentBtn() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Receive Payment']"));
 		 return element;
 	}
 	public WebElement get15() {
