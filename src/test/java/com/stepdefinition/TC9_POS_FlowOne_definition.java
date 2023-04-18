@@ -1,14 +1,19 @@
 package com.stepdefinition;
 
+import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -27,6 +32,8 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	PageManager pma = new PageManager();
 	public float subTotal, totalBillAmount;
 	List<Float> menuPrice = new ArrayList<Float>();
+	String orderType = "";
+	String noOfGuest = "";
 	public int guestCountAOP;
 	float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0;
 
@@ -50,6 +57,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 				"com.plateron.restaurant.pos.MainActivity");
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
 //        capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, "true");
+//		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
 		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");
 		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
 		// capabilities.setCapability(MobileCapabilityType.UDID,"192.168.5.101:5555");
@@ -125,6 +133,11 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	@Then("User should able to select guest count Number and Click Proceed Button")
 	public void userShouldAbleToSelectGuestCountNumberAndClickProceedButton() {
 		pma.getPOS_FlowOne_POM().getNoOfGuest5().click();
+
+noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc");
+		System.out.println(noOfGuest);
+		pma.getPOS_FlowOne_POM().getProceedButton().click();
+		orderType = "DineIn";
 		pma.getPOS_FlowOne_POM().getProceedButton().click();
 	}
 
@@ -191,13 +204,36 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	}
 
 	@Then("User should able to Click on the {string} Button")
-	public void userShouldAbleToClickOnTheButton(String string) {
+	public void userShouldAbleToClickOnTheButton(String string) throws InterruptedException {
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
 //		LocalTime currentTime = LocalTime.now();
 //		String formattedTime = currentTime.format(formatter);
 //		String upperCase = formattedTime.toUpperCase();
 //		System.out.println(upperCase);
 
+//		Actions acc = new Actions(driverPos);
+//     	acc.dragAndDropBy(pma.getPos_Terminal_POM().getCompleteOrderSwipeElement(), 600, 0).perform();
+		
+		Thread.sleep(300);
+		String text = pma.getPOS_FlowOne_POM().getSTK1().getAttribute("content-desc");
+		System.out.println(text);
+		Thread.sleep(3000);
+		Actions act = new Actions(posDriver1);
+		WebElement aElement = pma.getPOS_FlowOne_POM().getSTK1();
+		int a = ((aElement.getSize().width) / 2) * -1;
+
+		dragAndDropBy(act, pma.getPOS_FlowOne_POM().getSTK1(), a, 600, 0).perform();
+		
+
+	}
+
+	public Actions dragAndDropBy(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {
+		return act
+				.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(100),
+						Origin.fromElement(pma.getPOS_FlowOne_POM().getSTK1()),(startOffset + 25), 0))
+				.tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
+						.createPointerMove(Duration.ofMillis(250), Origin.pointer(), xOffset, yOffset))
+				.tick(act.getActivePointer().createPointerUp(LEFT.asArg()));
 	}
 
 	@Then("User should Verify the page redirected to active order page")
@@ -287,6 +323,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 //		String formattedTime = currentTime.format(formatter);
 //		String upperCase = formattedTime.toUpperCase();
 //		System.out.println(upperCase);
+	
 	}
 
 	@Then("User should able to Click Recieve Payment Button")
@@ -450,7 +487,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		String billAmount = pma.getPOS_FlowOne_POM().getBillAmountPayDetails().getAttribute("content-desc");
 		Assert.assertEquals(billAmount, "$" + roundStringValue(totalBillAmount));
 	}
-
+  
 	@Then("User should able to Apply Discount and Validate the Subtotal and Calculation")
 	public void userShouldAbleToApplyDiscountAndValidateTheSubtotalAndCalculation() throws IOException, InterruptedException {
 		
@@ -680,4 +717,3 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	}
 
 }
-//17-04-2023 19:26
