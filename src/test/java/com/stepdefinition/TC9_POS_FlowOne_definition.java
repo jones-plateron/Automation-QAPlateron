@@ -33,8 +33,9 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	public float subTotal, totalBillAmount;
 	List<Float> menuPrice = new ArrayList<Float>();
 	String orderType = "";
-	String noOfGuest = "";
+	String noOfGuest = "",orderId="";
 	public int guestCountAOP;
+	
 	float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0;
 
 	public TC9_POS_FlowOne_definition() {
@@ -131,14 +132,15 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	}
 
 	@Then("User should able to select guest count Number and Click Proceed Button")
-	public void userShouldAbleToSelectGuestCountNumberAndClickProceedButton() {
+	public void userShouldAbleToSelectGuestCountNumberAndClickProceedButton() throws InterruptedException {
 		pma.getPOS_FlowOne_POM().getNoOfGuest5().click();
 
 noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc");
 		System.out.println(noOfGuest);
 		pma.getPOS_FlowOne_POM().getProceedButton().click();
 		orderType = "DineIn";
-		pma.getPOS_FlowOne_POM().getProceedButton().click();
+		//pma.getPOS_FlowOne_POM().getProceedButton().click();
+		Thread.sleep(500);
 	}
 
 	@Then("User should select menu item from the left-hand side \\(LHS)")
@@ -223,7 +225,7 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 		int a = ((aElement.getSize().width) / 2) * -1;
 
 		dragAndDropBy(act, pma.getPOS_FlowOne_POM().getSTK1(), a, 600, 0).perform();
-		
+		Thread.sleep(1500);
 
 	}
 
@@ -238,9 +240,9 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 
 	@Then("User should Verify the page redirected to active order page")
 	public void userShouldVerifyThePageRedirectedToActiveOrderPage() throws InterruptedException {
-		Thread.sleep(900);
-		pma.getPOS_FlowOne_POM().getActiveOrdersTab().click();
-		Thread.sleep(900);
+//		Thread.sleep(2000);
+//		pma.getPOS_FlowOne_POM().getActiveOrdersTab().click();
+		Thread.sleep(1500);
 		String headerAO = pma.getPOS_FlowOne_POM().getActiveOrdersPageHeader().getAttribute("content-desc");
 		Assert.assertEquals(headerAO, "Active Orders");
 	}
@@ -264,7 +266,7 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 		String substring = guestCount.substring(8, guestCount.length());
 		guestCountAOP = Integer.parseInt(substring);
 //	   System.out.println(substring);
-		String orderId = pma.getPOS_FlowOne_POM().getOrderIdRightCorner().getAttribute("content-desc");
+		orderId = pma.getPOS_FlowOne_POM().getOrderIdRightCorner().getAttribute("content-desc");
 //	   System.out.println(orderId);
 		String tableName = pma.getPOS_FlowOne_POM().getTableNameRightside().getAttribute("content-desc");
 //	   System.out.println(tableName);
@@ -332,7 +334,8 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 	}
 
 	@Then("User should Verify the page redirected to Payment Detail Page")
-	public void userShouldVerifyThePageRedirectedToPaymentDetailPage() throws IOException {
+	public void userShouldVerifyThePageRedirectedToPaymentDetailPage() throws IOException, InterruptedException {
+		Thread.sleep(1000);
 		String roundStringsalesTax="";
 		String paymentDetailsHdr = pma.getPOS_FlowOne_POM().getPaymentDetailsHeader().getAttribute("content-desc");
 		Assert.assertEquals(paymentDetailsHdr, "Payment details");
@@ -476,7 +479,7 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 		pma.getPOS_FlowOne_POM().getCollectCashBtnPayDetails().click();
 
 		String tipPopHeaderAmount = pma.getPOS_FlowOne_POM().getTipPopupBillAmt().getAttribute("content-desc");
-		Assert.assertEquals("Bill Amount: $" + totalBillAmount, tipPopHeaderAmount);
+		Assert.assertEquals("Bill Amount: $" + roundStringValue(totalBillAmount), tipPopHeaderAmount);
 		// No Tip
 		pma.getPOS_FlowOne_POM().getTipPopupNoTip().click();
 
@@ -651,25 +654,127 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 		// Bill Amount Validation
 		totalBillAmountADis = updatedSubTotal + salesTax + serviceFee + serviceFeeTax + gratuity + gratuityTax;
 		String billAmount = pma.getPOS_FlowOne_POM().getBillAmountPayDetailsAfterDis().getAttribute("content-desc");
-		Assert.assertEquals(billAmount, "$" + roundStringValue(totalBillAmount));
-		Thread.sleep(9000);
+		Assert.assertEquals(billAmount, "$" + roundStringValue(totalBillAmountADis));
+		
 
 	}
 
 
 	@Then("User should able to Click Complete Order Button")
-	public void userShouldAbleToClickCompleteOrderButton() {
-		
+	public void userShouldAbleToClickCompleteOrderButton() throws InterruptedException {
+		Actions act = new Actions(posDriver1);
+        WebElement aElement = pma.getPOS_FlowOne_POM().getCompleteOrderSwipe();
+        int a = (((aElement.getSize().width) / 2) * -1)+2;
 
-	}
+        dragAndDropBy1(act, pma.getPOS_FlowOne_POM().getCompleteOrderSwipe(), a, 400, 0).perform();
+        
+        Thread.sleep(1500);
+    }
+	
+    public Actions dragAndDropBy1(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {//Swipe
+        return act
+                .tick(act.getActivePointer().createPointerMove(Duration.ofMillis(1000),
+                        Origin.fromElement(pma.getPOS_FlowOne_POM().getCompleteOrderSwipe()),(startOffset + 25), 45))
+                .tick(act.getActivePointer().createPointerMove(Duration.ofMillis(1000),
+                        Origin.fromElement(pma.getPOS_FlowOne_POM().getCompleteOrderSwipe()),(startOffset + 15), 35))
+                .tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
+                        .createPointerMove(Duration.ofMillis(1000), Origin.pointer(), xOffset, yOffset))
+                .tick(act.getActivePointer().createPointerUp(LEFT.asArg()));
+    }
 
 	@Then("User should Verify the page redirected to Complete order page")
-	public void userShouldVerifyThePageRedirectedToCompleteOrderPage() {
-
+	public void userShouldVerifyThePageRedirectedToCompleteOrderPage() throws InterruptedException {
+		Thread.sleep(1500);
+		pma.getPOS_FlowOne_POM().getCompleteOrderSection().click();
+		Thread.sleep(1000);
+        String actHeadr = pma.getPOS_FlowOne_POM().getCompleteOrderHeadr().getAttribute("content-desc");    
+        Assert.assertTrue(actHeadr.equals("Completed Orders"));
 	}
 
 	@Then("User should Validate the Complete order page")
 	public void userShouldValidateTheCompleteOrderPage() throws InterruptedException {
+        
+        DecimalFormat dF = new DecimalFormat("#.##");
+        pma.getPOS_FlowOne_POM().getSearchBarCO().click();
+        pma.getPOS_FlowOne_POM().getSearchBarCO().sendKeys(orderId.substring(7, orderId.length()));
+        Thread.sleep(1000);
+        
+        pma.getPOS_FlowOne_POM().getCompleteOrderHeadr().click();
+        Thread.sleep(300);
+        pma.getPOS_FlowOne_POM().getFirstOrderinCO().click();
+        Thread.sleep(500);
+        
+       System.out.println(pma.getPOS_FlowOne_POM().getFirstOrderinCO().getAttribute("content-desc"));
+        String firstOrderCO = pma.getPOS_FlowOne_POM().getFirstOrderinCO().getAttribute("content-desc");
+        String employeeName = pma.getPOS_FlowOne_POM().getEmployeeName().getAttribute("content-desc");
+       System.out.println(employeeName);
+        String guestCount = pma.getPOS_FlowOne_POM().getGuestCountRightCornerCO().getAttribute("content-desc");
+        String substring = guestCount.substring(8, guestCount.length());
+        guestCountAOP = Integer.parseInt(substring);
+       System.out.println(substring);
+        String orderId = pma.getPOS_FlowOne_POM().getOrderIdRightCorneCO().getAttribute("content-desc");
+       System.out.println(orderId);
+        String tableName = pma.getPOS_FlowOne_POM().getTableNameRightsideCO().getAttribute("content-desc");
+       System.out.println(tableName);
+
+         Assert.assertTrue(firstOrderCO.contains("Paid - Cash"));
+         
+         if (employeeName.contains("Clocked In:")) {
+        	 String replaceAll = employeeName.replaceAll("[\\r\\n]+", "");
+ 			String[] split = replaceAll.split("Clocked In:");
+ 			employeeName = split[0];
+		}
+        Assert.assertTrue(firstOrderCO.contains(employeeName));
+        Assert.assertTrue(firstOrderCO.contains("Guest: " + substring));
+        Assert.assertTrue(firstOrderCO.contains(orderId));
+        Assert.assertTrue(firstOrderCO.contains("Waiter"));
+        Assert.assertTrue(firstOrderCO.contains(tableName));
+       //Need Table and Area name validations
+
+//        // Menu 1
+//        Thread.sleep(100);
+//        String m1text = pma.getPOS_FlowOne_POM().getFirstMenuRightSideCO().getAttribute("content-desc");
+//        System.out.println(m1text);
+//        String m1textRep = m1text.replaceAll("[\\r\\n]+", "");
+//        String[] m1Split = m1textRep.split("\\$");
+//        String menu1str = m1Split[m1Split.length - 1];
+//        float menu1 = Float.parseFloat(menu1str);
+//        Float menu1Rnd = Float.valueOf(dF.format(menu1));
+//        menuPrice.add(menu1Rnd);
+//
+//        // Menu 2
+//        String m2text = pma.getPOS_FlowOne_POM().getSecondMenuRightSide().getAttribute("content-desc");
+//        System.out.println(m2text);
+//        String m2textRep = m2text.replaceAll("[\\r\\n]+", "");
+//        String[] m2Split = m2textRep.split("\\$");
+//        String menu2str = m2Split[m2Split.length - 1];
+//        float menu2 = Float.parseFloat(menu2str);
+//        Float menu2Rnd = Float.valueOf(dF.format(menu2));
+//        menuPrice.add(menu2Rnd);
+//
+//        // Menu 3
+//        String m3text = pma.getPOS_FlowOne_POM().getThirdMenuRightSide().getAttribute("content-desc");
+//        String m3textRep = m3text.replaceAll("[\\r\\n]+", "");
+//        String[] m3Split = m3textRep.split("\\$");
+//        String menu3str = m3Split[m3Split.length - 1];
+//        float menu3 = Float.parseFloat(menu3str);
+//        Float menu3Rnd = Float.valueOf(dF.format(menu3));
+//        menuPrice.add(menu3Rnd);
+//
+//        // Menu 4
+//        String m4text = pma.getPOS_FlowOne_POM().getFourthMenuRightSide().getAttribute("content-desc");
+//        String m4textRep = m4text.replaceAll("[\\r\\n]+", "");
+//        String[] m4Split = m4textRep.split("\\$");
+//        String menu4str = m4Split[m4Split.length - 1];
+//        float menu4 = Float.parseFloat(menu4str);
+//        Float menu4Rnd = Float.valueOf(dF.format(menu4));
+//        menuPrice.add(menu4Rnd);
+        
+        //Order Status
+        String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus().getAttribute("content-desc");
+        Assert.assertTrue(orStatus.equals("Delivered"));
+		
+		//Order Summary Validation
 		pma.getPOS_FlowOne_POM().getTotAmountCOSummary().click();
 		Thread.sleep(600);
 		String subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
@@ -696,15 +801,7 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 		Assert.assertTrue(totalAmountTxt.contains("Paid - Cash"));
 		Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
 		Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmountADis)));
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		
 		
