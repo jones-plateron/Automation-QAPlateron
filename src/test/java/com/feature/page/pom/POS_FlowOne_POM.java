@@ -100,6 +100,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='7']"));
 		 return element;
 	}
+
 	public WebElement getActiveOrdersPageHeader() {
 		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Active Orders']"));
 		 return element;
@@ -108,6 +109,9 @@ public class POS_FlowOne_POM extends BaseClass{
 		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
 		 return element;
 	}
+	public WebElement getRecievePaymentBtn() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Receive Payment']"));
+     }
 	public WebElement getEmployeeName() {
 		 WebElement element = posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[1]"));
 		 return element;
