@@ -110,7 +110,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 return element;
 	}
 	public WebElement getRecievePaymentBtn() {
-		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Receive Payment']"));
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Receive Payment']"));
      }
 	public WebElement getEmployeeName() {
 		 WebElement element = posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[1]"));
@@ -125,7 +125,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 return element;
 	}
 	public WebElement getFirstMenuRightSide() {
-		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
 		 return element;
 	}
 	public WebElement getSecondMenuRightSide() {
@@ -191,16 +191,61 @@ public class POS_FlowOne_POM extends BaseClass{
 		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='No Tip']"));
 		 return element;
 	}
-	public WebElement get32() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
-		 return element;
-	}
-	
-	public WebElement get33() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
-		 return element;
-	}
-	
-	
-	}
 
+	public WebElement getSTK1() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Send to Kitchen']"));
+		 return element;
+	}
+	public WebElement getCompleteOrderHeadr() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Completed Orders']"));
+		 return element;
+	}
+	public WebElement getCompleteOrderSwipe() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Complete Order']"));
+		 return element;
+	}
+	public WebElement getFirstOrderinCO() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
+		 return element;
+	}
+	
+	public WebElement getGuestCountRightCornerCO() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='9']"));
+		 return element;
+	}
+	public WebElement getOrderIdRightCorneCO() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='11']"));
+		 return element;
+	}
+	public WebElement getFirstMenuRightSideCO() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
+		 return element;
+	}
+	public WebElement getSecondMenuRightSideCO() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+		 return element;
+	}
+	public WebElement getThirdMenuRightSideCO() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[1]"));
+		 return element;
+	}
+	public WebElement getFourthMenuRightSideCO() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+		 return element;
+	}
+	public WebElement getTableNameRightsideCO() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='7']"));
+		 return element;
+	
+	}
+	public WebElement getCompleteOrderSection() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Completed Orders']"));
+		 return element;
+	
+	}
+	public WebElement getCompleteOrderStatus() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
+		 return element;
+	
+	}
+}//android.view.View[@content-desc="Declined"]
