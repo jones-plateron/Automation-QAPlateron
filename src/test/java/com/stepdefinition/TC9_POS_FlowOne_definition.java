@@ -622,6 +622,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 
 	@Then("User should able to Click Complete Order Button")
 	public void userShouldAbleToClickCompleteOrderButton() {
+		
 
 	}
 
