@@ -201,7 +201,7 @@ public class TC8_Discount_Configuration_definition extends BaseClass {
 	@Then("User should able to Create Discount Template")
 	public void userShouldAbleToCreateDiscountTemplate() throws IOException, InterruptedException {
 		
-		for (int i = 1; i < 7; i++) {
+		for (int i = 1; i < 8; i++) {
 			
 			//Discount Name
 	    String discountName = getDataFromExcel("Discount", (i), 0);

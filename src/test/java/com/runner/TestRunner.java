@@ -22,6 +22,5 @@ public class TestRunner {
 	@AfterClass
 	public static void afterClass() {
 		JvmReport.generateJVMReport(System.getProperty("user.dir")+"\\target\\output.json");
-	}
-		
+	}		
 }

@@ -110,7 +110,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 return element;
 	}
 	public WebElement getRecievePaymentBtn() {
-		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Receive Payment']"));
+		 return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Receive Payment']"));
      }
 	public WebElement getEmployeeName() {
 		 WebElement element = posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[1]"));
@@ -191,15 +191,100 @@ public class POS_FlowOne_POM extends BaseClass{
 		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='No Tip']"));
 		 return element;
 	}
-	public WebElement get32() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getDiscountDropDown() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='5']"));
+	}
+	public WebElement getFirstEligibleDiscountTemplate() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@index='0']"));
+	}
+	//After Applying Discount+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public WebElement getSubtotalPayDetailsAfterDis() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[7]"));
 		 return element;
+	}
+	public WebElement getDiscountAmtPayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='1']"));
+		 return element;
+	}public WebElement getSalesTaxPayDetailsAfterDis() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='2']"));
+		 return element;
+	}
+	public WebElement getServiceFeePayDetailsAfterDis() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+		 return element;
+	}
+	public WebElement getServiceFeeTaxPayDetailsAfterDis() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='4']"));
+		 return element;
+	}
+	public WebElement getGratuityPayDetailsAfterDis() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='5'])[2]"));
+		 return element;
+	}
+	public WebElement getGratuityTaxPayDetailsAfterDis() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='6'])[1]"));
+		 return element;
+	}
+	public WebElement getBillAmountPayDetailsAfterDis() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='7']"));
+		 return element;
+	}
+	public WebElement getSubTotalTxtCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[14]"));
+	}
+	public WebElement getSubTotalValueCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[3]"));
+	}
+	public WebElement getDiscountValueCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[3]"));
+	}
+	public WebElement getSalesTaxCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='5'])[1]"));
+	}
+	public WebElement getServiceFeeCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='7'])[2]"));
+	}
+	public WebElement getServiceFeeTaxCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='9'])[2]"));
+	}
+	public WebElement getGratuityCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='11'])[2]"));
+	}
+	public WebElement getGratuityTaxCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='13'])[2]"));
+	}
+	public WebElement getTotAmountCOSummary() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='15']"));
 	}
 	
-	public WebElement get33() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
-		 return element;
+	
+	
+	
+	public WebElement get34() {
+		return posDriver1.findElement(By.xpath(""));
 	}
+	public WebElement get35() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get36() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get37() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get38() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get39() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get40() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get41() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	
 	
 	
 	}
