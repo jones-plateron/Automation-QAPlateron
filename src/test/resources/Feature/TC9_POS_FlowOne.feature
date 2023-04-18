@@ -15,8 +15,7 @@ Feature: HappyPath Flow
     Then User should Verify the page redirected to Payment Detail Page
     And User should able to click Cash option and Collect Button 
     Then User should able to enter TIP and Validate the TIP reflection 
-    And User should able to Apply Discount 
-    And User should Validate the Subtotal and Calculation 
+    And User should able to Apply Discount and Validate the Subtotal and Calculation
     Then User should able to Click Complete Order Button 
     Then User should Verify the page redirected to Complete order page 
     And User should Validate the Complete order page 
