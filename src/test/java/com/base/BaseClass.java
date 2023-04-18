@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
@@ -75,6 +77,59 @@ public class BaseClass {
 			break;
 		}
 		return data;
+	}
+	public float subtotalAfterApplyingDiscountWOExcludeItems(List<Float> menus,float discPercentage) {
+		
+		float discountAmtOfMenu,subTotalAfterDiscount=0,discountAmt=0,MenuAfterDiscount;
+		for (int i = 0; i < menus.size(); i++) {
+			Float menuItem = menus.get(i);
+			discountAmtOfMenu=(menuItem*discPercentage/100);
+			MenuAfterDiscount=(menuItem-discountAmtOfMenu);
+			discountAmt=(discountAmt+discountAmtOfMenu);
+			subTotalAfterDiscount=(subTotalAfterDiscount+MenuAfterDiscount);
+		}
+		DecimalFormat df = new DecimalFormat("#.##");
+		float discountAmt1 = Float.valueOf(df.format(discountAmt));
+		return discountAmt1;
+	}
+	public float roundFloatValue(float val) {
+		DecimalFormat df = new DecimalFormat("#.00");
+		df.setMinimumFractionDigits(2);
+		float roundedVal = Float.parseFloat(df.format(val));
+		//		float roundedVal = Float.parseFloat(df.format(val));
+		return roundedVal;
+	}
+	public String roundStringValue(float val) {
+		DecimalFormat df = new DecimalFormat("#.00");
+		df.setMinimumFractionDigits(2);
+		String roundedVal = df.format(val);
+		//		float roundedVal = Float.parseFloat(df.format(val));
+		return roundedVal;
+	}
+	public float salesTax(float subTotal,float salTaxPercentage) {
+		float salesTax=(subTotal*salTaxPercentage/100);
+		float roundedValue = roundFloatValue(salesTax);
+		return roundedValue;
+	}
+	public float serviceFee(float subTotal,float serFeePercentage) {
+		float serviceFee=(subTotal*serFeePercentage/100);
+		float roundedValue = roundFloatValue(serviceFee);
+		return roundedValue;
+	}
+	public float serviceFeeTax(float SalesTax,float serFeeTxPercentage) {
+		float serviceFeeTax=(SalesTax*serFeeTxPercentage/100);
+		float roundedValue = roundFloatValue(serviceFeeTax);
+		return roundedValue;
+	}
+	public float gratuity(float SubTotal,float gratuityPercentage) {
+		float gratuity=(SubTotal*gratuityPercentage/100);
+		float roundedValue = roundFloatValue(gratuity);
+		return roundedValue;
+	}
+	public float gratuityTax(float gratuity,float gratuityTaxPercentage) {
+		float gratuityTax=(gratuity*gratuityTaxPercentage/100);
+		float roundedValue = roundFloatValue(gratuityTax);
+		return roundedValue;
 	}
 	public String getAttributeJsExecutor(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) rmsDriver;

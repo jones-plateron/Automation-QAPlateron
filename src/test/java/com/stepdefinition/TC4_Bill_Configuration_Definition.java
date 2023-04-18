@@ -50,50 +50,50 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 	@Then("User should Enable or Disable Apply sales tax on Subtotal after Deductions Option #Excel Input")
 	public void userShouldEnableOrDisableApplySalesTaxOnSubtotalAfterDeductionsOptionExcelInput()
 			throws InterruptedException, IOException {
-		String salTxafterDeduct = getDataFromExcel("Bill Configuration", 2, 1);
-		// System.out.println(salTxafterDeduct);
-		if (salTxafterDeduct.equals("ON")) {Thread.sleep(500);
-			if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
-					.getAttribute("value").equals("true")) {
-			} else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
-					.getAttribute("value").equals("false")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle1()
-						.click();
-			}
-		} else if (salTxafterDeduct.equals("OFF")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
-					.getAttribute("value").equals("true")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle1()
-						.click();
-			} else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
-					.getAttribute("value").equals("false")) {
-			}
-		} else {
-			Assert.assertTrue(false, "Invalid State");
-		}
+//		String salTxafterDeduct = getDataFromExcel("Bill Configuration", 2, 1);
+//		// System.out.println(salTxafterDeduct);
+//		if (salTxafterDeduct.equals("ON")) {Thread.sleep(500);
+//			if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
+//					.getAttribute("value").equals("true")) {
+//			} else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
+//					.getAttribute("value").equals("false")) {
+//				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle1()
+//						.click();
+//			}
+//		} else if (salTxafterDeduct.equals("OFF")) {
+//			if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
+//					.getAttribute("value").equals("true")) {
+//				pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle1()
+//						.click();
+//			} else if (pma.getRMS_SettingsPage_Configuration_POM().getApplySalesTaxontheSubtotalafterDeductionsToggle()
+//					.getAttribute("value").equals("false")) {
+//			}
+//		} else {
+//			Assert.assertTrue(false, "Invalid State");
+//		}
 	}
 
 	@Then("User should Enable or Disable Apply sales tax on Tip after Deductions Option #Excel Input")
 	public void userShouldEnableOrDisableApplySalesTaxOnTipAfterDeductionsOptionExcelInput()
 			throws InterruptedException, IOException {
-		String salTxOnTipafterDeduct = getDataFromExcel("Bill Configuration", 3, 1);
-		if (salTxOnTipafterDeduct.equals("ON")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
-					.getAttribute("value").equals("true")) {
-			} else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
-					.getAttribute("value").equals("false")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle1().click();
-			}
-		} else if (salTxOnTipafterDeduct.equals("OFF")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
-					.getAttribute("value").equals("true")) {
-				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle1().click();
-			} else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
-					.getAttribute("value").equals("false")) {
-			}
-		} else {
-			Assert.assertTrue(false, "Invalid State");
-		}
+//		String salTxOnTipafterDeduct = getDataFromExcel("Bill Configuration", 3, 1);
+//		if (salTxOnTipafterDeduct.equals("ON")) {
+//			if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
+//					.getAttribute("value").equals("true")) {
+//			} else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
+//					.getAttribute("value").equals("false")) {
+//				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle1().click();
+//			}
+//		} else if (salTxOnTipafterDeduct.equals("OFF")) {
+//			if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
+//					.getAttribute("value").equals("true")) {
+//				pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle1().click();
+//			} else if (pma.getRMS_SettingsPage_Configuration_POM().getgetApplySalesTaxontheTipafterDeductionsToggle()
+//					.getAttribute("value").equals("false")) {
+//			}
+//		} else {
+//			Assert.assertTrue(false, "Invalid State");
+//		}
 	}
 
 	@Then("User should enter the Service Fee Percentage #Excel Input")
@@ -109,51 +109,51 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 
 	@Then("User should enable or Disable the Service fee tax option #Excel Input")
 	public void userShouldEnableOrDisableTheServiceFeeTaxOptionExcelInput() throws IOException, InterruptedException {
-//		String SerFeeTXCheckBx = getDataFromExcel("Bill Configuration", 5, 1);
-//
-//		if (SerFeeTXCheckBx.equals("ON")) {Thread.sleep(500);
-//			if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
-//					.getAttribute("value").equals("true")) {Thread.sleep(500);
-//			} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
-//					.getAttribute("value").equals("false")) {Thread.sleep(500);
-//				pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
-//			}
-//		} else if (SerFeeTXCheckBx.equals("OFF")) {Thread.sleep(500);
-//			if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
-//					.getAttribute("value").equals("true")) {Thread.sleep(500);
-//				pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
-//			} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
-//					.getAttribute("value").equals("false")) {Thread.sleep(500);
-//			}
-//		} else {
-//			Assert.assertTrue(false, "Invalid State");
-//		}
+		String SerFeeTXCheckBx = getDataFromExcel("Bill Configuration", 5, 1);
+
+		if (SerFeeTXCheckBx.equals("ON")) {Thread.sleep(500);
+			if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+					.getAttribute("value").equals("true")) {Thread.sleep(500);
+			} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+					.getAttribute("value").equals("false")) {Thread.sleep(500);
+				pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
+			}
+		} else if (SerFeeTXCheckBx.equals("OFF")) {Thread.sleep(500);
+			if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+					.getAttribute("value").equals("true")) {Thread.sleep(500);
+				pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle1().click();
+			} else if (pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageInclusiveofSalesTaxToggle()
+					.getAttribute("value").equals("false")) {Thread.sleep(500);
+			}
+		} else {
+			Assert.assertTrue(false, "Invalid State");
+		}
 	}
 
 	@Then("User should enable or Disable the Apply service fee on the subtotal after deductions #Excel Input")
 	public void userShouldEnableOrDisableTheApplyServiceFeeOnTheSubtotalAfterDeductionsExcelInput()
 			throws IOException, InterruptedException {
-//		String serFeeonSubToAfterDedu = getDataFromExcel("Bill Configuration", 7, 1);
-//
-//		if (serFeeonSubToAfterDedu.equals("ON")) {Thread.sleep(500);
-//			if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
-//					.getAttribute("value").equals("true")) {Thread.sleep(500);
-//			} else if (pma.getRMS_SettingsPage_Configuration_POM()
-//					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {Thread.sleep(500);
-//				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
-//						.click();
-//			}
-//		} else if (serFeeonSubToAfterDedu.equals("OFF")) {Thread.sleep(500);
-//			if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
-//					.getAttribute("value").equals("true")) {Thread.sleep(500);
-//				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
-//						.click();
-//			} else if (pma.getRMS_SettingsPage_Configuration_POM()
-//					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {Thread.sleep(500);
-//			}
-//		} else {
-//			Assert.assertTrue(false, "Invalid State");
-//		}
+		String serFeeonSubToAfterDedu = getDataFromExcel("Bill Configuration", 7, 1);
+
+		if (serFeeonSubToAfterDedu.equals("ON")) {Thread.sleep(500);
+			if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
+					.getAttribute("value").equals("true")) {Thread.sleep(500);
+			} else if (pma.getRMS_SettingsPage_Configuration_POM()
+					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle1().getAttribute("value").equals("false")) {Thread.sleep(500);
+				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
+						.click();
+			}
+		} else if (serFeeonSubToAfterDedu.equals("OFF")) {Thread.sleep(500);
+			if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1()
+					.getAttribute("value").equals("true")) {Thread.sleep(500);
+				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
+						.click();
+			} else if (pma.getRMS_SettingsPage_Configuration_POM()
+					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {Thread.sleep(500);
+			}
+		} else {
+			Assert.assertTrue(false, "Invalid State");
+		}
 	}
 
 	@Then("User should click Save button in Bill Configuration page")

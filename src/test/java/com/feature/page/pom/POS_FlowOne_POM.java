@@ -96,62 +96,110 @@ public class POS_FlowOne_POM extends BaseClass{
 		 WebElement element = posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='3'])[2]"));
 		 return element;
 	}
-	public WebElement get11() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getActiveOrdersTab() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='7']"));
 		 return element;
 	}
-	public WebElement getActiveOrderHeader() {
+
+	public WebElement getActiveOrdersPageHeader() {
 		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Active Orders']"));
 		 return element;
 	}
-	public WebElement get13() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getFirstOrderinAO() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
 		 return element;
 	}
 	public WebElement getRecievePaymentBtn() {
 		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Receive Payment']"));
+     }
+	public WebElement getEmployeeName() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[1]"));
 		 return element;
 	}
-	public WebElement get15() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getGuestCountRightCorner() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='9']"));
 		 return element;
 	}
-	public WebElement get16() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getOrderIdRightCorner() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='12']"));
 		 return element;
 	}
-	public WebElement get17() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getFirstMenuRightSide() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
 		 return element;
 	}
-	public WebElement get18() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getSecondMenuRightSide() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
 		 return element;
 	}
-	public WebElement get19() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getThirdMenuRightSide() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[1]"));
 		 return element;
 	}
-	public WebElement get20() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getFourthMenuRightSide() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
 		 return element;
 	}
-	public WebElement get21() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getTableNameRightside() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='7']"));
 		 return element;
 	}
-	public WebElement get22() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getReceivePaymentBtn() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@index=17]"));
 		 return element;
 	}
-	public WebElement get23() {
-		 WebElement element = posDriver1.findElement(By.xpath(""));
+	public WebElement getPaymentDetailsHeader() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[5]"));
 		 return element;
-	}public WebElement get24() {
+	}
+	public WebElement getSubtotalPayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[7]"));
+		 return element;
+	}
+	public WebElement getSalesTaxPayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='1']"));
+		 return element;
+	}public WebElement getServiceFeePayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='2']"));
+		 return element;
+	}
+	public WebElement getServiceFeeTaxPayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+		 return element;
+	}
+	public WebElement getGratuityPayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='4']"));
+		 return element;
+	}
+	public WebElement getGratuityTaxPayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='5']"));
+		 return element;
+	}
+	public WebElement getBillAmountPayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='8']"));
+		 return element;
+	}
+	public WebElement getCollectCashBtnPayDetails() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Collect Cash']"));
+		 return element;
+	}
+	public WebElement getTipPopupBillAmt() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
+		 return element;
+	}
+	public WebElement getTipPopupNoTip() {
+		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='No Tip']"));
+		 return element;
+	}
+	public WebElement get32() {
 		 WebElement element = posDriver1.findElement(By.xpath(""));
 		 return element;
 	}
 	
+	public WebElement get33() {
+		 WebElement element = posDriver1.findElement(By.xpath(""));
+		 return element;
+	}
 	
 	
 	}
