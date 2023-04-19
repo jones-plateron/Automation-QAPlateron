@@ -125,7 +125,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 return element;
 	}
 	public WebElement getFirstMenuRightSide() {
-		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
 		 return element;
 	}
 	public WebElement getSecondMenuRightSide() {
@@ -205,7 +205,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 return element;
 	}
 	public WebElement getFirstOrderinCO() {
-		 WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='0'])[2]"));
 		 return element;
 	}
 	
@@ -218,7 +218,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 return element;
 	}
 	public WebElement getFirstMenuRightSideCO() {
-		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
 		 return element;
 	}
 	public WebElement getSecondMenuRightSideCO() {
@@ -230,7 +230,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 return element;
 	}
 	public WebElement getFourthMenuRightSideCO() {
-		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+		 return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
 }
 	public WebElement getDiscountDropDown() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='5']"));
@@ -309,8 +309,8 @@ public class POS_FlowOne_POM extends BaseClass{
 	
 	
 	
-	public WebElement get34() {
-		return posDriver1.findElement(By.xpath(""));
+	public WebElement getSearchBarCO() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='4']"));
 	}
 	public WebElement get35() {
 		return posDriver1.findElement(By.xpath(""));
@@ -335,7 +335,7 @@ public class POS_FlowOne_POM extends BaseClass{
 	}
 	
 	
-	}
+	
 	public WebElement getCompleteOrderStatus() {
 		 WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
 		 return element;
