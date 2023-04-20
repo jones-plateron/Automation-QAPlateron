@@ -59,17 +59,16 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
 //        capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, "true");
 //		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
-		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");
+		capabilities.setCapability(MobileCapabilityType.UDID, "IR9PAMMZUCIBF6XG");
 		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
 		// capabilities.setCapability(MobileCapabilityType.UDID,"192.168.5.101:5555");
 
 		capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
 
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
-
+		
 		posDriver1 = new AppiumDriver(url, capabilities);
-		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofMillis(6));
-
+		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofMillis(7));
 	}
 
 	@When("User should able to enter login credentials")
@@ -157,7 +156,6 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		Thread.sleep(500);
 		pma.getPOS_FlowOne_POM().getMenu4().click();
 		Thread.sleep(500);
-
 		// To get all values in that locators
 //	    for (int i = 1; i < 15; i++) {
 //	    	 WebElement findElement = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])["+i+"]"));

@@ -175,7 +175,8 @@ public class TC3_RMS_SettingsPage_Configuration_definition extends BaseClass {
 		Actions action = new Actions(rmsDriver);
 		action.keyDown(Keys.CONTROL).sendKeys("a");
 	    action.sendKeys(Keys.BACK_SPACE).build().perform();
-	    action.keyUp(Keys.CONTROL);	    
+	    action.keyUp(Keys.CONTROL);	 
+	    
 		pma.getRMS_SettingsPage_Configuration_POM().getBillSettingSaveButton().click();
 		String actIndication = pma.getRMS_SettingsPage_Configuration_POM().getServiceFeePercentageTextBoxIndication().getText();
 		Assert.assertTrue(actIndication.contains("Please enter valid value"));
