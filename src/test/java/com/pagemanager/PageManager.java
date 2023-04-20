@@ -22,6 +22,7 @@ public class PageManager extends BaseClass{
 	private RMS_ManageTable_POM rMS_ManageTable_POM;
 	private RMS_Cooking_Station_POM rMS_Cooking_Station_POM;
 	private RMS_Discount_Configuration_POM rMS_Discount_Configuration_POM;
+	
 //	private CalculationsFile calculationsFile;
 
 	
@@ -61,7 +62,7 @@ public class PageManager extends BaseClass{
 
 	public POS_FlowOne_POM getPOS_FlowOne_POM() {
 		return pOS_FlowOne_POM==null? pOS_FlowOne_POM=new POS_FlowOne_POM():pOS_FlowOne_POM;
-	} 
+	}
 
 //	public CalculationsFile getCalculationsFile() {
 //		return calculationsFile==null?calculationsFile=new CalculationsFile():calculationsFile;
