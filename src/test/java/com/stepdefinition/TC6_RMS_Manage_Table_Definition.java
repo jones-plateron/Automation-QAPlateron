@@ -1,13 +1,10 @@
 package com.stepdefinition;
 
-import java.awt.Desktop.Action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +16,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -305,6 +301,7 @@ public class TC6_RMS_Manage_Table_Definition extends BaseClass {
 
 		Select selectDropdown = new Select(pma.getRMS_ManageTable_POM().getAreaSelectDropDown());
 		List<WebElement> options = selectDropdown.getOptions();
+        
 		selectDropdown.selectByVisibleText("Area 1");
 		selectDropdown.getFirstSelectedOption().getText();
 		System.out.println(selectDropdown.getFirstSelectedOption().getText());
@@ -380,7 +377,7 @@ public class TC6_RMS_Manage_Table_Definition extends BaseClass {
 				action.sendKeys(Keys.BACK_SPACE).build().perform();
 				action.keyUp(Keys.CONTROL);
 				Thread.sleep(200);
-				action.sendKeys("Edited Area").build().perform();
+				action.sendKeys("AutoEdited").build().perform();
 				Thread.sleep(200);
 				break;
 			}
@@ -397,7 +394,7 @@ public class TC6_RMS_Manage_Table_Definition extends BaseClass {
 			List<WebElement> areaLists2 = pma.getRMS_ManageTable_POM().getAreaLists();
 			for (int j = 0; j < areaLists2.size(); j++) {
 				String text1 = areaLists2.get(j).getText();
-				if (text1.contains("Edited Area")) {
+				if (text1.contains("AutoEdited")) {
 					Thread.sleep(2000);
 					areaLists2.get(j).click();
 			
@@ -525,9 +522,9 @@ public class TC6_RMS_Manage_Table_Definition extends BaseClass {
 		pma.getRMS_ManageTable_POM().getTableThreeDots().get(0).click();
 		pma.getRMS_ManageTable_POM().getDeleteTable().click();
 		pma.getRMS_ManageTable_POM().getDeleteTablepopupDeletebutton().click();// Table Deleted here
-		Thread.sleep(200);
+		Thread.sleep(1000);
 		String totalTableafterDelete = pma.getRMS_ManageTable_POM().getTotalTables().getText();
-		System.out.println(totalTableafterDelete);Thread.sleep(200);
+		System.out.println(totalTableafterDelete);Thread.sleep(500);
 		Assert.assertTrue(!totalTablebeforeDelete.equals(totalTableafterDelete));
 
 	}

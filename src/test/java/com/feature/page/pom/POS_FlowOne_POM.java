@@ -68,7 +68,7 @@ public class POS_FlowOne_POM extends BaseClass{
 		 return element;
 	}
 	public WebElement getTable1() {
-		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+		 WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
 		 return element;
 	}
 	public WebElement getNoOfGuest5() {

@@ -74,9 +74,11 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 
 	@When("User should able to enter login credentials")
 	public void userShouldAbleToEnterLoginCredentials() throws InterruptedException {
-		String generatedPIN = "2353";
-		for (int i = 0; i < generatedPIN.length(); i++) {
-			char charAt = generatedPIN.charAt(i);
+//		posLoginWithEmployeePin("2353");
+		String employeePIN = "4567";
+
+		for (int i = 0; i < employeePIN.length(); i++) {
+			char charAt = employeePIN.charAt(i);
 //            Thread.sleep(100);
 			switch (charAt) {
 			case '1':
@@ -120,22 +122,23 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 				break;
 			}
 		}
-		Thread.sleep(1500);
 
-	}
+	
+			}
 
 	@Then("User should Select any table and verify that the guest count popup appears")
 	public void userShouldSelectAnyTableAndVerifyThatTheGuestCountPopupAppears() throws InterruptedException {
 		// pma.getPOS_FlowOne_POM().getArea1().click();
-		Thread.sleep(200);
+		Thread.sleep(900);
 		pma.getPOS_FlowOne_POM().getTable1().click();
 	}
 
 	@Then("User should able to select guest count Number and Click Proceed Button")
 	public void userShouldAbleToSelectGuestCountNumberAndClickProceedButton() throws InterruptedException {
+		Thread.sleep(1000);
 		pma.getPOS_FlowOne_POM().getNoOfGuest5().click();
 
-noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc");
+		noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc");
 		System.out.println(noOfGuest);
 		pma.getPOS_FlowOne_POM().getProceedButton().click();
 		orderType = "DineIn";
@@ -469,6 +472,13 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 
 		// Bill Amount Validation
 		totalBillAmount = subTotal + salesTax + serFee + serFeeTax + gratuityValue + gratuityTaxValue;
+		System.out.println(subTotal);
+		System.out.println(salesTax);
+		System.out.println(serFee);
+		System.out.println(serFeeTax);
+		System.out.println(gratuityValue);
+		System.out.println(gratuityTaxValue);
+		
 		String billAmount = pma.getPOS_FlowOne_POM().getBillAmountPayDetails().getAttribute("content-desc");
 		Assert.assertEquals(billAmount, "$" + roundStringValue(totalBillAmount));
 
@@ -803,15 +813,13 @@ noOfGuest = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("Content-desc"
 		Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmountADis)));
 	
 		
-		
-		
-		
-		
-		
-		
-		
-		
+	}
+	@Given("Excel Write Check")
+	public void excelWriteCheck() throws IOException {
+		writeValueToCell("Discount", 8, 0, "Custom Text Rewrite");
+		writeValueToCell("Discount", 8, 1, "Text Rewrite");
+		writeValueToCell("Discount", 8, 2, "Rewrite");
 		
 	}
 
-}
+}//20-04-2023 10:38 Complete

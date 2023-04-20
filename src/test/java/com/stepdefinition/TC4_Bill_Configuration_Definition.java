@@ -132,7 +132,7 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 
 	@Then("User should enable or Disable the Apply service fee on the subtotal after deductions #Excel Input")
 	public void userShouldEnableOrDisableTheApplyServiceFeeOnTheSubtotalAfterDeductionsExcelInput()
-			throws IOException, InterruptedException {
+throws IOException, InterruptedException {
 		String serFeeonSubToAfterDedu = getDataFromExcel("Bill Configuration", 7, 1);
 
 		if (serFeeonSubToAfterDedu.equals("ON")) {Thread.sleep(500);
@@ -148,8 +148,7 @@ public class TC4_Bill_Configuration_Definition extends BaseClass {
 					.getAttribute("value").equals("true")) {Thread.sleep(500);
 				pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle()
 						.click();
-			} else if (pma.getRMS_SettingsPage_Configuration_POM()
-					.getApplyServiceFeeOntheSubtotalafterDeductionsToggle().getAttribute("value").equals("false")) {Thread.sleep(500);
+			} else if (pma.getRMS_SettingsPage_Configuration_POM().getApplyServiceFeeOntheSubtotalafterDeductionsToggle1().getAttribute("value").equals("false")) {Thread.sleep(500);
 			}
 		} else {
 			Assert.assertTrue(false, "Invalid State");
