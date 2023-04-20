@@ -135,11 +135,11 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 
 	@When("User should verify the Add Modifier item slide pop-up and text box")
 	public void userShouldVerifyTheAddModifierItemSlidePopUpAndTextBox() throws InterruptedException {
-		Thread.sleep(900);
+		Thread.sleep(1300);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();
-		Thread.sleep(900);
+		Thread.sleep(1500);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideHdrElement().getText().equals("Add Modifier Item"));
-		Thread.sleep(500);
+		Thread.sleep(900);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameHdrElement().isDisplayed());
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceHdrElement().isDisplayed());
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModifierTypeHdr().isDisplayed());
@@ -340,6 +340,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod1);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
+		Thread.sleep(1000);
 		for (int i = 0; i < 4; i++) {
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(300);
@@ -369,6 +370,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod2);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
+		Thread.sleep(1000);
 		for (int i = 4; i < 8; i++) {
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
@@ -409,6 +411,8 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod3);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
+//		rmsDriver.navigate().refresh();
+		Thread.sleep(1000);
 		for (int i = 8; i < 12; i++) {
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().sendKeys(modifierItemsAsMaps.get(i).get("Modifier"));Thread.sleep(500);
@@ -771,18 +775,18 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			sb.append(randomChar);
 		}
 	     String randomCateName = sb.toString();  
-	     pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
-	     pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName);Thread.sleep(100);
-	     pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);		
+	     pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(600);
+	     pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName);Thread.sleep(600);
+	     pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(600);		
 		
-		for (int i = 0; i < asMaps.size()/2; i++) {	Thread.sleep(400);
+		for (int i = 0; i < asMaps.size()/2; i++) {	Thread.sleep(900);
 			pma.getRMS_Menus_Configuration_POM().getAddMenuInsideCateElement().click();
 			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(asMaps.get(i).get("MenuName"));Thread.sleep(100);
 			Select slt2 = new Select(pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuTypeDropDown());
 			slt2.selectByVisibleText(asMaps.get(i).get("Modifier Type"));Thread.sleep(100);
 			pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(asMaps.get(i).get("Price"));
 			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(500);
-			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(500);
+			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(900);
 		
 			
 			Sheet sht= workbook.getSheet("Menu List");
@@ -795,7 +799,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			createCell1.setCellValue(asMaps.get(i).get("Price"));
 			Cell createCell2 = createRow.createCell(3);
 			createCell2.setCellValue(asMaps.get(i).get("Modifier Type"));
-			
+			Thread.sleep(1000);
 			
 		}
 		
@@ -812,7 +816,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 					sb1.append(randomChar1);
 				}
 			     String randomCateName1 = sb1.toString();
-		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(900);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName1);Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
 		for (int i = asMaps.size()/2; i < asMaps.size(); i++) {Thread.sleep(1000);
@@ -837,7 +841,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			Cell createCell2 = createRow.createCell(3);
 			createCell2.setCellValue(asMaps.get(i).get("Modifier Type"));
 			
-			
+			Thread.sleep(1000);
 			
 		}
 		workbook.write(fileOutputStream);
@@ -846,7 +850,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		
 		
 		
-		
+		Thread.sleep(1000);
 		
 	}
 
@@ -891,7 +895,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				slt2.selectByVisibleText(list.get(j+1));Thread.sleep(100);
 				pma.getRMS_Menus_Configuration_POM().getAddMenuSlidePriceTextBx().sendKeys(list.get(j+2));Thread.sleep(100);
 				
-				pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();			Thread.sleep(100);
+				pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddModifierBtn().click();			Thread.sleep(1000);
 				
 				
 				
@@ -907,7 +911,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				createCell2.setCellValue(list.get(j+1));
 				
 			     
-				
+				Thread.sleep(1000);
 				
 				
 				
@@ -955,7 +959,8 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 						rmsDriver.findElement(By.xpath("(//span[@class='label-text text-bottom'])["+(k+1)+"]")).click();Thread.sleep(200);
 					}
 					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtnAfter().click();Thread.sleep(200);
-					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(100);
+					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(2000);
+					System.out.println(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideAreYouSureText().getText());
 					Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideAreYouSureText().getText().contains("Are you sure all the modifiers are optional for this menu"));
 					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideLetMeModifyBtn().click();Thread.sleep(300);
 					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(200);
@@ -986,7 +991,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			List<WebElement> menusListInsideCate = pma.getRMS_Menus_Configuration_POM().getMenusListInsideCate();Thread.sleep(100);
 			int size = menusListInsideCate.size();Thread.sleep(100);
 			String menusCountString = Integer.toString(size);Thread.sleep(100);
-			Assert.assertTrue(categoryName.contains(menusCountString));Thread.sleep(100);
+			Assert.assertTrue(categoryName.contains(menusCountString));Thread.sleep(1000);
 		}
 	}
 
@@ -1077,7 +1082,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys("Publish Menu Description Text");Thread.sleep(200);
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(200);
 		
-		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(1000);
 		//Status Validation
 		boolean point1=false,point2=false;
 		WebElement publishMenuPopTable = pma.getRMS_Menus_Configuration_POM().getPublishMenuPopTable();Thread.sleep(900);
@@ -1099,7 +1104,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		}
 		Assert.assertTrue(point1);
 		Assert.assertTrue(point2);
-		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(1000);
 	}
 
 	@Then("User should Edit the {string} and verify that publish menu status as {string} and {string}")
@@ -1110,7 +1115,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideMenuNameTextBx().sendKeys(" edit");Thread.sleep(200);
 		pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(200);
 		
-		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(1000);
 		//Status Validation
 		boolean point1=false,point2=false;
 				WebElement publishMenuPopTable = pma.getRMS_Menus_Configuration_POM().getPublishMenuPopTable();Thread.sleep(900);
@@ -1126,13 +1131,13 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 					if (findTableRows.get(i).getText().contains(cateName)) {
 						List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
 //							System.out.println(findTableDatas.get(1).getText());
-						Assert.assertTrue(findTableDatas.get(1).getText().equals(cateStatus));Thread.sleep(200);
+						Assert.assertTrue(findTableDatas.get(1).getText().equals(cateStatus));Thread.sleep(500);
 						point2=true;
 					}
 				}
 				Assert.assertTrue(point1);
 				Assert.assertTrue(point2);
-				pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(200);
+				pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(1000);
 	}
 
 	@Then("User should delete the {string} and verify that publish menu status as {string} and {string}")
@@ -1181,7 +1186,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideDescriptionTextBx().sendKeys(asMaps.get(i).get("Description"));Thread.sleep(200);
 			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();
 		}
-		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(200);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(1000);
 		boolean point2=false;int point1=0;
 		//Status Validation
 		WebElement publishMenuPopTable = pma.getRMS_Menus_Configuration_POM().getPublishMenuPopTable();Thread.sleep(900);
@@ -1200,7 +1205,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			if (findTableRows.get(i).getText().contains(cateName)) {
 				List<WebElement> findTableDatas = findTableRows.get(i).findElements(By.tagName("td"));
 //					System.out.println(findTableDatas.get(1).getText());
-				Assert.assertTrue(findTableDatas.get(1).getText().equals("Existing"));Thread.sleep(200);
+				Assert.assertTrue(findTableDatas.get(1).getText().equals("Existing"));Thread.sleep(600);
 				point2=true;
 				}
 		}

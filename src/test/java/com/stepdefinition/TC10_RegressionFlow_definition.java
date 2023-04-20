@@ -78,7 +78,7 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 		Assert.assertTrue(automationArea.equals(automationAreaExcel));
 		Thread.sleep(200);
 		
-		//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Area Validation Done>>>>>>>>>>>>>>>>>>>>>>>>>
+		//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Area Validation Done>>>>>>>>>>>>>>>>>>>>>>>>>\\
 		for (int i = 0; i < 10; i++) {
 		posDriver1.findElement(By.xpath("//android.view.View[@index='0']["+i+"]"));
 		}

@@ -429,7 +429,7 @@ public class TC2_RMS_Employee_Management_definition extends BaseClass {
 //				pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().click();	
 //			} catch (Exception e) {}
 			
-			
+	        Thread.sleep(2000);
 			rmsDriver.navigate().refresh();
 			Thread.sleep(2000);
 			pma.getRMS_Employee_Management_POM().getAddEmployeeBtnElement().click();Thread.sleep(1000);
@@ -570,28 +570,16 @@ public class TC2_RMS_Employee_Management_definition extends BaseClass {
 		System.out.println(indvEmployeeListElement.size());
 		int j=1;
 		
-		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
-		Thread.sleep(1000);
-		FileInputStream fileInputStream= new FileInputStream(file);
-		Thread.sleep(1000);
-		Workbook workbook = new XSSFWorkbook(fileInputStream);		
-	     Sheet sheet = workbook.getSheet("Employee Details");
-	      Row row = sheet.createRow(0);
-	      Cell cell0 = row.createCell(0);
-	      cell0.setCellValue("Employee Name");
-	      Cell cell1= row.createCell(1);
-	      cell1.setCellValue("EmpRole");
-	      Cell cell2 = row.createCell(2);
-	      cell2.setCellValue("PIN");
-	      Cell cell3 = row.createCell(3);
-	      cell3.setCellValue("Email");
-	      Cell cell4 = row.createCell(4);
-	      cell4.setCellValue("PhoneNo");
-	      FileOutputStream fileOutputStream = new FileOutputStream(file);
+		
+		writeValueToCell("Employee Details", 0, 0, "Employee Name");Thread.sleep(200);
+		writeValueToCell("Employee Details", 0, 1, "EmpRole");Thread.sleep(200);
+		writeValueToCell("Employee Details", 0, 2, "PIN");Thread.sleep(200);
+		writeValueToCell("Employee Details", 0, 3, "Email");Thread.sleep(200);
+		writeValueToCell("Employee Details", 0, 4, "PhoneNo");Thread.sleep(200);
 		
 		
 		
-		try {
+//		try {
 			for (int i = 0; i < indvEmployeeListElement.size(); i++,j++) {
 				String empListDispName = pma.getRMS_Employee_Management_POM().getEmpNameInsideListElement(j).getText();
 				//System.out.println(empListDispName);
@@ -632,21 +620,14 @@ public class TC2_RMS_Employee_Management_definition extends BaseClass {
 				}
 				System.out.println(SlidePIN);
 				
-				//Store in Excel
-				Sheet sheet1 = workbook.getSheet("Employee Details");
-				  Row row1 = sheet1.createRow(i+1);
-			      Cell cellEmpNa = row1.createCell(0);
-			      cellEmpNa.setCellValue(SlideDispName1);
-			      Cell cellEmpRole= row1.createCell(1);
-			      cellEmpRole.setCellValue(SlideRole);
-			      Cell cellPin = row1.createCell(2);
-			      cellPin.setCellValue(SlidePIN);
-			      Cell cellEmail = row1.createCell(3);
-			      cellEmail.setCellValue(SlideEmail);
-			      Cell cellPhoneNo = row1.createCell(4);
-			      cellPhoneNo.setCellValue(SlidePhone);
+
 				
-					      
+					      //using Base Class
+			      writeValueToCell("Employee Details", i+1, 0, SlideDispName1);Thread.sleep(200);
+			      writeValueToCell("Employee Details", i+1, 1, SlideRole);Thread.sleep(200);
+			      writeValueToCell("Employee Details", i+1, 2, SlidePIN);Thread.sleep(200);
+			      writeValueToCell("Employee Details", i+1, 3, SlideEmail);Thread.sleep(200);
+			      writeValueToCell("Employee Details", i+1, 4, SlidePhone);Thread.sleep(200);
 				
 				
 				
@@ -657,11 +638,11 @@ public class TC2_RMS_Employee_Management_definition extends BaseClass {
 			}//need to add individual validation
 			
 			  
-		} catch (Exception e) {
-			workbook.write(fileOutputStream);
-			e.printStackTrace();
-		}
-		workbook.write(fileOutputStream);
+//		} catch (Exception e) {
+//			workbook.write(fileOutputStream);
+//			e.printStackTrace();
+//		}
+//		workbook.write(fileOutputStream);
 		
 		
 	}

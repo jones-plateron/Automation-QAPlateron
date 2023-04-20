@@ -108,7 +108,6 @@ Feature: Menus Items section validations
     #When User should click Menus section and verify the page redirection
     #Then Deleting Menus and Categories
 #
-#
     #Examples: 
       #| mobileNumber | otp    |
       #|   7777777723 | 666666 |      

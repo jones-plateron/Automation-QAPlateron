@@ -157,6 +157,12 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//li[@class='list-item cursor-pointer ' and contains(text(),'Gratuity Configuration' )]"));
 		return element;
 	}
+	public WebElement getGratuityConfigurationSections2() {
+		WebElement element = rmsDriver.findElement(By.xpath("(.//*[text()='Gratuity Configuration'])[1]"));
+		return element;
+	}
+	
+	
 	public WebElement getGratuityConfigurationHeader() {
 		WebElement element = rmsDriver.findElement(By.xpath("//div[@class='page-header__page-title font-x-bold mb-3' and contains(text(),'Gratuity Configuration')]"));
 		return element;

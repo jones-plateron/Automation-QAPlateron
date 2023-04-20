@@ -25,6 +25,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.pagemanager.PageManager;
+
 import io.appium.java_client.AppiumDriver;
 
 public class BaseClass {
@@ -32,6 +34,7 @@ public class BaseClass {
 	public static WebDriver rmsDriver;
 	public static AppiumDriver posDriver1;
 	public static AppiumDriver mobileDriver1;
+//	PageManager pma = new PageManager();
 	
 	public BaseClass() {
 		PageFactory.initElements(rmsDriver, this);
@@ -78,17 +81,45 @@ public class BaseClass {
 		}
 		return data;
 	}
+	
+	public void posLoginWithEmployeePin(String employeePIN) {}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public float subtotalAfterApplyingDiscountWOExcludeItems(List<Float> menus,float discPercentage) {
 		
 		float discountAmtOfMenu,subTotalAfterDiscount=0,discountAmt=0,MenuAfterDiscount;
+		DecimalFormat df = new DecimalFormat("#.##");
 		for (int i = 0; i < menus.size(); i++) {
 			Float menuItem = menus.get(i);
 			discountAmtOfMenu=(menuItem*discPercentage/100);
+			
 			MenuAfterDiscount=(menuItem-discountAmtOfMenu);
-			discountAmt=(discountAmt+discountAmtOfMenu);
+			
+			discountAmt=(discountAmt+roundFloatValue(discountAmtOfMenu));
 			subTotalAfterDiscount=(subTotalAfterDiscount+MenuAfterDiscount);
 		}
-		DecimalFormat df = new DecimalFormat("#.##");
+		
 		float discountAmt1 = Float.valueOf(df.format(discountAmt));
 		return discountAmt1;
 	}
@@ -202,8 +233,8 @@ public class BaseClass {
 	}
 	
 	public void writeValueToCell(String sheetName,int rowIndex,int cellIndex,String Data) throws IOException {
-		File file =new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
-		FileInputStream fileInputStream = new FileInputStream(file);
+		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+		FileInputStream fileInputStream= new FileInputStream(file);
 		Workbook workbook = new XSSFWorkbook(fileInputStream);
 		Sheet dataSheet = workbook.getSheet(sheetName);
 		Row row = dataSheet.getRow(rowIndex);
