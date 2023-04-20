@@ -62,6 +62,7 @@ Feature: Manage Table
       | S1         |               11 |
       | S2         |               22 |
       | S3         |               33 |
+      | S4         |               55 |
       | xyz        |               77 |
     And User should able to select any area and verify the Area Header and Total Table count under the Area Name
     And User should able to Edit any Area name

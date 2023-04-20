@@ -102,6 +102,9 @@ PageManager pma = new PageManager();
 	public WebElement getAddModifierItemButtonElement() {
 		return rmsDriver.findElement(By.xpath("//div[@class='card card-empty']"));
 	}
+	public WebElement getAddModifierItemButtonElement1() {
+		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-outline-primary btn-small btn-width large d-flex align-items-center']"));
+	}
 	public WebElement getAddModifierItemSlideHdrElement() {
 		return rmsDriver.findElement(By.xpath("//h4[@class='modal-title text-ellipsis ']"));
 	}

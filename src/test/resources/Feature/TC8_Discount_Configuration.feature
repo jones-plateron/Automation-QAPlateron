@@ -2,7 +2,7 @@
 Feature: Discount
 
   @DiscountConfiguration1
-  Scenario Outline: As a RMS User,
+  Scenario Outline: As a RMS User,Discount template Validations
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to Discount Configuration and Verify the Redirection
     Then User should Click Create Discount button and verify the page redirection
@@ -18,7 +18,7 @@ Feature: Discount
       |   7777777723 | 666666 |
 
   @DiscountConfiguration2
-  Scenario Outline: As a RMS User,
+  Scenario Outline: As a RMS User,Discount Template Creation
     Given Login to the restaurant with "<mobileNumber>" and "<otp>"
     When User should redirects to Discount Configuration and Verify the Redirection
     Then User should Click Create Discount button and verify the page redirection
