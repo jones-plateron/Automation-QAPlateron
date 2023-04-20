@@ -59,7 +59,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
 //        capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, "true");
 //		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
-		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");
+		capabilities.setCapability(MobileCapabilityType.UDID, "HA1GSLK1");
 		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
 		// capabilities.setCapability(MobileCapabilityType.UDID,"192.168.5.101:5555");
 
@@ -77,7 +77,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 
 		for (int i = 0; i < employeePIN.length(); i++) {
 			char charAt = employeePIN.charAt(i);
-//            Thread.sleep(100);
+           Thread.sleep(100);
 			switch (charAt) {
 			case '1':
 				pma.getPOS_FlowOne_POM().getPinOneElement().click();
