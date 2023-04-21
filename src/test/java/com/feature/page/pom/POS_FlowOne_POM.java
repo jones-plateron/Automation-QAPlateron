@@ -139,6 +139,9 @@ public class POS_FlowOne_POM extends BaseClass {
 		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='12']"));
 		return element;
 	}
+	public WebElement getOrderIdRightCornerTakeOut() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='14']"));		
+	}
 
 	public WebElement getFirstMenuRightSide() {
 		WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
@@ -166,7 +169,7 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 
 	public WebElement getReceivePaymentBtn() {
-		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@index=17]"));
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Receive Payment']"));
 		return element;
 	}
 
@@ -354,6 +357,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getServiceFeeCOSummary() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='7'])[2]"));
 	}
+	public WebElement getServiceFeeCOSummaryTakeOut() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='7'])[1]"));
+	}
 
 	public WebElement getServiceFeeTaxCOSummary() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='9'])[2]"));
@@ -369,6 +375,9 @@ public class POS_FlowOne_POM extends BaseClass {
 
 	public WebElement getTotAmountCOSummary() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='15']"));
+	}
+	public WebElement getTotAmountCOSummaryTakeOut() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='17']"));
 	}
 
 	public WebElement getSearchBarCO() {
@@ -406,6 +415,29 @@ public class POS_FlowOne_POM extends BaseClass {
 	//Note if the area is added then the index for table will be 6:1
 	public WebElement getTable1() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
+
+	public WebElement getArea1Table1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
+	}
+
+	public WebElement getTakeOutSection() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Take-out']"));
+	}
+	public WebElement getTakeOutPopupHeader() {
+//		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[7]"));
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Take-out']"));
+	}
+	public WebElement getPopupCustomerNameHeader() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='1']"));
+	}
+	public WebElement getPopupMobileNumHeader() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='3']"));
+	}
+	public WebElement getPopupCustomerNameTextBx() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='2']"));
+	}
+	public WebElement getPopupMobileNumTextBx() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='4']"));
 	}
 	public WebElement getTable2() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
@@ -459,8 +491,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	
 	
 	public WebElement getCompleteOrderStatus() {
-		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
-		return element;
-
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
+	}
+	public WebElement getCompleteOrderStatusTakeOut() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='15']"));
 	}
 }
