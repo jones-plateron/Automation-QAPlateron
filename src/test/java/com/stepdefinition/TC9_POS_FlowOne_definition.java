@@ -78,7 +78,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 
 		for (int i = 0; i < employeePIN.length(); i++) {
 			char charAt = employeePIN.charAt(i);
-//            Thread.sleep(100);
+           Thread.sleep(100);
 			switch (charAt) {
 			case '1':
 				pma.getPOS_FlowOne_POM().getPinOneElement().click();
