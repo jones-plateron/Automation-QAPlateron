@@ -9,9 +9,11 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -51,10 +53,10 @@ public class BaseClass {
 		Sheet dataSheet = workbook.getSheet(sheet);
 		Row row = dataSheet.getRow(rowIndex);
 		Cell cell = row.getCell(cellIndex);
-		int cellType = cell.getCellType();
+		CellType cellType = cell.getCellType();
 //		CellType cellType = cell.getCellType();
 		switch (cellType) {
-		case 0:
+		case NUMERIC:
 			if (DateUtil.isCellDateFormatted(cell)) {
 				Date dateCellValue = cell.getDateCellValue();
 				SimpleDateFormat reqFormat=new SimpleDateFormat("dd/MM/YYYY");
@@ -72,7 +74,7 @@ public class BaseClass {
 				}
 			}
 			break;
-		case 1:
+		case STRING:
 			String stringCellValue = cell.getStringCellValue();
 			data=stringCellValue;
 			break;
@@ -86,7 +88,26 @@ public class BaseClass {
 	
 	
 	
+	public String randomNameGenerator() {
+		String[] firstNames = {"Adam", "Alice", "Bobby", "Charlie", "David", "Emma", "Frank", "Grace", "Helen", "Ivy", "Kelly"};
+	    String[] lastNames = {"Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor"};
+	    Random rand = new Random();
+	    int indexFN = rand.nextInt(firstNames.length);
+	    int indexLN = rand.nextInt(lastNames.length);
+	    
+        String randomName = firstNames[indexFN] + " " + lastNames[indexLN];
+        return randomName;
+	}
 	
+	public String randomMobileNumberGeneration() {
+		Random random1 = new Random();
+        StringBuilder sb1 = new StringBuilder();
+        for (int k = 0; k < 10; k++) {
+            sb1.append(random1.nextInt(10));
+            }
+        String randomNum = sb1.toString();
+		return randomNum;
+	}
 	
 	
 	
