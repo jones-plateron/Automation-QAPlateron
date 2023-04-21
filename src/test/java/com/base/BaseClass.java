@@ -258,12 +258,21 @@ public class BaseClass {
 		FileInputStream fileInputStream= new FileInputStream(file);
 		Workbook workbook = new XSSFWorkbook(fileInputStream);
 		Sheet dataSheet = workbook.getSheet(sheetName);
-		Row row = dataSheet.getRow(rowIndex);
+		Row row;
+
+//		try {
+//			row = dataSheet.getRow(rowIndex);
+//		} catch (Exception e) {
+			row = dataSheet.getRow(rowIndex);
+//		}
+		
+		
 		Cell cell = row.createCell(cellIndex);
 		cell.setCellValue(Data);
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
 		workbook.write(fileOutputStream);
 	}
+	
 //	public void getValueFromCell(String sheetName,int rowIndex,int cellIndex) throws IOException {
 //		File file =new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
 //		FileInputStream fileInputStream = new FileInputStream(file);

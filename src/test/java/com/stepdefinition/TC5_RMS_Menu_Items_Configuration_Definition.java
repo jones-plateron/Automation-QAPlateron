@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -136,7 +137,16 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	@When("User should verify the Add Modifier item slide pop-up and text box")
 	public void userShouldVerifyTheAddModifierItemSlidePopUpAndTextBox() throws InterruptedException {
 		Thread.sleep(1300);
-		pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();
+		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys("Test Modifier");Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(500);
+		Thread.sleep(500);
+//		try {
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();
+//		} catch (Exception e) {
+//			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement1().click();
+//		}
+		
 		Thread.sleep(1500);
 		Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideHdrElement().getText().equals("Add Modifier Item"));
 		Thread.sleep(900);
@@ -214,7 +224,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideCancelBtn().click();
-		
+		Thread.sleep(1000);
 		//Bug on Save Button
 //		pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();
 //		pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();
@@ -228,7 +238,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys("Edit and Delete");
-		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(1000);
 		for (int i = 0; i < 2; i++) {
 			Thread.sleep(1000);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemButtonElement().click();Thread.sleep(900);
@@ -243,7 +253,7 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideModTypeVegan().click();	
 			}Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
-			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
+			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(2000);
 		}
 		//Edit Item
 		List<WebElement> modifierItemsList = pma.getRMS_Menus_Configuration_POM().getModifierItemsList();
@@ -324,18 +334,23 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 
 		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
 		Thread.sleep(1000);
-		FileInputStream fileInputStream= new FileInputStream(file);
-		Thread.sleep(1000);
-		Workbook workbook = new XSSFWorkbook(fileInputStream);		
-	     Sheet sheet = workbook.getSheet("Modifier List");
-	     Row row = sheet.createRow(0);
-	      Cell cell0 = row.createCell(0);
-	      cell0.setCellValue("Modifier Name");
-	      Cell cell1= row.createCell(1);
-	      cell1.setCellValue("Item Name");
-	      Cell cell2 = row.createCell(2);
-	      cell2.setCellValue("Price");
-	      FileOutputStream fileOutputStream = new FileOutputStream(file);
+//		FileInputStream fileInputStream= new FileInputStream(file);
+//		Thread.sleep(1000);
+//		Workbook workbook = new XSSFWorkbook(fileInputStream);		
+//	     Sheet sheet = workbook.getSheet("Modifier List");
+//	     Row row = sheet.createRow(0);
+//	      Cell cell0 = row.createCell(0);
+//	      cell0.setCellValue("Modifier Name");
+//	      Cell cell1= row.createCell(1);
+//	      cell1.setCellValue("Item Name");
+//	      Cell cell2 = row.createCell(2);
+//	      cell2.setCellValue("Price");
+//	      FileOutputStream fileOutputStream = new FileOutputStream(file);
+	      
+	      writeValueToCell("Modifier List", 0, 0, "Modifier Name");Thread.sleep(1000);
+	      writeValueToCell("Modifier List", 0, 1, " Modifier Item Name");Thread.sleep(1000);
+	      writeValueToCell("Modifier List", 0, 2, "Price");Thread.sleep(1000);
+	      
 		//Create a Modifier-------------------------------------------------------------
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(mod1);
@@ -357,14 +372,17 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
 			
 			
-			Sheet sheet1 = workbook.getSheet("Modifier List");
-		      Row row1 = sheet1.createRow(i+1);
-		      Cell catName = row1.createCell(0);
-		      catName.setCellValue(mod1);
-		      Cell itemName= row1.createCell(1);
-		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
-		      Cell price = row1.createCell(2);
-		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
+//			Sheet sheet1 = workbook.getSheet("Modifier List");
+//		      Row row1 = sheet1.createRow(i+1);
+//		      Cell catName = row1.createCell(0);
+//		      catName.setCellValue(mod1);
+//		      Cell itemName= row1.createCell(1);
+//		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
+//		      Cell price = row1.createCell(2);
+//		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
+			writeValueToCell("Modifier List", i+1, 0, mod1);
+			writeValueToCell("Modifier List", i+1, 1, modifierItemsAsMaps.get(i).get("Modifier"));
+			writeValueToCell("Modifier List", i+1, 2, modifierItemsAsMaps.get(i).get("Amount"));
 		}
 		//-----------------------------------------------------------------------------------
 		pma.getRMS_Menus_Configuration_POM().getAddModifierbutton().click();
@@ -386,14 +404,17 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
 			
-			Sheet sheet2 = workbook.getSheet("Modifier List");
-			Row row1 = sheet2.createRow(i+1);
-		      Cell catName = row1.createCell(0);
-		      catName.setCellValue(mod2);
-		      Cell itemName= row1.createCell(1);
-		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
-		      Cell price = row1.createCell(2);
-		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
+//			Sheet sheet2 = workbook.getSheet("Modifier List");
+//			Row row1 = sheet2.createRow(i+1);
+//		      Cell catName = row1.createCell(0);
+//		      catName.setCellValue(mod2);
+//		      Cell itemName= row1.createCell(1);
+//		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
+//		      Cell price = row1.createCell(2);
+//		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
+			writeValueToCell("Modifier List", i+1, 0, mod2);
+			writeValueToCell("Modifier List", i+1, 1, modifierItemsAsMaps.get(i).get("Modifier"));
+			writeValueToCell("Modifier List", i+1, 2, modifierItemsAsMaps.get(i).get("Amount"));
 		}
 		//-----------------------------------------------------------------------------------
 		//Random Category Name
@@ -428,16 +449,19 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideDescriptionTextBx().sendKeys(modifierItemsAsMaps.get(i).get("Description"));Thread.sleep(500);
 			pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(1000);
 		
-			Sheet sheet3 = workbook.getSheet("Modifier List");
-			Row row1 = sheet3.createRow(i+1);
-		      Cell catName = row1.createCell(0);
-		      catName.setCellValue(mod3);
-		      Cell itemName= row1.createCell(1);
-		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
-		      Cell price = row1.createCell(2);
-		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
+//			Sheet sheet3 = workbook.getSheet("Modifier List");
+//			Row row1 = sheet3.createRow(i+1);
+//		      Cell catName = row1.createCell(0);
+//		      catName.setCellValue(mod3);
+//		      Cell itemName= row1.createCell(1);
+//		      itemName.setCellValue(modifierItemsAsMaps.get(i).get("Modifier"));
+//		      Cell price = row1.createCell(2);
+//		      price.setCellValue(modifierItemsAsMaps.get(i).get("Amount"));
+			writeValueToCell("Modifier List", i+1, 0, mod3);
+			writeValueToCell("Modifier List", i+1, 1, modifierItemsAsMaps.get(i).get("Modifier"));
+			writeValueToCell("Modifier List", i+1, 2, modifierItemsAsMaps.get(i).get("Amount"));
 		}
-		workbook.write(fileOutputStream);
+//		workbook.write(fileOutputStream);
 		
 	}
 
@@ -747,23 +771,30 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 	public void userShouldAddMenuItemsUnderCategoriesAnd(String cateName1, String cateName2,io.cucumber.datatable.DataTable dataTable) throws InterruptedException, IOException {
 		List<Map<String,String>> asMaps = dataTable.asMaps();
 		
-		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
-		Thread.sleep(1000);
-		FileInputStream fileInputStream= new FileInputStream(file);
-		Thread.sleep(1000);
-		Workbook workbook = new XSSFWorkbook(fileInputStream);		
-	     Sheet sheet = workbook.getSheet("Menu List");
-	      Row row = sheet.createRow(0);
-	      Cell cell0 = row.createCell(0);
-	      cell0.setCellValue("Category Name");
-	      Cell cell1= row.createCell(1);
-	      cell1.setCellValue("Menu Name");
-	      Cell cell2 = row.createCell(2);
-	      cell2.setCellValue("Price");
-	      Cell cell3 = row.createCell(3);
-	      cell3.setCellValue("Menu Type");
-	      FileOutputStream fileOutputStream = new FileOutputStream(file);
-	     // workbook.write(fileOutputStream);
+//		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+//		Thread.sleep(1000);
+//		FileInputStream fileInputStream= new FileInputStream(file);
+//		Thread.sleep(1000);
+//		Workbook workbook = new XSSFWorkbook(fileInputStream);		
+//	     Sheet sheet = workbook.getSheet("Menu List");
+//	      Row row = sheet.createRow(0);
+//	      Cell cell0 = row.createCell(0);
+//	      cell0.setCellValue("Category Name");
+//	      Cell cell1= row.createCell(1);
+//	      cell1.setCellValue("Menu Name");
+//	      Cell cell2 = row.createCell(2);
+//	      cell2.setCellValue("Price");
+//	      Cell cell3 = row.createCell(3);
+//	      cell3.setCellValue("Menu Type");
+//	      FileOutputStream fileOutputStream = new FileOutputStream(file);
+//	     // workbook.write(fileOutputStream);
+	      
+	      writeValueToCell("Menu List", 0, 0, "Category Name");Thread.sleep(1000);
+	      writeValueToCell("Menu List", 0, 1, "Menu Name");Thread.sleep(1000);
+	      writeValueToCell("Menu List", 0, 2, "Price");Thread.sleep(1000);
+	      writeValueToCell("Menu List", 0, 3, "Menu Type");Thread.sleep(1000);
+	      
+	      
 		
 		//Random Category Name
 		String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvwxyz";
@@ -789,17 +820,22 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			pma.getRMS_Menus_Configuration_POM().getAddMenuSlideSaveBtn().click();Thread.sleep(900);
 		
 			
-			Sheet sht= workbook.getSheet("Menu List");
-			Row createRow = sht.createRow(i+1);
-			Cell createCel = createRow.createCell(0);
-			createCel.setCellValue(randomCateName);
-			Cell createCell = createRow.createCell(1);
-			createCell.setCellValue(asMaps.get(i).get("MenuName"));
-			Cell createCell1 = createRow.createCell(2);
-			createCell1.setCellValue(asMaps.get(i).get("Price"));
-			Cell createCell2 = createRow.createCell(3);
-			createCell2.setCellValue(asMaps.get(i).get("Modifier Type"));
-			Thread.sleep(1000);
+//			Sheet sht= workbook.getSheet("Menu List");
+//			Row createRow = sht.createRow(i+1);
+//			Cell createCel = createRow.createCell(0);
+//			createCel.setCellValue(randomCateName);
+//			Cell createCell = createRow.createCell(1);
+//			createCell.setCellValue(asMaps.get(i).get("MenuName"));
+//			Cell createCell1 = createRow.createCell(2);
+//			createCell1.setCellValue(asMaps.get(i).get("Price"));
+//			Cell createCell2 = createRow.createCell(3);
+//			createCell2.setCellValue(asMaps.get(i).get("Modifier Type"));
+//			Thread.sleep(1000);
+			
+			writeValueToCell("Menu List", i+1, 0, randomCateName);Thread.sleep(1000);
+			writeValueToCell("Menu List", i+1, 1, asMaps.get(i).get("MenuName"));Thread.sleep(1000);
+			writeValueToCell("Menu List", i+1, 2, asMaps.get(i).get("Price"));Thread.sleep(1000);
+			writeValueToCell("Menu List", i+1, 3, asMaps.get(i).get("Modifier Type"));Thread.sleep(1000);
 			
 		}
 		
@@ -830,21 +866,25 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			
 			
 			
-			Sheet sht= workbook.getSheet("Menu List");
-			Row createRow = sht.createRow(i+1);
-			Cell createCel = createRow.createCell(0);
-			createCel.setCellValue(randomCateName1);
-			Cell createCell = createRow.createCell(1);
-			createCell.setCellValue(asMaps.get(i).get("MenuName"));
-			Cell createCell1 = createRow.createCell(2);
-			createCell1.setCellValue(asMaps.get(i).get("Price"));
-			Cell createCell2 = createRow.createCell(3);
-			createCell2.setCellValue(asMaps.get(i).get("Modifier Type"));
+//			Sheet sht= workbook.getSheet("Menu List");
+//			Row createRow = sht.createRow(i+1);
+//			Cell createCel = createRow.createCell(0);
+//			createCel.setCellValue(randomCateName1);
+//			Cell createCell = createRow.createCell(1);
+//			createCell.setCellValue(asMaps.get(i).get("MenuName"));
+//			Cell createCell1 = createRow.createCell(2);
+//			createCell1.setCellValue(asMaps.get(i).get("Price"));
+//			Cell createCell2 = createRow.createCell(3);
+//			createCell2.setCellValue(asMaps.get(i).get("Modifier Type"));
+			writeValueToCell("Menu List", i+1, 0, randomCateName1);Thread.sleep(1000);
+			writeValueToCell("Menu List", i+1, 1, asMaps.get(i).get("MenuName"));Thread.sleep(1000);
+			writeValueToCell("Menu List", i+1, 2, asMaps.get(i).get("Price"));Thread.sleep(1000);
+			writeValueToCell("Menu List", i+1, 3, asMaps.get(i).get("Modifier Type"));Thread.sleep(1000);
 			
 			Thread.sleep(1000);
 			
 		}
-		workbook.write(fileOutputStream);
+//		workbook.write(fileOutputStream);
 		//Need to Create for All - created
 		
 		
@@ -875,14 +915,14 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		
 
 		pma.getRMS_Menus_Configuration_POM().getAddCategoryButton().click();Thread.sleep(100);
-		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName1);Thread.sleep(100);
+		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupTextBoxElement().sendKeys(randomCateName1+" WM");Thread.sleep(100);
 		pma.getRMS_Menus_Configuration_POM().getAddModifierPopupSaveBtnElement().click();Thread.sleep(100);
 		
-		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
-		Thread.sleep(1000);
-		FileInputStream fileInputStream= new FileInputStream(file);
-		Thread.sleep(1000);
-		Workbook workbook = new XSSFWorkbook(fileInputStream);
+//		File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\Sheet\\Configsheet.xlsx");
+//		Thread.sleep(1000);
+//		FileInputStream fileInputStream= new FileInputStream(file);
+//		Thread.sleep(1000);
+//		Workbook workbook = new XSSFWorkbook(fileInputStream);
 		
 //InProgress?????		
 		List<List<String>> asLists = dataTable.asLists();
@@ -899,19 +939,25 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				
 				
 				
-				Sheet sht= workbook.getSheet("Menu List");
-				Row createRow = sht.createRow(i+21);
-				Cell createCel = createRow.createCell(0);
-				createCel.setCellValue(randomCateName1);
-				Cell createCell = createRow.createCell(1);
-				createCell.setCellValue(list.get(j));
-				Cell createCell1 = createRow.createCell(2);
-				createCell1.setCellValue(list.get(j+2));
-				Cell createCell2 = createRow.createCell(3);
-				createCell2.setCellValue(list.get(j+1));
+//				Sheet sht= workbook.getSheet("Menu List");
+//				Row createRow = sht.createRow(i+21);
+//				Cell createCel = createRow.createCell(0);
+//				createCel.setCellValue(randomCateName1);
+//				Cell createCell = createRow.createCell(1);
+//				createCell.setCellValue(list.get(j));
+//				Cell createCell1 = createRow.createCell(2);
+//				createCell1.setCellValue(list.get(j+2));
+//				Cell createCell2 = createRow.createCell(3);
+//				createCell2.setCellValue(list.get(j+1));
 				
-			     
-				Thread.sleep(1000);
+				writeValueToCell("Menu List", i+21, 0, randomCateName1);Thread.sleep(1000);
+				writeValueToCell("Menu List", i+21, 1, list.get(j));Thread.sleep(1000);
+				writeValueToCell("Menu List", i+21, 2, list.get(j+2));Thread.sleep(1000);
+				writeValueToCell("Menu List", i+21, 3, list.get(j+1));Thread.sleep(1000);
+				
+				
+				
+				
 				
 				
 				
@@ -967,8 +1013,8 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideYesProceedBtn().click();
 				}
 		}
-		 FileOutputStream fileOutputStream = new FileOutputStream(file);
-		workbook.write(fileOutputStream);
+//		 FileOutputStream fileOutputStream = new FileOutputStream(file);
+//		workbook.write(fileOutputStream);
 	}
 
 	@Then("User should verify the Menu items Edit option")
@@ -1268,8 +1314,13 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 			i--;
 			categoryListsElement = pma.getRMS_Menus_Configuration_POM().getCategoryListsElement();Thread.sleep(100);
 		}
-		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();
-		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();
+		Thread.sleep(1500);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuBtnElement().click();Thread.sleep(500);
+		pma.getRMS_Menus_Configuration_POM().getPublishMenuPopupPublishBtn().click();Thread.sleep(1000);
+		
+		
+		
+		
 		
 	}
 	

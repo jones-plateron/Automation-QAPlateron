@@ -156,18 +156,19 @@ throws IOException, InterruptedException {
 	}
 
 	@Then("User should click Save button in Bill Configuration page")
-	public void userShouldClickSaveButtonInBillConfigurationPage() {
+	public void userShouldClickSaveButtonInBillConfigurationPage() throws InterruptedException {
+		Thread.sleep(1000);
 		pma.getRMS_SettingsPage_Configuration_POM().getBillSettingSaveButton().click();
 	}
 
 	@When("User should click gratuity configuration section")
-	public void userShouldClickGratuityConfigurationSection() {
+	public void userShouldClickGratuityConfigurationSection() throws InterruptedException {
+		Thread.sleep(1000);
 		pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSections().click();
 	}
 
 	@Then("User enable or disable the Gratuity option #Excel Input")
 	public void userEnableOrDisableTheGratuityOptionExcelInput() throws IOException, InterruptedException {
-
 		String GradEnable = getDataFromExcel("Bill Configuration", 8, 1);
 
 		if (GradEnable.equals("ON")) {
@@ -195,7 +196,7 @@ throws IOException, InterruptedException {
 		String CheckboxOption = getDataFromExcel("Bill Configuration", 9, 1);
 
 		if (CheckboxOption.equals("Guest Count")) {Thread.sleep(500);
-			pma.getRMS_SettingsPage_Configuration_POM().getGuestCountRadioButtonOption().click();
+			pma.getRMS_SettingsPage_Configuration_POM().getGuestCountRadioButtonOption().click();Thread.sleep(500);
 
 		} else if (CheckboxOption.equals("Order Amount")) {Thread.sleep(500);
 			pma.getRMS_SettingsPage_Configuration_POM().getOrderAmountRadioButtonOption().click();
@@ -350,9 +351,44 @@ throws IOException, InterruptedException {
 	}
 
 	@Then("User should click save button in Gratuity configuration page")
-	public void userShouldClickSaveButtonInGratuityConfigurationPage() {
-		pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();
+	public void userShouldClickSaveButtonInGratuityConfigurationPage() throws InterruptedException {
+		Thread.sleep(1000);
+		pma.getRMS_SettingsPage_Configuration_POM().getGratuityConfigurationSaveButton().click();Thread.sleep(500);
 	}
+	
+	@Then("User should add the Payment settings of an Order")
+	public void userShouldAddThePaymentSettingsOfAnOrder() throws InterruptedException, IOException {
+		Thread.sleep(500);
+		pma.getRMS_SettingsPage_Configuration_POM().getPaymentSettingsSection().click();
+		Thread.sleep(500);
+		String dataFromExcel = getDataFromExcel("Bill Configuration", 17, 1);
+		if (dataFromExcel.equals("Prepaid")) {
+			if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().getAttribute("value").equals("true")) {
+				
+			} else if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().getAttribute("value").equals("false")) {
+				pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().click();
+			}else {
+				System.out.println("Invalid State");
+			}			
+		} else if (dataFromExcel.equals("Postpaid")) {
+			if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().getAttribute("value").equals("true")) {
+				pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().click();
+			} else if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().getAttribute("value").equals("false")) {
+			}else {
+				System.out.println("Invalid State");
+			}
+		}else {
+			System.out.println("Invalid State");
+		}
+		try {
+			pma.getRMS_SettingsPage_Configuration_POM().getPaymentsettingsPageSaveBtn().click();	
+		} catch (Exception e) {
+			Assert.assertTrue(pma.getRMS_SettingsPage_Configuration_POM().getPaymentsettingsPageDisabledSaveBtn().isDisplayed());
+		}
+		
+		
+	}
+	
 
 }
 

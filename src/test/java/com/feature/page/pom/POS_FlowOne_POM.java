@@ -415,7 +415,7 @@ public class POS_FlowOne_POM extends BaseClass {
 	//Note if the area is added then the index for table will be 6:1
 	public WebElement getTable1() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
-
+	}
 	public WebElement getArea1Table1() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
 	}
@@ -481,19 +481,15 @@ public class POS_FlowOne_POM extends BaseClass {
 		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Proceed']"));
 		return element;
 	}
-	
-	
 	public WebElement getGuestPopupHeadr() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[5]"));
 	}
-	
-	
-	
-	
 	public WebElement getCompleteOrderStatus() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
 	}
 	public WebElement getCompleteOrderStatusTakeOut() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='15']"));
 	}
+	
+	
 }
