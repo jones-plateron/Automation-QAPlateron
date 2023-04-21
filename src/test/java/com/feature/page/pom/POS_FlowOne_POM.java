@@ -76,16 +76,6 @@ public class POS_FlowOne_POM extends BaseClass {
 		return element;
 	}
 
-	public WebElement getArea1() {
-		WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[6]"));
-		return element;
-	}
-
-	public WebElement getTable1() {
-		WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
-		return element;
-	}
-
 	public WebElement getNoOfGuest5() {
 		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='5']"));
 		return element;
@@ -393,22 +383,38 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getSearchBarCO() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='4']"));
 	}
-
-	public WebElement getAreaGroundTable() {
+//+++++++++++++++++++++++++++++++Area and Table++++++++++++++++++++++++++++++++++++++++++
+	public WebElement getArea1() {
+		WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[6]"));
+		return element;
+	}
+	public WebElement getArea2() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='1']"));
 	}
 
-	public WebElement getArea2() {
+	public WebElement getArea3() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='2']"));
 	}
 
-	public WebElement getArea3() {
+	public WebElement getArea4() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
 	}
 
-	public WebElement getAutomationArea() {
+	public WebElement getArea5() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='4']"));
 	}
+	
+	
+	
+	
+	public WebElement gettabledetails() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
+	}
+	
+	
+	//Note if the area is added then the index for table will be 6:1
+	public WebElement getTable1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
 
 	public WebElement getArea1Table1() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
@@ -433,7 +439,57 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getPopupMobileNumTextBx() {
 		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='4']"));
 	}
-
+	public WebElement getTable2() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+	}
+	public WebElement getTable3() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[2]"));
+	}
+	public WebElement getTable4() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[3]"));
+	}
+	public WebElement getTable5() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='4'])[3]"));
+	}
+	public WebElement getTable6() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='5']"));
+	}
+	public WebElement getTable7() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='6']"));
+	}
+	public WebElement getTable8() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='7']"));
+	}
+	public WebElement getTable9() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='8']"));
+	}
+	public WebElement getTable10() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='9']"));
+	}
+	
+	public WebElement getOccupiedTableWaiterName() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[7]"));
+	}
+	public WebElement getReleasingthisTable() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Releasing this table will lose the current order']"));
+	}
+	public WebElement getCancelBtn() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Cancel']"));
+		return element;
+	}
+	public WebElement getReleaseTableProceedBtn() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Proceed']"));
+		return element;
+	}
+	
+	
+	public WebElement getGuestPopupHeadr() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[5]"));
+	}
+	
+	
+	
+	
 	public WebElement getCompleteOrderStatus() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
 	}
