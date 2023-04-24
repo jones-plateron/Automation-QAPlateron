@@ -974,6 +974,14 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 						Select slt = new Select(ModifiersListReqOrOpt.get(k));Thread.sleep(300);
 						slt.selectByVisibleText("Required");Thread.sleep(300);
 						Select slt1 = new Select(rmsDriver.findElement(By.xpath("(//tbody/tr[@class=' cursor-pointer']/td[2]/select[1])["+(k+1)+"]")));Thread.sleep(300);
+						
+						List<WebElement> findElements = rmsDriver.findElements(By.xpath("//Select[@class='minimal w-60']"));
+						for (int l = 0,z=5; l < findElements.size(); l++,z++) {
+							Select s1=new Select(findElements.get(l));
+							String value = s1.getFirstSelectedOption().getAttribute("value");
+							writeValueToCell("Menu List", i+21, z, value);
+						}
+						
 						List<WebElement> options = slt1.getOptions();Thread.sleep(300);
 						String optionText = options.get(options.size()-1).getText();Thread.sleep(300);
 //						System.out.println(optionText);Thread.sleep(200);
@@ -988,16 +996,26 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 //						System.out.println(k);
 						rmsDriver.findElement(By.xpath("(//span[@class='label-text text-bottom'])["+k+"]")).click();Thread.sleep(100);
 					}
+					
 					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtnAfter().click();Thread.sleep(100);
 					List<WebElement> ModifiersListReqOrOpt = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideAddedModifiersListReqOrOpt();
 					for (int k = 0; k < ModifiersListReqOrOpt.size()/2; k++) {
 						Select slt = new Select(ModifiersListReqOrOpt.get(k));Thread.sleep(300);
 						slt.selectByVisibleText("Required");Thread.sleep(300);
 						Select slt1 = new Select(rmsDriver.findElement(By.xpath("(//tbody/tr[@class=' cursor-pointer']/td[2]/select[1])["+(k+1)+"]")));Thread.sleep(300);
+						
 						List<WebElement> options = slt1.getOptions();Thread.sleep(300);
 						String optionText = options.get(options.size()-1).getText();Thread.sleep(300);
 						Assert.assertTrue(rmsDriver.findElement(By.xpath("(//span[@class='td-overflow label-text text-left text-bottom'])["+(k+1)+"]")).getText().contains(optionText));
 					}
+					
+					List<WebElement> findElements = rmsDriver.findElements(By.xpath("//Select[@class='minimal w-60']"));
+					for (int l = 0,z=5; l < findElements.size(); l++,z++) {
+						Select s1=new Select(findElements.get(l));
+						String value = s1.getFirstSelectedOption().getAttribute("value");
+						writeValueToCell("Menu List", i+21, z, value);
+					}
+					
 					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListSaveBtnAfter().click();Thread.sleep(200);
 				} else if (i==2) {
 					List<WebElement> addMenuSlideModifiersList2 = pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersList();
@@ -1006,7 +1024,16 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 					}
 					pma.getRMS_Menus_Configuration_POM().getAddMenuSlideModifiersListApplyBtnAfter().click();Thread.sleep(200);
 					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(2000);
-					System.out.println(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideAreYouSureText().getText());
+					
+					List<WebElement> findElements = rmsDriver.findElements(By.xpath("//Select[@class='minimal w-60']"));
+					for (int l = 0,z=5; l < findElements.size(); l++,z++) {
+						Select s1=new Select(findElements.get(l));
+						String value = s1.getFirstSelectedOption().getAttribute("value");
+						writeValueToCell("Menu List", i+21, z, value);
+					}
+					
+					
+					//System.out.println(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideAreYouSureText().getText());
 					Assert.assertTrue(pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideAreYouSureText().getText().contains("Are you sure all the modifiers are optional for this menu"));
 					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideLetMeModifyBtn().click();Thread.sleep(300);
 					pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideSaveBtn().click();Thread.sleep(200);

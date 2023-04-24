@@ -37,6 +37,11 @@ public class BaseClass {
 	public static AppiumDriver posDriver1;
 	public static AppiumDriver mobileDriver1;
 //	PageManager pma = new PageManager();
+	public String specialChar = "!@#$%%^&*()_+";
+	public String upperCase = "AUTOMATIONTEXT";
+	public String lowerCase = "automationtext";
+	public String numbers = "1234567890";
+	public String text = "!@#$%^&*()abcdefghijABCDEFGHIJ1234567890AutomationTestRegression";
 	
 	public BaseClass() {
 		PageFactory.initElements(rmsDriver, this);

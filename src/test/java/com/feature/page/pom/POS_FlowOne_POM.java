@@ -490,6 +490,57 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getCompleteOrderStatusTakeOut() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='15']"));
 	}
+	public WebElement get18PercentTip() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+	}
+	public WebElement get20PercentTip() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='2']"));
+	}
+	public WebElement get22PercentTip() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='3']"));
+	}
+	public WebElement getCustomTipAmtTextBx() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index=5]"));
+	}
+	public WebElement getCustomerNameTxtBxPaymentDetails() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getMobileNumTxtBxPaymentDetails() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='2']"));
+	}
+	public WebElement getCardRadioBtnPayDetails() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Card']"));
+	}
+	public WebElement getCashRadioBtnPayDetails() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Cash']"));
+	}
+	public WebElement get9() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get0() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get10() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get11() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get12() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get13() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get14() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get15() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement get16() {
+		return posDriver1.findElement(By.xpath(""));
+	}
 	
 	
 }
