@@ -75,7 +75,10 @@ public class POS_FlowOne_POM extends BaseClass {
 				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.HorizontalScrollView"));
 		return element;
 	}
-
+	public WebElement getNoOfGuest18() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='18']"));
+		return element;
+	}
 	public WebElement getNoOfGuest5() {
 		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='5']"));
 		return element;
@@ -405,17 +408,13 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 	
 	
-	
-	
 	public WebElement gettabledetails() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
 	}
 	
 	
 	//Note if the area is added then the index for table will be 6:1
-	public WebElement getTable1() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
-	}
+	
 	public WebElement getArea1Table1() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
 	}
@@ -438,6 +437,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 	public WebElement getPopupMobileNumTextBx() {
 		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='4']"));
+	}
+	public WebElement getTable1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
 	}
 	public WebElement getTable2() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
@@ -543,4 +545,110 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 	
 	
+	//+++++++++++Menu Page++++++++++
+	public WebElement getMenuPageHeader() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Menu']"));
+	}
+	public WebElement getSearchBarinMenuPg() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='1']"));
+	}
+	public WebElement get1stCate() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[7]"));
+	}
+	public WebElement get2ndCate() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[1]"));
+	}
+	public WebElement get3rdCate() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[1]"));
+	}
+	public WebElement get4thCate() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='3']"));
+	}
+	public WebElement get5thCate() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='7']"));
+	}
+	public WebElement get1stMenu() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
+	}
+	public WebElement get2ndMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[2]"));
+	}
+	public WebElement get3rdMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='2'])[2]"));
+	}
+	public WebElement get4thMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='3'])[2]"));
+	}
+	public WebElement get5thMenu() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='4']"));
+	}
+	public WebElement get6thMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='0'])[1]"));
+	}
+	public WebElement get7thMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
+	}
+	public WebElement get8thMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='2'])[3]"));
+	}
+	public WebElement get9thMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='3'])[3]"));
+	}
+	public WebElement get10thMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='4'])[3]"));
+	}
+	public WebElement get11thMenu() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='7']"));
+	}
+	public WebElement getMenuItemName(String text) {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='"+text+"']"));
+	}
+	
+	//Modifier
+	public WebElement getModifierHeaderMenuName() {
+	return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[8]"));
+   }
+	public WebElement getModifierCateName() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[9]"));
+	}
+	public WebElement getSelectUpt() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+	}
+	public WebElement getRequired() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[3]"));
+	}
+	public WebElement getModiXIcon() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
+	}
+	public WebElement getApplyBtn() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Apply']"));
+	}
+	public WebElement getCancel2() {
+		return posDriver1.findElement(By.xpath("(//android.widget.Button[@content-desc='Cancel'])[1]"));
+	}
+	public WebElement getMMItem1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
+	}
+	
+	public WebElement getMMItem2() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[3]"));
+	}
+	public WebElement getMMItem3() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[4]"));
+	}
+	public WebElement getMMItem4() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[1]"));
+	}
+	public WebElement getMMItem17() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[17]"));
+	}
+	
+	//Menu List RHS
+	public WebElement getRHSMenu1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[19]"));
+	}
+	//RHS Modifier Menu
+	public WebElement getRHSModi1() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
+	}
 }

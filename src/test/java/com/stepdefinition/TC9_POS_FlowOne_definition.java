@@ -59,7 +59,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
 //        capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, "true");
 //		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
-		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");
+		capabilities.setCapability(MobileCapabilityType.UDID, "HA1GSLK1");
 		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
 		// capabilities.setCapability(MobileCapabilityType.UDID,"192.168.5.101:5555");
 
@@ -74,7 +74,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	@When("User should able to enter login credentials")
 	public void userShouldAbleToEnterLoginCredentials() throws InterruptedException {
 //		posLoginWithEmployeePin("2353");
-		String employeePIN = "7115";
+		String employeePIN = "4567";
 
 		for (int i = 0; i < employeePIN.length(); i++) {
 			char charAt = employeePIN.charAt(i);
@@ -156,14 +156,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		Thread.sleep(500);
 		pma.getPOS_FlowOne_POM().getMenu4().click();
 		Thread.sleep(500);
-		// To get all values in that locators
-//	    for (int i = 1; i < 15; i++) {
-//	    	 WebElement findElement = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])["+i+"]"));
-//	    	 String actText = findElement.getAttribute("content-desc");
-//	 	    System.out.println(actText);
-//		}
-
-	}
+			}
 
 	@Then("User should Validate the Selected Menu is Reflected in RHS")
 	public void userShouldValidateTheSelectedMenuIsReflectedInRHS() {
@@ -221,6 +214,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		String text = pma.getPOS_FlowOne_POM().getSTK1().getAttribute("content-desc");
 		System.out.println(text);
 		Thread.sleep(3000);
+		
 		Actions act = new Actions(posDriver1);
 		WebElement aElement = pma.getPOS_FlowOne_POM().getSTK1();
 		int a = ((aElement.getSize().width) / 2) * -1;
@@ -233,7 +227,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	public Actions dragAndDropBy(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {
 		return act
 				.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(100),
-						Origin.fromElement(pma.getPOS_FlowOne_POM().getSTK1()),(startOffset + 25), 0))
+						Origin.fromElement(source),(startOffset + 25), 0))
 				.tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
 						.createPointerMove(Duration.ofMillis(250), Origin.pointer(), xOffset, yOffset))
 				.tick(act.getActivePointer().createPointerUp(LEFT.asArg()));

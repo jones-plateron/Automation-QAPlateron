@@ -24,6 +24,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -47,7 +49,11 @@ public class BaseClass {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
+		
 	}
+	
+	
+	
 	
 	
 	public String getDataFromExcel(String sheet,int rowIndex, int cellIndex) throws IOException {
@@ -122,7 +128,13 @@ public class BaseClass {
 	
 	
 	
-	
+	public String formatStringValue(String val) {
+		DecimalFormat df = new DecimalFormat("#.00");
+//		df.setMinimumFractionDigits(2);
+		String roundedVal = df.format(val);
+		//		float roundedVal = Float.parseFloat(df.format(val));
+		return roundedVal;
+	}
 	
 	
 	
@@ -289,5 +301,6 @@ public class BaseClass {
 //		FileOutputStream fileOutputStream = new FileOutputStream(file);
 //		workbook.write(fileOutputStream);
 //	}
+
 
 }
