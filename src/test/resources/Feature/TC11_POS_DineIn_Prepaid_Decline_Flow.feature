@@ -19,7 +19,7 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User should verify the Customer Information Field
     And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
-    And User Should Validate the Receive Payment Page
+    And User Should Validate the Active Orders Page
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
@@ -43,10 +43,11 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User should verify the Customer Information Field
     And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
-    And User Should Validate the Receive Payment Page
+    And User Should Validate the Active Orders Page
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
+    #Need Reports
     
 @POSDineInPrepaidMenuwithBothModifiersDecline
   Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
@@ -66,10 +67,11 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User should verify the Customer Information Field
     And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
-    And User Should Validate the Receive Payment Page
+    And User Should Validate the Active Orders Page
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
+    #Need Reports
     
 @POSDineInPrepaidMenuwithModifierPriceZeroDecline
   Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
@@ -89,10 +91,11 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User should verify the Customer Information Field
     And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
-    And User Should Validate the Receive Payment Page
+    And User Should Validate the Active Orders Page
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
+    #Need Reports
     
 @POSDineInPrepaidMenuPriceZerowithModifierDecline
   Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
@@ -112,7 +115,8 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User should verify the Customer Information Field
     And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
-    And User Should Validate the Receive Payment Page
+    And User Should Validate the Active Orders Page
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
+    #Need Reports
