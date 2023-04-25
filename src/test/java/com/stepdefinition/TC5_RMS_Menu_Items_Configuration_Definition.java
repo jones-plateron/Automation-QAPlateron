@@ -1012,6 +1012,11 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 					List<WebElement> findElements = rmsDriver.findElements(By.xpath("//Select[@class='minimal w-60']"));
 					for (int l = 0,z=5; l < findElements.size(); l++,z++) {
 						Select s1=new Select(findElements.get(l));
+						for (int k = 0; k < findElements.size(); k++) {
+							if (k==0) {
+								s1.selectByVisibleText("3");
+							}
+						}
 						String value = s1.getFirstSelectedOption().getAttribute("value");
 						writeValueToCell("Menu List", i+21, z, value);
 					}

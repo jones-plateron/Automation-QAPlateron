@@ -514,11 +514,11 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getCashRadioBtnPayDetails() {
 		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Cash']"));
 	}
-	public WebElement get9() {
-		return posDriver1.findElement(By.xpath(""));
+	public WebElement getOrderStatusDropdownAO() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Cooking']"));
 	}
-	public WebElement get0() {
-		return posDriver1.findElement(By.xpath(""));
+	public WebElement getgetOrderStatusDropdownDeclineAO() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Declined']"));
 	}
 	public WebElement get10() {
 		return posDriver1.findElement(By.xpath(""));
