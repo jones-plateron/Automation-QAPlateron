@@ -7,6 +7,8 @@ import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.PointerInput.Origin;
@@ -16,6 +18,7 @@ import org.testng.Assert;
 import com.base.BaseClass;
 import com.pagemanager.PageManager;
 
+import io.appium.java_client.AppiumBy.ByAndroidUIAutomator;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -294,7 +297,6 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 																											// name and
 																											// Price
 																											// from POS
-					System.out.println(actMenu1);
 					String replaceAll1 = actMenu1.replaceAll("[\\r\\n]+", "");// removing the Nxt Line
 					String menuName1 = getDataFromExcel("Menu List", val, 1);// Getting Menu Name From Excel
 					String menuPrice1 = getDataFromExcel("Menu List", val, 2);// Getting Menu Price From Excel as String
@@ -304,7 +306,6 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 					break;
 				case 1:
 					String actMenu2 = pma.getPOS_FlowOne_POM().get2ndMenu().getAttribute("content-desc");
-					System.out.println(actMenu2);
 					String replaceAll2 = actMenu2.replaceAll("[\\r\\n]+", "");
 					String menuName2 = getDataFromExcel("Menu List", val, 1);
 					String menuPrice2 = getDataFromExcel("Menu List", val, 2);
@@ -314,7 +315,6 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 					break;
 				case 2:
 					String actMenu3 = pma.getPOS_FlowOne_POM().get3rdMenu().getAttribute("content-desc");
-					System.out.println(actMenu3);
 					String replaceAll3 = actMenu3.replaceAll("[\\r\\n]+", "");
 					String menuName3 = getDataFromExcel("Menu List", val, 1);
 					String menuPrice3 = getDataFromExcel("Menu List", val, 2);
@@ -325,7 +325,6 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 				case 3:
 
 					String actMenu4 = pma.getPOS_FlowOne_POM().get4thMenu().getAttribute("content-desc");
-					System.out.println(actMenu4);
 					String replaceAll4 = actMenu4.replaceAll("[\\r\\n]+", "");
 					String menuName4 = getDataFromExcel("Menu List", val, 1);
 					String menuPrice4 = getDataFromExcel("Menu List", val, 2);
@@ -336,7 +335,6 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 				case 4:
 
 					String actMenu5 = pma.getPOS_FlowOne_POM().get5thMenu().getAttribute("content-desc");
-					System.out.println(actMenu5);
 					String replaceAll5 = actMenu5.replaceAll("[\\r\\n]+", "");
 					String menuName5 = getDataFromExcel("Menu List", val, 1);
 					String menuPrice5 = getDataFromExcel("Menu List", val, 2);
@@ -351,7 +349,10 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 			}
 			k = j;// Category and Menu Validation Done
 		}
-
+		}
+		@Then("User should Validate the Modifier Popup")
+		public void userShouldValidateTheModifierPopup() throws InterruptedException {
+		    
 		// Modifier Validation
 		pma.getPOS_FlowOne_POM().get3rdCate().click();
 		// Modiifier Opens
@@ -364,7 +365,7 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 		String modiPopupMenu = pma.getPOS_FlowOne_POM().getModifierHeaderMenuName().getAttribute("content-desc");
 		Assert.assertEquals(modiPopupMenu, emodiMenu);
 
-		// Validating the Selected Menu with Reflected in RHS Menu
+		// Validating the Selected Menu is Reflected in RHS Menu
 		String rhsMenuAt = pma.getPOS_FlowOne_POM().getRHSMenu1().getAttribute("content-desc");
 		String rhsMenu = rhsMenuAt.substring(0, rhsMenuAt.length() - 2);
 		Assert.assertEquals(rhsMenu, modiPopupMenu);
@@ -390,8 +391,7 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 		}
 
 
-		// Modiifier Opens
-		pma.getPOS_FlowOne_POM().get2ndMenu().click();
+		// Second Menu========>>>Modiifier Opens
 		String modiMenu1 = pma.getPOS_FlowOne_POM().get2ndMenu().getAttribute("content-desc");
 		String replaceAll1 = modiMenu1.replaceAll("[\\r\\n]", "");
 		String emodiMenu1 = replaceAll1.substring(0, replaceAll.length() - 5);
@@ -399,16 +399,81 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 		Thread.sleep(5000);
 		String modiPopupMenu1 = pma.getPOS_FlowOne_POM().getModifierHeaderMenuName().getAttribute("content-desc");
 		Assert.assertEquals(modiPopupMenu1, emodiMenu1);
+		
+		
 		// 2nd Menu=>Required and Optional
-		pma.getPOS_FlowOne_POM().getMMItem1().click();
-		pma.getPOS_FlowOne_POM().getMMItem17().click();
-		pma.getPOS_FlowOne_POM().getApplyBtn().click();
+		String requiredStatus1 = pma.getPOS_FlowOne_POM().getRequired().getAttribute("content-desc");
+		Assert.assertTrue(requiredStatus1.contains("Required"));
+		if (requiredStatus1.contains("Required")) {
+			String requiredNumString = requiredStatus1.substring(11);//Required number taking alone
+			int requiredNum = Integer.parseInt(requiredNumString);//Converting the string number into Int
+			for (int i = 1; i <=requiredNum; i++) {
+				switch (i) {
+				case 1:
+					pma.getPOS_FlowOne_POM().getMMItem1().click();
+					//Getting ContentDesc
+					String mmItem1At1 = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");
+					String mmItem1re1 = mmItem1At1.replaceAll("[//rr//n]", "");
+					String mmItem1s = mmItem1re1.substring(0, mmItem1re1.length() - 6);
+					//Validiating with RHS
+					Thread.sleep(500);
+					String rhsModiItemAt1 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply().getAttribute("content-desc");
+					String rhsModiItem1 = rhsModiItemAt1.substring(11);
+					Assert.assertTrue(rhsModiItem1.contains(mmItem1s));
+					
+					break;
+				case 2:
+					pma.getPOS_FlowOne_POM().getMMItem2().click();
+					//Getting ContentDesc
+					String mmItem1At2 = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");
+					String mmItem1re2 = mmItem1At2.replaceAll("[//rr//n]", "");
+					String mmItem2 = mmItem1re2.substring(0, mmItem1re2.length() - 6);
+					//Validiating with RHS
+					Thread.sleep(500);
+					String rhsModiItemAt2 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply().getAttribute("content-desc");
+					String rhsModiItem2 = rhsModiItemAt2.substring(11);
+					Assert.assertTrue(rhsModiItem2.contains(mmItem2));
+					break;
+				case 3:
+					pma.getPOS_FlowOne_POM().getMMItem3().click();
+					//Getting ContentDesc
+					String mmItem1At3 = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");
+					String mmItem1re3 = mmItem1At3.replaceAll("[//rr//n]", "");
+					String mmItem13 = mmItem1re3.substring(0, mmItem1re3.length() - 6);
+					//Validiating with RHS
+					Thread.sleep(500);
+					String rhsModiItemAt3 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply().getAttribute("content-desc");
+					String rhsModiItem3 = rhsModiItemAt3.substring(11);
+					Assert.assertTrue(rhsModiItem3.contains(mmItem13));
+					break;
+				case 4:
+					pma.getPOS_FlowOne_POM().getMMItem4().click();
+					//Getting ContentDesc
+					String mmItem1At4 = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");
+					String mmItem1re4 = mmItem1At4.replaceAll("[//rr//n]", "");
+					String mmItem14 = mmItem1re4.substring(0, mmItem1re4.length() - 6);
+					//Validiating with RHS
+					Thread.sleep(500);
+					String rhsModiItemAt4 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply().getAttribute("content-desc");
+					String rhsModiItem4 = rhsModiItemAt4.substring(11);
+					Assert.assertTrue(rhsModiItem4.contains(mmItem14));
+					break;
 
+				default:
+					break;
+				}
+			}
+		} else {
+			pma.getPOS_FlowOne_POM().getApplyBtn().click();
+
+		}
+		pma.getPOS_FlowOne_POM().getApplyBtn().click();
+		
 		// 3rd Menu=>Both Optional
 		pma.getPOS_FlowOne_POM().get3rdMenu().click();
 		Thread.sleep(300);
 		pma.getPOS_FlowOne_POM().getApplyBtn().click();
-		Thread.sleep(2000);
+		Thread.sleep(200);
 
 	}
 
