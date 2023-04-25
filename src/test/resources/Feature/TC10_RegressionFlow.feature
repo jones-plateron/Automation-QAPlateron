@@ -14,5 +14,6 @@ Feature: Regression
     When  User should able to enter login credentials
     And User should navigate to Menus Section through Dine-In
     Then User should Validate the Category and Menus #from Excel
+    And User should Validate the Modifier Popup
     And User should Click Sent to Kitchen Button
     

@@ -651,4 +651,7 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getRHSModi1() {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
 	}
+	public WebElement getRHSModi1beforeapply() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[5]"));
+	}
 }
