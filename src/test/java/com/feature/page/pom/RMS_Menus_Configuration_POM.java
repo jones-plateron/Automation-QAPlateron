@@ -102,6 +102,9 @@ PageManager pma = new PageManager();
 	public WebElement getAddModifierItemButtonElement() {
 		return rmsDriver.findElement(By.xpath("//div[@class='card card-empty']"));
 	}
+	public WebElement getAddModifierItemButtonElementNO() {
+		return rmsDriver.findElement(By.xpath("//div[@class='card card-empty']"));
+	}
 	public WebElement getAddModifierItemButtonElement1() {
 		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-outline-primary btn-small btn-width large d-flex align-items-center']"));
 	}
@@ -272,7 +275,7 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//span[normalize-space()='Please enter menu name']"));
 	}
 	public WebElement getAddMenuSlideMenuTypeHdr() {
-		return rmsDriver.findElement(By.xpath("//label[@class='form-label form-label__form--medium']"));
+		return rmsDriver.findElement(By.xpath("//label[@class='form-label form-label__form--medium ']"));
 	}
 	public WebElement getAddMenuSlideMenuTypeDropDown() {
 		return rmsDriver.findElement(By.xpath("//select[@placeholder='Choose menu type']"));

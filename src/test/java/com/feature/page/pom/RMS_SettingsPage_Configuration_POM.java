@@ -320,8 +320,22 @@ PageManager pma = new PageManager();
 		WebElement element = rmsDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-small d-flex align-items-center ']"));
 		return element;
 	}
-	
-
+	public WebElement getPaymentSettingsSection() {
+		WebElement element = rmsDriver.findElement(By.xpath("//li[normalize-space()='Payment Settings']"));
+		return element;
+	}
+	public WebElement getPaymentModeCheckBox() {
+		WebElement element = rmsDriver.findElement(By.xpath("//div[contains(@class,'nav-collapsed')]//div//div[1]//ul[1]//li[1]//div[1]//div[1]//label[1]//span[1]"));
+		return element;
+	}
+	public WebElement getPaymentsettingsPageSaveBtn() {
+		WebElement element = rmsDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-small d-flex align-items-center ']"));
+		return element;
+	}
+	public WebElement getPaymentsettingsPageDisabledSaveBtn() {
+		WebElement element = rmsDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-small d-flex align-items-center cursor-na']"));
+		return element;
+	}
 }
 
 //23-03-2023 18:20
