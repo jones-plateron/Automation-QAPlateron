@@ -492,8 +492,31 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getReleasingthisTable() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Releasing this table will lose the current order']"));
 	}
+	//RHS===>>>>>>>>>
 	public WebElement getCancelBtn() {
 		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Cancel']"));
+		return element;
+	}
+	public WebElement getYesCancelBtn() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Yes, Cancel']"));
+		return element;
+	}
+	public WebElement getKeepTheOrderBtn() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Keep the Order']"));
+		return element;
+	}
+	public WebElement getCancelPopupInstruction() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Would you like to cancel the order']"));
+		return element;
+	}
+	
+
+	public WebElement getTableNameInMenuPage() {
+	WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='6']"));
+	return element;
+	}
+	public WebElement getGuestCountInMenuPage() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='8']"));
 		return element;
 	}
 	public WebElement getReleaseTableProceedBtn() {
@@ -569,6 +592,15 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getSearchBarinMenuPg() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='1']"));
 	}
+	public WebElement getSearchedit() {
+		return posDriver1.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText"));
+	}
+	public WebElement getSearh1stMenu() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='0'])[2]"));
+	}
+	public WebElement getMenuNotFound() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Menu Item(s) does not exist.']"));
+	}
 	public WebElement get1stCate() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[7]"));
 	}
@@ -626,7 +658,7 @@ public class POS_FlowOne_POM extends BaseClass {
 	
 	//Modifier
 	public WebElement getModifierHeaderMenuName() {
-	return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[8]"));
+	return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
    }
 	public WebElement getModifierCateName() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[9]"));
@@ -635,7 +667,7 @@ public class POS_FlowOne_POM extends BaseClass {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
 	}
 	public WebElement getRequired() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[3]"));
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[3]"));
 	}
 	public WebElement getModiXIcon() {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
@@ -693,8 +725,32 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getPrepaidReceivePmtBtn() {
 		return posDriver1.findElement(By.xpath("(//android.widget.Button[@index='12'])[1]"));
 	}
+	public WebElement getNewMMItem1() {
+        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='2']"));
+    }
+    public WebElement getNewMMItem2() {
+        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='3']"));
+    }
+    public WebElement getNewMMItem3() {
+        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='4']"));
+    }
+    public WebElement getNewMMItem4() {
+        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='5']"));
+    }
+    public WebElement getNewMMItem5() {
+        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='8']"));
+    }
+    public WebElement getNewMMItem6() {
+        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='9']"));
+    }
 	
 	//Menu List RHS
+	public WebElement getRHSMenu() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
+	}
+	public WebElement getRHSMenuValidation() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
+	}
 	public WebElement getRHSMenu1() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[19]"));
 	}
@@ -703,6 +759,13 @@ public class POS_FlowOne_POM extends BaseClass {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
 	}
 	public WebElement getRHSModi1beforeapply() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[5]"));
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[4]"));
 	}
+	public WebElement getMinusSymbol() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[4]"));
+	}
+	public WebElement getPlusSymbol() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='2'])[4]"));
+	}
+	
 }

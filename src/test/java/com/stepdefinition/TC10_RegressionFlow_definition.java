@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
@@ -349,10 +350,11 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 			}
 			k = j;// Category and Menu Validation Done
 		}
-		}
-		@Then("User should Validate the Modifier Popup")
-		public void userShouldValidateTheModifierPopup() throws InterruptedException {
-		    
+	}
+
+	@Then("User should Validate the Modifier Popup")
+	public void userShouldValidateTheModifierPopup() throws InterruptedException {
+
 		// Modifier Validation
 		pma.getPOS_FlowOne_POM().get3rdCate().click();
 		// Modiifier Opens
@@ -366,30 +368,30 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 		Assert.assertEquals(modiPopupMenu, emodiMenu);
 
 		// Validating the Selected Menu is Reflected in RHS Menu
-		String rhsMenuAt = pma.getPOS_FlowOne_POM().getRHSMenu1().getAttribute("content-desc");
+		String rhsMenuAt = pma.getPOS_FlowOne_POM().getRHSMenu().getAttribute("content-desc");
 		String rhsMenu = rhsMenuAt.substring(0, rhsMenuAt.length() - 2);
 		Assert.assertEquals(rhsMenu, modiPopupMenu);
 
 		// 1st Menu=>Required one
 		String requiredStatus = pma.getPOS_FlowOne_POM().getRequired().getAttribute("content-desc");
-		Assert.assertTrue(requiredStatus.contains("Required"));
+		Assert.assertTrue(requiredStatus.contains("*"));
 
+		if (requiredStatus.contains("*")) {
 
-		if (requiredStatus.contains("Required")) {
-			
-			pma.getPOS_FlowOne_POM().getMMItem1().click();
-			String mmItem1At = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");//Getting Modifier Menu in Popup
-			String mmItem1re = mmItem1At.replaceAll("[//rr//n]", "");
-			String mmItem1 = mmItem1re.substring(0, mmItem1re.length() - 6);
+			pma.getPOS_FlowOne_POM().getNewMMItem1().click();
+			String mmItem1At = pma.getPOS_FlowOne_POM().getNewMMItem1().getAttribute("content-desc");// Getting Modifier
+																										// Menu in Popup
+			String mmItem1 = mmItem1At.substring(0, mmItem1At.length() - 7);
 			pma.getPOS_FlowOne_POM().getApplyBtn().click();
-			
-			String rhsModiItemAt = pma.getPOS_FlowOne_POM().getRHSModi1().getAttribute("content-desc");//Getting Modifier Menu in RHS
+
+			String rhsModiItemAt = pma.getPOS_FlowOne_POM().getRHSModi1().getAttribute("content-desc");// Getting
+																										// Modifier Menu
+																										// in RHS
 			String rhsModiItem = rhsModiItemAt.substring(11);
-			Assert.assertEquals(mmItem1, rhsModiItem);//Comparing Both
+			Assert.assertEquals(mmItem1, rhsModiItem);// Comparing Both
 		} else {
 			pma.getPOS_FlowOne_POM().getApplyBtn().click();
 		}
-
 
 		// Second Menu========>>>Modiifier Opens
 		String modiMenu1 = pma.getPOS_FlowOne_POM().get2ndMenu().getAttribute("content-desc");
@@ -399,62 +401,67 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 		Thread.sleep(5000);
 		String modiPopupMenu1 = pma.getPOS_FlowOne_POM().getModifierHeaderMenuName().getAttribute("content-desc");
 		Assert.assertEquals(modiPopupMenu1, emodiMenu1);
-		
-		
+
 		// 2nd Menu=>Required and Optional
 		String requiredStatus1 = pma.getPOS_FlowOne_POM().getRequired().getAttribute("content-desc");
-		Assert.assertTrue(requiredStatus1.contains("Required"));
-		if (requiredStatus1.contains("Required")) {
-			String requiredNumString = requiredStatus1.substring(11);//Required number taking alone
-			int requiredNum = Integer.parseInt(requiredNumString);//Converting the string number into Int
-			for (int i = 1; i <=requiredNum; i++) {
+		Assert.assertTrue(requiredStatus1.contains("*"));
+		if (requiredStatus1.contains("*")) {
+			String requiredNumString = requiredStatus1.substring(7, requiredStatus1.length() - 2);// Required number
+																									// taking alone
+			int requiredNum = Integer.parseInt(requiredNumString);// Converting the string number into Int
+			for (int i = 1; i <= requiredNum; i++) {
 				switch (i) {
 				case 1:
-					pma.getPOS_FlowOne_POM().getMMItem1().click();
-					//Getting ContentDesc
-					String mmItem1At1 = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");
+					pma.getPOS_FlowOne_POM().getNewMMItem1().click();
+					// Getting ContentDesc
+					String mmItem1At1 = pma.getPOS_FlowOne_POM().getNewMMItem1().getAttribute("content-desc");
 					String mmItem1re1 = mmItem1At1.replaceAll("[//rr//n]", "");
-					String mmItem1s = mmItem1re1.substring(0, mmItem1re1.length() - 6);
-					//Validiating with RHS
+					String mmItem1s = mmItem1re1.substring(0, mmItem1re1.length() - 7);
+					// Validiating with RHS
 					Thread.sleep(500);
-					String rhsModiItemAt1 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply().getAttribute("content-desc");
+					String rhsModiItemAt1 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply()
+							.getAttribute("content-desc");
 					String rhsModiItem1 = rhsModiItemAt1.substring(11);
+					Thread.sleep(2000);
 					Assert.assertTrue(rhsModiItem1.contains(mmItem1s));
-					
+
 					break;
 				case 2:
-					pma.getPOS_FlowOne_POM().getMMItem2().click();
-					//Getting ContentDesc
-					String mmItem1At2 = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");
+					pma.getPOS_FlowOne_POM().getNewMMItem2().click();
+					// Getting ContentDesc
+					String mmItem1At2 = pma.getPOS_FlowOne_POM().getNewMMItem2().getAttribute("content-desc");
 					String mmItem1re2 = mmItem1At2.replaceAll("[//rr//n]", "");
-					String mmItem2 = mmItem1re2.substring(0, mmItem1re2.length() - 6);
-					//Validiating with RHS
+					String mmItem2 = mmItem1re2.substring(0, mmItem1re2.length() - 7);
+					// Validiating with RHS
 					Thread.sleep(500);
-					String rhsModiItemAt2 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply().getAttribute("content-desc");
+					String rhsModiItemAt2 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply()
+							.getAttribute("content-desc");
 					String rhsModiItem2 = rhsModiItemAt2.substring(11);
 					Assert.assertTrue(rhsModiItem2.contains(mmItem2));
 					break;
 				case 3:
-					pma.getPOS_FlowOne_POM().getMMItem3().click();
-					//Getting ContentDesc
-					String mmItem1At3 = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");
+					pma.getPOS_FlowOne_POM().getNewMMItem3().click();
+					// Getting ContentDesc
+					String mmItem1At3 = pma.getPOS_FlowOne_POM().getNewMMItem3().getAttribute("content-desc");
 					String mmItem1re3 = mmItem1At3.replaceAll("[//rr//n]", "");
-					String mmItem13 = mmItem1re3.substring(0, mmItem1re3.length() - 6);
-					//Validiating with RHS
+					String mmItem13 = mmItem1re3.substring(0, mmItem1re3.length() - 7);
+					// Validiating with RHS
 					Thread.sleep(500);
-					String rhsModiItemAt3 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply().getAttribute("content-desc");
+					String rhsModiItemAt3 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply()
+							.getAttribute("content-desc");
 					String rhsModiItem3 = rhsModiItemAt3.substring(11);
 					Assert.assertTrue(rhsModiItem3.contains(mmItem13));
 					break;
 				case 4:
-					pma.getPOS_FlowOne_POM().getMMItem4().click();
-					//Getting ContentDesc
-					String mmItem1At4 = pma.getPOS_FlowOne_POM().getMMItem1().getAttribute("content-desc");
+					pma.getPOS_FlowOne_POM().getNewMMItem4().click();
+					// Getting ContentDesc
+					String mmItem1At4 = pma.getPOS_FlowOne_POM().getNewMMItem4().getAttribute("content-desc");
 					String mmItem1re4 = mmItem1At4.replaceAll("[//rr//n]", "");
-					String mmItem14 = mmItem1re4.substring(0, mmItem1re4.length() - 6);
-					//Validiating with RHS
+					String mmItem14 = mmItem1re4.substring(0, mmItem1re4.length() - 7);
+					// Validiating with RHS
 					Thread.sleep(500);
-					String rhsModiItemAt4 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply().getAttribute("content-desc");
+					String rhsModiItemAt4 = pma.getPOS_FlowOne_POM().getRHSModi1beforeapply()
+							.getAttribute("content-desc");
 					String rhsModiItem4 = rhsModiItemAt4.substring(11);
 					Assert.assertTrue(rhsModiItem4.contains(mmItem14));
 					break;
@@ -468,13 +475,20 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 
 		}
 		pma.getPOS_FlowOne_POM().getApplyBtn().click();
-		
+
 		// 3rd Menu=>Both Optional
 		pma.getPOS_FlowOne_POM().get3rdMenu().click();
 		Thread.sleep(300);
 		pma.getPOS_FlowOne_POM().getApplyBtn().click();
 		Thread.sleep(200);
 
+		// Cancel Popup validation
+		pma.getPOS_FlowOne_POM().getCancelBtn().click();
+		String getInstruction = pma.getPOS_FlowOne_POM().getCancelPopupInstruction().getAttribute("content-desc");
+		Assert.assertEquals("Would you like to cancel the order", getInstruction);
+		boolean displayed = pma.getPOS_FlowOne_POM().getKeepTheOrderBtn().isDisplayed();
+		Assert.assertTrue(displayed);
+		pma.getPOS_FlowOne_POM().getYesCancelBtn().click();
 	}
 
 //	for (int i = 1; i <= 10; i++) {
@@ -486,9 +500,122 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 //		System.out.println(attribute);
 //	}
 //}
-	@Then("User should Click Sent to Kitchen Button")
-	public void userShouldClickSentToKitchenButton() {
+	@Then("User should validate the RHS")
+	public void userShouldValidateTheRHS() throws InterruptedException {
+		// RHS Validation
+		pma.getPOS_FlowOne_POM().getArea5().click();Thread.sleep(500);
+		String actTableAt = pma.getPOS_FlowOne_POM().getTable4().getAttribute("content-desc");
+		String actTable = actTableAt.substring(0, actTableAt.length() - 9);
 
+		pma.getPOS_FlowOne_POM().getTable4().click();
+
+		pma.getPOS_FlowOne_POM().getNoOfGuest5().click();
+		String guesNo = pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("content-desc");
+		pma.getPOS_FlowOne_POM().getProceedButton().click();
+		// Guest Count Validation
+		String guesNoInMenuPage = pma.getPOS_FlowOne_POM().getGuestCountInMenuPage().getAttribute("content-desc");
+		Assert.assertEquals("Guest - " + guesNo, guesNoInMenuPage);
+		// Table Name Validation
+		String tableNameMenuPageAt = pma.getPOS_FlowOne_POM().getTableNameInMenuPage().getAttribute("content-desc");
+		Assert.assertEquals(actTable, tableNameMenuPageAt);
+
+		// Menu Validation
+		String actMenuAt = pma.getPOS_FlowOne_POM().getMenu1().getAttribute("content-desc");
+		String actMenu = actMenuAt.substring(0, actMenuAt.length() - 6);
+		pma.getPOS_FlowOne_POM().getMenu1().click();
+		Thread.sleep(500);
+		String actRhsMenuAt = pma.getPOS_FlowOne_POM().getRHSMenuValidation().getAttribute("content-desc");
+		String actRHSMenu = actRhsMenuAt.substring(0, actRhsMenuAt.length() - 2);
+		Assert.assertEquals(actMenu, actRHSMenu);
+		
+		// Plus Validation
+		String menuCount = actRhsMenuAt.substring(11);// RHS Menu==>Taking Count Value Only
+		int menucountInt = Integer.parseInt(menuCount);
+		for (int i = 0; i < 4; i++) {
+			pma.getPOS_FlowOne_POM().getPlusSymbol().click();
+			menucountInt++;
+		}
+		String addictionCount = pma.getPOS_FlowOne_POM().getRHSMenuValidation().getAttribute("content-desc");
+		String countString = Integer.toString(menucountInt);
+		Assert.assertTrue(addictionCount.contains(countString));
+
+		// Minus Validation
+		String minusValidation = pma.getPOS_FlowOne_POM().getRHSMenuValidation().getAttribute("content-desc");
+		String minusCount = minusValidation.substring(11);
+		int intMenuCount = Integer.parseInt(minusCount);
+		for (int i = 0; i < 4; i++) {
+			pma.getPOS_FlowOne_POM().getMinusSymbol().click();
+			intMenuCount--;
+		}
+		String afterMinusCount = pma.getPOS_FlowOne_POM().getRHSMenuValidation().getAttribute("content-desc");
+		String afterString = Integer.toString(intMenuCount);
+		Assert.assertTrue(afterMinusCount.contains(afterString));
+
+		// Cancelling
+		pma.getPOS_FlowOne_POM().getCancelBtn().click();
+		String getInstruction = pma.getPOS_FlowOne_POM().getCancelPopupInstruction().getAttribute("content-desc");
+		Assert.assertEquals("Would you like to cancel the order", getInstruction);
+		boolean displayed = pma.getPOS_FlowOne_POM().getKeepTheOrderBtn().isDisplayed();
+		Assert.assertTrue(displayed);
+		pma.getPOS_FlowOne_POM().getYesCancelBtn().click();
+	}
+
+	@Then("User should Validate the Search Functionality")
+	public void userShouldValidateTheSearchFunctionality() throws InterruptedException {
+
+		pma.getPOS_FlowOne_POM().getArea5().click();Thread.sleep(500);
+		pma.getPOS_FlowOne_POM().getTable4().click();
+		pma.getPOS_FlowOne_POM().getNoOfGuest5().click();
+		pma.getPOS_FlowOne_POM().getProceedButton().click();
+
+		// Searching One Menu and Validating the Results
+		pma.getPOS_FlowOne_POM().getSearchBarinMenuPg().click();
+		pma.getPOS_FlowOne_POM().getSearchBarinMenuPg().sendKeys("Menu Item10");
+		Thread.sleep(500);
+		String searchedMenuAt = pma.getPOS_FlowOne_POM().getSearh1stMenu().getAttribute("content-desc");
+		String searchedMenu = searchedMenuAt.substring(0, searchedMenuAt.length() - 7);
+		Assert.assertEquals("Menu Item10", searchedMenu);
+
+		// Searching the Menu and Clicking the Menu and Validating RHS
+		pma.getPOS_FlowOne_POM().getSearchBarinMenuPg().click();
+		pma.getPOS_FlowOne_POM().getSearchBarinMenuPg().sendKeys("Menu Item1");
+		Thread.sleep(500);
+		String actSearchedMenuAt = pma.getPOS_FlowOne_POM().getSearh1stMenu().getAttribute("content-desc");
+		String actSearchedMenu = actSearchedMenuAt.substring(0, actSearchedMenuAt.length() - 6);
+		pma.getPOS_FlowOne_POM().getSearh1stMenu().click();
+		Thread.sleep(500);
+		String rhsClickedMenuAt = pma.getPOS_FlowOne_POM().getRHSMenuValidation().getAttribute("content-desc");
+		String rhsClickedMenu = rhsClickedMenuAt.substring(0, rhsClickedMenuAt.length() - 2);
+		Assert.assertEquals(actSearchedMenu, rhsClickedMenu);
+
+		// Menu Not Found Validation
+		pma.getPOS_FlowOne_POM().getSearchBarinMenuPg().click();
+		Thread.sleep(200);
+		pma.getPOS_FlowOne_POM().getSearchBarinMenuPg().sendKeys(specialChar);
+		pma.getPOS_FlowOne_POM().getMenuPageHeader().click();Thread.sleep(200);
+		boolean displayed = pma.getPOS_FlowOne_POM().getMenuNotFound().isDisplayed();
+		Assert.assertTrue(displayed);
+
+	}
+
+	public void userShouldClickSentToKitchenButton() throws InterruptedException {
+
+		Actions act = new Actions(posDriver1);
+		WebElement aElement = pma.getPOS_FlowOne_POM().getSTK1();
+		int a = ((aElement.getSize().width) / 2) * -1;
+
+		dragAndDropBy(act, pma.getPOS_FlowOne_POM().getSTK1(), a, 600, 0).perform();
+		Thread.sleep(1500);
+
+	}
+
+	public Actions dragAndDropBy(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {
+		return act
+				.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(100), Origin.fromElement(source),
+						(startOffset + 25), 0))
+				.tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
+						.createPointerMove(Duration.ofMillis(250), Origin.pointer(), xOffset, yOffset))
+				.tick(act.getActivePointer().createPointerUp(LEFT.asArg()));
 	}
 
 }
