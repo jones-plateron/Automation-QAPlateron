@@ -15,5 +15,7 @@ Feature: Regression
     And User should navigate to Menus Section through Dine-In
     Then User should Validate the Category and Menus #from Excel
     And User should Validate the Modifier Popup
-    And User should Click Sent to Kitchen Button
+    Then User should validate the RHS
+    Then User should Validate the Search Functionality 
+    #And User should Click Sent to Kitchen Button
     
