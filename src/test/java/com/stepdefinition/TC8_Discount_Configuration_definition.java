@@ -80,7 +80,6 @@ public class TC8_Discount_Configuration_definition extends BaseClass {
 		pma.getRMS_Discount_Configuration_POM().getDiscountTempSave().click();
 		String actTxt = pma.getRMS_Discount_Configuration_POM().getDiscountPercentageTxtBxIndication().getText();
 		Assert.assertTrue(actTxt.contains(string));
-		
 	    //Special Characters
 	    pma.getRMS_Discount_Configuration_POM().getDiscountPercentageTxtBx().sendKeys(specialChar);
 	    String givenTxt1 = pma.getRMS_Discount_Configuration_POM().getDiscountPercentageTxtBx().getAttribute("value");
