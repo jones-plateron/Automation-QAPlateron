@@ -360,6 +360,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getDiscountValueCOSummary() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[3]"));
 	}
+	public WebElement getDiscountValueCOSummaryRefund() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+	}
 
 	public WebElement getSalesTaxCOSummary() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='5'])[1]"));
@@ -386,6 +389,12 @@ public class POS_FlowOne_POM extends BaseClass {
 
 	public WebElement getTotAmountCOSummary() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='15']"));
+	}
+	public WebElement getTotAmountCOSummaryRefund() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='14'])[1]"));
+	}
+	public WebElement getRefundedAmountCOSummary() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='16'])[1]"));
 	}
 	public WebElement getTotAmountCOSummaryTakeOut() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='17']"));
@@ -590,6 +599,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement get5thMenu() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='4']"));
 	}
+	public WebElement get5thMenuWith4inEachRow() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='0'])[2]"));
+	}
 	public WebElement get6thMenu() {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='0'])[1]"));
 	}
@@ -674,6 +686,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 	public WebElement getNewMMItem6() {
 		return posDriver1.findElement(By.xpath("//android.widget.Button[@index='9']"));
+	}
+	public WebElement getNewMMItem7() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@index='10']"));
 	}
 	public WebElement getPrepaidReceivePmtBtn() {
 		return posDriver1.findElement(By.xpath("(//android.widget.Button[@index='12'])[1]"));

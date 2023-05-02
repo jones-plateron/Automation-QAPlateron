@@ -63,7 +63,7 @@ public class TC2_RMS_Employee_Management_definition extends BaseClass {
 		//rmsDriver =new ChromeDriver();
 		rmsDriver.manage().window().maximize();
 		rmsDriver.get("https://www.qa.restaurants.plateron.com/auth/login");
-		rmsDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		rmsDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		Thread.sleep(1000);
 		pma.getRMS_Employee_Management_POM().getLoginMobileNumElement().sendKeys(mobileNum);Thread.sleep(500);
 		pma.getRMS_Employee_Management_POM().getLoginContinuebuttonElement().click();Thread.sleep(1000);

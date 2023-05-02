@@ -126,13 +126,6 @@ public class BaseClass {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	public String formatStringValue(String val) {
 		DecimalFormat df = new DecimalFormat("#.00");
 //		df.setMinimumFractionDigits(2);
@@ -141,14 +134,7 @@ public class BaseClass {
 		return roundedVal;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Revamped No Use
 	public float subtotalAfterApplyingDiscountWOExcludeItems(List<Float> menus,float discPercentage) {
 		
 		float discountAmtOfMenu,subTotalAfterDiscount=0,discountAmt=0,MenuAfterDiscount;
@@ -181,6 +167,7 @@ public class BaseClass {
 		return roundedVal;
 	}
 	
+	//Individual item level Calculation before Applying Discount
 	public List<Map<String,Float>> calculationSummary(Map<String,Float> menus,Map<String,Float> entityPercentages){
 		List<Map<String,Float>> allMenuEntityValues = new LinkedList<>();
 		
@@ -214,6 +201,7 @@ public class BaseClass {
 		return allMenuEntityValues;
 	}
 	
+	//Grand Calculation before Applying Discount
 	public Map<String,Float> grandCalculationSummary(Map<String,Float> menus,Map<String,Float> entityPercentages){
 		List<Map<String,Float>> allIndividualMenuEntityValues = new LinkedList<>();
 		Map<String,Float> grandEntitySummary=new LinkedHashMap<String, Float>();
@@ -359,8 +347,8 @@ public class BaseClass {
 	}
 	
 	
-	
-	
+
+	//used to Round grand calculation summary
 	public Map<String,Float> roundCalculationSummary(Map<String,Float> summary) {
 		Map<String,Float> roundedCalculationSummary= new LinkedHashMap<>();
 		
@@ -372,32 +360,6 @@ public class BaseClass {
 		}
 		return roundedCalculationSummary;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public float salesTax(List<Float> menuPrices,float salTaxPercentage) { //Modified for Menu wise and Round off
 		float tot=0;

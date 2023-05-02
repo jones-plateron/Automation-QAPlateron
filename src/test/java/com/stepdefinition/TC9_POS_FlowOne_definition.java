@@ -32,12 +32,10 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	PageManager pma = new PageManager();
 	public float subTotal, totalBillAmount;
 	List<Float> menuPrice = new ArrayList<Float>();
-	String orderType = "";
-	String noOfGuest = "",orderId="",randomName="",randomNumber="";
+	public String noOfGuest = "",orderId="",randomName="",randomNumber="",orderType = "",orderTime="",tipPercentage="",discountName="",orderStatus="",orderPaymentType="";
 	public int guestCountAOP;
 	
-	float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0;
-
+	public float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0,tipAmount = 0;
 	public TC9_POS_FlowOne_definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
@@ -57,9 +55,9 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
 				"com.plateron.restaurant.pos.MainActivity");
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
-//        capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, "true");
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1000);
 //		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
-		capabilities.setCapability(MobileCapabilityType.UDID, "HA1GSLK1");//HA1GSLK1 - R9PT2034EVV
+		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");//HA1GSLK1 - R9PT2034EVV
 		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
 		// capabilities.setCapability(MobileCapabilityType.UDID,"192.168.5.101:5555");
 
@@ -68,13 +66,15 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
 		
 		posDriver1 = new AppiumDriver(url, capabilities);
-		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(70));
+		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(30));
+		noOfGuest = "";orderId="";randomName="";randomNumber="";orderType = "";orderTime="";tipPercentage="";discountName="";orderStatus="";orderPaymentType="";
+		salesTax = 0; gratuity = 0; serviceFee = 0; serviceFeeTax = 0; gratuityTax = 0; discountAmt = 0;totalBillAmountADis=0;tipAmount = 0;
 	}
 
 	@When("User should able to enter login credentials")
 	public void userShouldAbleToEnterLoginCredentials() throws InterruptedException {
 //		posLoginWithEmployeePin("2353");
-		String employeePIN = "4567";
+		String employeePIN = "7115";
 
 		for (int i = 0; i < employeePIN.length(); i++) {
 			char charAt = employeePIN.charAt(i);
@@ -785,7 +785,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 //		writeValueToCell("Reports", 0, 13, "Grand Total");
 //		writeValueToCell("Reports", 0, 14, "Discount");
 //		writeValueToCell("Reports", 0, 15, "Happy Hour Sale");
-		
+
 		
 		if (orderType.equals("Dine-In")) {
 	        DecimalFormat dF = new DecimalFormat("#.##");
