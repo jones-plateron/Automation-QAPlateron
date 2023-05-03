@@ -1,5 +1,6 @@
 package com.stepdefinition;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -230,7 +231,7 @@ PageManager pma = new PageManager();
 		
 	}
 	@Then("User should Add Cooking station based on the Number of Categories")
-	public void userShouldAddCookingStationBasedOnTheNumberOfCategories() throws InterruptedException {
+	public void userShouldAddCookingStationBasedOnTheNumberOfCategories() throws InterruptedException, IOException {
 		pma.getrMS_Cooking_Station_POM().getAddCookingStationButton().click();
 		Thread.sleep(200);
 		List<WebElement> addCSSlideCategoriesList = pma.getrMS_Cooking_Station_POM().getAddCSSlideCategoriesList();
@@ -266,6 +267,13 @@ PageManager pma = new PageManager();
 		     pma.getrMS_Cooking_Station_POM().getAddCSSlideSaveElement().click();Thread.sleep(500);
 		}
 		List<WebElement> eachCSName = pma.getrMS_Cooking_Station_POM().getEachCSName();
+		for (int i = 0; i < eachCSName.size(); i++) {
+			writeValueToCell("Menu List", i+1, 5, eachCSName.get(i).getText());
+		}
+		
+		
+		
+		
 		Assert.assertEquals(addCSSlideCategoriesList.size(), eachCSName.size());Thread.sleep(800);
 	}
 	@Then("User Should verify the Search functionality in Cooking Station")
