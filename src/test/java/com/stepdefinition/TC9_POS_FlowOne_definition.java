@@ -32,12 +32,10 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 	PageManager pma = new PageManager();
 	public float subTotal, totalBillAmount;
 	List<Float> menuPrice = new ArrayList<Float>();
-	String orderType = "";
-	String noOfGuest = "",orderId="",randomName="",randomNumber="";
+	public String noOfGuest = "",orderId="",randomName="",randomNumber="",orderType = "",orderTime="",tipPercentage="",discountName="",orderStatus="",orderPaymentType="";
 	public int guestCountAOP;
 	
-	float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0;
-
+	public float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0,tipAmount = 0;
 	public TC9_POS_FlowOne_definition() {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
@@ -57,9 +55,9 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
 				"com.plateron.restaurant.pos.MainActivity");
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
-//        capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, "true");
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1000);
 //		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
-		capabilities.setCapability(MobileCapabilityType.UDID, "HA1GSLK1");
+		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");//HA1GSLK1 - R9PT2034EVV
 		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
 		// capabilities.setCapability(MobileCapabilityType.UDID,"192.168.5.101:5555");
 
@@ -68,13 +66,15 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
 		
 		posDriver1 = new AppiumDriver(url, capabilities);
-		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofMillis(7));
+		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(30));
+		noOfGuest = "";orderId="";randomName="";randomNumber="";orderType = "";orderTime="";tipPercentage="";discountName="";orderStatus="";orderPaymentType="";
+		salesTax = 0; gratuity = 0; serviceFee = 0; serviceFeeTax = 0; gratuityTax = 0; discountAmt = 0;totalBillAmountADis=0;tipAmount = 0;
 	}
 
 	@When("User should able to enter login credentials")
 	public void userShouldAbleToEnterLoginCredentials() throws InterruptedException {
 //		posLoginWithEmployeePin("2353");
-		String employeePIN = "4567";
+		String employeePIN = "7115";
 
 		for (int i = 0; i < employeePIN.length(); i++) {
 			char charAt = employeePIN.charAt(i);
@@ -419,7 +419,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		if (!(percentageSaltx == 0)) {
 			String salesTxPD = pma.getPOS_FlowOne_POM().getSalesTaxPayDetails().getAttribute("content-desc");
 			String salTxreplace = salesTxPD.replaceAll("[\\r\\n]+", "");
-			salesTax = salesTax(subTotal, percentageSaltx);
+			salesTax = salesTax(menuPrice, percentageSaltx);
 			// format for Assert
 			roundStringsalesTax = roundStringValue(salesTax);
 
@@ -433,7 +433,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		if (!(percentageSerFee == 0)) {
 			String serFeePD = pma.getPOS_FlowOne_POM().getServiceFeePayDetails().getAttribute("content-desc");
 			String serFeereplace = serFeePD.replaceAll("[\\r\\n]+", "");
-			serFee = serviceFee(subTotal, percentageSerFee);
+			serFee = serviceFee(menuPrice, percentageSerFee);
 			// format for Assert
 			String roundStringserFee = roundStringValue(serFee);
 
@@ -471,7 +471,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 					if (subTotal >= Float.parseFloat(subTotalReaches)) {
 						if (takeAwayCBx.equals("ON") || dineInCBx.equals("ON")) {// need to get current order type +
 																					// button takeAway & dineIn status
-							gratuityValue = gratuity(subTotal, Float.parseFloat(gratuityPercent));
+							gratuityValue = gratuity(menuPrice, Float.parseFloat(gratuityPercent));
 							String gratuityPD = pma.getPOS_FlowOne_POM().getGratuityPayDetails()
 									.getAttribute("content-desc");
 							String gratuityreplace = gratuityPD.replaceAll("[\\r\\n]+", "");
@@ -486,7 +486,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 			} else if (gratuityBasedOn.equals("Guest Count")) {
 				if (Float.parseFloat(gratuityPercent) > 0) {
 					if (guestCountAOP >= Float.parseFloat(GuestCntReaches)) {
-						gratuityValue = gratuity(subTotal, Float.parseFloat(gratuityPercent));
+						gratuityValue = gratuity(menuPrice, Float.parseFloat(gratuityPercent));
 						String gratuityPD = pma.getPOS_FlowOne_POM().getGratuityPayDetails()
 								.getAttribute("content-desc");
 						String gratuityreplace = gratuityPD.replaceAll("[\\r\\n]+", "");
@@ -507,7 +507,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 					if (subTotal >= Float.parseFloat(subTotalReaches)) {
 						if (takeAwayCBx.equals("ON") || dineInCBx.equals("ON")) {
 //need to get CURRENT ORDER TYPE + button takeAway & dineIn status - ####-Pass Global OrderType String-####
-							gratuityTaxValue = gratuity(gratuityValue, Float.parseFloat(gratuityTaxPercent));
+							gratuityTaxValue = gratuityTax(gratuityValue, Float.parseFloat(gratuityTaxPercent));
 							String gratuityTaxPD = pma.getPOS_FlowOne_POM().getGratuityTaxPayDetails()
 									.getAttribute("content-desc");
 							String gratuityTaxreplace = gratuityTaxPD.replaceAll("[\\r\\n]+", "");
@@ -522,7 +522,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 			} else if (gratuityBasedOn.equals("Guest Count")) {
 				if (Float.parseFloat(gratuityPercent) > 0) {
 					if (guestCountAOP >= Float.parseFloat(GuestCntReaches)) {
-						gratuityTaxValue = gratuity(gratuityValue, Float.parseFloat(gratuityTaxPercent));
+						gratuityTaxValue = gratuityTax(gratuityValue, Float.parseFloat(gratuityTaxPercent));
 						String gratuityTaxPD = pma.getPOS_FlowOne_POM().getGratuityTaxPayDetails()
 								.getAttribute("content-desc");
 						String gratuityTaxreplace = gratuityTaxPD.replaceAll("[\\r\\n]+", "");
@@ -616,14 +616,14 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		String salTxRepTxt = salTxText.replaceAll("[\\r\\n]+", "");
 		String SalTxFromExcel = getDataFromExcel("Bill Configuration", 1, 1);
 		float salesTaxPer = Float.parseFloat(SalTxFromExcel);
-		salesTax = salesTax(subTotal, salesTaxPer);
+		salesTax = salesTax(menuPrice, salesTaxPer);
 		String salesTax1 = roundStringValue(salesTax);
 		Assert.assertEquals(salTxRepTxt, "Sales Tax$" + salesTax1);
 		// Service Fee
 		String SerFeeFromExcel = getDataFromExcel("Bill Configuration", 4, 1);
 		float percentageSerFee = Float.parseFloat(SerFeeFromExcel);
 		if (!(percentageSerFee == 0)) {
-			serviceFee = serviceFee(subTotal, percentageSerFee);
+			serviceFee = serviceFee(menuPrice, percentageSerFee);
 			// format for Assert
 			String roundStringserFee = roundStringValue(serviceFee);
 			String serFeeTxt = pma.getPOS_FlowOne_POM().getServiceFeePayDetailsAfterDis().getAttribute("content-desc");
@@ -663,7 +663,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 					if (updatedSubTotal >= Float.parseFloat(subTotalReaches)) {
 						if (takeAwayCBx.equals("ON") || dineInCBx.equals("ON")) {// need to get current order type +
 																					// button takeAway & dineIn status
-							gratuity = gratuity(updatedSubTotal, Float.parseFloat(gratuityPercent));
+							//gratuity = gratuity(updatedSubTotal, Float.parseFloat(gratuityPercent));
 							String gratuityPD = pma.getPOS_FlowOne_POM().getGratuityPayDetailsAfterDis()
 									.getAttribute("content-desc");
 							String gratuityreplace = gratuityPD.replaceAll("[\\r\\n]+", "");
@@ -678,7 +678,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 			} else if (gratuityBasedOn.equals("Guest Count")) {
 				if (Float.parseFloat(gratuityPercent) > 0) {
 					if (guestCountAOP >= Float.parseFloat(GuestCntReaches)) {
-						gratuity = gratuity(updatedSubTotal, Float.parseFloat(gratuityPercent));
+						//gratuity = gratuity(updatedSubTotal, Float.parseFloat(gratuityPercent));
 						String gratuityPD = pma.getPOS_FlowOne_POM().getGratuityPayDetailsAfterDis()
 								.getAttribute("content-desc");
 						String gratuityreplace = gratuityPD.replaceAll("[\\r\\n]+", "");
@@ -698,7 +698,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 					if (updatedSubTotal >= Float.parseFloat(subTotalReaches)) {
 						if (takeAwayCBx.equals("ON") || dineInCBx.equals("ON")) {
 //need to get CURRENT ORDER TYPE + button takeAway & dineIn status - ####-Pass Global OrderType String-####
-							gratuityTax = gratuity(gratuity, Float.parseFloat(gratuityTaxPercent));
+							gratuityTax = gratuityTax(gratuity, Float.parseFloat(gratuityTaxPercent));
 							String gratuityTaxPD = pma.getPOS_FlowOne_POM().getGratuityTaxPayDetailsAfterDis()
 									.getAttribute("content-desc");
 							String gratuityTaxreplace = gratuityTaxPD.replaceAll("[\\r\\n]+", "");
@@ -713,7 +713,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 			} else if (gratuityBasedOn.equals("Guest Count")) {
 				if (Float.parseFloat(gratuityPercent) > 0) {
 					if (guestCountAOP >= Float.parseFloat(GuestCntReaches)) {
-						gratuityTax = gratuity(gratuity, Float.parseFloat(gratuityTaxPercent));
+						gratuityTax = gratuityTax(gratuity, Float.parseFloat(gratuityTaxPercent));
 						String gratuityTaxPD = pma.getPOS_FlowOne_POM().getGratuityTaxPayDetailsAfterDis()
 								.getAttribute("content-desc");
 						String gratuityTaxreplace = gratuityTaxPD.replaceAll("[\\r\\n]+", "");
@@ -785,7 +785,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 //		writeValueToCell("Reports", 0, 13, "Grand Total");
 //		writeValueToCell("Reports", 0, 14, "Discount");
 //		writeValueToCell("Reports", 0, 15, "Happy Hour Sale");
-		
+
 		
 		if (orderType.equals("Dine-In")) {
 	        DecimalFormat dF = new DecimalFormat("#.##");

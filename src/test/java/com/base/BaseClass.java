@@ -8,8 +8,13 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
@@ -121,13 +126,6 @@ public class BaseClass {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	public String formatStringValue(String val) {
 		DecimalFormat df = new DecimalFormat("#.00");
 //		df.setMinimumFractionDigits(2);
@@ -136,14 +134,7 @@ public class BaseClass {
 		return roundedVal;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Revamped No Use
 	public float subtotalAfterApplyingDiscountWOExcludeItems(List<Float> menus,float discPercentage) {
 		
 		float discountAmtOfMenu,subTotalAfterDiscount=0,discountAmt=0,MenuAfterDiscount;
@@ -175,14 +166,222 @@ public class BaseClass {
 		//		float roundedVal = Float.parseFloat(df.format(val));
 		return roundedVal;
 	}
-	public float salesTax(float subTotal,float salTaxPercentage) {
-		float salesTax=(subTotal*salTaxPercentage/100);
-		float roundedValue = roundFloatValue(salesTax);
+	
+	//Individual item level Calculation before Applying Discount
+	public List<Map<String,Float>> calculationSummary(Map<String,Float> menus,Map<String,Float> entityPercentages){
+		List<Map<String,Float>> allMenuEntityValues = new LinkedList<>();
+		
+		
+		Set<Entry<String, Float>> eachMenu = menus.entrySet();
+		for (Entry<String, Float> menuSet : eachMenu) {
+			Map<String,Float> individualEntityValues= new LinkedHashMap<>();
+//			String key = menuSet.getKey();
+			Float value = menuSet.getValue();
+			
+			Float salesTaxPercentage = entityPercentages.get("salesTaxPercentage");
+			Float serviceFeePercentage = entityPercentages.get("serviceFeePercentage");
+			Float serviceFeeTaxPercentage = entityPercentages.get("serviceFeeTaxPercentage");
+			Float gratuityPercentage = entityPercentages.get("gratuityPercentage");
+			Float gratuityTaxPercentage = entityPercentages.get("gratuityTaxPercentage");
+			
+			Float salesTax= value*salesTaxPercentage/100;
+			Float serviceFee= value*serviceFeePercentage/100;
+			Float serviceFeeTax= serviceFee*serviceFeeTaxPercentage/100;
+			Float gratuity= value*gratuityPercentage/100;
+			Float gratuityTax= gratuity*gratuityTaxPercentage/100;
+			
+			individualEntityValues.put("salesTax", salesTax);
+			individualEntityValues.put("serviceFee", serviceFee);
+			individualEntityValues.put("serviceFeeTax", serviceFeeTax);
+			individualEntityValues.put("gratuity", gratuity);
+			individualEntityValues.put("gratuityTax", gratuityTax);
+			
+			allMenuEntityValues.add(individualEntityValues);
+		}
+		return allMenuEntityValues;
+	}
+	
+	//Grand Calculation before Applying Discount
+	public Map<String,Float> grandCalculationSummary(Map<String,Float> menus,Map<String,Float> entityPercentages){
+		List<Map<String,Float>> allIndividualMenuEntityValues = new LinkedList<>();
+		Map<String,Float> grandEntitySummary=new LinkedHashMap<String, Float>();
+		
+		Set<Entry<String, Float>> eachMenu = menus.entrySet();
+		for (Entry<String, Float> menuSet : eachMenu) {
+			Map<String,Float> individualEntityValues= new LinkedHashMap<>();
+//			String key = menuSet.getKey();
+			Float value = menuSet.getValue();
+			
+			Float salesTaxPercentage = entityPercentages.get("salesTaxPercentage");
+			Float serviceFeePercentage = entityPercentages.get("serviceFeePercentage");
+			Float serviceFeeTaxPercentage = entityPercentages.get("serviceFeeTaxPercentage");
+			Float gratuityPercentage = entityPercentages.get("gratuityPercentage");
+			Float gratuityTaxPercentage = entityPercentages.get("gratuityTaxPercentage");
+			
+			Float salesTax= value*salesTaxPercentage/100;
+			Float serviceFee= value*serviceFeePercentage/100;
+			Float serviceFeeTax= serviceFee*serviceFeeTaxPercentage/100;
+			Float gratuity= value*gratuityPercentage/100;
+			Float gratuityTax= gratuity*gratuityTaxPercentage/100;
+			
+			individualEntityValues.put("salesTax", salesTax);
+			individualEntityValues.put("serviceFee", serviceFee);
+			individualEntityValues.put("serviceFeeTax", serviceFeeTax);
+			individualEntityValues.put("gratuity", gratuity);
+			individualEntityValues.put("gratuityTax", gratuityTax);
+			
+			allIndividualMenuEntityValues.add(individualEntityValues);
+		}
+		float salesTax=0,serviceFee=0,serviceFeeTax=0,gratuity=0,gratuityTax=0;
+		for (int i = 0; i < allIndividualMenuEntityValues.size(); i++) {			
+			Map<String, Float> eachMap = allIndividualMenuEntityValues.get(i);
+			
+			salesTax = salesTax+eachMap.get("salesTax");
+			serviceFee = serviceFee+eachMap.get("serviceFee");
+			serviceFeeTax = serviceFeeTax+eachMap.get("serviceFeeTax");
+			gratuity = gratuity+eachMap.get("gratuity");
+			gratuityTax = gratuityTax+eachMap.get("gratuityTax");
+		}
+		
+		grandEntitySummary.put("salesTax", salesTax);
+		grandEntitySummary.put("serviceFee", serviceFee);
+		grandEntitySummary.put("serviceFeeTax", serviceFeeTax);
+		grandEntitySummary.put("gratuity", gratuity);
+		grandEntitySummary.put("gratuityTax", gratuityTax);
+		
+		return grandEntitySummary;
+	}
+	
+	//Exclude Items Added, Need to add Discount percentage
+	public Map<String,Float> grandCalculationSummaryAfterDiscount(Map<String,Float> menus,Map<String,Float> entityPercentages,List<String> Excluded,float discountPercentage){
+		List<Map<String,Float>> allIndividualMenuEntityValues = new LinkedList<>();
+		Map<String,Float> grandEntitySummary=new LinkedHashMap<String, Float>();
+		
+		Set<Entry<String, Float>> eachMenu = menus.entrySet();
+		for (Entry<String, Float> menuSet : eachMenu) {
+			Map<String,Float> individualEntityValues= new LinkedHashMap<>();
+			String key = menuSet.getKey();
+			float discountAmt=0;
+			boolean tag=false;
+				
+				for (int j = 0; j < Excluded.size(); j++) {
+					if (key.equals(Excluded.get(j))) {
+						Float value = menuSet.getValue();   	//Discount Accommodation
+						//Float value= menuP -(menuP*discountPercentage/100);
+						
+						
+						Float salesTaxPercentage = entityPercentages.get("salesTaxPercentage");
+						Float serviceFeePercentage = entityPercentages.get("serviceFeePercentage");
+						Float serviceFeeTaxPercentage = entityPercentages.get("serviceFeeTaxPercentage");
+						Float gratuityPercentage = entityPercentages.get("gratuityPercentage");
+						Float gratuityTaxPercentage = entityPercentages.get("gratuityTaxPercentage");
+						
+						Float salesTax= value*salesTaxPercentage/100;
+						Float serviceFee= value*serviceFeePercentage/100;
+						Float serviceFeeTax= serviceFee*serviceFeeTaxPercentage/100;
+						Float gratuity= value*gratuityPercentage/100;
+						Float gratuityTax= gratuity*gratuityTaxPercentage/100;
+						
+						individualEntityValues.put("salesTax", salesTax);
+						individualEntityValues.put("serviceFee", serviceFee);
+						individualEntityValues.put("serviceFeeTax", serviceFeeTax);
+						individualEntityValues.put("gratuity", gratuity);
+						individualEntityValues.put("gratuityTax", gratuityTax);
+						
+						allIndividualMenuEntityValues.add(individualEntityValues);
+						
+						tag=true;
+					}
+				}
+				
+				if (tag==false) {
+
+					Float menuP = menuSet.getValue();   	//Discount Accommodation
+					Float valueBeforeRound= menuP -(menuP*discountPercentage/100);
+					float value = roundFloatValue(valueBeforeRound);
+					
+					discountAmt=roundFloatValue((menuP*discountPercentage/100));
+					
+					Float salesTaxPercentage = entityPercentages.get("salesTaxPercentage");
+					Float serviceFeePercentage = entityPercentages.get("serviceFeePercentage");
+					Float serviceFeeTaxPercentage = entityPercentages.get("serviceFeeTaxPercentage");
+					Float gratuityPercentage = entityPercentages.get("gratuityPercentage");
+					Float gratuityTaxPercentage = entityPercentages.get("gratuityTaxPercentage");
+					
+					Float salesTax= menuP*salesTaxPercentage/100;
+					Float serviceFee= value*serviceFeePercentage/100;
+					Float serviceFeeTax= serviceFee*serviceFeeTaxPercentage/100;
+					Float gratuity= value*gratuityPercentage/100;
+					Float gratuityTax= gratuity*gratuityTaxPercentage/100;
+					
+					individualEntityValues.put("salesTax", salesTax);
+					individualEntityValues.put("serviceFee", serviceFee);
+					individualEntityValues.put("serviceFeeTax", serviceFeeTax);
+					individualEntityValues.put("gratuity", gratuity);
+					individualEntityValues.put("gratuityTax", gratuityTax);
+					individualEntityValues.put("discount", discountAmt);
+					
+					allIndividualMenuEntityValues.add(individualEntityValues);
+				}
+				float salesTax=0,serviceFee=0,serviceFeeTax=0,gratuity=0,gratuityTax=0,totalDiscountAmt=0;
+				for (int i = 0; i < allIndividualMenuEntityValues.size(); i++) {			
+					Map<String, Float> eachMap = allIndividualMenuEntityValues.get(i);
+					
+					salesTax = salesTax+eachMap.get("salesTax");
+					serviceFee = serviceFee+eachMap.get("serviceFee");
+					serviceFeeTax = serviceFeeTax+eachMap.get("serviceFeeTax");
+					gratuity = gratuity+eachMap.get("gratuity");
+					gratuityTax = gratuityTax+eachMap.get("gratuityTax");
+					totalDiscountAmt = totalDiscountAmt+eachMap.get("discount");
+					}
+				
+				grandEntitySummary.put("salesTax", salesTax);
+				grandEntitySummary.put("serviceFee", serviceFee);
+				grandEntitySummary.put("serviceFeeTax", serviceFeeTax);
+				grandEntitySummary.put("gratuity", gratuity);
+				grandEntitySummary.put("gratuityTax", gratuityTax);
+				grandEntitySummary.put("discount", totalDiscountAmt);
+			}
+		
+		return grandEntitySummary;
+	}
+	
+	
+
+	//used to Round grand calculation summary
+	public Map<String,Float> roundCalculationSummary(Map<String,Float> summary) {
+		Map<String,Float> roundedCalculationSummary= new LinkedHashMap<>();
+		
+		Set<Entry<String, Float>> entitySet = summary.entrySet();
+		
+		for (Entry<String, Float> entry : entitySet) {
+			float roundFloatValue = roundFloatValue(entry.getValue());
+			roundedCalculationSummary.put(entry.getKey(), roundFloatValue);
+		}
+		return roundedCalculationSummary;
+	}
+	
+	public float salesTax(List<Float> menuPrices,float salTaxPercentage) { //Modified for Menu wise and Round off
+		float tot=0;
+		for (int i = 0; i < menuPrices.size(); i++) {
+			float indvMenu = menuPrices.get(i);
+			tot =tot +indvMenu*salTaxPercentage/100;
+		}
+		float roundedValue = roundFloatValue(tot);		
 		return roundedValue;
 	}
-	public float serviceFee(float subTotal,float serFeePercentage) {
-		float serviceFee=(subTotal*serFeePercentage/100);
-		float roundedValue = roundFloatValue(serviceFee);
+	public float serviceFee(List<Float> menuPrices,float serFeePercentage) { //Modified for Menu wise and Round off
+		float tot=0;
+		for (int i = 0; i < menuPrices.size(); i++) {
+			float indvMenu = menuPrices.get(i);
+			tot =tot +indvMenu*serFeePercentage/100;
+		}
+		float roundedValue = roundFloatValue(tot);		
+		return roundedValue;
+	}
+	public float serviceFeeDiscount(float menuPrices,float serFeePercentage) { //Modified for Menu wise and Round off
+		 float tot =menuPrices*serFeePercentage/100;
+		float roundedValue = roundFloatValue(tot);		
 		return roundedValue;
 	}
 	public float serviceFeeTax(float SalesTax,float serFeeTxPercentage) {
@@ -190,9 +389,18 @@ public class BaseClass {
 		float roundedValue = roundFloatValue(serviceFeeTax);
 		return roundedValue;
 	}
-	public float gratuity(float SubTotal,float gratuityPercentage) {
-		float gratuity=(SubTotal*gratuityPercentage/100);
-		float roundedValue = roundFloatValue(gratuity);
+	public float gratuity(List<Float> menuPrices,float gratuityPercentage) { //Modified for Menu wise and Round off
+		float tot=0;
+		for (int i = 0; i < menuPrices.size(); i++) {
+			float indvMenu = menuPrices.get(i);
+			tot =tot +indvMenu*gratuityPercentage/100;
+		}
+		float roundedValue = roundFloatValue(tot);		
+		return roundedValue;
+	}
+	public float gratuityDiscount(float menuPrices,float gratuityPercentage) { //Modified for Menu wise and Round off
+		float tot=(menuPrices*gratuityPercentage/100);
+		float roundedValue = roundFloatValue(tot);		
 		return roundedValue;
 	}
 	public float gratuityTax(float gratuity,float gratuityTaxPercentage) {

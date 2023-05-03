@@ -1,7 +1,7 @@
 @DeclineFlow
 Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
 
-@POSDineInPrepaidMenuwithOptionalModifiersDecline
+@POSDineInPrepaidMenuwithOptionalModifiersDecline @OneTo
   Scenario: POS DineIn Prepaid Order with Optional Modifier Menus 
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
@@ -12,20 +12,21 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     When User Should click Receive Payment button
     Then User Should Verify the page redirected to Payment Detail Page
     And User Should verify the Receive Payment page Calculation
-    And User Should Add the Tip
+    And User Should Select the Payment Method as Cash
+    #Need to Modify the above line as both common for Card and Cash Settings
+    And User Should Add the Tip Percentage as "22%"
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
     And User should verify the Customer Information Field
-    And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
-    Then User should Validate the Order in Reports #One
+    #Then User should Validate the Order in Reports #One
     
-@POSDineInPrepaidMenuwithRequiredModifiersDecline
+@POSDineInPrepaidMenuwithRequiredModifiersDecline @OneTo
   Scenario: POS DineIn Prepaid Order with Required Modifier Menus
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
@@ -36,12 +37,12 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     When User Should click Receive Payment button
     Then User Should Verify the page redirected to Payment Detail Page
     And User Should verify the Receive Payment page Calculation
-    And User Should Add the Tip #Need to Check
+    And User Should Select the Payment Method as Cash
+    And User Should Add the Tip Percentage as "20%"
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
     And User should verify the Customer Information Field
-    And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
     And User Should Decline the Order
@@ -49,7 +50,7 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User Should Validate the Completed Orders Page
     #Need Reports
     
-@POSDineInPrepaidMenuwithBothModifiersDecline
+@POSDineInPrepaidMenuwithBothModifiersDecline @OneT
   Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
@@ -60,12 +61,12 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     When User Should click Receive Payment button
     Then User Should Verify the page redirected to Payment Detail Page
     And User Should verify the Receive Payment page Calculation
-    And User Should Add the Tip #Need to Check
+    And User Should Select the Payment Method as Cash
+    And User Should Add the Tip Percentage as "18%"
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
     And User should verify the Customer Information Field
-    And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
     And User Should Decline the Order
@@ -73,7 +74,7 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User Should Validate the Completed Orders Page
     #Need Reports
     
-@POSDineInPrepaidMenuwithModifierPriceZeroDecline
+@POSDineInPrepaidMenuwithModifierPriceZeroDecline @OneT
   Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
@@ -84,12 +85,12 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     When User Should click Receive Payment button
     Then User Should Verify the page redirected to Payment Detail Page
     And User Should verify the Receive Payment page Calculation
-    And User Should Add the Tip #Need to Check
+    And User Should Select the Payment Method as Cash
+    And User Should Add the Tip Percentage as "22%"
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
     And User should verify the Customer Information Field
-    And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
     And User Should Decline the Order
@@ -97,7 +98,7 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User Should Validate the Completed Orders Page
     #Need Reports
     
-@POSDineInPrepaidMenuPriceZerowithModifierDecline
+@POSDineInPrepaidMenuPriceZerowithModifierDecline @OneT
   Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
@@ -108,15 +109,24 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     When User Should click Receive Payment button
     Then User Should Verify the page redirected to Payment Detail Page
     And User Should verify the Receive Payment page Calculation
-    And User Should Add the Tip #Need to Check
+    And User Should Select the Payment Method as Cash
+    And User Should Add the Tip Percentage as "20%"
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
     And User should verify the Customer Information Field
-    And User Should Select the Payment Method as Cash
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
     #Need Reports
+    
+@Check
+  Scenario: Calculation Check
+  When Calculation validation
+  
+  
+  
+  
+    
