@@ -75,8 +75,8 @@ public class POS_FlowOne_POM extends BaseClass {
 				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.HorizontalScrollView"));
 		return element;
 	}
-	public WebElement getNoOfGuest18() {
-		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='18']"));
+	public WebElement getNoOfGuest8() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='8']"));
 		return element;
 	}
 	public WebElement getNoOfGuest5() {
@@ -708,7 +708,7 @@ public class POS_FlowOne_POM extends BaseClass {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
 	}
 	public WebElement getRHSModi1beforeapply() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[4]"));
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[5]"));
 	}
 	public WebElement getMinusSymbol() {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[4]"));
@@ -716,5 +716,174 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getPlusSymbol() {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='2'])[4]"));
 	}
+	public WebElement getRecieveButton() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@index='12']"));
+	}
 	
+	//Settings Page>>>>>>>>>>>>>>>>>>>>>>>>>>
+	public WebElement getSettingsPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Settings']"));
+	}
+	public WebElement getMapPrinters() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='1']"));
+	}
+	public WebElement getSearchingPrinterLoader() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Searching printers']"));
+	}
+	public WebElement getSearhPrintersBtn() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Search printers']"));
+	}
+	public WebElement getBillingStationPrinterSection() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@content-desc='Billing station printer'])[1]"));
+	}
+	public WebElement getBillingStationPrinterOptions() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@content-desc='Billing station printer'])[2]"));
+	}
+	public WebElement getSelectPrintersDropDown() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@index='3']"));
+	}
+
+	public WebElement getSelectPrintersDropDownAttr() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
+	}
+	public WebElement getAvailablePrinter1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[7]"));
+	}
+	public WebElement getAvailablePrinter1Attri() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='1']"));////////////
+	}
+	
+	public WebElement getCSPrintersSection() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Cooking station printer']"));
+	}
+	public WebElement getSaveBtn() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Save']"));
+	}
+	public WebElement getCS1() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='7']"));
+	}
+	public WebElement getCS1MapPrinter() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='8']"));
+	}
+	public WebElement getCS2() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='10']"));
+	}
+	public WebElement getCS2MapPrinter() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='11']"));
+	}
+	public WebElement getCS3() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
+	}
+	public WebElement getCS3MapPrinter() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='14']"));
+	}
+	public WebElement getCS4() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='16']"));
+	}
+	public WebElement getCS5() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='19']"));
+	}
+	public WebElement getMappedsuccessfully() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Settings updated Printers mapped sucessfully']"));
+	}
+	//+++++++++++++++++++++++++++++Screen Time Out+++++++++++++++++++++++++++++++++++++++++
+	public WebElement getScreenTimeOutSection() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='4']"));
+	}
+	public WebElement getScreenTimeOutOption() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Screen Time-Out']"));
+	}
+	public WebElement getScreenTimeOutToggle() {
+		return posDriver1.findElement(By.xpath("//android.widget.Switch[@index='1']"));
+	}
+	public WebElement getScreenTimeOutIns1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[2]"));
+	}
+	public WebElement getScreenTimeOutIns2() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Configure lock screen time-out for your POS devices']"));
+	}
+	public WebElement getEnterTimesIn() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[3]"));
+	}
+	
+	public WebElement getEnterTimesInMin() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Enter time in minutes']"));
+	}
+	public WebElement getEnterTimesInHr() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Enter time in hours']"));
+	}
+	public WebElement getScreenTimeTxtBox() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='4']"));
+	}
+	public WebElement getTimeformatStatus() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
+	}
+	public WebElement getScreenTimeMinutesDD() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Minutes']"));
+	}
+	public WebElement getScreenTimeMinutesDDBtn() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Minutes']"));
+	}
+	public WebElement getScreenTimeHoursDD() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Hours']"));
+	}
+	public WebElement getScreenTimeHoursDDBtn() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Hours']"));
+	}
+//++++++++++++++++++++++++++++++++++Cash Drawer++++++++++++++++++++++++++++++++++++++++++++
+	public WebElement getCashDrawer() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement getCashDrawerSection() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
+	}
+	public WebElement getConnectthisPOS() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement getConnectthisPOSIns() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement getConnectthisCheckBx() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	
+	//+++++++++++++++++++++++++++++++++++++Preparation Time+++++++++++++++++++++++++++++++++++++++++
+	public WebElement getPreparationTimeSection() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[7]"));
+	}
+	public WebElement getEstimatedOrderPreparationTime() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[9]"));
+	}
+	public WebElement get1stCS() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
+	}
+	public WebElement get2ndCS() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
+	}
+	public WebElement get3rdCS() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
+	}
+	public WebElement getMonday() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Monday']"));
+	}
+	public WebElement getTuesday() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Tuesday']"));
+	}
+	public WebElement getWednesday() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Wednesday']"));
+	}
+	public WebElement getThursday() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Thursday']"));
+	}
+	public WebElement getFriday() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Friday']"));
+	}
+	public WebElement getSaturday() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Saturday']"));
+	}
+	public WebElement getSunday() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc=\"Monday\"]"));
+	}
 }
+
+

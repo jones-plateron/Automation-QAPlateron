@@ -68,7 +68,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
 		
 		posDriver1 = new AppiumDriver(url, capabilities);
-		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofMillis(7));
+		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(3));
 	}
 
 	@When("User should able to enter login credentials")
