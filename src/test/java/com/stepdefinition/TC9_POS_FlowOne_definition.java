@@ -55,7 +55,35 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
 				"com.plateron.restaurant.pos.MainActivity");
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
-        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1000);
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1900);
+//		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
+		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");//HA1GSLK1 - R9PT2034EVV
+		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
+		// capabilities.setCapability(MobileCapabilityType.UDID,"192.168.5.101:5555");
+
+		capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
+
+		URL url = new URL("http://127.0.0.1:4723/wd/hub");
+		
+		posDriver1 = new AppiumDriver(url, capabilities);
+		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(30));
+		noOfGuest = "";orderId="";randomName="";randomNumber="";orderType = "";orderTime="";tipPercentage="";discountName="";orderStatus="";orderPaymentType="";
+		salesTax = 0; gratuity = 0; serviceFee = 0; serviceFeeTax = 0; gratuityTax = 0; discountAmt = 0;totalBillAmountADis=0;tipAmount = 0;
+	}
+	@Given("User should able to see Login Screen1")
+	public void userShouldAbleToSeeLoginScreen1() throws MalformedURLException {
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+
+		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "POS Terminal 1G");
+		capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+		capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+		capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12");
+		capabilities.setCapability(AndroidMobileCapabilityType.SKIP_UNLOCK, "false");
+		capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.plateron.restaurant.pos.qa");
+		capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
+				"com.plateron.restaurant.pos.MainActivity");
+		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1900);
 //		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
 		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");//HA1GSLK1 - R9PT2034EVV
 		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
