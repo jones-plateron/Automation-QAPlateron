@@ -1,12 +1,15 @@
 package com.base;
 
 
+import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -31,6 +34,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -56,8 +60,27 @@ public class BaseClass {
 		PageFactory.initElements(mobileDriver1, this);
 		
 	}
+	public void clickMoreIcononMenuAOpage(WebElement menuElement) throws InterruptedException {
+		Actions act = new Actions(posDriver1);
+		int a = ((menuElement.getSize().width) / 2) * -1;
+		dragAndDropByClick(act, menuElement, a, 549, 0).perform();
+	}
+	
+	public void clickMoreIcononMenuAOpage1(WebElement menuElement) throws InterruptedException {
+		Actions act = new Actions(posDriver1);
+		int a = ((menuElement.getSize().width) / 2) * -1;
+		dragAndDropByClick(act, menuElement, a, 549, -59).perform();
+	}
 	
 	
+	public Actions dragAndDropByClick(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {
+		return act
+				.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(100),
+						Origin.fromElement(source),(startOffset + 25), 0))
+				.tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
+						.createPointerMove(Duration.ofMillis(250), Origin.pointer(), xOffset, yOffset))
+				.tick(act.getActivePointer().createPointerUp(LEFT.asArg())).tick(act.getActivePointer().createPointerDown(LEFT.asArg()));
+	}
 	
 	
 	

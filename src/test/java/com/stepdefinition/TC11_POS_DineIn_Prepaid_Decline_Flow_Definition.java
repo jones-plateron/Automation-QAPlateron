@@ -17,7 +17,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -38,7 +37,8 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	Map<String,Float> entityPercentage = new LinkedHashMap<String,Float>();
 	Map<String, Float> roundedCalculationSummary = new LinkedHashMap<String,Float>();
 	List<String> excludedItems=new ArrayList<String>();
-	public String noOfGuest = "",orderId="",randomName="",randomNumber="",orderType = "",orderTime="",tipPercentage="",discountName="",orderStatus="",orderPaymentType="";
+	public String noOfGuest = "",orderId="",randomName="",randomNumber="",orderType = "",orderTime="",tipPercentage=""
+			,discountName="",orderStatus="",orderPaymentMethod="",PaymentType="";
 	public int guestCountAOP;
 	public float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0,tipAmount = 0;
 	DecimalFormat dF = new DecimalFormat("#.##");
@@ -57,7 +57,10 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	
 	@Then("User should able to select guest count Number and Click Proceed button")
 	public void userShouldAbleToSelectGuestCountNumberAndClickProceedButton() throws InterruptedException {
-		salesTax = 0; gratuity = 0; serviceFee = 0; serviceFeeTax = 0; gratuityTax = 0; discountAmt = 0;totalBillAmountADis=0;tipAmount = 0;
+		salesTax = 0; gratuity = 0; serviceFee = 0; serviceFeeTax = 0; gratuityTax = 0; discountAmt = 0;totalBillAmountADis=0;
+		tipAmount = 0;noOfGuest = "";orderId="";randomName="";randomNumber="";orderType = "";orderTime="";tipPercentage="";
+		discountName="";orderStatus="";orderPaymentMethod="";PaymentType="";
+		
 		pma.getPOS_FlowOne_POM().getNoOfGuest5().click();
 		noOfGuest=pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("content-desc");
 		pma.getPOS_FlowOne_POM().getProceedButton().click();
@@ -158,7 +161,15 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	}
 	@When("User Should click Receive Payment button")
 	public void userShouldClickReceivePaymentButton() {
-		pma.getPOS_FlowOne_POM().getPrepaidReceivePmtBtn().click();
+			pma.getPOS_FlowOne_POM().getPrepaidReceivePmtBtn().click();
+			
+			if (PaymentType.equals("Postpaid")) {
+			} else {
+				PaymentType="Prepaid";
+			}
+			
+			
+		
 	}
 	@Then("User Should Verify the page redirected to Payment Detail Page")
 	public void userShouldVerifyThePageRedirectedToPaymentDetailPage() throws InterruptedException {
@@ -303,8 +314,16 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	}
 	@Then("User Should Select the Payment Method as Cash")
 	public void userShouldSelectThePaymentMethodAsCash() throws InterruptedException {
-		Thread.sleep(500);
-		pma.getPOS_FlowOne_POM().getCashRadioBtnPayDetails().click();
+		orderPaymentMethod="Cash";
+		if (orderPaymentMethod.equals("Cash")) {
+			Thread.sleep(500);
+			pma.getPOS_FlowOne_POM().getCashRadioBtnPayDetails().click();
+		} else if (orderPaymentMethod.equals("Card")){	//Need to Identify the Effect in Card Flow
+			Thread.sleep(500);
+			pma.getPOS_FlowOne_POM().getCardRadioBtnPayDetails().click();
+			pma.getPOS_FlowOne_POM().getCloverFlexDeviceC143UT22560410().click();
+			
+		}
 	}
 	
 	@Then("User Should Add the Tip Percentage as {string}")
@@ -341,6 +360,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 			tipAmount=Float.parseFloat(tipPer);
 			pma.getPOS_FlowOne_POM().getCustomTipAmtTextBx().click();
 			pma.getPOS_FlowOne_POM().getCustomTipAmtTextBx().sendKeys(tipPer);
+			pma.getPOS_FlowOne_POM().getApplyBtn().click();
 		}
 		Thread.sleep(3500);
 	}
@@ -680,8 +700,14 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		
 		totalBillAmount=totalBillAmount+subTotal-(2*roundCalculationSummary1.get("discount"))+tipAmount;	
 		
+		String billAmount="";
 		// Bill Amount Validation
-		String billAmount = pma.getPOS_FlowOne_POM().getBillAmountPayDetailsAfterDisTip().getAttribute("content-desc");
+		if (tipPercentage.equals("No Tip")) {
+			billAmount = pma.getPOS_FlowOne_POM().getBillAmountPayDetailsAfterDisNoTip().getAttribute("content-desc");
+		} else {
+			billAmount = pma.getPOS_FlowOne_POM().getBillAmountPayDetailsAfterDisTip().getAttribute("content-desc");
+		}
+		
 		
 		if (billAmount.equals("$" + roundStringValue(totalBillAmount))) {
 			Assert.assertEquals(billAmount, "$" + roundStringValue(totalBillAmount));
@@ -726,7 +752,8 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		String nameTxt4 = pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().getAttribute("text");
 		Assert.assertEquals("abcdefghijABCDEFGHIJ1234567890Autom"+", Name", nameTxt4);Thread.sleep(500);
 		pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
-		pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().sendKeys(randomNameGenerator());
+		String name=randomNameGenerator();
+		pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().sendKeys(name);
 		//MobileNum Tab
 		//Text
 		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().click();
@@ -736,9 +763,26 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		Assert.assertTrue(numTxt.contains("(123) 456 - 7890"));Thread.sleep(500);
 		
 		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
-		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().sendKeys(randomMobileNumberGeneration());
+		String mobile=randomMobileNumberGeneration();
+		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().sendKeys(mobile);
 		
-		pma.getPOS_FlowOne_POM().getCashRadioBtnPayDetails().click();
+		pma.getPOS_FlowOne_POM().getPaymentMethodHdrTxt().click();
+		Thread.sleep(500);
+	}
+	
+	@Then("User should Enter the Customer Information")
+	public void userShouldEnterTheCustomerInformation() throws InterruptedException {
+		pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().click();
+		String name=randomNameGenerator();
+		pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().sendKeys(name);
+		Thread.sleep(500);
+		
+		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().click();
+		String mobile=randomMobileNumberGeneration();
+		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().sendKeys(mobile);
+		Thread.sleep(500);
+		
+		pma.getPOS_FlowOne_POM().getPaymentMethodHdrTxt().click();
 		Thread.sleep(500);
 	}
 	
@@ -760,11 +804,18 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		orderTime = formattedTime.toUpperCase();
 		System.out.println(orderTime);
 		
+		if (PaymentType.equals("Prepaid")) {
+			
+		}else {
+			PaymentType="Postpaid";
+		}
+		
+		
 	}
 	public Actions dragAndDropBy(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {
 		return act
 				.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(100),
-						Origin.fromElement(pma.getPOS_FlowOne_POM().getSTK1()),(startOffset + 25), 0))
+						Origin.fromElement(source),(startOffset + 25), 0))
 				.tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
 						.createPointerMove(Duration.ofMillis(250), Origin.pointer(), xOffset, yOffset))
 				.tick(act.getActivePointer().createPointerUp(LEFT.asArg()));
@@ -793,12 +844,23 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		   System.out.println(orderId);
 			String tableName = pma.getPOS_FlowOne_POM().getTableNameRightside().getAttribute("content-desc");
 //		   System.out.println(tableName);
-			Assert.assertTrue(firstOrderAO.contains("Paid - Cash"));
+			
+			if (PaymentType.equals("Prepaid")) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(firstOrderAO.contains("Paid - Cash"));
+				}else {
+					Assert.assertTrue(firstOrderAO.contains("Paid - Card"));
+				}
+			} else {
+				Assert.assertTrue(firstOrderAO.contains("Not Paid"));
+			}
+			
 			Assert.assertTrue(firstOrderAO.contains(employeeName));
 			Assert.assertTrue(firstOrderAO.contains("Guest: " + substring));
 			Assert.assertTrue(firstOrderAO.contains(orderId));
 			Assert.assertTrue(firstOrderAO.contains("Waiter"));
 			Assert.assertTrue(firstOrderAO.contains(tableName));
+			System.out.println(orderTime);
 			//Assert.assertTrue(firstOrderAO.contains(orderTime)); - Hiding Because of 1 minute mismatch issue
 		}
 		else if (orderType.equals("Take-Out")) {
@@ -817,7 +879,16 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 			//String tableName = pma.getPOS_FlowOne_POM().getTableNameRightside().getAttribute("content-desc");
 //		   System.out.println(tableName);
 
-			Assert.assertTrue(firstOrderAO.contains("Paid - Cash"));
+			if (PaymentType.equals("Prepaid")) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(firstOrderAO.contains("Paid - Cash"));
+				}else {
+					Assert.assertTrue(firstOrderAO.contains("Paid - Card"));
+				}
+			} else {
+				Assert.assertTrue(firstOrderAO.contains("Not Paid"));
+			}
+			
 			Assert.assertTrue(firstOrderAO.contains(employeeName));
 			Assert.assertTrue(firstOrderAO.contains(orderId));
 			Assert.assertTrue(firstOrderAO.contains("Waiter"));
@@ -871,7 +942,24 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	        String tableName = pma.getPOS_FlowOne_POM().getTableNameRightsideCO().getAttribute("content-desc");
 	       System.out.println(tableName);
 
-	         Assert.assertTrue(firstOrderCO.contains("Paid - Cash"));
+	       //Order list payment Status
+	       if (PaymentType.equals("Prepaid")&&(orderStatus.equals("Declined")||orderStatus.equals("Completed"))) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(firstOrderCO.contains("Paid - Cash"));
+					
+				} else if(orderPaymentMethod.equals("Card")){
+					Assert.assertTrue(firstOrderCO.contains("Paid - Card"));
+				}
+			}else if (PaymentType.equals("Postpaid")&&orderStatus.equals("Completed")) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(firstOrderCO.contains("Paid - Cash"));
+					
+				} else if(orderPaymentMethod.equals("Card")){
+					Assert.assertTrue(firstOrderCO.contains("Paid - Card"));
+				}
+			} else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+			}
 	         
 	         if (employeeName.contains("Clocked In:")) {
 	        	 String replaceAll = employeeName.replaceAll("[\\r\\n]+", "");
@@ -887,36 +975,120 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 
 	        
 	        //Order Status
-	        String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus().getAttribute("content-desc");
-	        Assert.assertTrue(orStatus.equals("Declined"));
-	        Thread.sleep(500);
+	        if (orderStatus.equals("Declined")) {
+	        	String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus().getAttribute("content-desc");
+		        Assert.assertTrue(orStatus.equals("Declined"));
+		        Thread.sleep(500);
+		        
+			}else if (orderStatus.equals("Completed")) {
+				String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus().getAttribute("content-desc");
+		        Assert.assertTrue(orStatus.equals("Delivered"));
+		        Thread.sleep(500);
+		        
+			} else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+			}
+	        
+	        String totalAmountTxt="", subTotalSMRY = "",
+			discountSMRY = "",
+			salesTxSMRY = "",
+			serviceFeeSMRY = "",
+			serviceFeeTXSMRY = "",
+			gratuitySMRY = "",
+			gratuityTxSMRY = "";
+	        
 			//Order Summary Validation
-			pma.getPOS_FlowOne_POM().getTotAmountCOSummary().click();
-			Thread.sleep(600);
-			String subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
-			String discountSMRY = pma.getPOS_FlowOne_POM().getDiscountValueCOSummaryRefund().getAttribute("content-desc");
-			String salesTxSMRY = pma.getPOS_FlowOne_POM().getSalesTaxCOSummary().getAttribute("content-desc");
-			String serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummary().getAttribute("content-desc");
-			String serviceFeeTXSMRY = pma.getPOS_FlowOne_POM().getServiceFeeTaxCOSummary().getAttribute("content-desc");
-			String gratuitySMRY = pma.getPOS_FlowOne_POM().getGratuityCOSummary().getAttribute("content-desc");
-			String gratuityTxSMRY = pma.getPOS_FlowOne_POM().getGratuityTaxCOSummary().getAttribute("content-desc");
+	        
+	        if (PaymentType.equals("Prepaid")&&(orderStatus.equals("Declined")||orderStatus.equals("Completed"))) {
+	        	
+	        	pma.getPOS_FlowOne_POM().getTotAmountCOSummary().click();
+				Thread.sleep(600);
+				subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
+				discountSMRY = pma.getPOS_FlowOne_POM().getDiscountValueCOSummaryRefund().getAttribute("content-desc");
+				salesTxSMRY = pma.getPOS_FlowOne_POM().getSalesTaxCOSummary().getAttribute("content-desc");
+				serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummary().getAttribute("content-desc");
+				serviceFeeTXSMRY = pma.getPOS_FlowOne_POM().getServiceFeeTaxCOSummary().getAttribute("content-desc");
+				gratuitySMRY = pma.getPOS_FlowOne_POM().getGratuityCOSummary().getAttribute("content-desc");
+				gratuityTxSMRY = pma.getPOS_FlowOne_POM().getGratuityTaxCOSummary().getAttribute("content-desc");
+				
+				
+				Assert.assertEquals(subTotalSMRY, "$"+roundStringValue(subTotal));
+				Assert.assertEquals(discountSMRY, "-$"+roundStringValue(discountAmt));
+				Assert.assertEquals(salesTxSMRY, "$"+roundStringValue(salesTax));
+				Assert.assertEquals(serviceFeeSMRY, "$"+roundStringValue(serviceFee));
+				Assert.assertEquals(serviceFeeTXSMRY, "$"+roundStringValue(serviceFeeTax));
+				Assert.assertEquals(gratuitySMRY, "$"+roundStringValue(gratuity));
+				Assert.assertEquals(gratuityTxSMRY, "$"+roundStringValue(gratuityTax));
+				
+				
+				totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummary().getAttribute("content-desc");
+				System.out.println(totalAmountTxt);
+				
+			}else if (PaymentType.equals("Postpaid")&&orderStatus.equals("Completed")) {
+				
+				pma.getPOS_FlowOne_POM().getTotAmountCOSummary().click();
+				Thread.sleep(600);
+				subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
+				discountSMRY = pma.getPOS_FlowOne_POM().getDiscountValueCOSummaryRefund().getAttribute("content-desc");
+				salesTxSMRY = pma.getPOS_FlowOne_POM().getSalesTaxCOSummary().getAttribute("content-desc");
+				serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummary().getAttribute("content-desc");
+				serviceFeeTXSMRY = pma.getPOS_FlowOne_POM().getServiceFeeTaxCOSummary().getAttribute("content-desc");
+				gratuitySMRY = pma.getPOS_FlowOne_POM().getGratuityCOSummary().getAttribute("content-desc");
+				gratuityTxSMRY = pma.getPOS_FlowOne_POM().getGratuityTaxCOSummary().getAttribute("content-desc");
+				
+				
+				Assert.assertEquals(subTotalSMRY, "$"+roundStringValue(subTotal));
+				Assert.assertEquals(discountSMRY, "-$"+roundStringValue(discountAmt));
+				Assert.assertEquals(salesTxSMRY, "$"+roundStringValue(salesTax));
+				Assert.assertEquals(serviceFeeSMRY, "$"+roundStringValue(serviceFee));
+				Assert.assertEquals(serviceFeeTXSMRY, "$"+roundStringValue(serviceFeeTax));
+				Assert.assertEquals(gratuitySMRY, "$"+roundStringValue(gratuity));
+				Assert.assertEquals(gratuityTxSMRY, "$"+roundStringValue(gratuityTax));
+				
+				
+				totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummary().getAttribute("content-desc");
+				System.out.println(totalAmountTxt);
+				
+			} else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+			}
+	        
 			
 			
-			Assert.assertEquals(subTotalSMRY, "$"+roundStringValue(subTotal));
-			Assert.assertEquals(discountSMRY, "-$"+roundStringValue(discountAmt));
-			Assert.assertEquals(salesTxSMRY, "$"+roundStringValue(salesTax));
-			Assert.assertEquals(serviceFeeSMRY, "$"+roundStringValue(serviceFee));
-			Assert.assertEquals(serviceFeeTXSMRY, "$"+roundStringValue(serviceFeeTax));
-			Assert.assertEquals(gratuitySMRY, "$"+roundStringValue(gratuity));
-			Assert.assertEquals(gratuityTxSMRY, "$"+roundStringValue(gratuityTax));
+			//Paid - Not paid status in Total Amount
+ 			if (PaymentType.equals("Prepaid")&&(orderStatus.equals("Declined")||orderStatus.equals("Completed"))) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(totalAmountTxt.contains("Paid - Cash"));
+					Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
+					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
+				} else if(orderPaymentMethod.equals("Card")){
+					Assert.assertTrue(totalAmountTxt.contains("Paid - Card"));
+					Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
+					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
+				}
+			}else if (PaymentType.equals("Postpaid")&&orderStatus.equals("Completed")) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(totalAmountTxt.contains("Paid - Cash"));
+					Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
+					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
+				} else if(orderPaymentMethod.equals("Card")){
+					Assert.assertTrue(totalAmountTxt.contains("Paid - Card"));
+					Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
+					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
+				}
+			} else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+			}
+			//Refund Amount Banner
+			if (PaymentType.equals("Prepaid")&&(orderStatus.equals("Declined"))) {
+				Thread.sleep(1000);
+				String refundText = pma.getPOS_FlowOne_POM().getRefundedAmountCOSummary().getAttribute("content-desc");
+				Assert.assertEquals(refundText.replaceAll("[\\r\\n]+", ""), "A refund amount $"+roundStringValue(totalBillAmount)+"  has been initiated for this order.");	
+			}else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus);
+			}
+//			
 			
-			
-			String totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummary().getAttribute("content-desc");
-			System.out.println(totalAmountTxt);
-			
-			Assert.assertTrue(totalAmountTxt.contains("Paid - Cash"));
-			Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
-			Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
 			
 			//Store Order information in Excel
 //			for (int i = 1; i < 100; i++) {
@@ -928,7 +1100,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 //				}
 //			}
 			
-			
+			System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
 		
 		} else if (orderType.equals("Take-Out")) {
 
@@ -951,7 +1123,24 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	        String orderId = pma.getPOS_FlowOne_POM().getOrderIdRightCorneCO().getAttribute("content-desc");
 	       System.out.println(orderId);
 
-	         Assert.assertTrue(firstOrderCO.contains("Paid - Cash"));
+	     //Order list payment Status
+	       if (PaymentType.equals("Prepaid")&&(orderStatus.equals("Declined")||orderStatus.equals("Completed"))) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(firstOrderCO.contains("Paid - Cash"));
+					
+				} else if(orderPaymentMethod.equals("Card")){
+					Assert.assertTrue(firstOrderCO.contains("Paid - Card"));
+				}
+			}else if (PaymentType.equals("Postpaid")&&orderStatus.equals("Completed")) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(firstOrderCO.contains("Paid - Cash"));
+					
+				} else if(orderPaymentMethod.equals("Card")){
+					Assert.assertTrue(firstOrderCO.contains("Paid - Card"));
+				}
+			} else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+			}
 	         
 	         if (employeeName.contains("Clocked In:")) {
 	        	 String replaceAll = employeeName.replaceAll("[\\r\\n]+", "");
@@ -964,48 +1153,121 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	       //Need Table and Area name validations
 	        
 	        //Order Status
-	        String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatusTakeOut().getAttribute("content-desc");
-	        Assert.assertTrue(orStatus.equals("Delivered"));
+	        if (orderStatus.equals("Declined")) {
+	        	String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus().getAttribute("content-desc");
+		        Assert.assertTrue(orStatus.equals("Declined"));
+		        Thread.sleep(500);
+		        
+			}else if (orderStatus.equals("Completed")) {
+				String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus().getAttribute("content-desc");
+		        Assert.assertTrue(orStatus.equals("Delivered"));
+		        Thread.sleep(500);
+		        
+			} else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+			}
 			
-			//Order Summary Validation
-			pma.getPOS_FlowOne_POM().getTotAmountCOSummaryTakeOut().click();
-			Thread.sleep(600);
-			String subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
-			String discountSMRY = pma.getPOS_FlowOne_POM().getDiscountValueCOSummary().getAttribute("content-desc");
-			String salesTxSMRY = pma.getPOS_FlowOne_POM().getSalesTaxCOSummary().getAttribute("content-desc");
-			String serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummaryTakeOut().getAttribute("content-desc");
-			String serviceFeeTXSMRY = pma.getPOS_FlowOne_POM().getServiceFeeTaxCOSummary().getAttribute("content-desc");
-			String gratuitySMRY = pma.getPOS_FlowOne_POM().getGratuityCOSummary().getAttribute("content-desc");
-			String gratuityTxSMRY = pma.getPOS_FlowOne_POM().getGratuityTaxCOSummary().getAttribute("content-desc");
+	        String totalAmountTxt="", subTotalSMRY = "",
+	    			discountSMRY = "",
+	    			salesTxSMRY = "",
+	    			serviceFeeSMRY = "",
+	    			serviceFeeTXSMRY = "",
+	    			gratuitySMRY = "",
+	    			gratuityTxSMRY = "";
+	    	        
+	    			//Order Summary Validation
+	    	        
+	    	        if (PaymentType.equals("Prepaid")&&(orderStatus.equals("Declined")||orderStatus.equals("Completed"))) {
+	    	        	
+	    	        	pma.getPOS_FlowOne_POM().getTotAmountCOSummary().click();
+	    				Thread.sleep(600);
+	    				subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
+	    				discountSMRY = pma.getPOS_FlowOne_POM().getDiscountValueCOSummaryRefund().getAttribute("content-desc");
+	    				salesTxSMRY = pma.getPOS_FlowOne_POM().getSalesTaxCOSummary().getAttribute("content-desc");
+	    				serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummary().getAttribute("content-desc");
+	    				serviceFeeTXSMRY = pma.getPOS_FlowOne_POM().getServiceFeeTaxCOSummary().getAttribute("content-desc");
+	    				gratuitySMRY = pma.getPOS_FlowOne_POM().getGratuityCOSummary().getAttribute("content-desc");
+	    				gratuityTxSMRY = pma.getPOS_FlowOne_POM().getGratuityTaxCOSummary().getAttribute("content-desc");
+	    				
+	    				
+	    				Assert.assertEquals(subTotalSMRY, "$"+roundStringValue(subTotal));
+	    				Assert.assertEquals(discountSMRY, "-$"+roundStringValue(discountAmt));
+	    				Assert.assertEquals(salesTxSMRY, "$"+roundStringValue(salesTax));
+	    				Assert.assertEquals(serviceFeeSMRY, "$"+roundStringValue(serviceFee));
+	    				Assert.assertEquals(serviceFeeTXSMRY, "$"+roundStringValue(serviceFeeTax));
+	    				Assert.assertEquals(gratuitySMRY, "$"+roundStringValue(gratuity));
+	    				Assert.assertEquals(gratuityTxSMRY, "$"+roundStringValue(gratuityTax));
+	    				
+	    				
+	    				totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummary().getAttribute("content-desc");
+	    				System.out.println(totalAmountTxt);
+	    				
+	    			}else if (PaymentType.equals("Postpaid")&&orderStatus.equals("Completed")) {
+	    				
+	    				pma.getPOS_FlowOne_POM().getTotAmountCOSummary().click();
+	    				Thread.sleep(600);
+	    				subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
+	    				discountSMRY = pma.getPOS_FlowOne_POM().getDiscountValueCOSummaryRefund().getAttribute("content-desc");
+	    				salesTxSMRY = pma.getPOS_FlowOne_POM().getSalesTaxCOSummary().getAttribute("content-desc");
+	    				serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummary().getAttribute("content-desc");
+	    				serviceFeeTXSMRY = pma.getPOS_FlowOne_POM().getServiceFeeTaxCOSummary().getAttribute("content-desc");
+	    				gratuitySMRY = pma.getPOS_FlowOne_POM().getGratuityCOSummary().getAttribute("content-desc");
+	    				gratuityTxSMRY = pma.getPOS_FlowOne_POM().getGratuityTaxCOSummary().getAttribute("content-desc");
+	    				
+	    				
+	    				Assert.assertEquals(subTotalSMRY, "$"+roundStringValue(subTotal));
+	    				Assert.assertEquals(discountSMRY, "-$"+roundStringValue(discountAmt));
+	    				Assert.assertEquals(salesTxSMRY, "$"+roundStringValue(salesTax));
+	    				Assert.assertEquals(serviceFeeSMRY, "$"+roundStringValue(serviceFee));
+	    				Assert.assertEquals(serviceFeeTXSMRY, "$"+roundStringValue(serviceFeeTax));
+	    				Assert.assertEquals(gratuitySMRY, "$"+roundStringValue(gratuity));
+	    				Assert.assertEquals(gratuityTxSMRY, "$"+roundStringValue(gratuityTax));
+	    				
+	    				
+	    				totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummary().getAttribute("content-desc");
+	    				System.out.println(totalAmountTxt);
+	    				
+	    			} else {
+	    				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+	    			}
 			
+			//Paid - Not paid status in Total Amount
+ 			if (PaymentType.equals("Prepaid")&&(orderStatus.equals("Declined")||orderStatus.equals("Completed"))) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(totalAmountTxt.contains("Paid - Cash"));
+					Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
+					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
+				} else if(orderPaymentMethod.equals("Card")){
+					Assert.assertTrue(totalAmountTxt.contains("Paid - Card"));
+					Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
+					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
+				}
+			}else if (PaymentType.equals("Postpaid")&&orderStatus.equals("Completed")) {
+				if (orderPaymentMethod.equals("Cash")) {
+					Assert.assertTrue(totalAmountTxt.contains("Paid - Cash"));
+					Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
+					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
+				} else if(orderPaymentMethod.equals("Card")){
+					Assert.assertTrue(totalAmountTxt.contains("Paid - Card"));
+					Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
+					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
+				}
+			} else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+			}
 			
-			Assert.assertEquals(subTotalSMRY, "$"+roundStringValue(subTotal));
-			Assert.assertEquals(discountSMRY, "-$"+roundStringValue(discountAmt));
-			Assert.assertEquals(salesTxSMRY, "$"+roundStringValue(salesTax));
-			Assert.assertEquals(serviceFeeSMRY, "$"+roundStringValue(serviceFee));
-			Assert.assertEquals(serviceFeeTXSMRY, "$"+roundStringValue(serviceFeeTax));
-			Assert.assertEquals(gratuitySMRY, "$"+roundStringValue(gratuity));
-			Assert.assertEquals(gratuityTxSMRY, "$"+roundStringValue(gratuityTax));
-			
-			
-			String totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummaryTakeOut().getAttribute("content-desc");
-			System.out.println(totalAmountTxt);
-			
-			Assert.assertTrue(totalAmountTxt.contains("Paid - Cash"));
-			Assert.assertTrue(totalAmountTxt.contains("Total Amount"));
-			Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
-			
-			
-			//Need to modify the bellow OR to AND after setting order Payment Type
-			if (orderPaymentType.equals("Prepaid")||orderStatus.equals("Declined")) {
+ 			
+			//Refund Amount Banner
+			if (PaymentType.equals("Prepaid")&&(orderStatus.equals("Declined"))) {
 				
 				String refundText = pma.getPOS_FlowOne_POM().getRefundedAmountCOSummary().getAttribute("content-desc");
-				
-				Assert.assertEquals(refundText, "A refund amount $"+roundStringValue(totalBillAmount)+" has been initiated for this order.");
+				Assert.assertEquals(refundText, "A refund amount $"+roundStringValue(totalBillAmount)+" has been initiated for this order.");	
+			}else {
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus);
 			}
 			
 			
-			
+			System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
 			//Store Data in Excel
 		}
 		
@@ -1205,23 +1467,115 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 //			java.lang.String key = menuAll.getKey();
 //		Float salesTaxpercentage= percentages.get("sales tax");
 //			System.out.println(salesTaxpercentage);		//			System.out.println(menuEach);
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		
 	}
 	
-	
+	@When("User Should Void the all Menu Items")
+	public void userShouldVoidTheAllMenuItems() throws InterruptedException {
+		for (int i = 0; i < menuPrice.size(); i++) {
+			int j=i;
+			if (i==(menuPrice.size()-1)) {
+				i=i+10; //To Make i value incorrect
+				}
+			switch (i) {
+			case 0:
+				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage());Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidDD86edAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+				String menu1Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+				Assert.assertTrue(menu1Txt.contains("Voided"));Thread.sleep(1500);
+				break;
+				
+			case 1:
+				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getSecondMenuRHSAOPage());Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidDDCustomerChangedMindAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+				String menu2Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+				Assert.assertTrue(menu2Txt.contains("Voided"));Thread.sleep(1500);
+				break;
+				
+			case 2:
+				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage());Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidDDGuestDissatisfiedAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+				String menu3Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+				Assert.assertTrue(menu3Txt.contains("Voided"));Thread.sleep(1500);
+				break;
+				
+			case 3:
+				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage());Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidDDTestingTrainingAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+				String menu4Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+				Assert.assertTrue(menu4Txt.contains("Voided"));Thread.sleep(1500);
+				break;
+				
+			case 4:
+				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage());Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getVoidDDWaiterErrorAOPage().click();Thread.sleep(1500);
+				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+				String menu5Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+				Assert.assertTrue(menu5Txt.contains("Voided"));Thread.sleep(1500);
+				break;
+
+			default:
+				switch (j) {
+				case 1:
+					clickMoreIcononMenuAOpage1(pma.getPOS_FlowOne_POM().getSecondMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDCustomerChangedMindAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+					String menu2TxtLst = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+					Assert.assertTrue(menu2TxtLst.contains("Voided"));Thread.sleep(1500);
+					break;
+					
+				case 2:
+					clickMoreIcononMenuAOpage1(pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDGuestDissatisfiedAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+					String menu3TxtLst = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+					Assert.assertTrue(menu3TxtLst.contains("Voided"));Thread.sleep(1500);
+					break;
+				case 3:
+					clickMoreIcononMenuAOpage1(pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDTestingTrainingAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+					String menu4TxtLst = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+					Assert.assertTrue(menu4TxtLst.contains("Voided"));Thread.sleep(1500);
+					break;
+				case 4:
+					clickMoreIcononMenuAOpage1(pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDWaiterErrorAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
+					String menu5TxtLst = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
+					Assert.assertTrue(menu5TxtLst.contains("Voided"));Thread.sleep(1500);
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
+		orderStatus="Declined";
+	}
 }
+enum PaymentType1 { Postpaid, PrePaid };
+
+
