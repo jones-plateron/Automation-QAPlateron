@@ -58,7 +58,6 @@ public class BaseClass {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
-		
 	}
 	public void clickMoreIcononMenuAOpage(WebElement menuElement) throws InterruptedException {
 		Actions act = new Actions(posDriver1);
