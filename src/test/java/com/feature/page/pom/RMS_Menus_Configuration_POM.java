@@ -45,8 +45,8 @@ PageManager pma = new PageManager();
 	public WebElement getAddModifierPopupCancelBtnElement() { //for Add Category popup also
 		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Cancel']"));
 	}
-	public WebElement getAddModifierPopupCloseBtnElement() { //for Add Category popup also
-		return rmsDriver.findElement(By.xpath("//i[@class='icon-close icon-5x']"));
+	public WebElement getAddModifierPopupCloseBtnElement() { //for Add Category popup also - //i[@class='icon-close icon-5x']
+		return rmsDriver.findElement(By.xpath("//*[name()='path' and contains(@d,'M16 1.4L14')]"));
 	}
 	public WebElement getAddModifierPopupSaveBtnElement() { //for Add Category popup also
 		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Save']"));
@@ -58,7 +58,7 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElements(By.xpath("//div[contains(@class,'inner__sidebar w-large sidenav-subheader')]//li"));
 	}
 	public WebElement getEditModifierNameIconElement() { // Same for Category Section
-		return rmsDriver.findElement(By.xpath("(//i[@class='icon-edit'])[1]"));
+		return rmsDriver.findElement(By.xpath("//button[@class='mr-2 tooltip']//*[name()='svg']"));
 	}
 	
 			public WebElement getCategoryNameHdrNEDElement() { // Same for Category Section
@@ -82,7 +82,10 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//input[@class='form-control  full-width modal-textarea'][@type='text']"));
 	}
 	public WebElement getDeleteModifierIconElementNName() {
-		return rmsDriver.findElement(By.xpath("//i[@class='icon-delete']"));
+		return rmsDriver.findElement(By.xpath("//button[@data-target='#delete-category-modal']//*[name()='svg']"));
+	}
+	public WebElement getDeleteModifierIconElementNName1() {
+		return rmsDriver.findElement(By.xpath("//svg[@class='icon-delete']"));
 	}
 	public WebElement getDeleteModifierPopupHdrElement() {
 		return rmsDriver.findElement(By.xpath("//h4[@class='modal-title text-ellipsis ']"));
@@ -94,7 +97,7 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//button[contains(text(),'Delete')]"));
 	}
 	public WebElement getDeleteModifierPopupCloseElement() {
-		return rmsDriver.findElement(By.xpath("//i[@class='icon-close icon-5x']"));
+		return rmsDriver.findElement(By.xpath("//*[name()='path' and contains(@d,'M16 1.4L14')]"));
 	}
 	public WebElement getDeleteModifierPopupTextElement() {
 		return rmsDriver.findElement(By.xpath("//p[@class='empty-state__help-text--large ']"));
@@ -154,13 +157,13 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Cancel']"));
 	}
 	public WebElement getAddModifierItemSlideCloseBtn() {
-		return rmsDriver.findElement(By.xpath("//i[@class='icon-close icon-5x']"));
+		return rmsDriver.findElement(By.xpath("//*[name()='path' and contains(@d,'M16 1.4L14')]"));
 	}
 	public List<WebElement> getModifierItemsList() {
 		return rmsDriver.findElements(By.xpath("//div[@class=' menu-card__menu-card-item  cursor-grab ']"));
 	}
 	public List<WebElement> getEditModifierItemsIconInsideList() {
-		return rmsDriver.findElements(By.xpath("//button[@class='mr-2 tooltip']"));
+		return rmsDriver.findElements(By.xpath("//i[@class='icon-edit']"));
 	}
 	
 	public WebElement getEditFirstMenuItemIconInsideList() {
@@ -202,7 +205,7 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//p[@class='card-text w-break mb-1']"));
 	}
 	public WebElement getModifierItemPriceInsideList() { // Applies for Category Menu Item Price
-		return rmsDriver.findElement(By.xpath("//div[@class='d-flex mw-60']"));
+		return rmsDriver.findElement(By.xpath("//div[@class='d-flex mw-60 align-items-end']"));
 	}
 	
 	
@@ -239,7 +242,7 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Cancel']"));
 	}
 	public WebElement getDeleteModifierItemPopCloseElement() {
-		return rmsDriver.findElement(By.xpath("//i[@class='icon-close icon-5x']"));
+		return rmsDriver.findElement(By.xpath("//*[name()='path' and contains(@d,'M16 1.4L14')]"));
 	}
 	public WebElement getDeleteModifierItemPopDeleteElement() {
 		return rmsDriver.findElement(By.xpath("//button[contains(text(),'Delete')]"));
@@ -381,8 +384,8 @@ PageManager pma = new PageManager();
 	public WebElement getPublishMenuPopupPublishBtn() {
 		return rmsDriver.findElement(By.xpath("//button[@class='btn btn-primary']"));
 	}
-	public WebElement getPublishMenuPopupCloseElement() {
-		return rmsDriver.findElement(By.xpath("//i[@class='icon-close icon-5x']"));
+	public WebElement getPublishMenuPopupCloseElement() { // - //i[@class='icon-close icon-5x']
+		return rmsDriver.findElement(By.xpath("//*[name()='path' and contains(@d,'M16 1.4L14')]"));
 	}
 	
 	public WebElement getPublishMenuPopTable() {

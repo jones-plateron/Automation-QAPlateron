@@ -139,13 +139,12 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 
 	public WebElement getOrderIdRightCorner() {
-		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='11']"));
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='12']"));
 		return element;
 	}
 	public WebElement getOrderIdRightCornerTakeOut() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='14']"));		
 	}
-
 	public WebElement getFirstMenuRightSide() {
 		WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
 		return element;
@@ -328,6 +327,10 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getTipPayDetailsAfter() {
 		return  posDriver1.findElement(By.xpath("(//android.view.View[@index='7'])[1]"));
 	}
+	public WebElement getBillAmountPayDetailsAfterDisNoTip() {
+		WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='7'])[1]"));
+		return element;
+	}
 	public WebElement getBillAmountPayDetailsAfterDisTip() {
 		WebElement element = posDriver1.findElement(By.xpath("(//android.view.View[@index='7'])[2]"));
 		return element;
@@ -390,11 +393,15 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getTotAmountCOSummary() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='15']"));
 	}
+	
 	public WebElement getTotAmountCOSummaryRefund() {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='14'])[1]"));
 	}
 	public WebElement getRefundedAmountCOSummary() {
-		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='16'])[1]"));
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='16'])[1]"));
+	}
+	public WebElement getRefundedAmountCOSummary1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='17'])[1]"));
 	}
 	public WebElement getTotAmountCOSummaryTakeOut() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='17']"));
@@ -529,6 +536,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getCompleteOrderStatus() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
 	}
+	public WebElement getCompleteOrderStatus1() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Delivered']"));
+	}
 	public WebElement getCompleteOrderStatusTakeOut() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='15']"));
 	}
@@ -542,7 +552,7 @@ public class POS_FlowOne_POM extends BaseClass {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='3']"));
 	}
 	public WebElement getCustomTipAmtTextBx() {
-		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index=5]"));
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index=0]"));
 	}
 	public WebElement getCustomerNameTxtBxPaymentDetails() {
 		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
@@ -562,14 +572,14 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getgetOrderStatusDropdownDeclineAO() {
 		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Declined']"));
 	}
-	public WebElement get10() {
-		return posDriver1.findElement(By.xpath(""));
+	public WebElement getCloverFlexDeviceC143UT22560410() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='C143UT22560410']"));
 	}
-	public WebElement get11() {
-		return posDriver1.findElement(By.xpath(""));
+	public WebElement getCloverFlexDevice22225PP25445065() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='22225PP25445065']"));
 	}
-	public WebElement get12() {
-		return posDriver1.findElement(By.xpath(""));
+	public WebElement getPaymentMethodHdrTxt() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Payment Method']"));
 	}
 	public WebElement get13() {
 		return posDriver1.findElement(By.xpath(""));
@@ -678,28 +688,7 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getCancel2() {
 		return posDriver1.findElement(By.xpath("(//android.widget.Button[@content-desc='Cancel'])[1]"));
 	}
-	public WebElement getMMItem1() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[11]"));
-	}
 	
-	public WebElement getMMItem2() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[3]"));
-	}
-	public WebElement getMMItem3() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[4]"));
-	}
-	public WebElement getMMItem4() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
-	}
-	public WebElement getMMItem17() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[17]"));
-	}
-	public WebElement getMMItem5() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
-	}
-	public WebElement getMMItem6() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[4]"));
-	}
 	//New Modifier Locators
 	public WebElement getNewMMItem1() {
 		return posDriver1.findElement(By.xpath("//android.widget.Button[@index='2']"));
@@ -725,25 +714,6 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getPrepaidReceivePmtBtn() {
 		return posDriver1.findElement(By.xpath("(//android.widget.Button[@index='12'])[1]"));
 	}
-	public WebElement getNewMMItem1() {
-        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='2']"));
-    }
-    public WebElement getNewMMItem2() {
-        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='3']"));
-    }
-    public WebElement getNewMMItem3() {
-        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='4']"));
-    }
-    public WebElement getNewMMItem4() {
-        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='5']"));
-    }
-    public WebElement getNewMMItem5() {
-        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='8']"));
-    }
-    public WebElement getNewMMItem6() {
-        return posDriver1.findElement(By.xpath("//android.widget.Button[@index='9']"));
-    }
-	
 	//Menu List RHS
 	public WebElement getRHSMenu() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
@@ -934,6 +904,166 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 	public WebElement getSunday() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc=\"Monday\"]"));
+	}
+	
+	
+	public WebElement getFirstMenuRHSAOPage() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
+	}
+	public WebElement getSecondMenuRHSAOPage() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+	}
+	public WebElement getThirdMenuRHSAOPage() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[1]"));
+	}
+	public WebElement getFourthMenuRHSAOPage() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+	}
+	public WebElement getFifthMenuRHSAOPage() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='4'])[1]"));
+	}
+	//More Active Orders
+	public WebElement getFirstMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
+	}
+	public WebElement getSecondMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+	}
+	public WebElement getThirdMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[1]"));
+	}
+	public WebElement getFourthMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+	}
+	public WebElement getFifthMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='4'])[1]"));
+	}
+	
+	
+	
+	public WebElement getVoidOptionAOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Void']"));
+	}
+	public WebElement getSelectReasonDropDownAOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Select Reason']"));
+	}
+	public WebElement getSaveBtnVoidWindowAOPage() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
+	}
+	public WebElement getCancelBtnVoidWindowAOPage() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='2'])[2]"));
+	}
+	public WebElement getVoidDDCustomerChangedMindAOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Customer Changed Mind']"));
+	}
+	public WebElement getVoidDDWaiterErrorAOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Waiter Error']"));
+	}
+	public WebElement getVoidDD86edAOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='86ed']"));
+	}
+	public WebElement getVoidDDTestingTrainingAOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Testing/Training']"));
+	}
+	public WebElement getVoidDDGuestDissatisfiedAOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Guest Dissatisfied']"));
+	}
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Refund
+	public WebElement getRefundBtnCOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Refund']"));
+	}
+	public WebElement getRefundPageText() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Tax charged is refunded in addition to the amount selected.']"));
+	}
+	public WebElement getServiceFeeCheckBxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Service Fee']"));
+	}
+	public WebElement getGratuityCheckBxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Gratuity']"));
+	}
+	public WebElement getTipCheckBxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Tip']"));
+	}
+	public WebElement getCustomValueCheckBxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Custom value']"));
+	}
+	public WebElement getOrderNumberHdrRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Order#']"));
+	}
+	public WebElement getCustomerNameHdrRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Customer Name']"));
+	}
+	public WebElement getPaymentMethodHdrRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Payment Method']"));
+	}
+	public WebElement getRefundedHdrRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Refunded']"));
+	}
+	public WebElement getFirstTransactionDetailsRefundPage() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[6]"));
+	}
+	public WebElement getTotalRefundableAmountRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='19']"));
+	}
+	public WebElement getYouWillRefundAmountRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='18']"));
+	}
+	public WebElement getYouWillRefundTextRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='17']"));
+	}
+	public WebElement getRefundCancelBtn() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Cancel']"));
+	}
+	public WebElement getOrderIDRefundPageLHS() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='10']"));
+	}
+	public WebElement getCustomerNameRefundPageLHS() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='9']"));
+	}
+	public WebElement getTotalAmountNPayMethodRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='12']"));
+	}
+	public WebElement getBillAmountTextRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Bill amount']"));
+	}
+	public WebElement getOrderHasNotBeenSentToKitchenNotification() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement getServiceFeeTextBoxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getGratuityTextBoxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getTipTextBoxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getCustomValueTextBoxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getEnterValueWarnMsgRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='3']"));
+	}
+	public WebElement getRefundPageHdr() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Refund']"));
+	}
+	public WebElement getRefundConfirmatonPopProceed() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Proceed']"));
+	}
+	public WebElement getRefundConfirmatonPopCancel() {
+		return posDriver1.findElement(By.xpath("(//android.widget.Button[@content-desc='Cancel'])[1]"));
+	}
+	public WebElement getRefundConfirmatonPopText() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='16']"));
+	}
+	public WebElement getRefundBtnRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Refund']"));
+	}
+	public WebElement getRefundedAmountCOSummary2() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='19'])[1]"));
+	}
+	public WebElement getCOPage39() {
+		return posDriver1.findElement(By.xpath(""));
 	}
 }
 

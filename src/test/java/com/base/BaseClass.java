@@ -1,12 +1,15 @@
 package com.base;
 
 
+import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -31,6 +34,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -54,10 +58,28 @@ public class BaseClass {
 		PageFactory.initElements(rmsDriver, this);
 		PageFactory.initElements(posDriver1, this);
 		PageFactory.initElements(mobileDriver1, this);
-		
+	}
+	public void clickMoreIcononMenuAOpage(WebElement menuElement) throws InterruptedException {
+		Actions act = new Actions(posDriver1);
+		int a = ((menuElement.getSize().width) / 2) * -1;
+		dragAndDropByClick(act, menuElement, a, 549, 0).perform();
+	}
+	
+	public void clickMoreIcononMenuAOpage1(WebElement menuElement) throws InterruptedException {
+		Actions act = new Actions(posDriver1);
+		int a = ((menuElement.getSize().width) / 2) * -1;
+		dragAndDropByClick(act, menuElement, a, 549, -59).perform();
 	}
 	
 	
+	public Actions dragAndDropByClick(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {
+		return act
+				.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(100),
+						Origin.fromElement(source),(startOffset + 25), 0))
+				.tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
+						.createPointerMove(Duration.ofMillis(250), Origin.pointer(), xOffset, yOffset))
+				.tick(act.getActivePointer().createPointerUp(LEFT.asArg())).tick(act.getActivePointer().createPointerDown(LEFT.asArg()));
+	}
 	
 	
 	
@@ -251,6 +273,20 @@ public class BaseClass {
 		
 		return grandEntitySummary;
 	}
+	public Map<String,Float> amountRefundFromServiceFee(float serviceFeeToRefund, Map<String,Float> entityPercentages,Map<String,Float> entityValues) {
+//		Float serviceFeePercentage= entityPercentages.get("serviceFeePercentage");
+		Float serviceFeeTaxPercentage = entityPercentages.get("serviceFeeTaxPercentage");
+		Float serFee = entityValues.get("serviceFee");
+//		Float serFeeTax = entityValues.get("serviceFeeTax");
+		Float revisedSerFee=serFee-serviceFeeToRefund;
+		Float revisedSerFeetax=revisedSerFee*serviceFeeTaxPercentage/100;
+		entityValues.put("serviceFee", revisedSerFee);
+		entityValues.put("serviceFeeTax", revisedSerFeetax); //Need to Modify for Round Off
+		return entityValues;
+	}
+	
+	
+	
 	
 	//Exclude Items Added, Need to add Discount percentage
 	public Map<String,Float> grandCalculationSummaryAfterDiscount(Map<String,Float> menus,Map<String,Float> entityPercentages,List<String> Excluded,float discountPercentage){
@@ -308,7 +344,7 @@ public class BaseClass {
 					Float gratuityPercentage = entityPercentages.get("gratuityPercentage");
 					Float gratuityTaxPercentage = entityPercentages.get("gratuityTaxPercentage");
 					
-					Float salesTax= menuP*salesTaxPercentage/100;
+					Float salesTax= value*salesTaxPercentage/100;
 					Float serviceFee= value*serviceFeePercentage/100;
 					Float serviceFeeTax= serviceFee*serviceFeeTaxPercentage/100;
 					Float gratuity= value*gratuityPercentage/100;

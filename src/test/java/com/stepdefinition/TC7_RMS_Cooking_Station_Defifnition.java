@@ -286,7 +286,7 @@ PageManager pma = new PageManager();
 		}
 		Thread.sleep(300);
 		String dummyText = pma.getrMS_Cooking_Station_POM().getCSSearchBar().getAttribute("placeholder");
-		Assert.assertEquals(dummyText, "Search by station name, items");
+		Assert.assertEquals(dummyText, "Search by station name,category or item");
 		Thread.sleep(300);
 		pma.getrMS_Cooking_Station_POM().getCSSearchBar().sendKeys("unknown");
 		String attribute = pma.getrMS_Cooking_Station_POM().getCSSearchBar().getAttribute("value");

@@ -6,7 +6,13 @@
 	<artifactId>Appium-QaPlateron</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
-
+		<!-- https://mvnrepository.com/artifact/com.github.temyers/cucumber-jvm-parallel-plugin 
+	<dependency>
+    	<groupId>com.github.temyers</groupId>
+  		<artifactId>cucumber-jvm-parallel-plugin</artifactId>
+    	<version>5.0.0</version>
+	</dependency>-->
+	
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
@@ -75,6 +81,6 @@
 		</dependency>
 
 
-	</dependencies>
+</dependencies>
 	
 </project>

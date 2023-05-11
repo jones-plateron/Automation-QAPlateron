@@ -1,4 +1,4 @@
-@EmployeeManagement
+@EmployeeManagement @RMS
 Feature: Verify the Employee Management Page in RMS
 
   @AddEmployeepage 

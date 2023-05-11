@@ -20,7 +20,7 @@ public class RMS_Discount_Configuration_POM extends BaseClass {
 	}
 
 	public WebElement getDiscountSection() {
-		return rmsDriver.findElement(By.xpath("//img[contains(@class,'mr-1 discount-side-nav-image')]"));
+		return rmsDriver.findElement(By.xpath("//li[@id='Discount']"));
 	}
 
 	public WebElement getDiscountConfigurationHeader() {

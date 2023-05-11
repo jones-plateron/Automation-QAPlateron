@@ -1,4 +1,4 @@
-@ManageTable 
+@ManageTable @RMS
 Feature: Manage Table
 
   @POSSetup
@@ -11,7 +11,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |
 
   #Validating the TakeOut Page
   @TakeOut
@@ -30,7 +30,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |
 
   #Validating the AddTable
   @AddTables
@@ -69,7 +69,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |
 
   #Validating the Table
   @ValidatingTable
@@ -89,7 +89,7 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |
 
   #Validating the Rearrange
   @Rearrange
@@ -102,4 +102,4 @@ Feature: Manage Table
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |

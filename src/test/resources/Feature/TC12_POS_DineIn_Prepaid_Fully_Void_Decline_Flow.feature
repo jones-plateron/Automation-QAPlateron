@@ -1,8 +1,8 @@
-@DeclineFlow
-Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
+@DeclineFlow @FullyVoidDecline
+Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Fully Void Decline
 
-@POSDineInPrepaidMenuwithOptionalModifiersDecline @OneTo
-  Scenario: POS DineIn Prepaid Order with Optional Modifier Menus 
+@POSDineInPrepaidMenuwithOptionalModifiersCompleteVoidDecline @FullyVoidDecline
+  Scenario: POS DineIn Prepaid Order with Optional Modifier Menus Void All Items and Decline the Order
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
     Then User should Select any table and verify that the guest count popup appears
@@ -13,21 +13,21 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     Then User Should Verify the page redirected to Payment Detail Page
     And User Should verify the Receive Payment page Calculation
     And User Should Select the Payment Method as Cash
-    #Need to Modify the above line as both common for Card and Cash Settings
-    And User Should Add the Tip Percentage as "22%"
+    And User Should Add the Tip Percentage as "19.99"
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
-    And User should verify the Customer Information Field
+    And User should Enter the Customer Information
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
+    And User Should Void the all Menu Items 
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
-    #Then User should Validate the Order in Reports #One
-    
-@POSDineInPrepaidMenuwithRequiredModifiersDecline @OneTo
-  Scenario: POS DineIn Prepaid Order with Required Modifier Menus
+    #Then User should Validate the Order in Reports #One---------
+
+@POSDineInPrepaidMenuwithRequiredModifiersCompleteVoidDecline @FullyVoidDecline
+  Scenario: POS DineIn Prepaid Order with Required Modifier Menus Void All Items and Decline the Order
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
     Then User should Select any table and verify that the guest count popup appears
@@ -38,20 +38,21 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     Then User Should Verify the page redirected to Payment Detail Page
     And User Should verify the Receive Payment page Calculation
     And User Should Select the Payment Method as Cash
-    And User Should Add the Tip Percentage as "20%"
+    And User Should Add the Tip Percentage as "No Tip"
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
-    And User should verify the Customer Information Field
+    And User should Enter the Customer Information
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
+    And User Should Void the all Menu Items 
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
     #Need Reports
     
-@POSDineInPrepaidMenuwithBothModifiersDecline @OneT
-  Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
+@POSDineInPrepaidMenuwithBothModifiersCompleteVoidDecline @FullyVoidDecline
+  Scenario: POS DineIn Prepaid Order with Both Modifiers Menus Void All Items and Decline the Order
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
     Then User should Select any table and verify that the guest count popup appears
@@ -66,16 +67,17 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
-    And User should verify the Customer Information Field
+    And User should Enter the Customer Information
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
+    And User Should Void the all Menu Items 
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
     #Need Reports
     
-@POSDineInPrepaidMenuwithModifierPriceZeroDecline @OneT
-  Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
+@POSDineInPrepaidMenuwithModifierPriceZeroCompleteVoidDecline @FullyVoidDecline
+  Scenario: POS DineIn Prepaid Order with Menu with Modifier price Zero Void All Items and Decline the Order
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
     Then User should Select any table and verify that the guest count popup appears
@@ -90,7 +92,7 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
-    And User should verify the Customer Information Field
+    And User should Enter the Customer Information
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
     And User Should Decline the Order
@@ -98,8 +100,8 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User Should Validate the Completed Orders Page
     #Need Reports
     
-@POSDineInPrepaidMenuPriceZerowithModifierDecline @OneT
-  Scenario: POS DineIn Prepaid Order with Required Modifier Menus 
+@POSDineInPrepaidMenuPriceZerowithModifierCompleteVoidDecline @FullyVoidDecline
+  Scenario: POS DineIn Prepaid Order with Menu price Zero with Modifier Void All Items and Decline the Order
     Given  User should able to see Login Screen
     When  User should able to enter login credentials
     Then User should Select any table and verify that the guest count popup appears
@@ -114,19 +116,11 @@ Feature: POS DineIn Prepaid Order Menu with Optional Modifiers - Decline
     And User Should verify the Receive Payment page Calculation after Tip
     And User should apply Discount 
     And User Should verify the Receive Payment page Calculation after Applying Discount
-    And User should verify the Customer Information Field
+    And User should Enter the Customer Information
     And User Should swipe the Send to Kitchen
     And User Should Validate the Active Orders Page
+    And User Should Void the all Menu Items 
     And User Should Decline the Order
     And User should Verify Order gets Moved to Completed Orders Page 
     And User Should Validate the Completed Orders Page
     #Need Reports
-    
-@Check
-  Scenario: Calculation Check
-  When Calculation validation
-  
-  
-  
-  
-    

@@ -113,7 +113,7 @@ PageManager pma = new PageManager();
 		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Cancel']"));
 	}
 	public WebElement getDeleteCSPopCloseBtn() {
-		return rmsDriver.findElement(By.xpath("//i[@class='icon-close icon-5x']"));
+		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Delete']"));
 	}
 	public WebElement getDeleteCSPopDeleteBtn() {
 		return rmsDriver.findElement(By.xpath("//button[normalize-space()='Delete']"));

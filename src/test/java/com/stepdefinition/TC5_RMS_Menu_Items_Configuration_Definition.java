@@ -259,16 +259,16 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 		List<WebElement> modifierItemsList = pma.getRMS_Menus_Configuration_POM().getModifierItemsList();
 		for (int i = 0; i < 2; i++) {
 			int j=i+1;
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			List<WebElement> editModifierItemsIconInsideList1 = pma.getRMS_Menus_Configuration_POM().getEditModifierItemsIconInsideList();
 			String nameMod = rmsDriver.findElement(By.xpath("(//h4[@class='card-title line-wrap'])["+j+"]")).getText();
 			String descriptionMod = rmsDriver.findElement(By.xpath("(//p[@class='card-text w-break mb-1'])["+j+"]")).getText();
-			String priceMod = rmsDriver.findElement(By.xpath("(//div[@class='d-flex mw-60'])["+j+"]")).getText();
+			String priceMod = rmsDriver.findElement(By.xpath("(//div[@class='d-flex mw-60 align-items-end'])["+j+"]")).getText();
 //			System.out.println(nameMod);
 //			System.out.println(priceMod);
 //			System.out.println(descriptionMod);			
 			Thread.sleep(500);
-			editModifierItemsIconInsideList1.get(i+1).click();
+			editModifierItemsIconInsideList1.get(i).click();
 			Thread.sleep(500);
 			String insideNameText = pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlideNameTextBxElement().getAttribute("value");Thread.sleep(500);
 			String insidePriceText = pma.getRMS_Menus_Configuration_POM().getAddModifierItemSlidePriceTextBxElement().getAttribute("value");Thread.sleep(500);
@@ -1341,7 +1341,11 @@ public class TC5_RMS_Menu_Items_Configuration_Definition extends BaseClass {
 				pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemsIconInsideList1().click();
 				pma.getRMS_Menus_Configuration_POM().getDeleteModifierItemPopDeleteElement().click();
 			}
-			pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+			try {
+				pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName().click();
+			} catch (Exception e) {
+				pma.getRMS_Menus_Configuration_POM().getDeleteModifierIconElementNName1().click();
+			}
 			pma.getRMS_Menus_Configuration_POM().getDeleteModifierPopupDeleteElement().click();
 			i--;
 			categoryListsElement = pma.getRMS_Menus_Configuration_POM().getCategoryListsElement();Thread.sleep(100);

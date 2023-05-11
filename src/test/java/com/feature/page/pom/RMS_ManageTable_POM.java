@@ -154,7 +154,7 @@ PageManager pma = new PageManager();
 		return element;
 	}
 	public WebElement getAddTableXIcon() {
-		WebElement element = rmsDriver.findElement(By.xpath("//i[contains(@class,'icon-close icon-5x')]"));
+		WebElement element = rmsDriver.findElement(By.xpath("//button[@aria-label='Close']//*[name()='svg']"));
 		return element;
 	}
 	public WebElement getSearchTextBox() {

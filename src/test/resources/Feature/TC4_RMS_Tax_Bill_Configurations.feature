@@ -1,4 +1,4 @@
-@BillSettingsConfig
+@BillSettingsConfig @RMS
 Feature: Configuring the Pre-defined Bill Settings
 
   @ConfigurationTemp @Test
@@ -25,4 +25,4 @@ Feature: Configuring the Pre-defined Bill Settings
 		
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |

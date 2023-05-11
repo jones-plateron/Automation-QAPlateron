@@ -1,4 +1,4 @@
-@DiscountConfiguration
+@DiscountConfiguration @RMS
 Feature: Discount
 
   @DiscountConfiguration1
@@ -15,7 +15,7 @@ Feature: Discount
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |
 
   @DiscountConfiguration2
   Scenario Outline: As a RMS User,Discount Template Creation
@@ -27,7 +27,7 @@ Feature: Discount
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |
 
   @DiscountConfiguration3
   Scenario Outline: As a RMS User,
@@ -38,4 +38,4 @@ Feature: Discount
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |
