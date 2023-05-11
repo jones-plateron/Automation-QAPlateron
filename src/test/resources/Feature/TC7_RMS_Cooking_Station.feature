@@ -1,4 +1,4 @@
-@CookingStations
+@CookingStations @RMS
 Feature: Cooking Station Validations
 
   @UIValidationCS
@@ -14,7 +14,7 @@ Feature: Cooking Station Validations
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |    
+      |   1100110011 | 666666 |    
       
   @CookingStationCreation
   Scenario Outline: As a RMS User, I need to Create the Cooking Station
@@ -28,4 +28,4 @@ Feature: Cooking Station Validations
 
     Examples: 
       | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+      |   1100110011 | 666666 |

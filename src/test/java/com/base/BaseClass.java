@@ -273,6 +273,20 @@ public class BaseClass {
 		
 		return grandEntitySummary;
 	}
+	public Map<String,Float> amountRefundFromServiceFee(float serviceFeeToRefund, Map<String,Float> entityPercentages,Map<String,Float> entityValues) {
+//		Float serviceFeePercentage= entityPercentages.get("serviceFeePercentage");
+		Float serviceFeeTaxPercentage = entityPercentages.get("serviceFeeTaxPercentage");
+		Float serFee = entityValues.get("serviceFee");
+//		Float serFeeTax = entityValues.get("serviceFeeTax");
+		Float revisedSerFee=serFee-serviceFeeToRefund;
+		Float revisedSerFeetax=revisedSerFee*serviceFeeTaxPercentage/100;
+		entityValues.put("serviceFee", revisedSerFee);
+		entityValues.put("serviceFeeTax", revisedSerFeetax); //Need to Modify for Round Off
+		return entityValues;
+	}
+	
+	
+	
 	
 	//Exclude Items Added, Need to add Discount percentage
 	public Map<String,Float> grandCalculationSummaryAfterDiscount(Map<String,Float> menus,Map<String,Float> entityPercentages,List<String> Excluded,float discountPercentage){
@@ -330,7 +344,7 @@ public class BaseClass {
 					Float gratuityPercentage = entityPercentages.get("gratuityPercentage");
 					Float gratuityTaxPercentage = entityPercentages.get("gratuityTaxPercentage");
 					
-					Float salesTax= menuP*salesTaxPercentage/100;
+					Float salesTax= value*salesTaxPercentage/100;
 					Float serviceFee= value*serviceFeePercentage/100;
 					Float serviceFeeTax= serviceFee*serviceFeeTaxPercentage/100;
 					Float gratuity= value*gratuityPercentage/100;

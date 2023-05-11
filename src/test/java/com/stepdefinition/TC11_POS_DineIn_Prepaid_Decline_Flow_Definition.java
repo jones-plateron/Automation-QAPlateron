@@ -36,13 +36,17 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	Map<String,Float> menuPrice = new LinkedHashMap<String,Float>();
 	Map<String,Float> entityPercentage = new LinkedHashMap<String,Float>();
 	Map<String, Float> roundedCalculationSummary = new LinkedHashMap<String,Float>();
+	Map<String, Float> voidedMenusCalculationSummary =new LinkedHashMap<String,Float>();
+	Map<String, Float> voidedMenus = new LinkedHashMap<>();
 	List<String> excludedItems=new ArrayList<String>();
 	public String noOfGuest = "",orderId="",randomName="",randomNumber="",orderType = "",orderTime="",tipPercentage=""
-			,discountName="",orderStatus="",orderPaymentMethod="",PaymentType="";
+			,discountName="",orderStatus="",orderPaymentMethod="",PaymentType="",customerName="", customerMobile="";
 	public int guestCountAOP;
-	public float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0,tipAmount = 0;
+	boolean voidStatus=false;
+	public float salesTax = 0, gratuity = 0, serviceFee = 0, serviceFeeTax = 0,
+			refundedAmount=0, gratuityTax = 0, discountAmt = 0,totalBillAmountADis=0,tipAmount = 0,discountPercentage=0;
 	DecimalFormat dF = new DecimalFormat("#.##");
-	public enum orderAttribute { Postpaid, PrePaid, Declined, Completed, Dine_In, Take_Out };
+	public enum orderAttribute { Postpaid, PrePaid, Declined, Completed, Dine_In, Take_Out , Delivered};
 	public String specialChar = "!@#$%%^&*()_+";
 	public String upperCase = "AUTOMATIONTEXT";
 	public String lowerCase = "automationtext";
@@ -60,12 +64,25 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		salesTax = 0; gratuity = 0; serviceFee = 0; serviceFeeTax = 0; gratuityTax = 0; discountAmt = 0;totalBillAmountADis=0;
 		tipAmount = 0;noOfGuest = "";orderId="";randomName="";randomNumber="";orderType = "";orderTime="";tipPercentage="";
 		discountName="";orderStatus="";orderPaymentMethod="";PaymentType="";
+		voidStatus=false;
 		
 		pma.getPOS_FlowOne_POM().getNoOfGuest5().click();
 		noOfGuest=pma.getPOS_FlowOne_POM().getNoOfGuest5().getAttribute("content-desc");
 		pma.getPOS_FlowOne_POM().getProceedButton().click();
-		orderType="Dine-In";
+		orderType=orderAttribute.Dine_In.name();
 		Thread.sleep(1000);
+	}
+	@Then("User should Validate and Store Cutomer Information and Click Proceed Button")
+	public void userShouldValidateAndStoreCutomerInformationAndClickProceedButton() throws InterruptedException {
+		randomName=randomNameGenerator();
+		randomNumber=randomMobileNumberGeneration();
+		pma.getPOS_FlowOne_POM().getPopupCustomerNameTextBx().sendKeys(randomName);
+		pma.getPOS_FlowOne_POM().getPopupMobileNumTextBx().click();
+		pma.getPOS_FlowOne_POM().getPopupMobileNumTextBx().sendKeys(randomNumber);
+		System.out.println(randomNumber);
+		pma.getPOS_FlowOne_POM().getProceedButton().click();
+		Thread.sleep(1000);
+		orderType=orderAttribute.Take_Out.name();
 	}
 	@Then("User should Add the Pre-Defined Set of Menus")
 	public void userShouldAddThePreDefinedSetOfMenus() throws InterruptedException {
@@ -162,12 +179,13 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	}
 	@When("User Should click Receive Payment button")
 	public void userShouldClickReceivePaymentButton() {
-			pma.getPOS_FlowOne_POM().getPrepaidReceivePmtBtn().click();
-			
 			if (PaymentType.equals(orderAttribute.Postpaid.name())) {
-			} else {
+				pma.getPOS_FlowOne_POM().getReceivePaymentBtn().click();
+				
+			} else  { //if (PaymentType.equals(orderAttribute.PrePaid.name()))
+				pma.getPOS_FlowOne_POM().getPrepaidReceivePmtBtn().click();
 				PaymentType=orderAttribute.PrePaid.name();
-			}
+				}
 	}
 	@Then("User Should Verify the page redirected to Payment Detail Page")
 	public void userShouldVerifyThePageRedirectedToPaymentDetailPage() throws InterruptedException {
@@ -499,7 +517,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 			}
 		} catch (NullPointerException e) {
 		}
-		float discountPercentage = Float.parseFloat(getDataFromExcel("Discount", tempCellValue, 1));
+		discountPercentage = Float.parseFloat(getDataFromExcel("Discount", tempCellValue, 1));
 		float discountMinimumOrderAmt = Float.parseFloat(getDataFromExcel("Discount", tempCellValue, 2));
 		// Below Items are required in Future Orders
 		String discountDineIn = getDataFromExcel("Discount", tempCellValue, 3);
@@ -771,13 +789,13 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	@Then("User should Enter the Customer Information")
 	public void userShouldEnterTheCustomerInformation() throws InterruptedException {
 		pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().click();
-		String name=randomNameGenerator();
-		pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().sendKeys(name);
+		customerName=randomNameGenerator();
+		pma.getPOS_FlowOne_POM().getCustomerNameTxtBxPaymentDetails().sendKeys(customerName);
 		Thread.sleep(500);
 		
 		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().click();
-		String mobile=randomMobileNumberGeneration();
-		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().sendKeys(mobile);
+		customerMobile=randomMobileNumberGeneration();
+		pma.getPOS_FlowOne_POM().getMobileNumTxtBxPaymentDetails().sendKeys(customerMobile);
 		Thread.sleep(500);
 		
 		pma.getPOS_FlowOne_POM().getPaymentMethodHdrTxt().click();
@@ -792,9 +810,9 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		Thread.sleep(1000);
 		Actions act = new Actions(posDriver1);
 		WebElement aElement = pma.getPOS_FlowOne_POM().getSTK1();
-		int a = ((aElement.getSize().width) / 2) * -1;
+		int a = (((aElement.getSize().width) / 2) * -1)+5;
 
-		dragAndDropBy(act, pma.getPOS_FlowOne_POM().getSTK1(), a, 600, 0).perform();
+		dragAndDropBy(act, pma.getPOS_FlowOne_POM().getSTK1(), a, 500, 15).perform();
 		Thread.sleep(1500);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
 		LocalTime currentTime = LocalTime.now();
@@ -807,15 +825,20 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		}else {
 			PaymentType=orderAttribute.Postpaid.name();
 		}
+		Thread.sleep(500);
+		try {
+			
+		} catch (Exception e) {
+		}
 		
 		
 	}
 	public Actions dragAndDropBy(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {
 		return act
-				.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(100),
+				.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(1000),
 						Origin.fromElement(source),(startOffset + 25), 0))
 				.tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
-						.createPointerMove(Duration.ofMillis(250), Origin.pointer(), xOffset, yOffset))
+						.createPointerMove(Duration.ofMillis(1000), Origin.pointer(), xOffset, yOffset))
 				.tick(act.getActivePointer().createPointerUp(LEFT.asArg()));
 	}
 	
@@ -823,7 +846,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	@Then("User Should Validate the Active Orders Page")
 	public void userShouldValidateTheActiveOrdersPage() throws InterruptedException {
 		Thread.sleep(6000);
-		if (orderType.equals("Dine-In")) {
+		if (orderType.equals(orderAttribute.Dine_In.name())) {
 			pma.getPOS_FlowOne_POM().getFirstOrderinAO().click();
 			 System.out.println(pma.getPOS_FlowOne_POM().getFirstOrderinAO().getAttribute("content-desc"));
 			String firstOrderAO = pma.getPOS_FlowOne_POM().getFirstOrderinAO().getAttribute("content-desc");
@@ -840,6 +863,19 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 //		   System.out.println(substring);
 			orderId = pma.getPOS_FlowOne_POM().getOrderIdRightCorner().getAttribute("content-desc");
 		   System.out.println(orderId);
+		   
+		   //Search and Select first Order+++++++++++++++++++++++++++++++++++++++++++++
+		   pma.getPOS_FlowOne_POM().getSearchBarCO().click();
+	        pma.getPOS_FlowOne_POM().getSearchBarCO().sendKeys(orderId.substring(7, orderId.length()));
+	        Thread.sleep(1000);
+	        
+	        pma.getPOS_FlowOne_POM().getActiveOrdersPageHeader().click();
+	        Thread.sleep(300);
+	        pma.getPOS_FlowOne_POM().getFirstOrderinCO().click();
+	        Thread.sleep(500);
+		   
+		   
+		   
 			String tableName = pma.getPOS_FlowOne_POM().getTableNameRightside().getAttribute("content-desc");
 //		   System.out.println(tableName);
 			
@@ -861,7 +897,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 			System.out.println(orderTime);
 			//Assert.assertTrue(firstOrderAO.contains(orderTime)); - Hiding Because of 1 minute mismatch issue
 		}
-		else if (orderType.equals("Take-Out")) {
+		else if (orderType.equals(orderAttribute.Take_Out.name())) {
 			pma.getPOS_FlowOne_POM().getFirstOrderinAO().click();
 			// System.out.println(pma.getPOS_FlowOne_POM().getFirstOrderinAO().getAttribute("content-desc"));
 			String firstOrderAO = pma.getPOS_FlowOne_POM().getFirstOrderinAO().getAttribute("content-desc");
@@ -873,6 +909,26 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 				employeeName = split[0];
 			}
 			orderId = pma.getPOS_FlowOne_POM().getOrderIdRightCornerTakeOut().getAttribute("content-desc");
+			
+			
+			//Search and Select first Order+++++++++++++++++++++++++++++++++++++++++++++
+			   pma.getPOS_FlowOne_POM().getSearchBarCO().click();
+		        pma.getPOS_FlowOne_POM().getSearchBarCO().sendKeys(orderId.substring(7, orderId.length()));
+		        Thread.sleep(1000);
+		        
+		        pma.getPOS_FlowOne_POM().getActiveOrdersPageHeader().click();
+		        Thread.sleep(300);
+		        pma.getPOS_FlowOne_POM().getFirstOrderinCO().click();
+		        Thread.sleep(500);
+			
+			
+			
+			
+			
+			
+			
+			
+			
 //		   System.out.println(orderId);
 			//String tableName = pma.getPOS_FlowOne_POM().getTableNameRightside().getAttribute("content-desc");
 //		   System.out.println(tableName);
@@ -913,10 +969,50 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
         String actHeadr = pma.getPOS_FlowOne_POM().getCompleteOrderHeadr().getAttribute("content-desc");    
         Assert.assertTrue(actHeadr.equals("Completed Orders"));
 	}
+	
+	@Then("User should able to Swipe Complete Order Button")
+	public void userShouldAbleToSwipeCompleteOrderButton() throws InterruptedException {
+		
+		if (PaymentType.equals(orderAttribute.PrePaid.name())) {
+			Actions act = new Actions(posDriver1);
+	        WebElement aElement = pma.getPOS_FlowOne_POM().getCompleteOrderSwipe();
+	        int a = (((aElement.getSize().width) / 2) * -1)+2;
+
+	        dragAndDropBy1(act, aElement, a+20, 400, 0).perform();
+	        
+	        Thread.sleep(1500);
+	        orderStatus=orderAttribute.Completed.name();	
+		}else if (PaymentType.equals(orderAttribute.Postpaid.name())) {
+			Actions act = new Actions(posDriver1);
+	        WebElement aElement = pma.getPOS_FlowOne_POM().getCompleteOrderSwipe();
+	        int a = (((aElement.getSize().width) / 2) * -1)+2;
+
+	        dragAndDropBy1(act, aElement, a+20, 400, 60).perform();
+	        
+	        Thread.sleep(1500);
+	        orderStatus=orderAttribute.Completed.name();
+			
+		}
+		
+		
+    }
+	
+    public Actions dragAndDropBy1(Actions act, WebElement source, int startOffset, int xOffset, int yOffset) {//Swipe
+        return act
+        		.tick(act.getActivePointer().createPointerMove(Duration.ofMillis(200),
+                        Origin.fromElement(source),(startOffset + 50), 10))
+                .tick(act.getActivePointer().createPointerMove(Duration.ofMillis(1000),
+                        Origin.fromElement(source),(startOffset + 15), 10))
+                .tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
+                        .createPointerMove(Duration.ofMillis(1000), Origin.pointer(), xOffset, yOffset))
+                .tick(act.getActivePointer().createPointerUp(LEFT.asArg()));
+    }
+	
+	
 	@Then("User Should Validate the Completed Orders Page")
 	public void userShouldValidateTheCompletedOrdersPage() throws InterruptedException, IOException {
 		
-		if (orderType.equals("Dine-In")) {
+		if (orderType.equals(orderAttribute.Dine_In.name())) {
 //	        DecimalFormat dF = new DecimalFormat("#.##");
 	        pma.getPOS_FlowOne_POM().getSearchBarCO().click();
 	        pma.getPOS_FlowOne_POM().getSearchBarCO().sendKeys(orderId.substring(7, orderId.length()));
@@ -980,7 +1076,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		        
 			}else if (orderStatus.equals(orderAttribute.Completed.name())) {
 				String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus().getAttribute("content-desc");
-		        Assert.assertTrue(orStatus.equals(orderAttribute.Completed.name()));
+		        Assert.assertTrue(orStatus.equals(orderAttribute.Delivered.name()));
 		        Thread.sleep(500);
 		        
 			} else {
@@ -1082,7 +1178,15 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 				Thread.sleep(1000);
 				String refundText = pma.getPOS_FlowOne_POM().getRefundedAmountCOSummary().getAttribute("content-desc");
 				Assert.assertEquals(refundText.replaceAll("[\\r\\n]+", ""), "A refund amount $"+roundStringValue(totalBillAmount)+"  has been initiated for this order.");	
-			}else {
+			}else if (PaymentType.equals(orderAttribute.PrePaid.name())&&(orderStatus.equals(orderAttribute.Completed.name()))){
+				Thread.sleep(1000);
+				System.out.println(refundedAmount);
+				
+				
+				
+				
+				String refundText = pma.getPOS_FlowOne_POM().getRefundedAmountCOSummary1().getAttribute("content-desc");
+				Assert.assertEquals(refundText.replaceAll("[\\r\\n]+", ""), "A refund amount $"+roundStringValue(refundedAmount)+"  has been initiated for this order.");
 				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus);
 			}
 //			
@@ -1100,7 +1204,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 			
 			System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
 		
-		} else if (orderType.equals("Take-Out")) {
+		} else if (orderType.equals(orderAttribute.Take_Out.name())) {
 
 
 	        
@@ -1114,13 +1218,13 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	        pma.getPOS_FlowOne_POM().getFirstOrderinCO().click();
 	        Thread.sleep(500);
 	        
-	       System.out.println(pma.getPOS_FlowOne_POM().getFirstOrderinCO().getAttribute("content-desc"));
+	        System.out.println(pma.getPOS_FlowOne_POM().getFirstOrderinCO().getAttribute("content-desc"));
 	        String firstOrderCO = pma.getPOS_FlowOne_POM().getFirstOrderinCO().getAttribute("content-desc");
 	        String employeeName = pma.getPOS_FlowOne_POM().getEmployeeName().getAttribute("content-desc");
-	       System.out.println(employeeName);
+	        System.out.println(employeeName);
 	        String orderId = pma.getPOS_FlowOne_POM().getOrderIdRightCorneCO().getAttribute("content-desc");
-	       System.out.println(orderId);
-
+	        System.out.println(orderId);
+	       
 	     //Order list payment Status
 	       if (PaymentType.equals(orderAttribute.PrePaid.name())&&(orderStatus.equals(orderAttribute.Declined.name())||orderStatus.equals(orderAttribute.Completed.name()))) {
 				if (orderPaymentMethod.equals("Cash")) {
@@ -1157,8 +1261,9 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 		        Thread.sleep(500);
 		        
 			}else if (orderStatus.equals(orderAttribute.Completed.name())) {
-				String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus().getAttribute("content-desc");
-		        Assert.assertTrue(orStatus.equals(orderAttribute.Completed.name()));
+				String orStatus = pma.getPOS_FlowOne_POM().getCompleteOrderStatus1().getAttribute("content-desc");
+				System.out.println(orStatus);
+		        Assert.assertTrue(orStatus.equals(orderAttribute.Delivered.name()));
 		        Thread.sleep(500);
 		        
 			} else {
@@ -1177,12 +1282,12 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	    	        
 	    	        if (PaymentType.equals(orderAttribute.PrePaid.name())&&(orderStatus.equals(orderAttribute.Declined.name())||orderStatus.equals(orderAttribute.Completed.name()))) {
 	    	        	
-	    	        	pma.getPOS_FlowOne_POM().getTotAmountCOSummary().click();
+	    	        	pma.getPOS_FlowOne_POM().getTotAmountCOSummaryTakeOut().click();
 	    				Thread.sleep(600);
 	    				subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
 	    				discountSMRY = pma.getPOS_FlowOne_POM().getDiscountValueCOSummaryRefund().getAttribute("content-desc");
 	    				salesTxSMRY = pma.getPOS_FlowOne_POM().getSalesTaxCOSummary().getAttribute("content-desc");
-	    				serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummary().getAttribute("content-desc");
+	    				serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummaryTakeOut().getAttribute("content-desc");
 	    				serviceFeeTXSMRY = pma.getPOS_FlowOne_POM().getServiceFeeTaxCOSummary().getAttribute("content-desc");
 	    				gratuitySMRY = pma.getPOS_FlowOne_POM().getGratuityCOSummary().getAttribute("content-desc");
 	    				gratuityTxSMRY = pma.getPOS_FlowOne_POM().getGratuityTaxCOSummary().getAttribute("content-desc");
@@ -1197,17 +1302,17 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	    				Assert.assertEquals(gratuityTxSMRY, "$"+roundStringValue(gratuityTax));
 	    				
 	    				
-	    				totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummary().getAttribute("content-desc");
+	    				totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummaryTakeOut().getAttribute("content-desc");
 	    				System.out.println(totalAmountTxt);
 	    				
 	    			}else if (PaymentType.equals(orderAttribute.Postpaid.name())&&orderStatus.equals(orderAttribute.Completed.name())) {
 	    				
-	    				pma.getPOS_FlowOne_POM().getTotAmountCOSummary().click();
+	    				pma.getPOS_FlowOne_POM().getTotAmountCOSummaryTakeOut().click();
 	    				Thread.sleep(600);
 	    				subTotalSMRY = pma.getPOS_FlowOne_POM().getSubTotalValueCOSummary().getAttribute("content-desc");
 	    				discountSMRY = pma.getPOS_FlowOne_POM().getDiscountValueCOSummaryRefund().getAttribute("content-desc");
 	    				salesTxSMRY = pma.getPOS_FlowOne_POM().getSalesTaxCOSummary().getAttribute("content-desc");
-	    				serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummary().getAttribute("content-desc");
+	    				serviceFeeSMRY = pma.getPOS_FlowOne_POM().getServiceFeeCOSummaryTakeOut().getAttribute("content-desc");
 	    				serviceFeeTXSMRY = pma.getPOS_FlowOne_POM().getServiceFeeTaxCOSummary().getAttribute("content-desc");
 	    				gratuitySMRY = pma.getPOS_FlowOne_POM().getGratuityCOSummary().getAttribute("content-desc");
 	    				gratuityTxSMRY = pma.getPOS_FlowOne_POM().getGratuityTaxCOSummary().getAttribute("content-desc");
@@ -1222,7 +1327,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	    				Assert.assertEquals(gratuityTxSMRY, "$"+roundStringValue(gratuityTax));
 	    				
 	    				
-	    				totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummary().getAttribute("content-desc");
+	    				totalAmountTxt = pma.getPOS_FlowOne_POM().getTotAmountCOSummaryTakeOut().getAttribute("content-desc");
 	    				System.out.println(totalAmountTxt);
 	    				
 	    			} else {
@@ -1251,16 +1356,19 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 					Assert.assertTrue(totalAmountTxt.contains(roundStringValue(totalBillAmount)));
 				}
 			} else {
-				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations");
+				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus+" : Status Validations : Paid Status Not Validated");
 			}
 			
  			
 			//Refund Amount Banner
 			if (PaymentType.equals(orderAttribute.PrePaid.name())&&(orderStatus.equals(orderAttribute.Declined.name()))) {
 				
-				String refundText = pma.getPOS_FlowOne_POM().getRefundedAmountCOSummary().getAttribute("content-desc");
+				String refundText = pma.getPOS_FlowOne_POM().getRefundedAmountCOSummary1().getAttribute("content-desc");
 				Assert.assertEquals(refundText, "A refund amount $"+roundStringValue(totalBillAmount)+" has been initiated for this order.");	
-			}else {
+			}else if (PaymentType.equals(orderAttribute.PrePaid.name())&&voidStatus==true){
+//			refundedAmount=0;
+				String refundText = pma.getPOS_FlowOne_POM().getRefundedAmountCOSummary2().getAttribute("content-desc");
+				Assert.assertEquals(refundText.replaceAll("[\\r\\n]+", ""), "A refund amount $"+roundStringValue(refundedAmount)+"  has been initiated for this order.");
 				System.out.println(PaymentType+" - "+orderType+" - "+orderStatus);
 			}
 			
@@ -1479,6 +1587,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 				String menu1Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 				Assert.assertTrue(menu1Txt.contains("Voided"));Thread.sleep(1500);
+				voidStatus=true;
 				break;
 				
 			case 1:
@@ -1489,8 +1598,9 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 				String menu2Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 				Assert.assertTrue(menu2Txt.contains("Voided"));Thread.sleep(1500);
+				voidStatus=true;
 				break;
-				
+
 			case 2:
 				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage());Thread.sleep(1500);
 				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
@@ -1499,8 +1609,9 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 				String menu3Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 				Assert.assertTrue(menu3Txt.contains("Voided"));Thread.sleep(1500);
+				voidStatus=true;
 				break;
-				
+
 			case 3:
 				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage());Thread.sleep(1500);
 				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
@@ -1509,8 +1620,9 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 				String menu4Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 				Assert.assertTrue(menu4Txt.contains("Voided"));Thread.sleep(1500);
+				voidStatus=true;
 				break;
-				
+
 			case 4:
 				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage());Thread.sleep(1500);
 				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
@@ -1519,6 +1631,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 				String menu5Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 				Assert.assertTrue(menu5Txt.contains("Voided"));Thread.sleep(1500);
+				voidStatus=true;
 				break;
 
 			default:
@@ -1531,6 +1644,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 					String menu2TxtLst = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 					Assert.assertTrue(menu2TxtLst.contains("Voided"));Thread.sleep(1500);
+					voidStatus=true;
 					break;
 					
 				case 2:
@@ -1541,6 +1655,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 					String menu3TxtLst = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 					Assert.assertTrue(menu3TxtLst.contains("Voided"));Thread.sleep(1500);
+					voidStatus=true;
 					break;
 				case 3:
 					clickMoreIcononMenuAOpage1(pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage());Thread.sleep(1500);
@@ -1550,6 +1665,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 					String menu4TxtLst = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 					Assert.assertTrue(menu4TxtLst.contains("Voided"));Thread.sleep(1500);
+					voidStatus=true;
 					break;
 				case 4:
 					clickMoreIcononMenuAOpage1(pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage());Thread.sleep(1500);
@@ -1559,6 +1675,7 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
 					String menu5TxtLst = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
 					Assert.assertTrue(menu5TxtLst.contains("Voided"));Thread.sleep(1500);
+					voidStatus=true;
 					break;
 
 				default:
@@ -1571,91 +1688,369 @@ public class TC11_POS_DineIn_Prepaid_Decline_Flow_Definition extends BaseClass {
 	
 	@Then("User Should Partially Void Some Items")
 	public void userShouldPartiallyVoidSomeItems() throws InterruptedException {
-		//Partial Menu
-		for (int i = 0; i < (menuPrice.size()/2); i++) {
-			int j=i;
-			if (i==(menuPrice.size()-1)) {
-				i=i+10; //To Make i value incorrect
+		
+		
+		if (PaymentType.equals(orderAttribute.Postpaid.name())) {
+			
+
+			//Partial Menu
+			for (int i = 0; i < (menuPrice.size()/2); i++) {
+				int j=i;
+				if (i==(menuPrice.size()-1)) {
+					i=i+10; //To Make i value incorrect
+					}
+				switch (i) {
+				case 0:
+					String menu1Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage1().getAttribute("content-desc");
+					System.out.println(menu1Txt);
+					String[] split = menu1Txt.split("[\\r\\n]+");
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage1());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500); 
+					//Need to Accommodate Voiding while No Other Orders in Active Page
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDD86edAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					menuPrice.remove(split[1]);
+					voidStatus=true;
+					break;
+					
+				case 1:
+					String menu2Txt = pma.getPOS_FlowOne_POM().getSecondMenuRHSAOPage().getAttribute("content-desc");
+					String[] split1 = menu2Txt.split("[\\r\\n]+");
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getSecondMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDCustomerChangedMindAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					menuPrice.remove(split1[1]);
+					voidStatus=true;
+					break;
+					
+				case 2:
+					String menu3Txt = pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage().getAttribute("content-desc");
+					String[] split2 = menu3Txt.split("[\\r\\n]+");
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDGuestDissatisfiedAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					menuPrice.remove(split2[1]);
+					voidStatus=true;
+					break;
+					
+				case 3:
+					String menu4Txt = pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage().getAttribute("content-desc");
+					String[] split3 = menu4Txt.split("[\\r\\n]+");
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDTestingTrainingAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					menuPrice.remove(split3[1]);
+					voidStatus=true;
+					break;
+					
+				case 4:
+					String menu5Txt = pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage().getAttribute("content-desc");
+					String[] split4 = menu5Txt.split("[\\r\\n]+");
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDWaiterErrorAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					menuPrice.remove(split4[1]);
+					voidStatus=true;
+					break;
+					
+				default:
+					System.out.println("void Undone");
+					break;
 				}
-			switch (i) {
-			case 0:
-				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage());Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidDD86edAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
-				String menu1Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage().getAttribute("content-desc");
-				Assert.assertTrue(menu1Txt.contains("Voided"));Thread.sleep(1500);
-				String[] split = menu1Txt.split("[\\r\\n]+");
-				menuPrice.remove(split[1]);
-				break;
-				
-			case 1:
-				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getSecondMenuRHSAOPage());Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidDDCustomerChangedMindAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
-				String menu2Txt = pma.getPOS_FlowOne_POM().getSecondMenuRHSAOPage().getAttribute("content-desc");
-				Assert.assertTrue(menu2Txt.contains("Voided"));Thread.sleep(1500);
-				String[] split1 = menu2Txt.split("[\\r\\n]+");
-				menuPrice.remove(split1[1]);
-				break;
-				
-			case 2:
-				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage());Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidDDGuestDissatisfiedAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
-				String menu3Txt = pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage().getAttribute("content-desc");
-				Assert.assertTrue(menu3Txt.contains("Voided"));Thread.sleep(1500);
-				String[] split2 = menu3Txt.split("[\\r\\n]+");
-				menuPrice.remove(split2[1]);
-				break;
-				
-			case 3:
-				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage());Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidDDTestingTrainingAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
-				String menu4Txt = pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage().getAttribute("content-desc");
-				Assert.assertTrue(menu4Txt.contains("Voided"));Thread.sleep(1500);
-				String[] split3 = menu4Txt.split("[\\r\\n]+");
-				menuPrice.remove(split3[1]);
-				break;
-				
-			case 4:
-				clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage());Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getVoidDDWaiterErrorAOPage().click();Thread.sleep(1500);
-				pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();
-				String menu5Txt = pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage().getAttribute("content-desc");
-				Assert.assertTrue(menu5Txt.contains("Voided"));Thread.sleep(1500);
-				String[] split4 = menu5Txt.split("[\\r\\n]+");
-				menuPrice.remove(split4[1]);
-				break;
-				
-			default:
-				System.out.println("void Undone");
-				break;
 			}
+			
+			System.out.println(menuPrice);
+			
+//			Map<String, Float> grandCalculationSummaryAfterDiscount = grandCalculationSummaryAfterDiscount(menuPrice, entityPercentage, excludedItems, discountAmt);
+//			roundedCalculationSummary = roundCalculationSummary(grandCalculationSummaryAfterDiscount);
+			
+			
+			
+			
+			
+			
+		}else if (PaymentType.equals(orderAttribute.PrePaid.name())) {
+			
+			
+
+			//Partial Menu
+			for (int i = 0; i < (menuPrice.size()/2); i++) {
+				int j=i;
+				if (i==(menuPrice.size()-1)) {
+					i=i+10; //To Make i value incorrect
+					}
+				switch (i) {
+				case 0:
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage1());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500); 
+					//Need to Accommodate Voiding while No Other Orders in Active Page
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDD86edAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					String menu1Txt = pma.getPOS_FlowOne_POM().getFirstMenuRHSAOPage1().getAttribute("content-desc");
+					Assert.assertTrue(menu1Txt.contains("Voided"));Thread.sleep(1500);
+					String[] split = menu1Txt.split("[\\r\\n]+");
+					voidedMenus.put(split[1], menuPrice.get(split[1]));
+					menuPrice.remove(split[1]);
+					voidStatus=true;
+					break;
+					
+				case 1:
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getSecondMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDCustomerChangedMindAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					String menu2Txt = pma.getPOS_FlowOne_POM().getSecondMenuRHSAOPage().getAttribute("content-desc");
+					Assert.assertTrue(menu2Txt.contains("Voided"));Thread.sleep(1500);
+					String[] split1 = menu2Txt.split("[\\r\\n]+");
+					voidedMenus.put(split1[1], menuPrice.get(split1[1]));
+					menuPrice.remove(split1[1]);
+					voidStatus=true;
+					break;
+					
+				case 2:
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDGuestDissatisfiedAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					String menu3Txt = pma.getPOS_FlowOne_POM().getThirdMenuRHSAOPage().getAttribute("content-desc");
+					Assert.assertTrue(menu3Txt.contains("Voided"));Thread.sleep(1500);
+					String[] split2 = menu3Txt.split("[\\r\\n]+");
+					voidedMenus.put(split2[1], menuPrice.get(split2[1]));
+					menuPrice.remove(split2[1]);
+					voidStatus=true;
+					break;
+					
+				case 3:
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDTestingTrainingAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					String menu4Txt = pma.getPOS_FlowOne_POM().getFourthMenuRHSAOPage().getAttribute("content-desc");
+					Assert.assertTrue(menu4Txt.contains("Voided"));Thread.sleep(1500);
+					String[] split3 = menu4Txt.split("[\\r\\n]+");
+					voidedMenus.put(split3[1], menuPrice.get(split3[1]));
+					menuPrice.remove(split3[1]);
+					voidStatus=true;
+					break;
+					
+				case 4:
+					clickMoreIcononMenuAOpage(pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage());Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidOptionAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSelectReasonDropDownAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getVoidDDWaiterErrorAOPage().click();Thread.sleep(1500);
+					pma.getPOS_FlowOne_POM().getSaveBtnVoidWindowAOPage().click();Thread.sleep(1000);
+					String menu5Txt = pma.getPOS_FlowOne_POM().getFifthMenuRHSAOPage().getAttribute("content-desc");
+					Assert.assertTrue(menu5Txt.contains("Voided"));Thread.sleep(1500);
+					String[] split4 = menu5Txt.split("[\\r\\n]+");
+					voidedMenus.put(split4[1], menuPrice.get(split4[1]));
+					menuPrice.remove(split4[1]);
+					voidStatus=true;
+					break;
+					
+				default:
+					System.out.println("void Undone");
+					break;
+				}
+			}
+			
+			System.out.println(menuPrice);
+			
+			
+			//for Changing original Menu Price into Discounted Price
+			Set<Entry<String, Float>> entrySet2 = voidedMenus.entrySet();
+			for (Entry<String, Float> eachItem : entrySet2) {
+				Float value = eachItem.getValue();
+				System.out.println(value);
+				System.out.println(discountPercentage);
+				Float value1=value*discountPercentage/100;
+				value= value-value1;
+				voidedMenus.put(eachItem.getKey(), value);
+			}
+			//for Adding Menu Values
+			float voidedMenusTotal=0;
+			Set<Entry<String, Float>> entrySet3 = voidedMenus.entrySet();
+			for (Entry<String, Float> entry : entrySet3) {
+				voidedMenusTotal =voidedMenusTotal + entry.getValue();
+			}
+			
+			
+			
+			voidedMenusCalculationSummary = grandCalculationSummary(roundCalculationSummary(voidedMenus), entityPercentage);
+			Map<String, Float> roundedVoidSummary = roundCalculationSummary(voidedMenusCalculationSummary);
+			System.out.println(voidedMenus);
+			System.out.println(voidedMenusCalculationSummary);
+			System.out.println(roundedVoidSummary);
+			
+			Set<Entry<String,Float>> entrySet = roundedVoidSummary.entrySet();
+			refundedAmount=0;
+			for (Entry<String, Float> eachEntry : entrySet) {
+				Float value = eachEntry.getValue();
+				refundedAmount=refundedAmount+value;
+			}
+			refundedAmount=refundedAmount+voidedMenusTotal;
+			
 		}
-		
-		System.out.println(menuPrice);
-		
-		if (orderStatus.equals(orderAttribute.Completed.name())) {
-			Map<String, Float> grandCalculationSummaryAfterDiscount = grandCalculationSummaryAfterDiscount(menuPrice, entityPercentage, excludedItems, discountAmt);
-			roundedCalculationSummary = roundCalculationSummary(grandCalculationSummaryAfterDiscount);
-		}
-		
-		
 	}
 	
 	
+	@Then("User should Click Refund button and verify redirection")
+	public void userShouldClickRefundButtonAndVerifyRedirection() throws InterruptedException {
+		Thread.sleep(1000);
+		pma.getPOS_FlowOne_POM().getRefundBtnCOPage().click();
+		String text = pma.getPOS_FlowOne_POM().getRefundPageText().getAttribute("content-desc");
+		Assert.assertEquals("Tax charged is refunded in addition to the amount selected.", text);
+	}
 	
+	@Then("User should Verify Refund Page Informations")
+	public void userShouldVerifyRefundPageInformations() {
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getServiceFeeCheckBxRefundPage().isDisplayed());
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getGratuityCheckBxRefundPage().isDisplayed());
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getTipCheckBxRefundPage().isDisplayed());
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getCustomValueCheckBxRefundPage().isDisplayed());
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getOrderNumberHdrRefundPage().isDisplayed());
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getCustomerNameHdrRefundPage().isDisplayed());
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getPaymentMethodHdrRefundPage().isDisplayed());
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getRefundedHdrRefundPage().isDisplayed());
+		//Bill Amount Text
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getBillAmountTextRefundPage().isDisplayed());
+		//you will Refund Text Validation
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getYouWillRefundTextRefundPage().isDisplayed());
+		//Refund Amount Validation
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getFirstTransactionDetailsRefundPage().getAttribute("content-desc").contains(roundStringValue(refundedAmount)));
+		//Customer Name Validation
+		System.out.println(pma.getPOS_FlowOne_POM().getCustomerNameRefundPageLHS().getAttribute("content-desc"));
+		System.out.println(randomName);
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getCustomerNameRefundPageLHS().getAttribute("content-desc").equals(randomName));
+		//Order Id 
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getOrderIDRefundPageLHS().getAttribute("content-desc").contains(orderId));
+		//Refundable Amount Validation
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getTotalRefundableAmountRefundPage().getAttribute("content-desc").contains(roundStringValue(totalBillAmount-refundedAmount)));
+		//Paid Via is pending
+		
+		//total Amount Validation
+		String totalAmountText = pma.getPOS_FlowOne_POM().getTotalAmountNPayMethodRefundPage().getAttribute("content-desc");
+		Assert.assertEquals(totalAmountText,"Total amount $"+roundStringValue(totalBillAmount));
+	}
+	
+	@Then("User should Refund the amount using Service Fee")
+	public void userShouldRefundTheAmountUsingServiceFee() {
+		float refundableServiceFee=serviceFee-roundFloatValue(voidedMenusCalculationSummary.get("serviceFee"));
+		float ServiceFeerefund=refundableServiceFee;
+		String seviceFeeTxtBx = pma.getPOS_FlowOne_POM().getServiceFeeTextBoxRefundPage().getAttribute("text");
+		Assert.assertTrue(seviceFeeTxtBx.contains(roundStringValue(refundableServiceFee)));
+		Assert.assertTrue(seviceFeeTxtBx.contains("//$"));
+		
+//		if (ServiceFeerefund=) {
+//			for (int i = 0; ServiceFeerefund!=0; i++) {
+//				pma.getPOS_FlowOne_POM().getServiceFeeTextBoxRefundPage().sendKeys(Keys.chord(Keys.CONTROL,Keys.DELETE));
+//				
+//				ServiceFeerefund=ServiceFeerefund-1;
+//				
+//				pma.getPOS_FlowOne_POM().getServiceFeeTextBoxRefundPage().sendKeys("1");
+//			}	
+//			
+//		} else {
+//
+//		}
+		
+		
+		
+		
+		
+	}
+	@Then("User should Refund the amount using gratuity Fee")
+	public void userShouldRefundTheAmountUsingGratuityFee() {
+		//Pending
+	}
+	@Then("User should Refund the amount using Tip")
+	public void userShouldRefundTheAmountUsingTip() {
+		//Pending
+	}
+	@Then("User should Refund the amount using Custom Value")
+	public void userShouldRefundTheAmountUsingCustomValue() throws InterruptedException {
+		
+		pma.getPOS_FlowOne_POM().getCustomValueCheckBxRefundPage().click();
+		
+		
+		float voidedItemsTotal=0;
+		Set<Entry<String, Float>> voidesMenuSetEach = voidedMenus.entrySet();
+		for (Entry<String, Float> entry : voidesMenuSetEach) {
+			Float value = entry.getValue();
+			voidedItemsTotal=voidedItemsTotal+value;
+		}
+		
+		float refundableCustomValue=subTotal-discountAmt-voidedItemsTotal;
+		
+		System.out.println(roundStringValue(refundableCustomValue));
+		//Add Validation of Error Message pending
+		
+		float customValueToRefund = roundFloatValue(refundableCustomValue)/2;
+		pma.getPOS_FlowOne_POM().getCustomValueTextBoxRefundPage().click();
+		pma.getPOS_FlowOne_POM().getCustomValueTextBoxRefundPage().sendKeys(roundStringValue(customValueToRefund));
+		
+		Float salesTaxPer = entityPercentage.get("salesTaxPercentage");
+		
+		float amountYouwillRefundVal =roundFloatValue(customValueToRefund)+(roundFloatValue(customValueToRefund*salesTaxPer/100));
+		System.out.println(amountYouwillRefundVal);
+		
+		pma.getPOS_FlowOne_POM().getRefundPageHdr().click();
+		String amountYouWillRfnd = pma.getPOS_FlowOne_POM().getYouWillRefundAmountRefundPage().getAttribute("content-desc");
+		Assert.assertEquals(amountYouWillRfnd,"$"+roundStringValue(amountYouwillRefundVal));
+		
+		//Revised Bill Amount Validation
+		String revisedBillAmountVal = pma.getPOS_FlowOne_POM().getTotalRefundableAmountRefundPage().getAttribute("content-desc");
+		float revisedBillAmountCal=totalBillAmount-refundedAmount-amountYouwillRefundVal;
+		System.out.println(revisedBillAmountVal);
+		System.out.println(revisedBillAmountCal);
+		Assert.assertEquals(revisedBillAmountVal,"$"+roundStringValue(revisedBillAmountCal));
+		
+		
+		//Refund Confirmation Pop up Validation
+		pma.getPOS_FlowOne_POM().getRefundBtnRefundPage().click();
+		
+		String refundConfirmationText = pma.getPOS_FlowOne_POM().getRefundConfirmatonPopText().getAttribute("content-desc");
+		Assert.assertEquals(refundConfirmationText,"Would you like to refund $"+roundStringValue(amountYouwillRefundVal)+" by cash ?");
+		
+		pma.getPOS_FlowOne_POM().getRefundConfirmatonPopCancel().click();
+		
+		pma.getPOS_FlowOne_POM().getRefundBtnRefundPage().click();
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getRefundConfirmatonPopText().isDisplayed());
+		
+		pma.getPOS_FlowOne_POM().getRefundConfirmatonPopProceed().click();
+		
+		refundedAmount=refundedAmount+roundFloatValue(amountYouwillRefundVal);
+		
+		//Redirects to Completed Order Validation
+		Assert.assertTrue(pma.getPOS_FlowOne_POM().getCompleteOrderHeadr().isDisplayed());
+		
+		//Total Refunded Amount in Banner Validation 
+		Thread.sleep(2000);
+		String refundText = pma.getPOS_FlowOne_POM().getRefundedAmountCOSummary2().getAttribute("content-desc");
+		Assert.assertEquals(refundText.replaceAll("[\\r\\n]+", ""), "A refund amount $"+roundStringValue(refundedAmount)+"  has been initiated for this order.");
+		
+		//Refunded Amount Validation Inside Refund Page
+		pma.getPOS_FlowOne_POM().getRefundBtnCOPage().click();
+		String firstTxnDetails = pma.getPOS_FlowOne_POM().getFirstTransactionDetailsRefundPage().getAttribute("content-desc");
+		Assert.assertTrue(firstTxnDetails.contains(roundStringValue(refundedAmount)));
+		
+		//total Amount Validation
+		String totalAmountText = pma.getPOS_FlowOne_POM().getTotalAmountNPayMethodRefundPage().getAttribute("content-desc");
+		Assert.assertEquals(totalAmountText,"Total amount $"+roundStringValue(totalBillAmount));
+		
+	}
 	
 	
 	

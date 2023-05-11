@@ -46,9 +46,9 @@ List<String> jobNameswhileCreating=new ArrayList<String>(); //Assigning this Glo
 	}
 	
 	@Then("User should able to click jobs option and verify the {string} option is selected by default")
-	public void userShouldAbleToClickJobsOptionAndVerifyTheOptionIsSelectedByDefault(String ActManagername) {
+	public void userShouldAbleToClickJobsOptionAndVerifyTheOptionIsSelectedByDefault(String ActManagername) throws InterruptedException {
 	   pma.getRMS_Roles_and_Permissions_POM().getJobsTab().click();
-	   
+	   Thread.sleep(2000);
 	   String ActName = pma.getRMS_Roles_and_Permissions_POM().getManagerNameHeader().getText();
 	   System.out.println(ActName);
 	   Assert.assertTrue(ActName.contains(ActManagername));

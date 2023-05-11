@@ -363,17 +363,17 @@ throws IOException, InterruptedException {
 		Thread.sleep(500);
 		String dataFromExcel = getDataFromExcel("Bill Configuration", 17, 1);
 		if (dataFromExcel.equals("Prepaid")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().getAttribute("value").equals("true")) {
+			if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox1Satus().getAttribute("value").equals("true")) {
 				
-			} else if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().getAttribute("value").equals("false")) {
+			} else if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox1Satus().getAttribute("value").equals("false")) {
 				pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().click();
 			}else {
 				System.out.println("Invalid State");
 			}			
 		} else if (dataFromExcel.equals("Postpaid")) {
-			if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().getAttribute("value").equals("true")) {
+			if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox1Satus().getAttribute("value").equals("true")) {
 				pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().click();
-			} else if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox().getAttribute("value").equals("false")) {
+			} else if (pma.getRMS_SettingsPage_Configuration_POM().getPaymentModeCheckBox1Satus().getAttribute("value").equals("false")) {
 			}else {
 				System.out.println("Invalid State");
 			}

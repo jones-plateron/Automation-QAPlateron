@@ -393,11 +393,15 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getTotAmountCOSummary() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='15']"));
 	}
+	
 	public WebElement getTotAmountCOSummaryRefund() {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='14'])[1]"));
 	}
 	public WebElement getRefundedAmountCOSummary() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='16'])[1]"));
+	}
+	public WebElement getRefundedAmountCOSummary1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='17'])[1]"));
 	}
 	public WebElement getTotAmountCOSummaryTakeOut() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='17']"));
@@ -531,6 +535,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 	public WebElement getCompleteOrderStatus() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
+	}
+	public WebElement getCompleteOrderStatus1() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Delivered']"));
 	}
 	public WebElement getCompleteOrderStatusTakeOut() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@index='15']"));
@@ -903,9 +910,6 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getFirstMenuRHSAOPage() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
 	}
-	public WebElement getFirstMenuRHSAOPage1() {
-		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
-	}
 	public WebElement getSecondMenuRHSAOPage() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
 	}
@@ -916,6 +920,22 @@ public class POS_FlowOne_POM extends BaseClass {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
 	}
 	public WebElement getFifthMenuRHSAOPage() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='4'])[1]"));
+	}
+	//More Active Orders
+	public WebElement getFirstMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[13]"));
+	}
+	public WebElement getSecondMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+	}
+	public WebElement getThirdMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[1]"));
+	}
+	public WebElement getFourthMenuRHSAOPage1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+	}
+	public WebElement getFifthMenuRHSAOPage1() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='4'])[1]"));
 	}
 	
@@ -931,7 +951,7 @@ public class POS_FlowOne_POM extends BaseClass {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[3]"));
 	}
 	public WebElement getCancelBtnVoidWindowAOPage() {
-		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='2'])[3]"));
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='2'])[2]"));
 	}
 	public WebElement getVoidDDCustomerChangedMindAOPage() {
 		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Customer Changed Mind']"));
@@ -948,7 +968,103 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getVoidDDGuestDissatisfiedAOPage() {
 		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Guest Dissatisfied']"));
 	}
-	
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Refund
+	public WebElement getRefundBtnCOPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Refund']"));
+	}
+	public WebElement getRefundPageText() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Tax charged is refunded in addition to the amount selected.']"));
+	}
+	public WebElement getServiceFeeCheckBxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Service Fee']"));
+	}
+	public WebElement getGratuityCheckBxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Gratuity']"));
+	}
+	public WebElement getTipCheckBxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Tip']"));
+	}
+	public WebElement getCustomValueCheckBxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Custom value']"));
+	}
+	public WebElement getOrderNumberHdrRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Order#']"));
+	}
+	public WebElement getCustomerNameHdrRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Customer Name']"));
+	}
+	public WebElement getPaymentMethodHdrRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Payment Method']"));
+	}
+	public WebElement getRefundedHdrRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Refunded']"));
+	}
+	public WebElement getFirstTransactionDetailsRefundPage() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[6]"));
+	}
+	public WebElement getTotalRefundableAmountRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='19']"));
+	}
+	public WebElement getYouWillRefundAmountRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='18']"));
+	}
+	public WebElement getYouWillRefundTextRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='17']"));
+	}
+	public WebElement getRefundCancelBtn() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Cancel']"));
+	}
+	public WebElement getOrderIDRefundPageLHS() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='10']"));
+	}
+	public WebElement getCustomerNameRefundPageLHS() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='9']"));
+	}
+	public WebElement getTotalAmountNPayMethodRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='12']"));
+	}
+	public WebElement getBillAmountTextRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Bill amount']"));
+	}
+	public WebElement getOrderHasNotBeenSentToKitchenNotification() {
+		return posDriver1.findElement(By.xpath(""));
+	}
+	public WebElement getServiceFeeTextBoxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getGratuityTextBoxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getTipTextBoxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getCustomValueTextBoxRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='1']"));
+	}
+	public WebElement getEnterValueWarnMsgRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='3']"));
+	}
+	public WebElement getRefundPageHdr() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Refund']"));
+	}
+	public WebElement getRefundConfirmatonPopProceed() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Proceed']"));
+	}
+	public WebElement getRefundConfirmatonPopCancel() {
+		return posDriver1.findElement(By.xpath("(//android.widget.Button[@content-desc='Cancel'])[1]"));
+	}
+	public WebElement getRefundConfirmatonPopText() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='16']"));
+	}
+	public WebElement getRefundBtnRefundPage() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Refund']"));
+	}
+	public WebElement getRefundedAmountCOSummary2() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='19'])[1]"));
+	}
+	public WebElement getCOPage39() {
+		return posDriver1.findElement(By.xpath(""));
+	}
 }
 
 

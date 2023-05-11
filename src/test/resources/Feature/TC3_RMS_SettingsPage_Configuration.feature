@@ -1,4 +1,4 @@
-@SettingsConfiguration 
+@SettingsConfiguration @RMS
 Feature: Settings Page Configuration
 
   @BillSettings1

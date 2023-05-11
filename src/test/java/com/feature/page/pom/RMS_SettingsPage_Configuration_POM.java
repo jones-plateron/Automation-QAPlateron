@@ -17,7 +17,7 @@ PageManager pma = new PageManager();
 	}
 
 	public WebElement getSettingsSections() {
-		WebElement element = rmsDriver.findElement(By.xpath("//i[@class='icon-settings mr-1']"));
+		WebElement element = rmsDriver.findElement(By.xpath("//li[@id='Settings']"));
 		return element;
 	}
 	public WebElement getSettingsHeader() {
@@ -326,6 +326,10 @@ PageManager pma = new PageManager();
 	}
 	public WebElement getPaymentModeCheckBox() {
 		WebElement element = rmsDriver.findElement(By.xpath("//div[contains(@class,'nav-collapsed')]//div//div[1]//ul[1]//li[1]//div[1]//div[1]//label[1]//span[1]"));
+		return element;
+	}
+	public WebElement getPaymentModeCheckBox1Satus() {
+		WebElement element = rmsDriver.findElement(By.xpath("(//input[@name='enable_kds'])[1]"));
 		return element;
 	}
 	public WebElement getPaymentsettingsPageSaveBtn() {

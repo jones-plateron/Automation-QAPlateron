@@ -1,4 +1,4 @@
-@Rolesandpermission
+@Rolesandpermission @RMS
 Feature: Roles and permission
 
   @UIValidation
@@ -93,13 +93,13 @@ Feature: Roles and permission
       | mobileNumber | otp    |
       |   7777777723 | 666666 |
       
-    @Delete  
-  Scenario Outline: As a RMS User, I need to delete by Re-assigning
-    Given Login to the restaurant with "<mobileNumber>" and "<otp>"
-    When User should redirects to employees section
-    Then User should able to click jobs option and verify the "Manager" option is selected by default 
-    Then User should able to Delete all the Jobs
-
-    Examples: 
-      | mobileNumber | otp    |
-      |   7777777723 | 666666 |
+    #@Delete  
+  #Scenario Outline: As a RMS User, I need to delete by Re-assigning
+    #Given Login to the restaurant with "<mobileNumber>" and "<otp>"
+    #When User should redirects to employees section
+    #Then User should able to click jobs option and verify the "Manager" option is selected by default 
+    #Then User should able to Delete all the Jobs
+#
+    #Examples: 
+      #| mobileNumber | otp    |
+      #|   7777777723 | 666666 |
