@@ -1162,7 +1162,7 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getEmpNameOption() {
 		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Employee Name']"));
 	}
-	public WebElement getEmpName() {
+	public WebElement getShiftReviewEmpName() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[1]"));
 	}
 	public WebElement getOrderIdHeading() {

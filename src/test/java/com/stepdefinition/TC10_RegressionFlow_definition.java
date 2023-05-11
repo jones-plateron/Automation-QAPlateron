@@ -4,6 +4,8 @@ import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -28,6 +30,7 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 
 	PageManager pma = new PageManager();
 	String noOfGuest;
+	String userActionText="";
 
 	public TC10_RegressionFlow_definition() {
 		PageFactory.initElements(rmsDriver, this);
@@ -1377,8 +1380,12 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 	// ++++++++++++++++++++++++++++++++++++++++Cash Drawer Pending++++++++++++++++++++++++
 
 	@Then("User should click user action popup")
-	public void userShouldClickUserActionPopup() {
+	public void userShouldClickUserActionPopup() throws InterruptedException {
+		Thread.sleep(300);
+		userActionText = pma.getPOS_FlowOne_POM().getUserAction().getAttribute("content-desc");
 	    pma.getPOS_FlowOne_POM().getUserAction().click();
+	    
+	    Thread.sleep(1000);
 	}
 	@Then("User should navigate to ShiftReview Page")
 	public void userShouldNavigateToShiftReviewPage() {
@@ -1388,6 +1395,26 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 	}
 	@Then("User should Validate the Shift review page")
 	public void userShouldValidateTheShiftReviewPage() throws InterruptedException {
+		
+		//Header Validation
+		String shiftReview = pma.getPOS_FlowOne_POM().getShiftReviewHeadr().getAttribute("content-desc");
+		Assert.assertEquals(shiftReview,"Please review your shift before clocking out");
+		
+		//Cloked In Date And Time
+		   DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm a");  
+		   LocalDateTime now = LocalDateTime.now(); 
+		   System.out.println("Date anD Time  "+dtf.format(now)); 
+		
+		
+		
+		//Employee Name Validation
+		String userActionEmployeeName = userActionText.substring(0, userActionText.length()-20);
+		String shiftReviewEmpName = pma.getPOS_FlowOne_POM().getShiftReviewEmpName().getAttribute("content-desc");
+		String shiftReviewEmpName1 = shiftReviewEmpName.substring(0, shiftReviewEmpName.length()-1);
+		System.out.println("Shift review in Shift review page "+shiftReviewEmpName1);
+		Assert.assertEquals(userActionEmployeeName, shiftReviewEmpName1);
+		
+		
 		
 		//OrderId 
 		String OrderId1 = pma.getPOS_FlowOne_POM().getOrderId1().getAttribute("content-desc");
@@ -1435,8 +1462,15 @@ public class TC10_RegressionFlow_definition extends BaseClass {
 		Actions act = new Actions(posDriver1);
 		WebElement aElement = pma.getPOS_FlowOne_POM().getGratuity7();
 		
+		
+	
 		//act.dragAndDropBy(aElement, 0, -600).build().perform();
 		act.moveToElement(aElement).click().sendKeys(Keys.PAGE_DOWN).build().perform();
+		((JavascriptExecutor) posDriver1).executeScript("scroll(0,250);");
+		
+		
+		JavascriptExecutor js = (JavascriptExecutor) posDriver1;
+	       js.executeScript("window.scrollBy(0,-350)", "");
 		}
 	
 
