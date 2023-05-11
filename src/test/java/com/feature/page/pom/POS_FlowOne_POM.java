@@ -83,6 +83,26 @@ public class POS_FlowOne_POM extends BaseClass {
 		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='5']"));
 		return element;
 	}
+	public WebElement getNoOfGuest13() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='13']"));
+		return element;
+	}
+	public WebElement getNoOfGuest18() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='18']"));
+		return element;
+	}
+	public WebElement getNoOfGuest22() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='22']"));
+		return element;
+	}
+	public WebElement getNoOfGuest27() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='27']"));
+		return element;
+	}
+	public WebElement getNoOfGuest31() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='31']"));
+		return element;
+	}
 
 	public WebElement getProceedButton() {
 		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Proceed']"));
@@ -110,15 +130,30 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 
 	public WebElement getActiveOrdersTab() {
-		WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='7']"));
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='15']"));
 		return element;
 	}
+	public WebElement getActiveOrdersTab1() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Active Orders']"));
+		return element;
+	}
+	
 
 	public WebElement getActiveOrdersPageHeader() {
 		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Active Orders']"));
 		return element;
 	}
-
+	public WebElement getDineInTab() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Dine-In']"));
+		return element;
+	}
+	public WebElement getCompletedOrderTab() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Completed Orders']"));
+		return element;
+	}
+	
+	
+	//android.widget.ImageView[@content-desc="Completed Orders"]
 	public WebElement getFirstOrderinAO() {
 		WebElement element = posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
 		return element;
@@ -233,6 +268,10 @@ public class POS_FlowOne_POM extends BaseClass {
 
 	public WebElement getSTK1() {
 		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Send to Kitchen']"));
+		return element;
+	}
+	public WebElement getSTKwithoutMenu() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@index='11']"));
 		return element;
 	}
 
@@ -504,6 +543,10 @@ public class POS_FlowOne_POM extends BaseClass {
 		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Cancel']"));
 		return element;
 	}
+	public WebElement getCancelBtn2() {
+		WebElement element = posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Cancel']"));
+		return element;
+	}
 	public WebElement getYesCancelBtn() {
 		WebElement element = posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Yes, Cancel']"));
 		return element;
@@ -666,10 +709,11 @@ public class POS_FlowOne_POM extends BaseClass {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='"+text+"']"));
 	}
 	
-	//Modifier
+	//Modifier locators for Prepaid Orders(Recieve Button)
 	public WebElement getModifierHeaderMenuName() {
 	return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
    }
+	
 	public WebElement getModifierCateName() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[9]"));
 	}
@@ -685,7 +729,43 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getApplyBtn() {
 		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Apply']"));
 	}
+	public WebElement getAddNotes() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Add Note']"));
+	}
+	public WebElement getAddNotesTxtBx() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='4']"));
+	}
+	
 	public WebElement getCancel2() {
+		return posDriver1.findElement(By.xpath("(//android.widget.Button[@content-desc='Cancel'])[1]"));
+	}
+	//Modifier locators for Postpaid Orders(Sent to Kitchen Button)
+	public WebElement getModifierHeaderMenuNameSTK() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[3]"));
+	   }
+	public WebElement getModifierCateNameSTK() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[10]"));
+	}
+	public WebElement getSelectUptSTK() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[3]"));
+	}
+	public WebElement getRequiredSTK() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[4]"));
+	}
+	public WebElement getModiXIconSTK() {
+		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='1'])[4]"));
+	}
+	public WebElement getApplyBtnSTK() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Apply']"));
+	}
+	public WebElement getAddNotesSTK() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Add Note']"));
+	}
+	public WebElement getAddNotesTxtBxSTK() {
+		return posDriver1.findElement(By.xpath("//android.widget.EditText[@index='4']"));
+	}
+	
+	public WebElement getCancel2STK() {
 		return posDriver1.findElement(By.xpath("(//android.widget.Button[@content-desc='Cancel'])[1]"));
 	}
 	
@@ -714,6 +794,7 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getPrepaidReceivePmtBtn() {
 		return posDriver1.findElement(By.xpath("(//android.widget.Button[@index='12'])[1]"));
 	}
+	
 	//Menu List RHS
 	public WebElement getRHSMenu() {
 		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[12]"));
@@ -736,6 +817,9 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 	public WebElement getPlusSymbol() {
 		return posDriver1.findElement(By.xpath("(//android.widget.ImageView[@index='2'])[4]"));
+	}
+	public WebElement getRecieveButtonWithoutMenu() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@index='11']"));
 	}
 	public WebElement getRecieveButton() {
 		return posDriver1.findElement(By.xpath("//android.widget.Button[@index='12']"));
@@ -853,7 +937,7 @@ public class POS_FlowOne_POM extends BaseClass {
 	}
 //++++++++++++++++++++++++++++++++++Cash Drawer++++++++++++++++++++++++++++++++++++++++++++
 	public WebElement getCashDrawer() {
-		return posDriver1.findElement(By.xpath(""));
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
 	}
 	public WebElement getCashDrawerSection() {
 		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='0']"));
@@ -1065,6 +1149,154 @@ public class POS_FlowOne_POM extends BaseClass {
 	public WebElement getCOPage39() {
 		return posDriver1.findElement(By.xpath(""));
 	}
+	//++++++++++++++++++++++++++++++Shift Review+++++++++++++++++++++++++++++
+	public WebElement getUserAction() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@index='1']"));
+	}
+	public WebElement getShiftReview() {
+		return posDriver1.findElement(By.xpath("//android.widget.ImageView[@content-desc='Shift Review']"));
+	}
+	public WebElement getShiftReviewHeadr() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Please review your shift before clocking out']"));
+	}
+	public WebElement getEmpNameOption() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Employee Name']"));
+	}
+	public WebElement getShiftReviewEmpName() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[1]"));
+	}
+	public WebElement getOrderIdHeading() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Order #']"));
+	}
+	public WebElement getBillAmountHeading() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Bill Amount']"));
+	}
+	public WebElement getTipHeading() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Tip']"));
+	}
+	public WebElement getGratuityHeading() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Gratuity']"));
+	}
+	public WebElement getPayOut() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@content-desc='Pay out']"));
+	}
+	public WebElement getPrintReview() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Print Review']"));
+	}
+	public WebElement getReviewed() {
+		return posDriver1.findElement(By.xpath("//android.widget.Button[@content-desc='Reviewed']"));
+	}
+	public WebElement getOwes() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='10'])[2]"));
+	}
+	
+	public WebElement getOrderId1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='0'])[6]"));
+	}
+	public WebElement getOrderId2() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='4'])[2]"));
+	}
+	
+	
+	public WebElement getOrderId3() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='8']"));
+	}
+	public WebElement getOrderId4() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='12']"));
+	}
+	public WebElement getOrderId5() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='16']"));
+	}
+	public WebElement getOrderId6() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='20']"));
+	}
+	public WebElement getOrderId7() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='24']"));
+	}
+	public WebElement getBillAmount1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='1'])[2]"));
+	}
+	public WebElement getBillAmount2() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='5'])[2]"));
+	}
+	public WebElement getBillAmount3() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='9']"));
+	}
+	public WebElement getBillAmount4() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='13']"));
+	}
+	public WebElement getBillAmount5() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='17']"));
+	}
+	public WebElement getBillAmount6() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='21']"));
+	}
+	public WebElement getBillAmount7() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='25']"));
+	}
+	public WebElement getTip1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='2'])[2]"));
+	}
+	public WebElement getTip2() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='6'])[2]"));
+	}
+	public WebElement getTip3() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='10']"));
+	}
+	public WebElement getTip4() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='14']"));
+	}
+	public WebElement getTip5() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='18']"));
+	}
+	public WebElement getTip6() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='22']"));
+	}
+	public WebElement getTip7() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='26']"));
+	}
+	public WebElement getGratuity1() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='3'])[2]"));
+	}
+	public WebElement getGratuity2() {
+		return posDriver1.findElement(By.xpath("(//android.view.View[@index='7'])[2]"));
+	}
+	public WebElement getGratuity3() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='11']"));
+	}
+	public WebElement getGratuity4() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='15']"));
+	}
+	public WebElement getGratuity5() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='19']"));
+	}
+	public WebElement getGratuity6() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='23']"));
+	}
+	
+	public WebElement getGratuity7() {
+		return posDriver1.findElement(By.xpath("//android.view.View[@index='27']"));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

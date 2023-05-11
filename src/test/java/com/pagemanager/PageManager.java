@@ -3,6 +3,7 @@ package com.pagemanager;
 import org.openqa.selenium.support.PageFactory;
 
 import com.base.BaseClass;
+import com.feature.page.pom.MobileSanity_POM;
 import com.feature.page.pom.POS_FlowOne_POM;
 import com.feature.page.pom.RMS_Cooking_Station_POM;
 import com.feature.page.pom.RMS_Discount_Configuration_POM;
@@ -22,7 +23,7 @@ public class PageManager extends BaseClass{
 	private RMS_ManageTable_POM rMS_ManageTable_POM;
 	private RMS_Cooking_Station_POM rMS_Cooking_Station_POM;
 	private RMS_Discount_Configuration_POM rMS_Discount_Configuration_POM;
-	
+	private MobileSanity_POM mobileSanity_POM;
 //	private CalculationsFile calculationsFile;
 
 	
@@ -62,6 +63,10 @@ public class PageManager extends BaseClass{
 
 	public POS_FlowOne_POM getPOS_FlowOne_POM() {
 		return pOS_FlowOne_POM==null? pOS_FlowOne_POM=new POS_FlowOne_POM():pOS_FlowOne_POM;
+	}
+
+	public MobileSanity_POM getMobileSanity_POM() {
+		return mobileSanity_POM==null? mobileSanity_POM = new MobileSanity_POM(): mobileSanity_POM;
 	}
 
 //	public CalculationsFile getCalculationsFile() {

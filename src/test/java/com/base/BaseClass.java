@@ -20,6 +20,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -79,6 +80,15 @@ public class BaseClass {
 				.tick(act.getActivePointer().createPointerDown(LEFT.asArg())).tick(act.getActivePointer()
 						.createPointerMove(Duration.ofMillis(250), Origin.pointer(), xOffset, yOffset))
 				.tick(act.getActivePointer().createPointerUp(LEFT.asArg())).tick(act.getActivePointer().createPointerDown(LEFT.asArg()));
+	}
+	
+public static String generateRandomEmail(int length) {
+	    
+	    String allowedChars = "abcdefghijklmnopqrstuvwxyz" + "1234567890" + "_-.";
+	    String email = "";
+	    String temp = RandomStringUtils.random(length, allowedChars);
+	    email = temp.substring(0, temp.length() - 9) + "@plateron.com";
+	    return email;
 	}
 	
 	

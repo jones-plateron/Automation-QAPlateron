@@ -87,7 +87,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1900);
 //		capabilities.setCapability(MobileCapabilityType.UDID, "A3ALUN2906G00587");
-		capabilities.setCapability(MobileCapabilityType.UDID, "R9PT2034EVV");//HA1GSLK1 - R9PT2034EVV
+		capabilities.setCapability(MobileCapabilityType.UDID, "HA1GSLK1");//HA1GSLK1 - R9PT2034EVV
 		// A3ALUN2906G00587// R9YT306EJ2F //IR9PAMMZUCIBF6XG //192.168.14.241
 		// capabilities.setCapability(MobileCapabilityType.UDID,"192.168.5.101:5555");
 
@@ -96,7 +96,7 @@ public class TC9_POS_FlowOne_definition extends BaseClass {
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
 		
 		posDriver1 = new AppiumDriver(url, capabilities);
-		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(30));
+		posDriver1.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(3));
 		noOfGuest = "";orderId="";randomName="";randomNumber="";orderType = "";orderTime="";tipPercentage="";discountName="";orderStatus="";orderPaymentType="";
 		salesTax = 0; gratuity = 0; serviceFee = 0; serviceFeeTax = 0; gratuityTax = 0; discountAmt = 0;totalBillAmountADis=0;tipAmount = 0;
 	}
